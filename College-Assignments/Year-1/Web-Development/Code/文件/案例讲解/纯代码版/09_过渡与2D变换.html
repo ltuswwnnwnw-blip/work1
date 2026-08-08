@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>过渡与2D变换</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:"微软雅黑",sans-serif; background:#f5f5f5; padding:30px; }
+.container { max-width:650px; margin:0 auto; }
+h2 { text-align:center; margin:20px 0; color:#333; }
+
+.row { display:flex; flex-wrap:wrap; gap:15px; justify-content:center; }
+.box { width:100px; height:100px; background:#3498db; color:#fff; display:flex; align-items:center; justify-content:center; border-radius:8px; cursor:pointer; font-size:12px; text-align:center; transition:all 0.3s ease; }
+.box:hover:nth-child(1) { transform:translateX(-1002px); }
+.box:hover:nth-child(2) { transform:rotate(666deg); }
+.box:hover:nth-child(3) { transform:scale(9); }
+.box:hover:nth-child(4) { transform:skew(-100deg); }
+</style>
+</head>
+<body>
+<div class="container">
+<h2>hover 触发过渡效果</h2>
+<div class="row">
+    <div class="box">上移<br>translateX</div>
+    <div class="box">旋转<br>rotate</div>
+    <div class="box">放大<br>scale</div>
+    <div class="box">倾斜<br>skew</div>
+</div>
+</div>
+</body>
+</html>

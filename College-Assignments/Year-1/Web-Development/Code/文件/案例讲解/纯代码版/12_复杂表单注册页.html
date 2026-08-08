@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>复杂表单 - 注册页</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:"微软雅黑",sans-serif; background:#e8ecf1; padding:30px; }
+
+.form-box { background:#fff; border-radius:10px; padding:30px 40px; max-width:480px; margin:0 auto; box-shadow:0 2px 12px rgba(0,0,0,0.1); }
+.form-box h2 { text-align:center; font-weight:normal; border-bottom:1px solid #ccc; padding-bottom:15px; margin-bottom:25px; color:#333; }
+
+.form-group { margin-bottom:16px; display:flex; align-items:center; }
+.form-group label { width:80px; text-align:right; padding-right:10px; font-size:14px; color:#333; }
+.form-group input[type="text"], .form-group input[type="password"] { flex:1; height:32px; border:1px solid #ccc; padding:0 8px; border-radius:3px; font-size:13px; }
+.form-group input:focus { outline:none; border-color:#4a90d9; }
+.form-group select { flex:1; height:32px; border:1px solid #ccc; padding:0 6px; border-radius:3px; }
+.form-group textarea { flex:1; height:80px; border:1px solid #ccc; padding:6px 8px; border-radius:3px; resize:none; }
+
+.icon-wrap { display:inline-block; position:relative; flex:1; }
+.icon-wrap::before { content:""; position:absolute; left:8px; top:50%; transform:translateY(-50%); width:16px; height:16px; background:#bbb; border-radius:50%; }
+.icon-wrap input { padding-left:30px !important; width:100%; }
+
+.btn-row { text-align:center; margin-top:20px; padding-left:80px; }
+.btn-row input { width:100px; height:34px; border:none; font-size:15px; cursor:pointer; margin:0 8px; border-radius:3px; }
+.btn-row input[type="submit"] { background:#4a90d9; color:#fff; }
+.btn-row input[type="submit"]:hover { background:#3a7bc8; }
+.btn-row input[type="reset"] { background:#eee; color:#666; }
+.btn-row input[type="reset"]:hover { background:#ddd; }
+</style>
+</head>
+<body>
+
+<div class="form-box">
+<h2>新用户注册</h2>
+
+<div class="form-group">
+    <label>学号</label>
+    <span class="icon-wrap"><input type="text" placeholder="请输入学号"></span>
+</div>
+
+<div class="form-group">
+    <label>密码</label>
+    <span class="icon-wrap"><input type="password" placeholder="请输入密码"></span>
+</div>
+
+<div class="form-group">
+    <label>性别</label>
+    <span style="flex:1;">
+        <input type="radio" name="sex" checked> 男
+        <input type="radio" name="sex" style="margin-left:10px;"> 女
+    </span>
+</div>
+
+<div class="form-group">
+    <label>院系</label>
+    <select>
+        <option>电子信息学院</option>
+        <option>工商管理学院</option>
+        <option>智能制造学院</option>
+    </select>
+</div>
+
+<div class="form-group">
+    <label>建议</label>
+    <textarea placeholder="请输入你的建议..."></textarea>
+</div>
+
+<div class="btn-row">
+    <input type="submit" value="注册">
+    <input type="reset" value="重置">
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>文馨书屋 — 综合案例</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <style type="text/css">
+    /* ===== 全局重置 ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "微软雅黑", sans-serif;
+      color: #333;
+      background: #f5f5f5;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    /* ===== 外层容器 ===== */
+    #wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: #fff;
+    }
+
+    /* ===== 页头：logo + 搜索框 ===== */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 15px 20px;
+      border-bottom: 1px solid #eee;
+    }
+
+    header img {
+      height: 50px;
+    }
+
+    header form {
+      display: flex;
+      align-items: center;
+    }
+
+    #txt {
+      width: 200px;
+      height: 32px;
+      border: 1px solid #ccc;
+      padding-left: 30px;
+      background: url(../7.2素材/imgs/icon.png) no-repeat 8px center;
+      background-size: 14px;
+      font-size: 13px;
+      outline: none;
+    }
+
+    #btn {
+      height: 32px;
+      padding: 0 16px;
+      border: none;
+      background: orange;
+      color: #fff;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    #btn:hover {
+      background: #e68a00;
+    }
+
+    /* ===== 导航栏 ===== */
+    nav {
+      background: lightseagreen;
+      padding: 0 10px;
+    }
+
+    nav a {
+      display: inline-block;
+      padding: 12px 20px;
+      color: #fff;
+      font-size: 15px;
+      transition: all 0.2s;
+    }
+
+    nav a:hover {
+      color: #ff0;
+      background: rgba(255,255,255,0.15);
+    }
+
+    /* ===== 三栏布局（flex） ===== */
+    #box {
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    /* ===== 侧边栏 ===== */
+    aside {
+      width: 220px;
+      flex-shrink: 0;
+    }
+
+    aside h2 {
+      height: 54px;
+      line-height: 54px;
+      text-align: center;
+      color: #fff;
+      font-size: 18px;
+      background: orange;
+      margin: 0 0 1px 0;
+    }
+
+    aside h3 {
+      height: 54px;
+      line-height: 54px;
+      text-align: center;
+      color: #fff;
+      font-size: 18px;
+      background: seagreen;
+      margin: 0 0 1px 0;
+    }
+
+    aside a {
+      display: block;
+      height: 34px;
+      line-height: 34px;
+      padding: 0 10px;
+      border: 1px solid #ddd;
+      border-top: none;
+      color: #333;
+      font-size: 14px;
+      background: #fafafa;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    aside a:first-of-type {
+      border-top: 1px solid #ddd;
+    }
+
+    aside a:hover {
+      background: #e74c3c;
+      color: #fff;
+    }
+
+    #num {
+      font-weight: bold;
+      color: #e74c3c;
+      margin-right: 6px;
+    }
+
+    .more-box {
+      text-align: right;
+      padding: 5px 10px;
+      border: 1px solid #ddd;
+      border-top: none;
+      background: #fafafa;
+    }
+
+    .more-btn {
+      color: #3498db;
+      font-size: 13px;
+    }
+
+    /* ===== 主内容区 ===== */
+    main {
+      flex: 1;
+      min-width: 0;
+    }
+
+    main h2, main h4 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 15px 0;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+      color: #333;
+      font-size: 18px;
+    }
+
+    main h2 img, main h4 img {
+      width: 20px;
+      height: 20px;
+    }
+
+    main ul li {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px dashed #eee;
+    }
+
+    main ul li:last-child {
+      border-bottom: none;
+    }
+
+    main li div:first-child {
+      width: 130px;
+      height: 170px;
+      border: 1px solid #e0e0e0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    main li img {
+      width: 85%;
+      height: auto;
+    }
+
+    main li div:last-child {
+      flex: 1;
+      min-width: 0;
+    }
+
+    main li h4 {
+      border: none;
+      margin-bottom: 8px;
+      padding: 0;
+      font-size: 16px;
+    }
+
+    main li p {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.8;
+      margin-bottom: 6px;
+    }
+
+    main li p.author {
+      color: #999;
+      font-size: 12px;
+    }
+
+    /* ===== 精品读物 ===== */
+    #jingpin {
+      display: flex;
+      gap: 15px;
+    }
+
+    #jingpin a {
+      flex: 1;
+      text-align: center;
+      color: #333;
+      font-size: 13px;
+    }
+
+    #jingpin img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    #jingpin img:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+
+    /* ===== 页脚 ===== */
+    footer {
+      background: lightseagreen;
+      text-align: center;
+      padding: 20px;
+      color: #fff;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    /* ===== 响应式：平板 ===== */
+    @media screen and (max-width: 992px) {
+      #box {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      aside {
+        width: 100%;
+      }
+
+      aside a {
+        display: inline-block;
+        width: auto;
+        border: none;
+        padding: 4px 10px;
+        background: none;
+        height: auto;
+        line-height: 1.6;
+      }
+
+      .more-box {
+        display: none;
+      }
+
+      main li div:first-child {
+        width: 100px;
+        height: 130px;
+      }
+    }
+
+    /* ===== 响应式：手机 ===== */
+    @media screen and (max-width: 576px) {
+      header {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+
+      #txt {
+        width: 140px;
+      }
+
+      nav a {
+        padding: 8px 10px;
+        font-size: 13px;
+      }
+
+      #box {
+        padding: 10px;
+        gap: 10px;
+      }
+
+      main ul li {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      main li div:first-child {
+        width: 100%;
+        height: auto;
+      }
+
+      #jingpin {
+        flex-wrap: wrap;
+      }
+
+      #jingpin a {
+        flex: 0 0 calc(50% - 8px);
+      }
+
+      #jingpin img {
+        height: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 整页容器 -->
+  <div id="wrapper">
+
+    <!-- 页头：Logo + 搜索 -->
+    <header>
+      <img src="imgs/logo.jpg" alt="文馨书屋"/>
+      <form action="#">
+        <input type="text" name="txt" id="txt" placeholder="搜索图书..."/>
+        <input type="submit" name="search" id="btn" value="搜一下"/>
+      </form>
+    </header>
+
+    <!-- 导航栏 -->
+    <nav>
+      <a href="#">首页</a>
+      <a href="#">期刊</a>
+      <a href="#">图书</a>
+      <a href="#">视频</a>
+      <a href="#">活动</a>
+      <a href="#">资讯</a>
+      <a href="#">关于我们</a>
+    </nav>
+
+    <!-- 三栏主体：左aside + main + 右aside -->
+    <div id="box">
+
+      <!-- 左侧栏：畅销排行 -->
+      <aside>
+        <h2>畅销图书馆</h2>
+        <a href="#"><span id="num">01</span>首席医官</a>
+        <a href="#"><span id="num">02</span>明朝那些事儿</a>
+        <a href="#"><span id="num">03</span>活着</a>
+        <a href="#"><span id="num">04</span>三体</a>
+        <a href="#"><span id="num">05</span>国家地理百科全书</a>
+        <a href="#"><span id="num">06</span>半小时漫画中国史</a>
+        <a href="#"><span id="num">07</span>中国人的智慧</a>
+        <a href="#"><span id="num">08</span>海子的诗</a>
+        <a href="#"><span id="num">09</span>摇摇晃晃的人间</a>
+        <a href="#"><span id="num">10</span>十四只老鼠系列</a>
+      </aside>
+
+      <!-- 中间：推荐图书 + 精品读物 -->
+      <main>
+        <h2><img src="imgs/arrow.png" alt=""/>推荐图书</h2>
+        <ul>
+          <li>
+            <div><img src="imgs/book1.jpg" alt="明朝那些事儿"/></div>
+            <div>
+              <h4>明朝那些事儿</h4>
+              <p class="author">作者：当年明月 著 | 出版社：北京联合出版有限公司 | 出版时间：2017年05月</p>
+              <p>书中主要讲述了从1344年到1644年这三百年间关于明朝的一些故事。本书以史料为基础，以年代和具体人物为主线，加入小说的笔法，对明朝十七帝和其他王公权贵和小人物的命运进行描述，使得原本在历史中陌生、模糊的历史人物变得鲜活起来。</p>
+            </div>
+          </li>
+          <li>
+            <div><img src="imgs/book2.jpg" alt="活着"/></div>
+            <div>
+              <h4>活着</h4>
+              <p class="author">作者：余华 | 出版社：作家出版社 | 出版时间：2012年08月</p>
+              <p>书中讲述了一个历尽世间磨难的老人的故事，作者采用朴实简洁的语言刻画出形象细腻的人物，通过展现一个又一个人的死亡过程，淋漓尽致地表现出面对死亡和活着的人生态度：活着很艰难，也正因为艰难，活着才具有深刻的意义，没有比活着更美好的事，也没有比活着更艰难的事。</p>
+            </div>
+          </li>
+        </ul>
+
+        <h4><img src="imgs/arrow.png" alt=""/>精品读物</h4>
+        <div id="jingpin">
+          <a href="#"><img src="imgs/b1.jpg" alt=""/><p>14只老鼠全集</p></a>
+          <a href="#"><img src="imgs/b2.jpg" alt=""/><p>皮特猫全集</p></a>
+          <a href="#"><img src="imgs/b3.jpg" alt=""/><p>半小时漫画中国史</p></a>
+          <a href="#"><img src="imgs/b4.jpg" alt=""/><p>说医不二</p></a>
+        </div>
+      </main>
+
+      <!-- 右侧栏：信息公告 -->
+      <aside>
+        <h3>信息公告</h3>
+        <a href="#">关于谨防诈骗的重要提示</a>
+        <a href="#">"好书伴我行"活动开始啦</a>
+        <a href="#">最新读者交流会纪要报道</a>
+        <a href="#">微信扫码享优惠活动...</a>
+        <a href="#">畅销电子书试读优惠力度大</a>
+        <a href="#">11月电子书新书满2件8折...</a>
+        <a href="#">精装童书限时0元派送</a>
+        <a href="#">"读书声"线下活动即...</a>
+        <a href="#">新书速递11月与您相约</a>
+        <div class="more-box">
+          <a href="#" class="more-btn">更多 &gt;</a>
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+      <p>联系地址：广东省东莞市松山湖，邮编：523000，邮箱：123456@dgpt.com</p>
+      <p>copyright &copy; 2019 文馨书屋</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>

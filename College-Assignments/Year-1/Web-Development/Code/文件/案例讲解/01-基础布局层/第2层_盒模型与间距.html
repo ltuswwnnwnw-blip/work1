@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>第2层：盒模型与间距 —— 每个元素占多大地方</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+/* ===== 第1层：重置（必须先铺） ===== */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"微软雅黑",sans-serif;line-height:1.8;color:#333;background:#f8f9fa;padding:20px;}
+a{text-decoration:none;color:inherit;}
+
+/* ===== 第2层：间距——本文件的核心主题 ===== */
+.wrapper{max-width:860px;margin:0 auto;}
+h1{text-align:center;color:#2c3e50;margin-bottom:6px;font-size:30px;}
+.subtitle{text-align:center;color:#888;margin-bottom:30px;font-size:14px;}
+h2{color:#9b59b6;border-left:5px solid #9b59b6;padding-left:12px;margin:35px 0 15px;font-size:22px;}
+h3{color:#2ecc71;margin:22px 0 10px;font-size:18px;}
+p{margin-bottom:12px;}
+
+/* 演示区 */
+.demo-section{background:#fff;border:1px solid #ddd;border-radius:8px;padding:20px;margin:20px 0;}
+.compare-row{display:flex;gap:20px;margin-bottom:20px;}
+.compare-col{flex:1;padding:15px;border:2px solid #ddd;border-radius:6px;}
+.compare-col.bad{border-color:#e74c3c;background:#fdeaea;}
+.compare-col.good{border-color:#27ae60;background:#eafaf1;}
+
+/* 盒模型可视化 */
+.box-demo{background:#3498db;color:#fff;text-align:center;margin:10px auto;font-size:14px;}
+.box-content{background:#2ecc71;margin:0 auto;}
+
+/* margin塌陷演示 */
+.collapse-parent{background:#ddd;margin-top:30px;padding:1px 15px 15px;border-radius:6px;}
+.collapse-child{background:#e74c3c;color:#fff;padding:10px;text-align:center;border-radius:4px;margin-top:30px;}
+.collapse-fix{overflow:hidden;}
+
+/* 代码块 */
+pre{background:#2c3e50;color:#ecf0f1;padding:15px;border-radius:6px;overflow-x:auto;font-size:13px;line-height:1.5;margin:10px 0;}
+code{background:#eee;padding:2px 6px;border-radius:3px;font-size:13px;color:#e74c3c;}
+pre code{background:none;padding:0;color:#ecf0f1;}
+.highlight{background:#fff3cd;border-left:4px solid #f39c12;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+.error-box{background:#fdeaea;border-left:4px solid #e74c3c;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+.tag{display:inline-block;padding:2px 8px;border-radius:3px;font-size:12px;font-weight:bold;}
+.tag-bad{background:#e74c3c;color:#fff;}
+.tag-good{background:#27ae60;color:#fff;}
+
+/* 盒模型层次图 */
+.layers-visual{display:flex;flex-direction:column;align-items:center;margin:20px 0;font-size:14px;}
+.lv{margin:2px 0;text-align:center;color:#fff;border-radius:4px;padding:8px 0;}
+.lv-margin{background:#f39c12;width:440px;}
+.lv-border{background:#e67e22;width:380px;}
+.lv-padding{background:#2ecc71;width:320px;}
+.lv-content{background:#3498db;width:260px;}
+
+table{width:100%;border-collapse:collapse;margin:15px 0;}
+th,td{border:1px solid #ddd;padding:10px 14px;text-align:left;font-size:14px;}
+th{background:#f0f0f0;color:#555;}
+</style>
+</head>
+<body>
+<hr style="margin-top:50px;border:2px dashed #ccc;">
+<h2 style="text-align:center;color:#333;">🧪 纯净演示区（无注释，仅展示效果）</h2>
+
+<style>
+.clean-box-demo { max-width: 600px; margin: 20px auto; background: #fff; padding: 20px; border-radius: 8px; }
+.clean-box-layers { display: flex; flex-direction: column; align-items: center; font-size: 14px; }
+.clean-box-lv { margin: 2px 0; text-align: center; color: #fff; border-radius: 4px; padding: 8px 0; }
+</style>
+
+<div class="clean-box-demo">
+<div class="clean-box-layers">
+  <div class="clean-box-lv" style="background:#f39c12;width:440px;">margin（外边距）</div>
+  <div class="clean-box-lv" style="background:#e67e22;width:380px;">border（边框）</div>
+  <div class="clean-box-lv" style="background:#2ecc71;width:320px;">padding（内边距）</div>
+  <div class="clean-box-lv" style="background:#3498db;width:260px;">content（内容区）</div>
+</div>
+<div style="margin-top:20px;">
+  <h4>margin 塌陷：上下元素间距取最大值</h4>
+  <div style="background:#3498db;color:#fff;padding:10px;text-align:center;margin-bottom:30px;">margin-bottom: 30px</div>
+  <div style="background:#e74c3c;color:#fff;padding:10px;text-align:center;margin-top:20px;">margin-top: 20px</div>
+  <p style="text-align:center;color:#888;margin-top:10px;">间距 = max(30, 20) = 30px，不是 30+20=50px</p>
+</div>
+</div>
+
+</body>
+</html>
+
+<hr style="margin-top:50px;border:2px dashed #3498db;">
+<h2 style="text-align:center;color:#555;">📖 教学讲解区</h2>
+
+<div class="wrapper">
+
+<h1>📦 第2层：盒模型与间距</h1>
+<p class="subtitle">每个元素自己占多大地方——width、height、padding、margin</p>
+
+<!--
+宏观理解：
+第2层管的是"每个元素自己占多少空间"。
+就像你在停车场划线，每个车位多宽（width）、车位之间的过道多宽（margin）、
+车位线和车之间的缓冲距离（padding）——这些都是第2层的事。
+
+核心原则：第2层只管"我自己多大、和邻居多远"，不管"邻居怎么排"（那是第3层的事）。
+-->
+
+<h2>一、盒模型的四层结构</h2>
+
+<p>每个HTML元素都是一个"盒子"，由四层嵌套组成，从外到内：</p>
+
+<div class="layers-visual">
+    <div class="lv lv-margin">margin（外边距）—— 我和邻居之间的距离</div>
+    <div class="lv lv-border">border（边框）—— 我的边界线</div>
+    <div class="lv lv-padding">padding（内边距）—— 边界线和内容之间的缓冲</div>
+    <div class="lv lv-content">content（内容区）—— 文字/图片真正占的地方</div>
+</div>
+
+<pre><code>/* 盒模型的CSS写法 */
+.element {
+    width: 300px;           /* 内容区宽度（border-box下是总宽度） */
+    height: 200px;          /* 高度 */
+    padding: 20px;          /* 内边距：内容到边框的距离 */
+    border: 5px solid #333; /* 边框：5px粗、实线、深灰色 */
+    margin: 30px;           /* 外边距：这个盒子和邻居的距离 */
+}
+/* 总宽度 = 300（width）+ 0（padding在border-box下算在width里）+ 0（border同理）+ 30×2（margin）= 360px */
+/* 注意：margin不算在width里，即使border-box也不行！margin永远是"额外"的 */</code></pre>
+
+<h2>二、width 的三种写法：固定 vs 弹性 vs 限制</h2>
+
+<table>
+<tr><th>写法</th><th>含义</th><th>什么时候用</th><th>坑</th></tr>
+<tr>
+    <td><code>width: 900px</code></td>
+    <td>永远900px，不管屏幕多大</td>
+    <td>几乎不用（除非你确定屏幕永远>900px）</td>
+    <td><span class="tag tag-bad">手机375px→溢出</span></td>
+</tr>
+<tr>
+    <td><code>width: 100%</code></td>
+    <td>占满父容器的全部宽度</td>
+    <td>配合max-width使用</td>
+    <td>单独用在大屏上会太宽，文字难读</td>
+</tr>
+<tr>
+    <td><code>max-width: 900px</code></td>
+    <td>最大900px，小屏自动缩小</td>
+    <td><span class="tag tag-good">推荐</span> 容器、卡片、内容区</td>
+    <td>需要配合width:100%才能在小屏撑满</td>
+</tr>
+</table>
+
+<div class="error-box">
+<h3>❌ 你踩过的坑：ul 宽度写死 900px</h3>
+<p><strong>旧代码</strong>：<code>#content ul { width: 900px; }</code></p>
+<p><strong>问题</strong>：手机屏幕375px宽，900px的ul溢出屏幕，用户要横着滚。</p>
+<p><strong>修复</strong>：<code>#content ul { max-width: 900px; width: 100%; }</code></p>
+<p><strong>因果关系</strong>：width写死 → 小屏幕溢出 → <code>max-width</code>限上限、<code>width:100%</code>保下限 → 大屏不超900、小屏自动缩</p>
+</div>
+
+<h2>三、margin 塌陷 —— 第2层最阴险的坑</h2>
+
+<h3>3.1 兄弟元素之间的 margin 塌陷</h3>
+<p>两个上下排列的块级元素，上面的有 <code>margin-bottom: 30px</code>，下面的有 <code>margin-top: 20px</code>。<br>
+直觉上间距应该是 30+20=<strong>50px</strong>，但CSS的规则是：<strong>取两者中较大的那个</strong>，所以实际间距只有 <strong>30px</strong>。</p>
+
+<div class="demo-section">
+<h4>现场演示：</h4>
+<div style="background:#3498db;color:#fff;padding:10px;text-align:center;margin-bottom:30px;">上元素 margin-bottom: 30px</div>
+<div style="background:#e74c3c;color:#fff;padding:10px;text-align:center;margin-top:20px;">下元素 margin-top: 20px</div>
+<p style="margin-top:15px;color:#888;">👆 两个元素之间的间距是 30px（取最大值），不是 30+20=50px</p>
+</div>
+
+<h3>3.2 父子元素之间的 margin 塌陷</h3>
+<p>子元素的 <code>margin-top</code> 会"穿透"父元素，把父元素也一起往下推。</p>
+
+<div class="compare-row">
+<div class="compare-col bad">
+<h4>❌ 塌陷了</h4>
+<div class="collapse-parent">
+    <p style="font-size:12px;color:#888;">父元素（灰色背景）</p>
+    <div class="collapse-child">子元素 margin-top:30px</div>
+    <p style="font-size:12px;color:#888;">↑ 子元素把父元素也推下来了</p>
+</div>
+</div>
+<div class="compare-col good">
+<h4>✅ 修复了</h4>
+<div class="collapse-parent collapse-fix">
+    <p style="font-size:12px;color:#888;">父元素 + overflow:hidden</p>
+    <div class="collapse-child">子元素 margin-top:30px</div>
+    <p style="font-size:12px;color:#888;">↑ 子元素在父元素内部偏移</p>
+</div>
+</div>
+</div>
+
+<p><strong>修复方案（任选其一）</strong>：</p>
+<pre><code>/* 方案1：父元素加 overflow: hidden（最常用） */
+.parent { overflow: hidden; }
+
+/* 方案2：父元素加 padding-top: 1px（破坏塌陷条件） */
+.parent { padding-top: 1px; }
+
+/* 方案3：父元素加 border-top: 1px solid transparent（透明边框也有效） */
+.parent { border-top: 1px solid transparent; }</code></pre>
+
+<h3>3.3 margin 塌陷的两条铁律</h3>
+<div class="highlight">
+<p>1. <strong>只有垂直方向会塌陷</strong>，水平方向的 margin 不会合并。</p>
+<p>2. <strong>只有块级元素的 margin 会塌陷</strong>，flex子元素、inline-block元素不会。</p>
+</div>
+
+<h2>四、padding 的妙用</h2>
+
+<pre><code>/* padding 最常见的三个用途：*/
+
+/* 1. 给内容留呼吸空间 */
+.card { padding: 20px; }  /* 文字不贴边，看起来舒服 */
+
+/* 2. 配合 border-box 做固定尺寸的按钮 */
+.btn { width: 120px; padding: 10px 0; }  /* 不管字多字少，按钮都是120px宽 */
+
+/* 3. 用 padding-top 百分比做固定宽高比的容器 */
+.video-wrapper { padding-top: 56.25%; }  /* 16:9 的宽高比（9÷16=56.25%） */</code></pre>
+
+<h2>五、calc() —— 让浏览器帮你算宽度</h2>
+
+<pre><code>/* calc() 可以混合不同单位做运算 */
+width: calc(100% - 30px);
+/* 翻译：宽度 = 父容器100%宽度 - 30px */
+/* 用途：3列布局，每列宽度 = (100% - 2个gap) / 3 */
+
+/* ★★★ 最常见的致命错误 ★★★ */
+/* ❌ 运算符两边没空格 → CSS引擎直接忽略整行！ */
+width: calc(100%-30px);      /* 无效！当没写！ */
+width: calc((100% - 30px) / 3);  /* ✅ 正确 */
+
+/* 记法：calc当成文本输入框，加减乘除号像文字一样需要前后喘口气 */</code></pre>
+
+<div class="error-box">
+<h3>❌ 你踩过的坑：calc 空格缺失</h3>
+<p><strong>旧代码</strong>：<code>width: calc((100%-30px)/3)</code></p>
+<p><strong>问题</strong>：减号两边没空格，CSS解析器认为<code>100%-30px</code>是一个无效的CSS值，整行丢弃。浏览器当作你没写width。</p>
+<p><strong>修复</strong>：<code>width: calc((100% - 30px) / 3)</code></p>
+</div>
+
+<h2>六、gap vs margin —— 你和第3层的经典冲突</h2>
+
+<div class="highlight">
+<p><strong>核心原则</strong>：flex/grid 容器的子元素间距用 <code>gap</code>（第3层），不要用 <code>margin</code>（第2层）。</p>
+<p><strong>原因</strong>：gap 是父容器统一管理的"官方间距"，margin 是每个子元素自己设的"个人间距"。</p>
+<p>两者同时存在 → 间距 = gap + margin → 和预期不符 → calc()算错 → 布局崩</p>
+</div>
+
+<pre><code>/* ✅ 正确：父容器统一管间距 */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;          /* 第3层：间距的唯一来源 */
+}
+.child {
+    width: calc((100% - 30px) / 3);  /* 第2层：只算gap，不算margin */
+    /* 没有 margin！*/
+}
+
+/* ❌ 错误：gap和margin同时管间距 */
+.container { gap: 15px; }
+.child { margin: 2px; }   /* 第2层又在管间距 → 打架！*/</code></pre>
+
+<h2>七、因果关系链</h2>
+
+<pre><code>width 写死 900px → 小屏溢出 → 改用 max-width + width:100%
+
+父元素没设 overflow:hidden → 子元素 margin-top 穿透父元素 → 一起被推下去
+
+calc() 减号两边没空格 → CSS引擎丢弃整行 → 宽度变回默认 → 布局崩
+
+gap 和 margin 同时存在 → 间距变大(15+2+2=19px) → calc只减了gap → 宽度不够 → 溢出换行</code></pre>
+
+<p style="text-align:center;color:#888;margin-top:50px;">
+👉 下一步：<a href="第3层_弹性盒布局.html" style="color:#9b59b6;">第3层_弹性盒布局</a>
+</p>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>JS特效：表单数据验证</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"微软雅黑",sans-serif;line-height:1.8;color:#333;background:#f8f9fa;padding:20px;}
+.wrapper{max-width:860px;margin:0 auto;}
+h1{text-align:center;color:#2c3e50;margin-bottom:6px;}
+.subtitle{text-align:center;color:#888;margin-bottom:20px;font-size:14px;}
+h2{color:#e74c3c;border-left:5px solid #e74c3c;padding-left:12px;margin:35px 0 15px;font-size:22px;}
+h3{color:#2ecc71;margin:22px 0 10px;font-size:18px;}
+p{margin-bottom:12px;}
+pre{background:#2c3e50;color:#ecf0f1;padding:15px;border-radius:6px;overflow-x:auto;font-size:13px;line-height:1.5;margin:10px 0;}
+code{background:#eee;padding:2px 6px;border-radius:3px;font-size:13px;color:#e74c3c;}
+pre code{background:none;padding:0;color:#ecf0f1;}
+.highlight{background:#fff3cd;border-left:4px solid #f39c12;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+.error-box{background:#fdeaea;border-left:4px solid #e74c3c;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+table{width:100%;border-collapse:collapse;margin:15px 0;}
+th,td{border:1px solid #ddd;padding:10px 14px;text-align:left;font-size:14px;}
+th{background:#f0f0f0;color:#555;}
+
+/* 表单演示 */
+.form-demo{background:#fff;border-radius:8px;padding:25px 30px;max-width:450px;margin:20px auto;box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+.form-demo h4{text-align:center;margin-bottom:20px;font-size:20px;}
+.form-row{margin-bottom:14px;display:flex;align-items:flex-start;}
+.form-row label{width:80px;text-align:right;padding-right:10px;line-height:32px;font-size:14px;flex-shrink:0;}
+.form-row input[type="text"],.form-row input[type="password"]{flex:1;height:32px;border:1px solid #ccc;padding:0 8px;border-radius:3px;font-size:13px;}
+.option-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;line-height:32px;}
+.option-row label{width:auto!important;padding-right:4px!important;}
+.form-demo button,.form-demo input[type="submit"]{background:#e74c3c;color:#fff;border:none;padding:10px 30px;font-size:15px;border-radius:4px;cursor:pointer;}
+.form-demo button:hover{background:#c0392b;}
+.error-msg{color:#e74c3c;font-size:12px;line-height:32px;margin-left:8px;white-space:nowrap;}
+.success-msg{color:#27ae60;font-size:12px;line-height:32px;margin-left:8px;}
+
+#result-box{background:#fff;border-radius:8px;padding:15px;margin-top:15px;text-align:center;font-size:16px;display:none;}
+#result-box.success{border:2px solid #27ae60;color:#27ae60;display:block;}
+</style>
+</head>
+<body>
+<hr style="margin-top:50px;border:2px dashed #ccc;">
+<h2 style="text-align:center;color:#333;">🧪 纯净演示区（无注释，仅展示效果）</h2>
+<div style="max-width:450px;margin:20px auto;background:#fff;border-radius:8px;padding:20px 25px;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+  <h4 style="text-align:center;font-size:18px;margin-bottom:15px;">用户注册验证</h4>
+  <form onsubmit="return demoCheckAll()">
+    <div style="display:flex;align-items:center;margin-bottom:10px;">
+      <label style="width:70px;text-align:right;padding-right:8px;">用户名</label>
+      <input type="text" id="demo-user" placeholder="至少6个字符" style="flex:1;height:30px;border:1px solid #ccc;padding:0 6px;border-radius:3px;">
+      <span id="demo-ue" style="font-size:12px;margin-left:6px;color:#e74c3c;"></span>
+    </div>
+    <div style="display:flex;align-items:center;margin-bottom:10px;">
+      <label style="width:70px;text-align:right;padding-right:8px;">密码</label>
+      <input type="password" id="demo-pwd" placeholder="至少8位数字或字母" style="flex:1;height:30px;border:1px solid #ccc;padding:0 6px;border-radius:3px;">
+      <span id="demo-pe" style="font-size:12px;margin-left:6px;color:#e74c3c;"></span>
+    </div>
+    <div style="display:flex;align-items:center;margin-bottom:10px;">
+      <label style="width:70px;text-align:right;padding-right:8px;">性别</label>
+      <input type="radio" name="demo-sex2"> 男
+      <input type="radio" name="demo-sex2" style="margin-left:8px;"> 女
+      <span id="demo-se" style="font-size:12px;margin-left:6px;color:#e74c3c;"></span>
+    </div>
+    <div style="text-align:center;margin-top:15px;padding-left:70px;">
+      <input type="submit" value="注册" style="background:#e74c3c;color:#fff;border:none;padding:8px 25px;border-radius:3px;cursor:pointer;">
+    </div>
+  </form>
+</div>
+<script>
+function demoCheckAll() {
+  var u = document.getElementById("demo-user");
+  if (u.value.length < 6) { document.getElementById("demo-ue").innerHTML = "❌ 长度<6"; return false; }
+  else { document.getElementById("demo-ue").innerHTML = "✅"; }
+  var p = document.getElementById("demo-pwd");
+  if (p.value.length < 8) { document.getElementById("demo-pe").innerHTML = "❌ 长度<8"; return false; }
+  if (!/^[0-9A-Za-z]+$/.test(p.value)) { document.getElementById("demo-pe").innerHTML = "❌ 只能数字字母"; return false; }
+  document.getElementById("demo-pe").innerHTML = "✅";
+  var sx = document.getElementsByName("demo-sex2"), ok = false;
+  for (var i=0; i<sx.length; i++) { if (sx[i].checked) ok = true; }
+  if (!ok) { document.getElementById("demo-se").innerHTML = "❌ 必选"; return false; }
+  document.getElementById("demo-se").innerHTML = "✅";
+  alert("✅ 验证通过！（演示模式）");
+  return false;
+}
+</script>
+
+</body>
+</html>
+<hr style="margin-top:50px;border:2px dashed #3498db;">
+<h2 style="text-align:center;color:#555;">📖 教学讲解区</h2>
+
+<div class="wrapper">
+
+<h1>✅ JS特效：表单数据验证</h1>
+<p class="subtitle">对应课件 8.5 | 核心：正则表达式 + onsubmit + 验证函数链</p>
+
+<!--
+宏观理解：
+表单验证 = 每个字段单独检查 + 最后统一把关 + 正则表达式检查格式
+- 每个字段一个验证函数 → return true(通过) / false(不通过)
+- onsubmit统一调用所有验证函数 → 全部true才提交
+- 正则表达式 → 用符号描述"合法格式"（手机号/邮箱/密码）
+
+整个流程：
+用户点"注册" → onsubmit触发 → checkAll()
+  → checkUser() && checkPwd() && checkSex() && checkInterest()
+  → 全部true → return true → 表单提交
+  → 任一false → return false → 阻止提交 → 显示错误提示
+-->
+
+<h2>一、正则表达式：用符号描述"合法格式"</h2>
+<table>
+<tr><th>符号</th><th>含义</th><th>例子</th></tr>
+<tr><td><code>^</code></td><td>从字符串头开始匹配</td><td><code>^a</code> = 以a开头</td></tr>
+<tr><td><code>$</code></td><td>到字符串尾结束</td><td><code>a$</code> = 以a结尾</td></tr>
+<tr><td><code>[0-9]</code></td><td>任意一个数字(0~9)</td><td></td></tr>
+<tr><td><code>[a-z]</code></td><td>任意一个小写字母</td><td></td></tr>
+<tr><td><code>[A-Z]</code></td><td>任意一个大写字母</td><td></td></tr>
+<tr><td><code>[0-9A-Za-z]</code></td><td>数字+大小写字母都可以</td><td></td></tr>
+<tr><td><code>+</code></td><td>至少1个</td><td><code>[a-z]+</code> = 至少1个小写字母</td></tr>
+<tr><td><code>*</code></td><td>0个或任意个</td><td></td></tr>
+<tr><td><code>{n}</code></td><td>恰好n个</td><td><code>[0-9]{6}</code> = 恰好6位数字</td></tr>
+<tr><td><code>{n,m}</code></td><td>n到m个</td><td><code>[0-9]{6,12}</code> = 6到12位数字</td></tr>
+</table>
+
+<pre><code>// 正则表达式基础用法
+var reg = /^[0-9A-Za-z]+$/;  // 从头到尾只能出现数字和大小写字母
+// /.../ → 正则表达式的边界（就像字符串用""包起来）
+
+reg.test("hello123");   // → true  ✅ 全是数字和字母
+reg.test("hello 123");  // → false ❌ 有空格
+reg.test("你好");        // → false ❌ 有中文
+
+// 常见验证规则
+/^[0-9]*$/                    // 只能输入数字
+/^[0-9]{6}$/                  // 恰好6位数字
+/^1[3-9][0-9]{9}$/            // 手机号（1开头，第二位3~9，后面9位数字）
+/^[0-9A-Za-z]{6,12}$/         // 6~12位的数字或字母（密码）</code></pre>
+
+<h2>二、表单提交流程</h2>
+<pre><code>&lt;form onsubmit="return checkAll()"&gt;
+    ← onsubmit：表单提交前自动触发
+    ← return：把checkAll()的返回值传给onsubmit
+    ← checkAll()返回false → onsubmit="return false" → 阻止提交
+    ← checkAll()返回true  → onsubmit="return true"  → 允许提交
+
+function checkAll() {
+    // && 逻辑"与"：全部为true才返回true
+    if (checkUser() && checkPwd() && checkSex() && checkInterest()) {
+        return true;   // 全部通过→提交
+    } else {
+        return false;  // 任一失败→阻止提交
+    }
+}</code></pre>
+
+<h2>三、现场演示</h2>
+<div class="form-demo">
+    <h4>用户注册</h4>
+    <form onsubmit="return checkAll()">
+        <div class="form-row">
+            <label>用户名：</label>
+            <input type="text" id="user" placeholder="至少6个字符">
+            <span class="error-msg" id="user-error"></span>
+        </div>
+        <div class="form-row">
+            <label>密码：</label>
+            <input type="password" id="pwd" placeholder="至少8位，只能数字和字母">
+            <span class="error-msg" id="pwd-error"></span>
+        </div>
+        <div class="form-row">
+            <label>性别：</label>
+            <span class="option-row">
+                <input type="radio" name="sex" value="男" id="male"> <label for="male">男</label>
+                <input type="radio" name="sex" value="女" id="female"> <label for="female">女</label>
+            </span>
+            <span class="error-msg" id="sex-error"></span>
+        </div>
+        <div class="form-row">
+            <label>爱好：</label>
+            <span class="option-row">
+                <input type="checkbox" name="hobby" value="阅读" id="h1"> <label for="h1">阅读</label>
+                <input type="checkbox" name="hobby" value="运动" id="h2"> <label for="h2">运动</label>
+                <input type="checkbox" name="hobby" value="音乐" id="h3"> <label for="h3">音乐</label>
+            </span>
+            <span class="error-msg" id="hobby-error"></span>
+        </div>
+        <div style="text-align:center;margin-top:15px;">
+            <input type="submit" value="注册">
+        </div>
+    </form>
+</div>
+<div id="result-box"></div>
+
+<script>
+// ★★★ 表单验证完整代码 ★★★
+
+// 正则表达式：用于验证密码格式
+var pwdReg = /^[0-9A-Za-z]+$/;
+// 含义：^从头开始 → [0-9A-Za-z]数字或字母 → +至少1个 → $到结尾
+// 效果：整个密码只能包含数字和大小写字母
+
+// --- 验证函数1：用户名 ---
+function checkUser() {
+    // getElementById("user") → 通过id找到用户名输入框
+    var user = document.getElementById("user");
+    // .value → 拿到输入框里用户打的内容
+
+    if (user.value.length < 6) {
+        // .length → 字符串的长度（几个字符）
+        document.getElementById("user-error").innerHTML = "❌ 长度不能小于6";
+        return false;  // 验证不通过
+    } else {
+        document.getElementById("user-error").innerHTML = "✅";
+        return true;   // 验证通过
+    }
+}
+
+// --- 验证函数2：密码（两步验证）---
+function checkPwd() {
+    var pwd = document.getElementById("pwd").value;
+
+    // 第一步：检查长度
+    if (pwd.length < 8) {
+        document.getElementById("pwd-error").innerHTML = "❌ 长度不能小于8";
+        return false;
+    }
+    // 第二步：用正则检查格式
+    // !pwdReg.test(pwd) → 正则测试不通过
+    if (!pwdReg.test(pwd)) {
+        document.getElementById("pwd-error").innerHTML = "❌ 只能包含数字和字母";
+        return false;
+    }
+
+    document.getElementById("pwd-error").innerHTML = "✅";
+    return true;
+}
+
+// --- 验证函数3：性别（单选按钮）---
+function checkSex() {
+    // getElementsByName("sex") → 通过name属性找到所有单选按钮
+    // 返回NodeList（类似数组），包含两个radio元素
+    var sexNodes = document.getElementsByName("sex");
+    var checked = false;
+
+    // 遍历两个radio按钮，看有没有被选中的
+    for (var i = 0; i < sexNodes.length; i++) {
+        if (sexNodes[i].checked) {
+            // .checked → 布尔值：true=被选中，false=没选中
+            checked = true;
+            break;  // 找到了就退出循环
+        }
+    }
+
+    if (!checked) {
+        document.getElementById("sex-error").innerHTML = "❌ 必选";
+        return false;
+    } else {
+        document.getElementById("sex-error").innerHTML = "✅";
+        return true;
+    }
+}
+
+// --- 验证函数4：爱好（复选框）---
+function checkInterest() {
+    var hobbyNodes = document.getElementsByName("hobby");
+    var checked = false;
+
+    for (var i = 0; i < hobbyNodes.length; i++) {
+        if (hobbyNodes[i].checked) {
+            checked = true;
+            break;
+        }
+    }
+
+    if (!checked) {
+        document.getElementById("hobby-error").innerHTML = "❌ 必选至少一个";
+        return false;
+    } else {
+        document.getElementById("hobby-error").innerHTML = "✅";
+        return true;
+    }
+}
+
+// --- 总验证函数：表单提交前统一检查 ---
+function checkAll() {
+    // && → 逻辑"与"：四个都为true才返回true
+    // 短路求值：从左往右，遇到false就停止（后面的不再执行）
+    if (checkUser() && checkPwd() && checkSex() && checkInterest()) {
+        document.getElementById("result-box").className = "success";
+        document.getElementById("result-box").innerHTML = "✅ 注册成功！（演示模式，数据未提交）";
+        return false;  // 演示模式：阻止真实提交（真实项目中改成return true）
+    } else {
+        return false;  // 阻止提交
+    }
+}
+</script>
+
+<h2>四、验证函数链的短路逻辑</h2>
+<pre><code>checkAll()执行：
+  → checkUser() → false? → 后面三个不执行，直接return false
+  → checkUser() → true?  → 继续checkPwd()
+      → checkPwd() → false? → checkSex()和checkInterest()不执行，return false
+      → checkPwd() → true?  → 继续checkSex()
+          → checkSex() → false? →checkInterest()不执行，return false
+          → checkSex() → true?  → 继续checkInterest()
+              → checkInterest() → false? → return false
+              → checkInterest() → true?  → return true → 提交！
+
+★ 这就是"短路求值"：遇到第一个false就停，不浪费CPU</code></pre>
+
+<h2>五、getElementById vs getElementsByName</h2>
+<pre><code>getElementById("user")         → 返回单个元素（id是唯一的）
+getElementsByName("sex")       → 返回NodeList（name可以重复，radio组必须同名）
+getElementsByTagName("input")  → 返回所有input元素的NodeList
+
+// 为什么sex用getElementsByName？
+// 因为两个radio的name都是"sex"，这样才能互斥（选男就不能选女）
+// 要检查哪个被选中，必须拿到两个radio一起遍历</code></pre>
+
+<h2>六、onsubmit 完整流程图</h2>
+<pre><code>用户填写表单 → 点击"注册"按钮
+  → 触发form的onsubmit事件
+  → 调用checkAll()
+  → checkAll内部依次调用4个验证函数
+  → 每个验证函数独立检查自己的字段
+      → 通过 → 显示✅ → return true
+      → 失败 → 显示❌错误提示 → return false
+  → checkAll汇总结果
+      → 全部true → 表单提交 → 跳转到action页面
+      → 任一false → 阻止提交 → 用户留在当前页修改</code></pre>
+
+<div class="error-box">
+<h3>❌ 常见错误：忘了return</h3>
+<p><code>onsubmit="checkAll()"</code> → checkAll返回值被丢弃，表单永远会提交！</p>
+<p><strong>修复</strong>：<code>onsubmit="return checkAll()"</code>（必须加return）</p>
+</div>
+
+<p style="text-align:center;color:#888;margin-top:50px;">
+🏁 全部 JS 案例讲解结束 | 回到总览：<a href="../00-CSS七层体系/七层体系总览.html" style="color:#e74c3c;">CSS七层体系总览</a>
+</p>
+
+</div>
+
+</body>
+</html>

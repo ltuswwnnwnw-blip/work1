@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>第6层：过渡与2D变换 —— 让元素动起来</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"微软雅黑",sans-serif;line-height:1.8;color:#333;background:#f8f9fa;padding:20px;}
+.wrapper{max-width:860px;margin:0 auto;}
+h1{text-align:center;color:#2c3e50;margin-bottom:6px;}
+.subtitle{text-align:center;color:#888;margin-bottom:30px;font-size:14px;}
+h2{color:#e67e22;border-left:5px solid #e67e22;padding-left:12px;margin:35px 0 15px;font-size:22px;}
+h3{color:#2ecc71;margin:22px 0 10px;font-size:18px;}
+p{margin-bottom:12px;}
+
+.demo-section{background:#fff;border:1px solid #ddd;border-radius:8px;padding:20px;margin:20px 0;}
+.demo-row{display:flex;gap:15px;flex-wrap:wrap;margin:15px 0;justify-content:center;}
+
+/* 过渡演示 */
+.transition-box{width:120px;height:120px;background:#3498db;color:#fff;border-radius:8px;
+    display:flex;align-items:center;justify-content:center;text-align:center;font-size:14px;cursor:pointer;margin:10px;}
+/* transition: 属性 时长 时间函数 延迟; */
+.trans-1{transition:background 0.3s ease;}
+.trans-1:hover{background:#e74c3c;}
+.trans-2{transition:all 0.5s ease;}
+.trans-2:hover{background:#e74c3c;transform:scale(1.1);border-radius:50%;}
+/* all → 所有可过渡的属性都过渡
+ * scale(1.1) → 放大到110%
+ * border-radius:50% → 变成圆形 */
+
+/* 2D变换演示 */
+.transform-box{width:100px;height:100px;background:#e67e22;color:#fff;border-radius:8px;
+    display:flex;align-items:center;justify-content:center;font-size:12px;margin:10px;}
+.translate{transform:translate(30px,-10px);}
+/* translate(X偏移, Y偏移) → 平移
+ * 注意：transform 移动的是视觉位置，原来的空间还在！ */
+.rotate{transform:rotate(45deg);}
+/* rotate(度数) → 顺时针旋转 */
+.scale{transform:scale(1.3);}
+/* scale(倍数) → 放大 1.3 = 130% */
+.skew{transform:skew(15deg,5deg);}
+/* skew(X倾斜, Y倾斜) → 倾斜变形 */
+.multi{transform:translate(20px,0) rotate(20deg) scale(0.9);}
+/* 多个变换用空格分隔，从右往左执行 */
+
+pre{background:#2c3e50;color:#ecf0f1;padding:15px;border-radius:6px;overflow-x:auto;font-size:13px;line-height:1.5;margin:10px 0;}
+code{background:#eee;padding:2px 6px;border-radius:3px;font-size:13px;color:#e74c3c;}
+pre code{background:none;padding:0;color:#ecf0f1;}
+.highlight{background:#fff3cd;border-left:4px solid #f39c12;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+
+table{width:100%;border-collapse:collapse;margin:15px 0;}
+th,td{border:1px solid #ddd;padding:10px 14px;text-align:left;font-size:14px;}
+th{background:#f0f0f0;color:#555;}
+
+/* transform-origin演示 */
+.origin-demo{width:80px;height:80px;background:#9b59b6;color:#fff;border-radius:8px;
+    display:flex;align-items:center;justify-content:center;font-size:11px;margin:10px;cursor:pointer;
+    transition:transform 0.5s ease;}
+.origin-center{transform-origin:center;}
+.origin-center:hover{transform:rotate(180deg);}
+.origin-top{transform-origin:top center;}
+.origin-top:hover{transform:rotate(180deg);}
+/* transform-origin: 旋转轴心位置，默认是center（元素正中心） */</style>
+</head>
+<body>
+<hr style="margin-top:50px;border:2px dashed #ccc;">
+<h2 style="text-align:center;color:#333;">🧪 纯净演示区（无注释，仅展示效果）</h2>
+
+<style>
+.clean-trans-box { max-width: 600px; margin: 20px auto; background: #fff; padding: 20px; border-radius: 8px; display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
+.clean-trans-item { width: 100px; height: 100px; background: #3498db; color: #fff; display: flex; align-items: center; justify-content: center; border-radius: 8px; cursor: pointer; font-size: 12px; text-align: center; transition: all 0.3s ease; }
+.clean-trans-item:hover:nth-child(1) { transform: translateY(-10px); }
+.clean-trans-item:hover:nth-child(2) { transform: rotate(15deg); }
+.clean-trans-item:hover:nth-child(3) { transform: scale(1.2); }
+.clean-trans-item:hover:nth-child(4) { transform: skew(-10deg); }
+</style>
+
+<div class="clean-trans-box">
+  <div class="clean-trans-item">hover<br>上移</div>
+  <div class="clean-trans-item">hover<br>旋转</div>
+  <div class="clean-trans-item">hover<br>放大</div>
+  <div class="clean-trans-item">hover<br>倾斜</div>
+</div>
+
+</body>
+</html>
+
+<hr style="margin-top:50px;border:2px dashed #3498db;">
+<h2 style="text-align:center;color:#555;">📖 教学讲解区</h2>
+
+<div class="wrapper">
+
+<h1>🎬 第6层：过渡与2D变换</h1>
+<p class="subtitle">transition 让变化平滑、transform 让元素变形</p>
+
+<!--
+第6层只管"动效"，不管布局。
+核心区别：
+- transition：定义"变化过程"（从状态A到状态B要多长时间、什么节奏）
+- transform：定义"变成什么样"（位移、旋转、缩放、倾斜）
+- 两者配合：transform定义变化内容，transition定义变化速度
+-->
+
+<h2>一、transition —— 让变化变平滑</h2>
+
+<pre><code>/* transition 完整写法 */
+transition: 属性名 持续时间 时间函数 延迟时间;
+
+/* 最常用的简写 */
+transition: all 0.3s ease;
+/* all → 所有可过渡的属性都过渡（颜色、大小、位置、透明度...） */
+/* 0.3s → 变化过程持续0.3秒 */
+/* ease → 慢→快→慢的节奏（最自然） */
+</code></pre>
+
+<div class="demo-row">
+    <div class="transition-box trans-1">
+        <span>背景色<br>0.3s过渡</span>
+    </div>
+    <div class="transition-box trans-2">
+        <span>全部属性<br>0.5s过渡<br>+缩放+圆角</span>
+    </div>
+</div>
+<p style="text-align:center;font-size:13px;color:#888;">👆 鼠标放上去看看效果</p>
+
+<h3>时间函数（timing-function）对比</h3>
+<table>
+<tr><th>值</th><th>节奏</th><th>适合</th></tr>
+<tr><td><code>ease</code></td><td>慢→快→慢</td><td>绝大多数场景（默认）</td></tr>
+<tr><td><code>linear</code></td><td>匀速</td><td>持续循环动画</td></tr>
+<tr><td><code>ease-in</code></td><td>慢→快</td><td>元素退出</td></tr>
+<tr><td><code>ease-out</code></td><td>快→慢</td><td>元素进入</td></tr>
+</table>
+
+<h2>二、transform —— 四大变形</h2>
+
+<div class="demo-row">
+    <div class="transform-box translate"><span>位移<br>30,-10</span></div>
+    <div class="transform-box rotate"><span>旋转45°</span></div>
+    <div class="transform-box scale"><span>放大1.3倍</span></div>
+    <div class="transform-box skew"><span>倾斜</span></div>
+    <div class="transform-box multi"><span>组合变换<br>位移+旋转+缩放</span></div>
+</div>
+
+<pre><code>transform: translate(30px, -10px);   /* 平移：右移30px，上移10px */
+transform: rotate(45deg);              /* 旋转：顺时针45度 */
+transform: scale(1.3);                /* 缩放：放大到1.3倍 */
+transform: skew(15deg, 5deg);         /* 倾斜：X轴15度，Y轴5度 */
+
+/* 组合变换：空格分隔，从右往左执行 */
+transform: translate(20px,0) rotate(20deg) scale(0.9);</code></pre>
+
+<h3>⚠️ transform vs margin —— 关键区别</h3>
+<div class="highlight">
+<p><strong>transform: translate() 移动的是视觉位置，原来占据的空间不变</strong>——就像一个全息投影，人走了影子还在。</p>
+<p><strong>margin 改变的是实际布局位置</strong>——人走了空间也腾出来了。</p>
+<p>所以：<strong>做动画用 transform，改布局用 margin。</strong>不要用 transform 来做布局位移。</p>
+</div>
+
+<h2>三、transform-origin —— 变形从哪里开始</h2>
+<div class="demo-row">
+    <div class="origin-demo origin-center">中心旋转<br>（默认）<br>hover看</div>
+    <div class="origin-demo origin-top">顶部旋转<br>hover看</div>
+</div>
+<pre><code>transform-origin: center;       /* 默认：元素正中心 */
+transform-origin: top left;     /* 左上角 */
+transform-origin: 0 0;          /* 坐标(0,0)，左上角 */
+transform-origin: 50% 0;        /* 顶部中点 */</code></pre>
+
+<h2>四、因果关系链</h2>
+<pre><code>:hover 改属性 → 没写transition → 瞬间跳变 → 生硬
+:hover 改属性 → 写了transition:all 0.3s → 平滑过渡
+
+transform移动 → 视觉位置变了 → 原来空间还在 → 旁边有"鬼影空白"
+margin移动 → 实际位置变了 → 周围元素重新排列 → 触发重排（性能差）
+
+最佳实践：hover效果用transform+transition（GPU加速，性能好）
+         布局位移用margin（真实移动，不欺骗）</code></pre>
+
+<p style="text-align:center;color:#888;margin-top:50px;">
+👉 下一步：<a href="第6层_3D翻转卡片.html" style="color:#e67e22;">第6层_3D翻转卡片</a>
+</p>
+
+</div>
+
+</body>
+</html>

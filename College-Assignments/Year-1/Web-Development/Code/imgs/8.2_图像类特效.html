@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>图像类特效</title>
+    <style>
+        #lunbo { width: 500px; border: 1px solid gray; padding: 3px; }
+        #pic { width: 500px; height: 500px; object-fit: cover; }
+        #small { font-size: 0; }
+        #small a { display: inline-block; margin: 5px; opacity: 0.3; }
+        #small img { width: 115px; }
+        #small #current { opacity: 1; }
+    </style>
+</head>
+<body>
+    <div id="lunbo">
+        <img src="imgs/flower0.jpg" id="pic" alt="">
+        <div id="small">
+            <a href="#" id="current"><img src="imgs/flower0.jpg" alt=""></a>
+            <a href="#"><img src="imgs/flower1.jpg" alt=""></a>
+            <a href="#"><img src="imgs/flower2.jpg" alt=""></a>
+            <a href="#"><img src="imgs/flower3.jpg" alt=""></a>
+        </div>
+    </div>
+
+    <script>
+        var timer1;
+        var timer2;
+        var nodes;
+        var olmg;
+        var now = 0;
+        var all = 4;
+        var val;
+
+        function gotoImg(num) {
+            nodes[now].id = "";
+            nodes[num].id = "current";
+            now = num;
+            olmg.src = "imgs/flower" + num + ".jpg";
+            clearInterval(timer2);
+            val = 0;
+            timer2 = setInterval(fadeIn, 5);
+        }
+
+        function nextImg() {
+            var count = now;
+            if (now == (all - 1)) {
+                count = 0;
+            } else {
+                count++;
+            }
+            gotoImg(count);
+        }
+
+        function fadeIn() {
+            if (val <= 100) {
+                olmg.style.opacity = val / 100;
+                val++;
+            } else {
+                clearInterval(timer2);
+            }
+        }
+
+        window.onload = function () {
+            nodes = document.getElementById("small").getElementsByTagName("a");
+            olmg = document.getElementById("pic");
+            timer1 = window.setInterval(nextImg, 3000);
+
+            nodes[0].onmouseover = function () {
+                clearInterval(timer1);
+                gotoImg(0);
+                timer1 = setInterval(nextImg, 5000);
+            };
+            nodes[1].onmouseover = function () {
+                clearInterval(timer1);
+                gotoImg(1);
+                timer1 = setInterval(nextImg, 5000);
+            };
+            nodes[2].onmouseover = function () {
+                clearInterval(timer1);
+                gotoImg(2);
+                timer1 = setInterval(nextImg, 5000);
+            };
+            nodes[3].onmouseover = function () {
+                clearInterval(timer1);
+                gotoImg(3);
+                timer1 = setInterval(nextImg, 5000);
+            };
+        };
+    </script>
+</body>
+</html>

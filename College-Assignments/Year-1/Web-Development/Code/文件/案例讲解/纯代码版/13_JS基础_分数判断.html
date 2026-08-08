@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>JavaScript基础 - 分数等级判断</title>
+<style>
+body { font-family:"微软雅黑",sans-serif; background:#2c3e50; color:#ecf0f1; text-align:center; padding:50px; }
+button { background:#f39c12; color:#fff; border:none; padding:12px 30px; font-size:16px; border-radius:6px; cursor:pointer; }
+button:hover { background:#e67e22; }
+#output { background:#1a1a2e; color:#2ecc71; padding:15px; border-radius:6px; margin-top:15px; font-family:Consolas,monospace; font-size:16px; min-height:40px; max-width:500px; margin-left:auto; margin-right:auto; line-height:1.6; }
+</style>
+</head>
+<body>
+
+<h2>分数等级判断器</h2>
+<button onclick="start()">开始判断</button>
+<div id="output"></div>
+
+<script>
+function start() {
+    var name = prompt("请输入名字：");
+    if (name === "" || name === null) { return; }
+
+    var score = Number(prompt("请输入" + name + "的分数："));
+    var grade;
+
+    if (score >= 90) { grade = "优秀"; }
+    else if (score >= 80) { grade = "良好"; }
+    else if (score >= 70) { grade = "中等"; }
+    else if (score >= 60) { grade = "及格"; }
+    else { grade = "不及格"; }
+
+    document.getElementById("output").innerHTML += name + " | " + score + "分 | " + grade + "<br>";
+}
+</script>
+
+</body>
+</html>

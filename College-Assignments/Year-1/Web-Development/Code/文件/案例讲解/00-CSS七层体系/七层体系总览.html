@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>CSS 七层体系总览 —— 解决"打架"问题的思维框架</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* =================================================================
+         * 这个文件的目的：让你脑子里有一张"CSS 地图"
+         * 以后写任何 CSS，先想清楚它在第几层，就不会写出互相打架的代码。
+         *
+         * 注意：这个文件不是让你抄代码的，是让你"看懂"CSS 的。
+         * 每一层的具体案例在对应的文件夹里。
+         * ================================================================= */
+
+        /* ===== 第一层：全局重置 —— 把浏览器的默认样式铲平 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* box-sizing: border-box 是整个CSS最重要的第一行代码
+             * 做什么：让你写的 width 就是最终宽度，padding和border不会额外撑大盒子
+             * 不写会怎样：width:50% + padding:10px = 实际超过50%，两个50%并排会挤到下一行 */
+        }
+
+        /* ===== 第二层：间距/尺寸 —— 每个元素自己占多大地方 ===== */
+        body {
+            font-family: "微软雅黑", sans-serif;
+            background-color: #1a1a2e;
+            color: #e0e0e0;
+            line-height: 1.8;
+            /* line-height: 行高，1.8 意思是行间距是字号的 1.8 倍
+             * 不写的话默认约1.2，中文会挤在一起很难读 */
+            padding: 20px;
+        }
+
+        /* ===== 第三层：排列 —— 元素之间怎么排队 ===== */
+        #wrapper {
+            max-width: 900px;
+            /* max-width：最大宽度限制，在大屏幕上不会无限拉宽
+             * 对比 width：width 是固定宽度，换小屏幕会溢出
+             * 常见错误：写死 width:900px → 手机屏幕375px → 内容溢出 → 用户要横着滚 */
+            margin: 0 auto;
+            /* margin: 0 auto 是经典居中写法
+             * 原理：上下margin为0，左右margin自动平分 → 元素居中
+             * 前提：元素必须有宽度（或max-width），否则auto没法分 */
+        }
+
+        /* ===== 第五层：视觉样式 —— 长什么样 ===== */
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            color: #ff6b6b;
+            /* color 只管文字颜色，不管背景
+             * 如果想改背景色，用 background-color */
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 40px;
+        }
+
+        .subtitle code {
+            background-color: #333;
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: #ffd93d;
+            /* code 标签：表示代码片段，默认是等宽字体 */
+        }
+
+        h2 {
+            color: #ffd93d;
+            font-size: 22px;
+            margin: 40px 0 15px 0;
+            border-left: 4px solid #ff6b6b;
+            padding-left: 12px;
+            /* border-left：只在左边加一条红色竖线，视觉上标识"这是一个重要的标题" */
+        }
+
+        h3 {
+            color: #6bcb77;
+            font-size: 18px;
+            margin: 20px 0 10px 0;
+        }
+
+        p {
+            margin-bottom: 12px;
+        }
+
+        /* 七层楼的可视化展示 */
+        .layer-stack {
+            margin: 30px 0;
+        }
+
+        .layer {
+            padding: 15px 20px;
+            margin: 3px 0;
+            border-radius: 6px;
+            font-weight: bold;
+            /* border-radius: 圆角，6px 是轻微的圆角，看起来柔和 */
+        }
+
+        .layer-num {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            line-height: 28px;
+            text-align: center;
+            background-color: rgba(255,255,255,0.2);
+            /* rgba(红,绿,蓝,透明度)：透明度0.2表示20%不透明度 → 半透明的白色圆背景
+             * 常见错误：写成 rgba(0, green, blue, alpha) → 参数必须是数字！ */
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .layer-7 { background-color: #c0392b; }  /* 响应式层 - 红色 */
+        .layer-6 { background-color: #e67e22; }  /* 动效层 - 橙色 */
+        .layer-5 { background-color: #f1c40f; color: #333; } /* 视觉层 - 黄色 */
+        .layer-4 { background-color: #2ecc71; color: #333; } /* 定位层 - 绿色 */
+        .layer-3 { background-color: #3498db; }  /* 排列层 - 蓝色 */
+        .layer-2 { background-color: #9b59b6; }  /* 间距层 - 紫色 */
+        .layer-1 { background-color: #34495e; }  /* 重置层 - 深灰 */
+
+        .layer-desc {
+            font-weight: normal;
+            font-size: 13px;
+            display: block;
+            margin-left: 38px;
+            opacity: 0.85;
+        }
+
+        /* 冲突对表格 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            /* border-collapse: collapse 让相邻单元格的边框合并成一条线
+             * 不写的话两个td之间的边框会有两条线，中间有缝隙 */
+            margin: 15px 0;
+        }
+
+        th, td {
+            border: 1px solid #444;
+            padding: 10px 14px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #2c2c44;
+            color: #ffd93d;
+        }
+
+        td {
+            background-color: #1e1e32;
+        }
+
+        .bad {
+            color: #ff6b6b;
+            /* 红色 = 错误/警告，在代码注释中用小❌标记 */
+        }
+
+        .good {
+            color: #6bcb77;
+            /* 绿色 = 正确/推荐，在代码注释中用✅标记 */
+        }
+
+        .highlight {
+            background-color: #2c2c44;
+            border-left: 4px solid #ffd93d;
+            padding: 12px 16px;
+            margin: 15px 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .arrow {
+            color: #ffd93d;
+            font-weight: bold;
+        }
+
+        code {
+            background-color: #2c2c44;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "Consolas", "Courier New", monospace;
+            font-size: 13px;
+            color: #ffd93d;
+        }
+
+        /* 第六层：动效 —— hover 交互反馈 */
+        .layer:hover {
+            transform: translateX(8px);
+            /* translateX(8px)：鼠标放上去时往右移8px，给用户"这个东西可以点"的暗示
+             * 不写的话hover没有反馈，用户不知道交互成功了 */
+            transition: transform 0.2s ease;
+            /* transition：让移动过程变平滑，0.2秒内完成 */
+            cursor: pointer;
+            /* cursor: pointer：鼠标变成手指形状 */
+        }
+    </style>
+</head>
+<body>
+<hr style="margin-top:50px;border:2px dashed #ccc;">
+<h2 style="text-align:center;color:#333;">🧪 纯净演示区（无注释，仅展示效果）</h2>
+<div style="max-width:600px;margin:20px auto;font-family:'微软雅黑',sans-serif;line-height:1.8;">
+<div style="padding:15px 20px;margin:3px 0;border-radius:6px;font-weight:bold;background:#c0392b;color:#fff;"><span style="display:inline-block;width:28px;height:28px;line-height:28px;text-align:center;background:rgba(255,255,255,0.2);border-radius:50%;margin-right:10px;font-size:14px;">7</span>响应式层 @media</div>
+<div style="padding:15px 20px;margin:3px 0;border-radius:6px;font-weight:bold;background:#e67e22;color:#fff;"><span style="display:inline-block;width:28px;height:28px;line-height:28px;text-align:center;background:rgba(255,255,255,0.2);border-radius:50%;margin-right:10px;font-size:14px;">6</span>动效层 transition/transform</div>
+<div style="padding:15px 20px;margin:3px 0;border-radius:6px;font-weight:bold;background:#f1c40f;color:#333;"><span style="display:inline-block;width:28px;height:28px;line-height:28px;text-align:center;background:rgba(255,255,255,0.2);border-radius:50%;margin-right:10px;font-size:14px;">5</span>视觉层 color/background/shadow</div>
+<div style="padding:15px 20px;margin:3px 0;border-radius:6px;font-weight:bold;background:#2ecc71;color:#333;"><span style="display:inline-block;width:28px;height:28px;line-height:28px;text-align:center;background:rgba(255,255,255,0.2);border-radius:50%;margin-right:10px;font-size:14px;">4</span>定位层 position/z-index</div>
+<div style="padding:15px 20px;margin:3px 0;border-radius:6px;font-weight:bold;background:#3498db;color:#fff;"><span style="display:inline-block;width:28px;height:28px;line-height:28px;text-align:center;background:rgba(255,255,255,0.2);border-radius:50%;margin-right:10px;font-size:14px;">3</span>排列层 display:flex/grid</div>
+<div style="padding:15px 20px;margin:3px 0;border-radius:6px;font-weight:bold;background:#9b59b6;color:#fff;"><span style="display:inline-block;width:28px;height:28px;line-height:28px;text-align:center;background:rgba(255,255,255,0.2);border-radius:50%;margin-right:10px;font-size:14px;">2</span>间距层 width/padding/margin</div>
+<div style="padding:15px 20px;margin:3px 0;border-radius:6px;font-weight:bold;background:#34495e;color:#fff;"><span style="display:inline-block;width:28px;height:28px;line-height:28px;text-align:center;background:rgba(255,255,255,0.2);border-radius:50%;margin-right:10px;font-size:14px;">1</span>重置层 *{box-sizing:border-box}</div>
+</div>
+
+</body>
+</html>
+
+<hr style="margin-top:50px;border:2px dashed #3498db;">
+<h2 style="text-align:center;color:#555;">📖 教学讲解区</h2>
+
+
+<div id="wrapper">
+
+    <!-- ================================================================
+         总览区：这个文件教什么
+         ================================================================ -->
+    <h1>🏗️ CSS 七层体系总览</h1>
+    <p class="subtitle">
+        对应课程：全部章节（3.3 ~ 7.2）&nbsp;|&nbsp;
+        核心问题：<code>为什么我的 CSS 老是打架？</code>&nbsp;|&nbsp;
+        答案：因为你让两个层管了同一件事
+    </p>
+
+    <!--
+    在实际网页中的应用：
+    淘宝首页的每个区域、B站的导航栏、GitHub的代码页面
+    ——所有这些网页的 CSS 都可以拆解成这七层。
+    每一层管一类事情，层和层之间互不越界。
+    -->
+
+    <h2>一、CSS 的本质不是"一堆属性"，而是"一栋七层楼"</h2>
+
+    <p>
+        你目前学的所有 CSS 属性，其实分属 <strong>七个互不隶属的部门</strong>。
+        就像一栋楼，每层管不同的事：
+        一楼打地基、二楼定尺寸、三楼管排列、四楼放位置、五楼做装修、六楼搞动画、七楼适配屏幕。
+    </p>
+    <p>
+        <span class="bad">❌ 冲突的本质</span>：你不小心让两个部门管了同一件事。
+        比如"间距"这件事，二楼的 <code>margin</code> 想管，三楼的 <code>gap</code> 也想管，就打起来了。
+    </p>
+    <p>
+        <span class="good">✅ 解决方案</span>：写完一行 CSS，先想清楚 <strong>"它在第几层？有没有别的层的属性已经在管这件事？"</strong>
+        有的话，删掉一个。
+    </p>
+
+    <!-- ================================================================
+         七层楼可视化
+         ================================================================ -->
+    <h2>二、七层楼全貌（从上到下）</h2>
+
+    <div class="layer-stack">
+        <div class="layer layer-7">
+            <span class="layer-num">7</span> 响应式层 —— 不同屏幕怎么变 <code>@media</code>
+            <span class="layer-desc">管辖权：@media 媒体查询、viewport、calc()、min/max-width</span>
+        </div>
+        <div class="layer layer-6">
+            <span class="layer-num">6</span> 动效层 —— 怎么动 <code>transition / transform / @keyframes</code>
+            <span class="layer-desc">管辖权：transition过渡、transform变换、animation动画</span>
+        </div>
+        <div class="layer layer-5">
+            <span class="layer-num">5</span> 视觉层 —— 长什么样 <code>color / background / shadow</code>
+            <span class="layer-desc">管辖权：颜色、背景、圆角、阴影、渐变、字体</span>
+        </div>
+        <div class="layer layer-4">
+            <span class="layer-num">4</span> 定位层 —— 放哪个位置 <code>position / z-index</code>
+            <span class="layer-desc">管辖权：position定位、z-index层级、float浮动</span>
+        </div>
+        <div class="layer layer-3">
+            <span class="layer-num">3</span> 排列层 —— 怎么排队 <code>display:flex / grid</code>
+            <span class="layer-desc">管辖权：display、flex-wrap、justify-content、align-items、gap、order</span>
+        </div>
+        <div class="layer layer-2">
+            <span class="layer-num">2</span> 间距层 —— 多大、多宽 <code>width / padding / margin</code>
+            <span class="layer-desc">管辖权：width、height、padding、margin、box-sizing</span>
+        </div>
+        <div class="layer layer-1">
+            <span class="layer-num">1</span> 重置层 —— 铲平地基 <code>* { box-sizing: border-box }</code>
+            <span class="layer-desc">管辖权：清除浏览器默认样式、统一盒模型</span>
+        </div>
+    </div>
+
+    <p>
+        <strong>记忆口诀</strong>：<br>
+        一楼打地基（重置），二楼定大小（间距），三楼管排列（flex），
+        四楼放位置（定位），五楼做装修（视觉），六楼搞动画（动效），七楼看屏幕（响应式）。
+    </p>
+
+    <!-- ================================================================
+         你学过的每节课对应哪一层
+         ================================================================ -->
+    <h2>三、你学过的每节课，都在这栋楼里</h2>
+
+    <table>
+        <tr>
+            <th>课程章节</th>
+            <th>教的什么</th>
+            <th>属于第几层</th>
+        </tr>
+        <tr>
+            <td>3.3 素材</td>
+            <td>display: block/inline/inline-block、position定位、flex弹性盒、图片间隙</td>
+            <td>第2、3、4层</td>
+        </tr>
+        <tr>
+            <td>4.2 素材</td>
+            <td>超链接伪类 :link/:visited/:hover/:active、display属性</td>
+            <td>第3、5层</td>
+        </tr>
+        <tr>
+            <td>4.3 素材</td>
+            <td>垂直/水平导航条</td>
+            <td>第3、5层</td>
+        </tr>
+        <tr>
+            <td>5.2 素材</td>
+            <td>margin 塌陷（相邻兄弟、父子元素）</td>
+            <td>第2层</td>
+        </tr>
+        <tr>
+            <td>5.3 素材</td>
+            <td>复杂表单：box-sizing、图标定位、相邻兄弟选择器、vertical-align</td>
+            <td>第1、2、4层</td>
+        </tr>
+        <tr>
+            <td>6.1 素材</td>
+            <td>video/audio 嵌入</td>
+            <td>HTML层</td>
+        </tr>
+        <tr>
+            <td>6.2 素材</td>
+            <td>transition过渡、transform变换、伪元素、圆角、阴影、渐变</td>
+            <td>第5、6层</td>
+        </tr>
+        <tr>
+            <td>6.3 素材</td>
+            <td>3D旋转、perspective透视、preserve-3d、background-size</td>
+            <td>第5、6层</td>
+        </tr>
+        <tr>
+            <td>6.4 素材</td>
+            <td>@keyframes动画、animation属性全家桶</td>
+            <td>第6层</td>
+        </tr>
+        <tr>
+            <td>7.2 素材</td>
+            <td>完整页面：flex布局 + hover动效 + 媒体查询占位</td>
+            <td>第3、6、7层</td>
+        </tr>
+        <tr>
+            <td>CSS优先级</td>
+            <td>权重计算、!important、外部/内部样式优先级</td>
+            <td><strong>跨层规则</strong></td>
+        </tr>
+        <tr>
+            <td>幸福东莞</td>
+            <td>标准流、float浮动、父元素塌陷、清除浮动</td>
+            <td>第3、4层</td>
+        </tr>
+        <tr>
+            <td>响应式布局</td>
+            <td>viewport、@media、calc()、flex-wrap、min/max-width</td>
+            <td>第7层</td>
+        </tr>
+    </table>
+
+    <!-- ================================================================
+         最常打架的五对冤家
+         ================================================================ -->
+    <h2>四、最常打架的五对冤家（你踩过的坑都在这里）</h2>
+
+    <table>
+        <tr>
+            <th>冲突对</th>
+            <th>哪层vs哪层</th>
+            <th>为什么打架</th>
+            <th>怎么选</th>
+        </tr>
+        <tr>
+            <td><code>gap</code> vs <code>margin</code></td>
+            <td>第3层 vs 第2层</td>
+            <td>两个属性同时在管"卡片之间的间距"。gap说15px，margin说2px，结果间距变成了15+2+2=19px，而且calc()公式只减了gap忘了margin</td>
+            <td><span class="good">flex/grid 容器用 gap</span>，子元素不设 margin</td>
+        </tr>
+        <tr>
+            <td><code>width: xx%</code> vs <code>flex: 1</code></td>
+            <td>第2层 vs 第3层</td>
+            <td>width是"你给我多少宽度"，flex是"你把剩余空间分我几份"。两个同时写，浏览器不知道听谁的</td>
+            <td><span class="good">固定宽度用 width，弹性比例用 flex，二选一</span></td>
+        </tr>
+        <tr>
+            <td><code>position: absolute</code> vs flex</td>
+            <td>第4层 vs 第3层</td>
+            <td>absolute 的元素脱离第3层的 flex 管理，flex 当它不存在。如果父元素是flex但没有height，absolute子元素会让父元素高度塌成0</td>
+            <td><span class="good">absolute 脱离 flex</span>，父元素必须设 relative + height</td>
+        </tr>
+        <tr>
+            <td><code>display: inline-block</code> vs flex</td>
+            <td>旧第3层 vs 新第3层</td>
+            <td>inline-block是上世纪的横排方案，flex是现代的。inline-block会有4px幽灵空隙，垂直对不齐</td>
+            <td><span class="good">布局用 flex</span>，inline-block 只用于文字级小元素</td>
+        </tr>
+        <tr>
+            <td><code>transform: translate</code> vs margin</td>
+            <td>第6层 vs 第2层</td>
+            <td>transform 移动了视觉位置，但原来在第2层占据的空间不变——所以左边留了一个"鬼影空白"</td>
+            <td><span class="good">位移用 margin（真动位置）</span>，transform 只做动画效果</td>
+        </tr>
+    </table>
+
+    <!-- ================================================================
+         核心铁律
+         ================================================================ -->
+    <h2>五、核心铁律：一个职责，只交给一层</h2>
+
+    <div class="highlight">
+        <p><strong>铁律1：写之前先问"这是第几层的事"</strong></p>
+        <p>你要设间距 → 第2层（padding/margin）或第3层（gap），选一个，别两个都用。</p>
+        <p>你要改排列 → 第3层（flex/grid），别用第2层的margin去推位置。</p>
+        <p>你要加动画 → 第6层（transition/transform），别用第2层的margin做动画（性能差）。</p>
+    </div>
+
+    <div class="highlight">
+        <p><strong>铁律2：依赖关系从下往上</strong></p>
+        <p>
+            第1层(重置) <span class="arrow">→</span> 第2层(间距) <span class="arrow">→</span> 第3层(排列)
+            <span class="arrow">→</span> 第4层(定位) <span class="arrow">→</span> 第5层(视觉)
+            <span class="arrow">→</span> 第6层(动效) <span class="arrow">→</span> 第7层(响应式)
+        </p>
+        <p>每一层依赖于下面所有层。比如第7层的 <code>@media</code> 改宽度，前提是第3层的 <code>display:flex; flex-wrap:wrap</code> 已经装好了。</p>
+        <p><span class="bad">常见错误</span>：第3层没装 flex-wrap，第7层写媒体查询改li宽度 → 无效，因为li还是块级元素，一个占一行。</p>
+    </div>
+
+    <div class="highlight">
+        <p><strong>铁律3：@media 只覆盖要改的属性</strong></p>
+        <p>❌ 错误写法：在每个 @media 里把所有CSS重写一遍</p>
+        <p>✅ 正确写法：默认样式写在外面（小屏），@media 里只写大屏需要改的那几个属性</p>
+        <p>原因：媒体查询是"覆盖"不是"替换"，重复写不改的属性只会增加代码量和维护成本。</p>
+    </div>
+
+    <!-- ================================================================
+         写CSS的检查清单
+         ================================================================ -->
+    <h2>六、写 CSS 前的检查清单（建议贴显示器旁边）</h2>
+
+    <table>
+        <tr>
+            <th>步骤</th>
+            <th>问题</th>
+            <th>你在操作哪一层</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>有没有写 <code>* { box-sizing: border-box }</code>？</td>
+            <td>第1层（地基必须先铺）</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>这个元素的宽高是固定的还是弹性的？</td>
+            <td>第2层</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>它的父元素是 flex/grid 吗？如果是，间距用 gap 不要用 margin</td>
+            <td>第3层</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>这个元素需要脱离正常流吗（absolute/fixed）？如果是，父元素设了 relative 吗？设了 height 吗？</td>
+            <td>第4层</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>样式装饰（颜色、圆角、阴影）是在第5层，不会影响布局吗？</td>
+            <td>第5层（通常安全）</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>动效（transition/transform）不会和布局冲突吗？</td>
+            <td>第6层（通常安全，但transform注意"鬼影空白"）</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td><code>@media</code> 里只覆盖需要改的属性，不要重复写不需要改的</td>
+            <td>第7层</td>
+        </tr>
+    </table>
+
+    <!-- ================================================================
+         案例文件导航
+         ================================================================ -->
+    <h2>七、配套案例文件导航</h2>
+
+    <table>
+        <tr>
+            <th>文件夹</th>
+            <th>文件</th>
+            <th>内容</th>
+        </tr>
+        <tr>
+            <td>01-基础布局层</td>
+            <td>第1层_全局重置.html</td>
+            <td>box-sizing 为什么是整个CSS的基石、浏览器默认样式对比</td>
+        </tr>
+        <tr>
+            <td>01-基础布局层</td>
+            <td>第2层_盒模型与间距.html</td>
+            <td>width/height/padding/margin、margin塌陷、calc()计算</td>
+        </tr>
+        <tr>
+            <td>01-基础布局层</td>
+            <td>第3层_弹性盒布局.html</td>
+            <td>display:flex、flex-wrap、gap、justify-content、align-items、flex:1</td>
+        </tr>
+        <tr>
+            <td>02-定位与高级布局</td>
+            <td>第4层_定位详解.html</td>
+            <td>relative/absolute/fixed、父相子绝、z-index层叠</td>
+        </tr>
+        <tr>
+            <td>02-定位与高级布局</td>
+            <td>CSS优先级_权重计算.html</td>
+            <td>权重计算法、!important、选择器优先级对决</td>
+        </tr>
+        <tr>
+            <td>02-定位与高级布局</td>
+            <td>响应式布局_完整案例.html</td>
+            <td>viewport、@media、min-width移动优先、calc()列宽公式</td>
+        </tr>
+        <tr>
+            <td>02-定位与高级布局</td>
+            <td>浮动布局_幸福东莞.html</td>
+            <td>float、clear、父元素塌陷、BFC清除浮动</td>
+        </tr>
+        <tr>
+            <td>03-视觉与动效层</td>
+            <td>第5层_视觉样式.html</td>
+            <td>颜色、背景、圆角、阴影、渐变</td>
+        </tr>
+        <tr>
+            <td>03-视觉与动效层</td>
+            <td>第6层_过渡与2D变换.html</td>
+            <td>transition、transform(位移/旋转/缩放/倾斜)</td>
+        </tr>
+        <tr>
+            <td>03-视觉与动效层</td>
+            <td>第6层_3D翻转卡片.html</td>
+            <td>perspective、preserve-3d、backface-visibility、卡片翻转</td>
+        </tr>
+        <tr>
+            <td>03-视觉与动效层</td>
+            <td>第6层_关键帧动画.html</td>
+            <td>@keyframes、animation属性、循环动画</td>
+        </tr>
+        <tr>
+            <td>04-交互层</td>
+            <td>复杂表单_注册页详解.html</td>
+            <td>表单元素、图标定位、:focus样式、相邻兄弟选择器</td>
+        </tr>
+        <tr>
+            <td>04-交互层</td>
+            <td>JavaScript入门_分数判断.html</td>
+            <td>变量、数据类型、if/else、prompt()、类型转换</td>
+        </tr>
+    </table>
+
+    <p style="text-align:center; color:#888; margin-top:50px;">
+        💡 建议按顺序看：先看本文件建立框架 <span class="arrow">→</span> 再逐个看每层的案例文件
+    </p>
+
+</div>
+
+
+</body>
+</html>

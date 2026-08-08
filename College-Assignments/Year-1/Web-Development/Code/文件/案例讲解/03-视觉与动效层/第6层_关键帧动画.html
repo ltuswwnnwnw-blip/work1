@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>第6层：关键帧动画 —— 自动循环播放的动画</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"微软雅黑",sans-serif;line-height:1.8;color:#333;background:#f8f9fa;padding:20px;}
+.wrapper{max-width:860px;margin:0 auto;}
+h1{text-align:center;color:#2c3e50;margin-bottom:6px;}
+.subtitle{text-align:center;color:#888;margin-bottom:30px;font-size:14px;}
+h2{color:#e67e22;border-left:5px solid #e67e22;padding-left:12px;margin:35px 0 15px;font-size:22px;}
+h3{color:#2ecc71;margin:22px 0 10px;font-size:18px;}
+p{margin-bottom:12px;}
+
+.demo-section{background:#fff;border:1px solid #ddd;border-radius:8px;padding:20px;margin:20px 0;text-align:center;}
+pre{background:#2c3e50;color:#ecf0f1;padding:15px;border-radius:6px;overflow-x:auto;font-size:13px;line-height:1.5;margin:10px 0;}
+code{background:#eee;padding:2px 6px;border-radius:3px;font-size:13px;color:#e74c3c;}
+pre code{background:none;padding:0;color:#ecf0f1;}
+
+hr{border:none;border-top:1px dashed #ddd;margin:25px 0;}
+
+/* ★★★ 动画演示元素 ★★★ */
+/* 弹跳球 */
+.bounce-ball{width:60px;height:60px;background:radial-gradient(circle at 35% 35%,#ff6b6b,#c0392b);
+    border-radius:50%;margin:20px auto;
+    animation:bounce 1s ease infinite alternate;}
+/* animation: 名称 时长 时间函数 次数(无限) 方向(来回)
+ * bounce → @keyframes bounce的名字，绑定动画
+ * 1s → 每个循环1秒
+ * ease → 慢→快→慢
+ * infinite → 无限循环
+ * alternate → 正着放一遍再反着放一遍 → 弹跳的来回效果 */
+
+@keyframes bounce{
+    from{transform:translateY(0);}    /* from = 0%：起始位置 */
+    to{transform:translateY(-100px);}  /* to = 100%：弹到最高点 */
+}
+/* @keyframes bounce → 定义一个叫"bounce"的动画
+ * from/to = 动画的起点和终点
+ * 配合 alternate → from→to 再 to→from → 弹上去又落下来 */
+
+/* 旋转加载圈 */
+.spinner{width:50px;height:50px;border:5px solid #ecf0f1;border-top-color:#3498db;
+    border-radius:50%;margin:20px auto;
+    animation:spin 0.8s linear infinite;}
+/* border-top-color → 只让顶部边框有颜色，其他三边灰色 → 形成旋转弧线 */
+
+@keyframes spin{
+    to{transform:rotate(360deg);}  /* 从0度转到360度 → 一圈 */
+}
+
+/* 脉冲呼吸 */
+.pulse{width:80px;height:80px;background:#e74c3c;border-radius:50%;margin:20px auto;
+    animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{
+    0%{transform:scale(1);opacity:1;}
+    50%{transform:scale(1.2);opacity:0.7;}
+    100%{transform:scale(1);opacity:1;}
+}
+/* 百分比关键帧：0%→50%→100% 构成一个完整的呼吸循环 */
+
+/* 左右摆动 */
+.swing{width:80px;height:40px;background:#f39c12;border-radius:40px 40px 0 0;margin:30px auto;
+    transform-origin:bottom center;animation:swing 2s ease-in-out infinite;}
+/* transform-origin: bottom center → 以底部中心为轴摆 */
+@keyframes swing{
+    0%{transform:rotate(-30deg);}
+    50%{transform:rotate(30deg);}
+    100%{transform:rotate(-30deg);}
+}</style>
+</head>
+<body>
+<hr style="margin-top:50px;border:2px dashed #ccc;">
+<h2 style="text-align:center;color:#333;">🧪 纯净演示区（无注释，仅展示效果）</h2>
+
+<style>
+@keyframes clean-bounce { from { transform: translateY(0); } to { transform: translateY(-80px); } }
+@keyframes clean-spin { to { transform: rotate(360deg); } }
+.clean-anim-box { max-width: 600px; margin: 20px auto; background: #fff; padding: 20px; border-radius: 8px; display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; align-items: flex-end; }
+</style>
+
+<div class="clean-anim-box">
+  <div style="text-align:center;">
+    <div style="width:40px;height:40px;background:#e74c3c;border-radius:50%;margin:0 auto;animation:clean-bounce 1s ease infinite alternate;"></div>
+    <p style="font-size:12px;margin-top:8px;">弹跳</p>
+  </div>
+  <div style="text-align:center;">
+    <div style="width:40px;height:40px;border:4px solid #ecf0f1;border-top-color:#3498db;border-radius:50%;margin:0 auto;animation:clean-spin 0.8s linear infinite;"></div>
+    <p style="font-size:12px;margin-top:8px;">旋转</p>
+  </div>
+</div>
+
+</body>
+</html>
+<hr style="margin-top:50px;border:2px dashed #3498db;">
+<h2 style="text-align:center;color:#555;">📖 教学讲解区</h2>
+
+<div class="wrapper">
+
+<h1>🎞️ 第6层：关键帧动画 @keyframes</h1>
+<p class="subtitle">不需要hover触发，页面加载就自动播放的动画</p>
+
+<!--
+transition vs animation 的区别：
+- transition：需要触发（hover、focus等），只有"从A到B"两个状态
+- animation：自动播放，可以定义"从A到B到C到D..."任意多个状态
+
+本页演示4种经典动画：弹跳、旋转、呼吸、摆动
+-->
+
+<h2>一、animation 全家桶属性</h2>
+<pre><code>/* animation 简写（最常用） */
+animation: 名称 时长 时间函数 延迟 次数 方向 填充模式;
+
+/* 拆开写 */
+animation-name: bounce;            /* 绑定哪个 @keyframes */
+animation-duration: 1s;            /* 持续时长 */
+animation-timing-function: ease;   /* 时间函数 */
+animation-delay: 0s;               /* 延迟多久开始 */
+animation-iteration-count: infinite;/* 播放次数：数字 或 infinite(无限) */
+animation-direction: alternate;    /* normal(正向) / alternate(来回) / reverse(反向) */
+animation-fill-mode: forwards;     /* 动画结束后停在最后一帧 */</code></pre>
+
+<h2>二、四种经典动画演示</h2>
+
+<div class="demo-section">
+<h3>1. 弹跳球（bounce + alternate）</h3>
+<div class="bounce-ball"></div>
+<pre><code>@keyframes bounce {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-100px); }
+}
+animation: bounce 1s ease infinite alternate;
+/* alternate → 正放一遍再反放一遍 = 弹上去又落下来 */</code></pre>
+</div>
+
+<hr>
+
+<div class="demo-section">
+<h3>2. 旋转加载圈（spin + linear + infinite）</h3>
+<div class="spinner"></div>
+<pre><code>@keyframes spin { to { transform: rotate(360deg); } }
+animation: spin 0.8s linear infinite;
+/* linear → 匀速旋转，不会卡顿 */</code></pre>
+</div>
+
+<hr>
+
+<div class="demo-section">
+<h3>3. 脉冲呼吸（百分比关键帧）</h3>
+<div class="pulse"></div>
+<pre><code>@keyframes pulse {
+    0%   { transform: scale(1);   opacity: 1; }
+    50%  { transform: scale(1.2); opacity: 0.7; }
+    100% { transform: scale(1);   opacity: 1; }
+}
+animation: pulse 2s ease-in-out infinite;</code></pre>
+</div>
+
+<hr>
+
+<div class="demo-section">
+<h3>4. 左右摆动（transform-origin + rotate）</h3>
+<div class="swing"></div>
+<pre><code>@keyframes swing {
+    0%   { transform: rotate(-30deg); }
+    50%  { transform: rotate(30deg); }
+    100% { transform: rotate(-30deg); }
+}
+transform-origin: bottom center;
+animation: swing 2s ease-in-out infinite;</code></pre>
+</div>
+
+<h2>三、transition vs animation 对比</h2>
+<table style="width:100%;border-collapse:collapse;margin:15px 0;">
+<tr><th></th><th>transition 过渡</th><th>animation 动画</th></tr>
+<tr><td>触发方式</td><td>需要触发（:hover等）</td><td>自动播放</td></tr>
+<tr><td>状态数</td><td>2个（从→到）</td><td>任意多个（from/to/百分比）</td></tr>
+<tr><td>循环</td><td>不支持</td><td>infinite 无限循环</td></tr>
+<tr><td>来回</td><td>不支持</td><td>alternate 来回播放</td></tr>
+<tr><td>适用场景</td><td>按钮hover、卡片悬浮</td><td>加载圈、轮播图、呼吸灯</td></tr>
+</table>
+
+<p style="text-align:center;color:#888;margin-top:50px;">
+👉 下一步：<a href="../04-交互层/复杂表单_注册页详解.html" style="color:#e67e22;">复杂表单_注册页详解</a>
+</p>
+
+</div>
+
+</body>
+</html>

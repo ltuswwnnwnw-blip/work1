@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>第5层：视觉样式 —— 颜色、背景、圆角、阴影、渐变</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"微软雅黑",sans-serif;line-height:1.8;color:#333;background:#f8f9fa;padding:20px;}
+.wrapper{max-width:860px;margin:0 auto;}
+h1{text-align:center;color:#2c3e50;margin-bottom:6px;}
+.subtitle{text-align:center;color:#888;margin-bottom:30px;font-size:14px;}
+h2{color:#f1c40f;border-left:5px solid #f1c40f;padding-left:12px;margin:35px 0 15px;font-size:22px;}
+h3{color:#e67e22;margin:22px 0 10px;font-size:18px;}
+p{margin-bottom:12px;}
+
+.demo-section{background:#fff;border:1px solid #ddd;border-radius:8px;padding:20px;margin:20px 0;}
+.demo-row{display:flex;gap:15px;flex-wrap:wrap;margin:15px 0;}
+
+pre{background:#2c3e50;color:#ecf0f1;padding:15px;border-radius:6px;overflow-x:auto;font-size:13px;line-height:1.5;margin:10px 0;}
+code{background:#eee;padding:2px 6px;border-radius:3px;font-size:13px;color:#e74c3c;}
+pre code{background:none;padding:0;color:#ecf0f1;}
+.error-box{background:#fdeaea;border-left:4px solid #e74c3c;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+
+/* 演示用的视觉元素 */
+.shadow-demo{background:#fff;padding:30px;text-align:center;border-radius:8px;margin:10px;flex:1;min-width:150px;}
+.shadow-1{box-shadow:0 2px 8px rgba(0,0,0,0.15);}
+.shadow-2{box-shadow:0 8px 25px rgba(0,0,0,0.25);}
+.shadow-3{box-shadow:0 4px 12px rgba(0,0,0,0.1),0 1px 3px rgba(0,0,0,0.08);}
+.shadow-inset{box-shadow:inset 0 2px 8px rgba(0,0,0,0.3);background:#ecf0f1;}
+.radius-demo{background:#3498db;color:#fff;padding:15px 25px;margin:5px;display:inline-block;}
+.radius-none{border-radius:0;}
+.radius-small{border-radius:4px;}
+.radius-large{border-radius:12px;}
+.radius-pill{border-radius:50px;padding:15px 35px;}
+.radius-circle{border-radius:50%;width:80px;height:80px;text-align:center;line-height:80px;padding:0;}
+
+.gradient-demo{height:120px;border-radius:8px;margin:10px 0;flex:1;min-width:200px;}
+.grad-1{background:linear-gradient(to right,#3498db,#2ecc71);}
+.grad-2{background:linear-gradient(135deg,#e74c3c,#f39c12,#f1c40f);}
+/* linear-gradient(方向, 颜色1, 颜色2, ...)
+ * to right → 从左到右
+ * 135deg → 从左上到右下(135度)
+ * 可以写多个颜色，自动过渡 */
+.grad-3{background:radial-gradient(circle,#fff,#3498db);}
+/* radial-gradient(形状, 中心颜色, 边缘颜色) → 从中心向外辐射 */</style>
+</head>
+<body>
+<hr style="margin-top:50px;border:2px dashed #ccc;">
+<h2 style="text-align:center;color:#333;">🧪 纯净演示区（无注释，仅展示效果）</h2>
+
+<style>
+.clean-visual-box { max-width: 600px; margin: 20px auto; background: #fff; padding: 20px; border-radius: 8px; display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
+.clean-visual-item { width: 120px; height: 120px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; text-align: center; }
+</style>
+
+<div class="clean-visual-box">
+  <div class="clean-visual-item" style="background:linear-gradient(135deg,#667eea,#764ba2);border-radius:50%;">渐变背景<br>+ 圆形</div>
+  <div class="clean-visual-item" style="background:#3498db;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.2);">圆角<br>+ 阴影</div>
+  <div class="clean-visual-item" style="background:#e74c3c;border-radius:4px;box-shadow:inset 0 0 20px rgba(0,0,0,0.3);">内阴影</div>
+  <div class="clean-visual-item" style="background:radial-gradient(circle,#ff6b6b,#c0392b);border-radius:8px;">径向渐变</div>
+</div>
+
+</body>
+</html>
+
+<hr style="margin-top:50px;border:2px dashed #3498db;">
+<h2 style="text-align:center;color:#555;">📖 教学讲解区</h2>
+
+<div class="wrapper">
+
+<h1>🎨 第5层：视觉样式</h1>
+<p class="subtitle">颜色、背景、圆角、阴影、渐变 —— 只管"长什么样"，不影响布局</p>
+
+<!--
+第5层是最安全的一层——它几乎不会和其他层冲突。
+你写再多 color、background、border-radius、box-shadow，
+都不会改变元素占据的空间大小和排列位置。
+-->
+
+<h2>一、box-shadow —— 让卡片"浮起来"</h2>
+<pre><code>box-shadow: 水平偏移 垂直偏移 模糊半径 颜色;
+/* 阴影不占空间！它只是视觉上的投影，不影响元素的实际宽度 */</code></pre>
+
+<div class="demo-row">
+    <div class="shadow-demo shadow-1"><strong>轻阴影</strong><br><code>0 2px 8px</code></div>
+    <div class="shadow-demo shadow-2"><strong>重阴影</strong><br><code>0 8px 25px</code></div>
+    <div class="shadow-demo shadow-3"><strong>双阴影</strong><br><code>两个叠加</code></div>
+    <div class="shadow-demo shadow-inset"><strong>内阴影</strong><br><code>inset</code></div>
+</div>
+
+<h2>二、border-radius —— 圆它！</h2>
+<pre><code>border-radius: 4px;       /* 轻微圆角——卡片、按钮 */
+border-radius: 12px;      /* 明显圆角——弹窗、大容器 */
+border-radius: 50px;      /* 药丸形——标签、按钮 */
+border-radius: 50%;       /* 圆形——头像（前提：width=height） */</code></pre>
+
+<div class="demo-section">
+    <span class="radius-demo radius-none">无圆角</span>
+    <span class="radius-demo radius-small">4px</span>
+    <span class="radius-demo radius-large">12px</span>
+    <span class="radius-demo radius-pill">药丸形</span>
+    <span class="radius-demo radius-circle">圆形</span>
+</div>
+
+<h2>三、渐变 —— 不用图片也能做漂亮的背景</h2>
+
+<pre><code>/* 线性渐变：从一个方向到另一个方向 */
+background: linear-gradient(to right, #3498db, #2ecc71);
+
+/* 对角线渐变 + 三个颜色 */
+background: linear-gradient(135deg, #e74c3c, #f39c12, #f1c40f);
+
+/* 径向渐变：从中心向外辐射 */
+background: radial-gradient(circle, #fff, #3498db);</code></pre>
+
+<div class="demo-row">
+    <div class="gradient-demo grad-1"></div>
+    <div class="gradient-demo grad-2"></div>
+    <div class="gradient-demo grad-3"></div>
+</div>
+
+<h2>四、你踩过的坑</h2>
+
+<div class="error-box">
+<h3>❌ rgba() 参数写了英文单词</h3>
+<p><strong>旧代码</strong>：<code>background-color: rgba(0, green, blue, alpha);</code></p>
+<p><strong>问题</strong>：<code>rgba(红, 绿, 蓝, 透明度)</code> 四个参数<strong>必须全是数字</strong>。你写了 green、blue、alpha 三个英文单词，CSS引擎解析不了，整行丢弃。</p>
+<p><strong>修复</strong>：<code>rgba(0, 0, 0, 0.3)</code> —— 黑色、30%不透明度。</p>
+<p><strong>记法</strong>：rgba = Red Green Blue Alpha，全是0-255的数字（Alpha是0-1的小数）。</p>
+</div>
+
+<h2>五、因果关系</h2>
+<pre><code>rgba参数不是数字 → CSS引擎丢弃整行 → 背景色不生效 → 看不出报错→很难排查
+第5层只管"长什么样" → 不影响布局 → 可以放心写，不会和1-4层打架</code></pre>
+
+<p style="text-align:center;color:#888;margin-top:50px;">
+👉 下一步：<a href="第6层_过渡与2D变换.html" style="color:#f1c40f;">第6层_过渡与2D变换</a>
+</p>
+
+</div>
+
+</body>
+</html>

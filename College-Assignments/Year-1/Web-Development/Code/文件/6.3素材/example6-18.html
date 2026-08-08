@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>background-size用法</title>
+		<style type="text/css">
+			p{
+				width: 300px;
+				height: 100px;
+				border: 1px solid black;
+				background: url(images/hat.png) no-repeat;
+				background-size: cover;
+			}
+			p:nth-of-type(2){
+				background-size: contain;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="content">
+			<h3>二月二 龙抬头 有盼头</h3>
+			<p>农历二月初二，俗称“龙抬头”之日，又称春耕节、农事节、青龙节等，是中国民间传统节日。</p>
+			<p>自古以来，人们在龙抬头时节，会举行敬龙祈雨、放生，以求一年吉祥丰收。祭龙、吃龙食、采龙气、剃龙头、起龙船、围粮囤等都是二月二龙抬头的习俗。</p>
+		</div>
+	</body>
+</html>

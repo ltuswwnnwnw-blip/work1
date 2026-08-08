@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>下拉导航菜单</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:"微软雅黑",sans-serif; background:#f5f5f5; padding:30px; }
+
+.nav { list-style:none; display:flex; background:#34495e; border-radius:6px; max-width:600px; margin:0 auto; }
+.nav>li { position:relative; }
+.nav>li>a { display:block; padding:12px 24px; color:#fff; text-decoration:none; }
+.nav>li>a:hover { background:#2ecc71; }
+
+.sub { position:absolute; top:100%; left:0; background:#fff; border:1px solid #ddd; border-radius:0 0 6px 6px; min-width:130px; display:none; z-index:10; box-shadow:0 4px 8px rgba(0,0,0,0.1); }
+.sub a { display:block; padding:10px 20px; color:#333; text-decoration:none; border-bottom:1px solid #f0f0f0; font-size:14px; }
+.sub a:hover { background:#2ecc71; color:#fff; }
+
+.has-sub>a::after { content:" ▼"; font-size:10px; margin-left:4px; }
+</style>
+</head>
+<body>
+
+<ul class="nav">
+    <li><a href="#">首页</a></li>
+    <li class="has-sub" onmouseover="show(0)" onmouseout="hide(0)">
+        <a href="#">产品</a>
+        <div class="sub" id="s0">
+            <a href="#">智能手机</a>
+            <a href="#">笔记本电脑</a>
+            <a href="#">平板电脑</a>
+        </div>
+    </li>
+    <li class="has-sub" onmouseover="show(1)" onmouseout="hide(1)">
+        <a href="#">服务</a>
+        <div class="sub" id="s1">
+            <a href="#">在线咨询</a>
+            <a href="#">售后维修</a>
+        </div>
+    </li>
+    <li><a href="#">关于</a></li>
+</ul>
+
+<script>
+var subs = document.querySelectorAll(".sub");
+function show(i) { subs[i].style.display = "block"; }
+function hide(i) { subs[i].style.display = "none"; }
+</script>
+
+</body>
+</html>

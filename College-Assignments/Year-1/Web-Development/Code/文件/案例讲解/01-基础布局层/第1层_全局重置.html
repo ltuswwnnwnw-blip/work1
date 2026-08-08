@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>第1层：全局重置 —— CSS的地基</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--
+    ================================================================
+    这个文件教什么：
+    1. 为什么写CSS第一件事必须是"重置"
+    2. box-sizing: border-box 为什么是整个CSS最重要的一行代码
+    3. 浏览器默认样式有哪些坑
+    4. 你之前犯过的相关错误
+
+    对应七层楼：第1层（重置层）—— 铲平地基
+    前置知识：无（这是第一层，不依赖任何东西）
+    后续依赖：第2层(间距) 第3层(排列) 都依赖这一层
+    实际应用：任何一个网页的 CSS 文件，第一块永远是重置
+    ================================================================
+    -->
+
+    <style>
+        /* =================================================================
+         * 第一层：全局重置 —— 铲平浏览器的"默认装修"
+         *
+         * 问题：不同浏览器（Chrome、Firefox、Edge）对同一个HTML标签有
+         * 不同的默认样式。比如 <body>
+<hr style="margin-top:50px;border:2px dashed #ccc;">
+<h2 style="text-align:center;color:#333;">🧪 纯净演示区（无注释，仅展示效果）</h2>
+
+<style>
+.clean-reset * { margin: 0; padding: 0; }
+.clean-reset-box { background: #fff; border-radius: 8px; padding: 20px; max-width: 600px; margin: 20px auto; }
+.clean-reset-row { display: flex; gap: 20px; margin-bottom: 15px; }
+.clean-reset-col { flex: 1; padding: 15px; border-radius: 6px; }
+.clean-reset-col.bad { border: 2px solid #e74c3c; background: #fdeaea; }
+.clean-reset-col.good { border: 2px solid #27ae60; background: #eafaf1; }
+.clean-reset-demo { background: #3498db; color: #fff; text-align: center; padding: 20px; margin: 8px 0; width: 50%; }
+</style>
+
+<div class="clean-reset-box">
+<div class="clean-reset-row">
+  <div class="clean-reset-col bad">
+    <h4>content-box（默认，坑）</h4>
+    <div style="box-sizing:content-box;width:50%;padding:20px;background:#3498db;color:#fff;text-align:center;">width:50%+padding</div>
+    <div style="box-sizing:content-box;width:50%;padding:20px;background:#e74c3c;color:#fff;text-align:center;">实际超100%</div>
+  </div>
+  <div class="clean-reset-col good">
+    <h4>border-box（重置后，正确）</h4>
+    <div style="box-sizing:border-box;width:50%;padding:20px;background:#3498db;color:#fff;text-align:center;">width:50%</div>
+    <div style="box-sizing:border-box;width:50%;padding:20px;background:#27ae60;color:#fff;text-align:center;">正好50%</div>
+  </div>
+</div>
+</div>
+
+</body>
+</html>
+
+<hr style="margin-top:50px;border:2px dashed #3498db;">
+<h2 style="text-align:center;color:#555;">📖 教学讲解区</h2>
+ 在 Chrome 里默认有 8px 的外边距，
+         * <ul> 默认有左边的内边距和列表符号。
+         *
+         * 如果不重置：你在自己电脑上看是居中的，换到别的浏览器就歪了。
+         * ================================================================= */
+
+        /* ---- 重置写法1：通配符一把梭（最简单、最常用） ---- */
+        * {
+            margin: 0;
+            /* margin: 0 → 把所有元素的默认外边距清零
+             * 为什么：<body>默认有8px外边距，不清零你的页面四周会有白边 */
+
+            padding: 0;
+            /* padding: 0 → 把所有元素的默认内边距清零
+             * 为什么：<ul>默认有40px左内边距，不清零你的列表会往右缩一块 */
+
+            box-sizing: border-box;
+            /* ★★★ 整个CSS第一重要的属性 ★★★
+             *
+             * 做什么：让你写的 width 就是元素的最终宽度。
+             *        padding 和 border 不会再额外撑大盒子。
+             *
+             * 为什么：浏览器默认是 box-sizing: content-box，
+             *        意思是"width 只管内容区，padding和border另算"。
+             *        这就导致你写 width: 50%，实际宽度 = 50% + padding + border，
+             *        两个"50%"并排会超过100%，被挤到下一行。
+             *
+             * 不写会怎样：
+             *   你写：width: 50%; padding: 20px;
+             *   实际宽度 = 50% + 20px + 20px > 50%
+             *   两个并排的50%盒子 → 第二个被挤下去 → 布局崩了
+             *
+             * 记法：border-box = "边框也算在宽度里面" */
+        }
+
+        /* ---- 重置写法2：专门针对某些标签的默认样式 ---- */
+        ul, ol {
+            list-style: none;
+            /* list-style: none → 去掉列表前面的圆点或数字
+             * 为什么：导航栏、卡片列表不需要默认的圆点符号
+             * 不写：每个<li>前面会自动出现一个黑圆点，破坏设计 */
+        }
+
+        a {
+            text-decoration: none;
+            /* text-decoration: none → 去掉链接的下划线
+             * 为什么：导航栏、按钮里的链接带下划线会显得很业余
+             * 不写：每个链接文字下面都有一条蓝线 */
+            color: inherit;
+            /* color: inherit → 链接颜色继承父元素的颜色，不用浏览器默认的蓝色
+             * 为什么：默认蓝色链接在深色导航栏上根本看不见 */
+        }
+
+        img {
+            display: block;
+            /* display: block → 把图片从行内元素变成块级元素
+             * 为什么：图片默认是 inline 元素，底部会有 3px 的"幽灵空隙"
+             *        变成 block 后这个空隙就消失了
+             * 不写：图片下面始终有一条3px的缝，怎么调margin都没用 */
+            max-width: 100%;
+            /* max-width: 100% → 图片最大不超过父容器宽度
+             * 为什么：防止大图在手机上溢出屏幕
+             * 不写：一张1200px宽的图在375px的手机屏幕上会溢出 → 出现横向滚动条 */
+            height: auto;
+            /* height: auto → 高度自动按比例缩放
+             * 配合 max-width: 100% 使用，图片不会变形 */
+        }
+
+        /* ---- 重置写法3：body 的基础设置 ---- */
+        body {
+            font-family: "微软雅黑", sans-serif;
+            /* font-family → 设置默认字体
+             * "微软雅黑"是Windows中文默认字体，sans-serif是备胎（如果雅黑没了就用系统默认无衬线字体）
+             * 不写：浏览器用Times New Roman（英文衬线字体），中文网页看起来像论文 */
+            line-height: 1.6;
+            /* line-height → 行高设为字号的1.6倍
+             * 不写：默认约1.2，中文文字会上下挤在一起，阅读体验很差 */
+            color: #333;
+            /* color → 默认文字颜色设为深灰（#333），不是纯黑（#000）
+             * 为什么：纯黑色对比度太高，长时间阅读眼睛累，#333 看起来更舒服 */
+        }
+
+        /* =================================================================
+         * 下面是一个对比演示：展示有重置和没重置的区别
+         * ================================================================= */
+
+        body {
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .demo-container {
+            max-width: 800px;
+            /* max-width → 最大宽度800px，大屏幕上内容不会铺满整个屏幕太宽难读
+             * 和 width: 800px 的区别：
+             *   max-width → 屏幕<800px时自动缩小适应（响应式）
+             *   width: 800px → 永远800px，手机375px屏幕直接溢出 */
+            margin: 0 auto;
+            /* margin: 0 auto → 上下0、左右自动 → 居中 */
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #3498db;
+            border-left: 4px solid #3498db;
+            padding-left: 10px;
+            margin: 30px 0 15px;
+        }
+
+        h3 {
+            color: #2ecc71;
+            margin: 20px 0 10px;
+        }
+
+        /* ---- 对比演示：两栏并排 ---- */
+        .compare-row {
+            display: flex;
+            /* display: flex → 让两个子元素横着排（这是第3层的知识） */
+            gap: 20px;
+            /* gap → 两个子元素之间的间距（也是第3层的知识） */
+            margin-bottom: 20px;
+        }
+
+        .compare-box {
+            flex: 1;
+            /* flex: 1 → 两个盒子平分可用空间（也是第3层的知识） */
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .compare-box.bad {
+            border-color: #e74c3c;
+            background-color: #fdeaea;
+        }
+
+        .compare-box.good {
+            border-color: #27ae60;
+            background-color: #eafaf1;
+        }
+
+        .compare-box h4 {
+            margin: 0 0 10px 0;
+            font-size: 16px;
+        }
+
+        .demo-box {
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .demo-box.small {
+            width: 50%;
+            /* 在 content-box（默认）下：实际宽度 = 50% + 20px*2(padding) = 溢出
+             * 在 border-box 下：实际宽度 = 50%（padding算在50%里面） */
+        }
+
+        /* 代码展示块 */
+        pre {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            /* overflow-x: auto → 代码太长时横向出现滚动条，不溢出 */
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        code {
+            background-color: #eee;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 13px;
+            color: #e74c3c;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: #ecf0f1;
+        }
+
+        .highlight-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #f39c12;
+            padding: 12px 16px;
+            margin: 15px 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .error-box {
+            background-color: #fdeaea;
+            border-left: 4px solid #e74c3c;
+            padding: 12px 16px;
+            margin: 15px 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .demo-section {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        /* 小标签 */
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .tag-error {
+            background-color: #e74c3c;
+            color: white;
+        }
+        .tag-ok {
+            background-color: #27ae60;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="demo-container">
+
+    <h1>🏗️ 第1层：全局重置</h1>
+    <p class="subtitle">CSS 的地基 —— 先把所有浏览器的默认样式"铲平"，你的样式才能说一不二</p>
+
+    <!--
+    宏观理解：
+    浏览器就像一个毛坯房，每个浏览器（Chrome、Firefox、Edge）的"毛坯"标准不一样。
+    比如 <body> 标签，Chrome 默认给它加了 8px 外边距，Firefox 也加了但可能不同。
+    如果你不先把这些默认值清零就开始写 CSS，相当于在不同的地基上盖房子——
+    在这个浏览器看着居中，另一个浏览器就歪了。
+
+    重置层 = 铲平所有浏览器的默认差异，让所有浏览器从"同一张白纸"开始。
+    -->
+
+    <!-- ================================================================
+         box-sizing 详解
+         ================================================================ -->
+    <h2>一、box-sizing: border-box —— CSS第一重要的属性</h2>
+
+    <h3>1.1 浏览器默认行为：content-box（坑人的默认值）</h3>
+
+    <p>
+        浏览器默认的盒模型叫 <code>content-box</code>。它的逻辑是：
+        <strong>你设的 width 只代表"内容区的宽度"</strong>，
+        padding（内边距）和 border（边框）是另外加上去的。
+    </p>
+
+    <pre><code>/* content-box（浏览器默认）下：*/
+.box {
+    width: 200px;        /* 内容区宽度 = 200px */
+    padding: 20px;        /* 左右各加20px */
+    border: 5px solid;    /* 左右各加5px */
+}
+/* 实际占据宽度 = 200 + 20×2 + 5×2 = 250px！ */
+/* 你写的200px，实际占了250px——多了25%！ */</code></pre>
+
+    <div class="demo-section">
+        <h4>直观演示：两个50%宽度的盒子并排</h4>
+        <p>（下面的盒子用了 <code>width:50%; padding:20px;</code>，观察它们能不能并排）</p>
+
+        <div class="compare-row">
+            <div class="compare-box bad">
+                <h4>❌ content-box（浏览器默认）</h4>
+                <p>width: 50% + padding: 20px</p>
+                <p>→ 实际宽度超过50%</p>
+                <p>→ 两个盒子并排会溢出</p>
+                <p>→ 第二个盒子被挤到下一行</p>
+            </div>
+            <div class="compare-box good">
+                <h4>✅ border-box（重置后）</h4>
+                <p>width: 50% 就真的是50%</p>
+                <p>→ padding 和 border 都算在50%里面</p>
+                <p>→ 两个盒子正好并排</p>
+                <p>→ 布局不会崩</p>
+            </div>
+        </div>
+    </div>
+
+    <h3>1.2 border-box 的工作原理</h3>
+
+    <p>
+        <code>box-sizing: border-box</code> 的意思是：<strong>"边框也算在宽度里面"</strong>。<br>
+        你设 <code>width: 200px</code>，元素总宽度就是200px，浏览器自动帮你从内容区里扣掉 padding 和 border 的空间。
+    </p>
+
+    <pre><code>/* border-box 下：*/
+.box {
+    box-sizing: border-box;  /* ← 加上这一行 */
+    width: 200px;             /* 总宽度 = 200px（不会多） */
+    padding: 20px;            /* 内容区自动缩小，给padding腾地方 */
+    border: 5px solid;        /* 内容区继续缩小，给border腾地方 */
+}
+/* 实际占据宽度 = 200px（就是你写的200px！） */
+/* 内容区宽度 = 200 - 20×2 - 5×2 = 150px（浏览器自动算了） */</code></pre>
+
+    <div class="highlight-box">
+        <strong>💡 记忆口诀</strong>：<br>
+        content-box = 你写的宽度只是内容，padding和border额外加 → 实际宽度 > 你写的 → <span class="tag tag-error">坑</span><br>
+        border-box = 你写的宽度就是最终宽度，padding和border算在里面 → 实际宽度 = 你写的 → <span class="tag tag-ok">省心</span>
+    </div>
+
+    <!-- ================================================================
+         常见错误
+         ================================================================ -->
+    <h2>二、你踩过的坑（来自之前的练习）</h2>
+
+    <div class="error-box">
+        <h3>❌ 常见错误1：忘了写 box-sizing: border-box</h3>
+        <p><strong>症状</strong>：明明每个卡片设了 <code>width: calc((100% - 30px) / 3)</code>，结果还是溢出换行了。</p>
+        <p><strong>原因</strong>：卡片有 <code>padding: 15px</code>，在 content-box 下这 30px 的 padding 是额外加上去的。calc只算了gap，没算padding。</p>
+        <p><strong>修复</strong>：第一行加上 <code>* { box-sizing: border-box; }</code> 就行了。</p>
+    </div>
+
+    <div class="error-box">
+        <h3>❌ 常见错误2：ul 宽度写死 900px</h3>
+        <p><strong>症状</strong>：响应式布局里把 ul 设了 <code>width: 900px</code>，手机屏幕375px时内容溢出。</p>
+        <p><strong>原因</strong>：<code>width: 900px</code> 是固定宽度，不管屏幕多大都是900px。</p>
+        <p><strong>修复</strong>：用 <code>max-width: 900px; width: 100%;</code> 代替。max-width 限制最大宽度，width:100% 保证小屏幕自动缩小。</p>
+    </div>
+
+    <div class="error-box">
+        <h3>❌ 常见错误3：图片底部有神秘空隙</h3>
+        <p><strong>症状</strong>：图片放在 div 里，div 底部总是多出 3px 空白，怎么设 margin:0 都消不掉。</p>
+        <p><strong>原因</strong>：图片默认是 <code>inline</code> 元素，和文字一样按基线对齐，基线下方留了给字母"g、y、j"尾巴的空间——这就是那 3px 的来历。</p>
+        <p><strong>修复</strong>：<code>img { display: block; }</code> 一行解决。让图片变成块级元素，不再按文字基线对齐。</p>
+    </div>
+
+    <!-- ================================================================
+         完整的重置模板
+         ================================================================ -->
+    <h2>三、标准重置模板（建议每个项目开头都复制这段）</h2>
+
+    <pre><code>/* ===== 第1层：全局重置 ===== */
+/* 作用：清除浏览器默认样式，统一盒模型 */
+/* 把这7行放在任何CSS文件的最开头 */
+
+* {
+    margin: 0;                 /* 清除默认外边距（body有8px） */
+    padding: 0;                /* 清除默认内边距（ul有40px） */
+    box-sizing: border-box;    /* 让width就是最终宽度 */
+}
+
+ul, ol {
+    list-style: none;          /* 去掉列表前面的圆点 */
+}
+
+a {
+    text-decoration: none;     /* 去掉链接下划线 */
+    color: inherit;            /* 链接颜色跟随父元素 */
+}
+
+img {
+    display: block;            /* 消除图片底部3px幽灵空隙 */
+    max-width: 100%;           /* 图片不超过容器宽度 */
+    height: auto;              /* 高度自动等比缩放 */
+}</code></pre>
+
+    <!-- ================================================================
+         因果关系链
+         ================================================================ -->
+    <h2>四、因果关系链</h2>
+
+    <pre><code>没写 box-sizing: border-box
+  → width: 50% 的实际宽度 > 50%
+  → 两个"50%"并排，总和超过100%
+  → 第二个盒子被挤到下一行
+  → 布局崩溃
+
+没写 img { display: block }
+  → 图片是 inline 元素
+  → 按文字基线对齐，底部留3px给字母尾巴
+  → 图片和容器底部之间有3px缝隙
+  → 怎么调margin都消不掉
+
+没写 ul { list-style: none }
+  → 导航栏每个菜单项前面有个黑圆点
+  → 看起来像文档目录，不像导航栏
+
+没写 * { margin: 0; padding: 0 }
+  → 不同浏览器给 body、p、h1 的默认margin不同
+  → 在Chrome看是居中的，Firefox看就歪了</code></pre>
+
+    <!-- ================================================================
+         与其他层的依赖关系
+         ================================================================ -->
+    <h2>五、与其他层的关系</h2>
+
+    <div class="highlight-box">
+        <p><strong>第1层 → 第2层（间距层）</strong>：第2层的 padding/margin/width 能不能算对，完全取决于第1层的 <code>box-sizing</code> 设没设对。</p>
+        <p><strong>第1层 → 第3层（排列层）</strong>：flex 布局中 <code>flex: 1</code> 要正常分配宽度，前提是第1层的 <code>box-sizing: border-box</code> 已经设好了，否则弹性计算会出错。</p>
+        <p><strong>第1层 → 第7层（响应式层）</strong>：@media 里的 <code>width: calc()</code> 公式基于 border-box 计算，如果第1层没设好，calc结果会偏小。</p>
+    </div>
+
+    <p style="text-align:center; color:#888; margin-top:50px;">
+        <a href="../01-基础布局层/第2层_盒模型与间距.html" style="color:#3498db;">👉 下一步：第2层_盒模型与间距</a>
+    </p>
+
+</div>
+
+
+</body>
+</html>

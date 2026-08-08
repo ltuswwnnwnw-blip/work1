@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>复杂表单 —— 注册页完整详解</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"微软雅黑",sans-serif;line-height:1.8;color:#333;background:#e8ecf1;padding:20px;}
+.wrapper{max-width:860px;margin:0 auto;}
+h1{text-align:center;color:#2c3e50;margin-bottom:6px;}
+.subtitle{text-align:center;color:#888;margin-bottom:30px;font-size:14px;}
+h2{color:#4a90d9;border-left:5px solid #4a90d9;padding-left:12px;margin:35px 0 15px;font-size:22px;}
+h3{color:#2ecc71;margin:22px 0 10px;font-size:18px;}
+p{margin-bottom:12px;}
+
+pre{background:#2c3e50;color:#ecf0f1;padding:15px;border-radius:6px;overflow-x:auto;font-size:13px;line-height:1.5;margin:10px 0;}
+code{background:#eee;padding:2px 6px;border-radius:3px;font-size:13px;color:#e74c3c;}
+pre code{background:none;padding:0;color:#ecf0f1;}
+.error-box{background:#fdeaea;border-left:4px solid #e74c3c;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+.highlight{background:#fff3cd;border-left:4px solid #f39c12;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+table{width:100%;border-collapse:collapse;margin:15px 0;}
+th,td{border:1px solid #ddd;padding:10px 14px;text-align:left;font-size:14px;}
+th{background:#f0f0f0;color:#555;}
+
+/* ===== 表单演示样式（和课件complex-form.html一致） ===== */
+.form-demo{background:#fff;border-radius:10px;padding:30px 40px;max-width:520px;margin:20px auto;box-shadow:0 2px 12px rgba(0,0,0,0.1);}
+.form-demo h4{text-align:center;font-size:24px;font-weight:normal;color:#333;
+    border-bottom:1px solid #ccc;padding-bottom:15px;margin-bottom:25px;}
+
+/* 表单行：每个字段一行 */
+.form-group{margin-bottom:16px;line-height:32px;}
+
+/* label：字段名，统一宽度右对齐 */
+.form-group>label:first-child{display:inline-block;width:80px;text-align:right;
+    font-size:14px;color:#333;vertical-align:middle;}
+/* > 是子选择器，只选直接子元素label，不选嵌套更深的label(如radio的label)
+ * :first-child → 只选第一个label，排除后续的radio-label
+ * vertical-align: middle → 和旁边的输入框垂直居中对齐（因为两者都是inline-block）*/
+
+/* 输入框基础样式 */
+.form-demo input[type="text"],.form-demo input[type="password"]{
+    width:260px;height:32px;border:1px solid #ccc;padding:0 8px;font-size:13px;
+    border-radius:2px;vertical-align:middle;}
+
+/* :focus → 输入框被选中时边框变蓝 */
+.form-demo input:focus,.form-demo select:focus,.form-demo textarea:focus{
+    outline:none;border-color:#4a90d9;}
+/* outline:none → 去掉浏览器默认的黑色外框，用我们自己的蓝色边框代替 */
+
+/* select 下拉框 */
+.form-demo select{width:260px;height:32px;border:1px solid #ccc;padding:0 6px;
+    font-size:13px;vertical-align:middle;cursor:pointer;background:#fff;}
+
+/* textarea 文本域 */
+.form-demo textarea{width:260px;height:80px;border:1px solid #ccc;padding:6px 8px;
+    font-size:13px;vertical-align:top;resize:none;}
+/* resize:none → 禁止用户拖拽右下角改变大小，保持设计一致 */
+
+/* 单选/复选组 */
+.option-group{display:inline-block;vertical-align:middle;width:260px;}
+
+/* 按钮 */
+.btn-group{margin-top:20px;text-align:center;padding-left:80px;}
+.btn-group input[type="submit"],.btn-group input[type="reset"]{
+    width:100px;height:34px;border:none;font-size:15px;cursor:pointer;
+    margin:0 8px;border-radius:2px;}
+.btn-group input[type="submit"]{background:#4a90d9;color:#fff;}
+.btn-group input[type="submit"]:hover{background:#3a7bc8;}
+.btn-group input[type="reset"]{background:#eee;color:#666;}
+.btn-group input[type="reset"]:hover{background:#ddd;}
+
+/* ★★★ 图标定位：父相子绝 ★★★ */
+.icon-input{display:inline-block;position:relative;vertical-align:middle;}
+/* position:relative → 给里面的绝对定位图标当锚点（父相） */
+.icon-input input{padding-left:30px!important;width:260px;}
+/* padding-left:30px → 给左边的图标腾出空间，文字不会和图标重叠 */
+
+/* 图标用CSS画（不需要图片） */
+.icon-input::before{content:"";position:absolute;left:8px;top:50%;
+    transform:translateY(-50%);width:16px;height:16px;
+    background:#bbb;border-radius:50%;}
+/* position:absolute → 相对于父元素(.icon-input)定位（子绝）
+ * top:50% + translateY(-50%) → 垂直居中的标准写法
+ *   只用top:50%会把图标的顶部放在中心，translateY(-50%)再往上移自身一半=真正居中 */</style>
+</head>
+<body>
+<hr style="margin-top:50px;border:2px dashed #ccc;">
+<h2 style="text-align:center;color:#333;">🧪 纯净演示区（无注释，仅展示效果）</h2>
+<div style="max-width:450px;margin:20px auto;background:#fff;border-radius:10px;padding:25px 30px;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+  <h4 style="text-align:center;font-size:20px;font-weight:normal;border-bottom:1px solid #ccc;padding-bottom:15px;margin-bottom:20px;">新用户注册</h4>
+  <div style="margin-bottom:14px;display:flex;align-items:center;">
+    <label style="width:80px;text-align:right;padding-right:10px;">学号</label>
+    <input type="text" placeholder="请输入学号" style="flex:1;height:32px;border:1px solid #ccc;padding:0 8px;border-radius:3px;">
+  </div>
+  <div style="margin-bottom:14px;display:flex;align-items:center;">
+    <label style="width:80px;text-align:right;padding-right:10px;">密码</label>
+    <input type="password" placeholder="请输入密码" style="flex:1;height:32px;border:1px solid #ccc;padding:0 8px;border-radius:3px;">
+  </div>
+  <div style="margin-bottom:14px;display:flex;align-items:center;">
+    <label style="width:80px;text-align:right;padding-right:10px;">性别</label>
+    <input type="radio" name="demo-sex" checked> 男
+    <input type="radio" name="demo-sex" style="margin-left:10px;"> 女
+  </div>
+  <div style="margin-bottom:14px;display:flex;align-items:center;">
+    <label style="width:80px;text-align:right;padding-right:10px;">院系</label>
+    <select style="flex:1;height:32px;border:1px solid #ccc;padding:0 6px;border-radius:3px;">
+      <option>电子信息学院</option>
+      <option>工商管理学院</option>
+    </select>
+  </div>
+  <div style="text-align:center;margin-top:20px;padding-left:80px;">
+    <input type="submit" value="注册" style="background:#4a90d9;color:#fff;border:none;padding:8px 25px;border-radius:3px;cursor:pointer;margin-right:10px;">
+    <input type="reset" value="重置" style="background:#eee;color:#666;border:none;padding:8px 25px;border-radius:3px;cursor:pointer;">
+  </div>
+</div>
+
+</body>
+</html>
+<hr style="margin-top:50px;border:2px dashed #3498db;">
+<h2 style="text-align:center;color:#555;">📖 教学讲解区</h2>
+
+<div class="wrapper">
+
+<h1>📋 第3+4+5层协作：复杂表单详解</h1>
+<p class="subtitle">表单 = HTML结构（骨架）+ CSS定位（图标）+ CSS样式（美化）</p>
+
+<h2>一、完整表单演示（下方有逐行解释）</h2>
+
+<div class="form-demo">
+<h4>新用户注册</h4>
+
+<div class="form-group">
+    <label for="sid">学号</label>
+    <span class="icon-input">
+        <input type="text" id="sid" placeholder="请输入学号">
+    </span>
+</div>
+
+<div class="form-group">
+    <label for="pwd1">密码</label>
+    <span class="icon-input">
+        <input type="password" id="pwd1" placeholder="请输入密码">
+    </span>
+</div>
+
+<div class="form-group">
+    <label>性别</label>
+    <span class="option-group">
+        <input type="radio" name="gender" id="male" checked><label for="male">男</label>
+        <input type="radio" name="gender" id="female"><label for="female">女</label>
+    </span>
+</div>
+
+<div class="form-group">
+    <label>爱好</label>
+    <span class="option-group">
+        <input type="checkbox" name="hobby" id="c1"><label for="c1">阅读</label>
+        <input type="checkbox" name="hobby" id="c2"><label for="c2">运动</label>
+        <input type="checkbox" name="hobby" id="c3"><label for="c3">音乐</label>
+    </span>
+</div>
+
+<div class="form-group">
+    <label for="dept">院系</label>
+    <select id="dept">
+        <option>电子信息学院</option>
+        <option>工商管理学院</option>
+        <option>智能制造学院</option>
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="sug">建议</label>
+    <textarea id="sug" placeholder="请输入你的建议..."></textarea>
+</div>
+
+<div class="btn-group">
+    <input type="submit" value="注册">
+    <input type="reset" value="重置">
+</div>
+</div>
+
+<h2>二、核心知识点拆解</h2>
+
+<h3>2.1 图标在输入框里——"父相子绝"的经典应用</h3>
+<pre><code>/* 父：relative（当坐标系原点） */
+.icon-input { position: relative; display: inline-block; }
+
+/* 子：absolute（在父容器内精确放图标） */
+.icon-input::before {
+    position: absolute;
+    left: 8px;                    /* 距左8px */
+    top: 50%;                     /* 顶部中点 */
+    transform: translateY(-50%);  /* 上移自身一半 = 真正垂直居中 */
+}
+/* 为什么 top:50% 不够？它把图标的顶部放在中心，图标下半截还在下面
+ * translateY(-50%) 把图标往上移自身高度的一半 → 图标的中心对齐父容器的中心 */</code></pre>
+
+<h3>2.2 padding-left 给图标腾空间</h3>
+<pre><code>.icon-input input { padding-left: 30px; }
+/* 不加这一行 → 图标和输入文字重叠 → 用户打的字被图标挡住 */</code></pre>
+
+<h3>2.3 vertical-align: middle —— 内联元素对齐</h3>
+<pre><code>/* label和input都是inline-block，默认基线对齐 → 对不齐
+ * 全部加上 vertical-align: middle → 中线对齐 → 整齐 */
+label, input, select { vertical-align: middle; }</code></pre>
+
+<h2>三、你踩过的坑</h2>
+
+<div class="error-box">
+<h3>❌ 标签没闭合</h3>
+<p><code>&lt;p&gt;文字&lt;p&gt;</code> → &lt;p&gt;不能嵌套，浏览器自动补标签→DOM结构错乱。</p>
+<p><strong>修复</strong>：<code>&lt;p&gt;文字&lt;/p&gt;</code></p>
+</div>
+
+<div class="error-box">
+<h3>❌ &lt;/a&gt; 少写斜杠写成 &lt;a&gt;</h3>
+<p>结果：整个a标签没闭合，后面的元素被吞进这个a里→链接范围异常扩大。</p>
+</div>
+
+<p style="text-align:center;color:#888;margin-top:50px;">
+👉 下一步：<a href="JavaScript入门_分数判断.html" style="color:#4a90d9;">JavaScript入门_分数判断</a>
+</p>
+
+</div>
+
+</body>
+</html>

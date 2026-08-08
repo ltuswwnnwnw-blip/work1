@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>::before和::after用法</title>
+		<style type="text/css">
+			h2::before{
+				content: '>>';
+				font-size: 16px;
+				color: red;
+			}
+			h2::after{
+				content: '<<';
+				font-size: 16px;
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>伪类</h2>
+		<p>伪类只是为现有元素定义特殊状态的样式，并不会创建新元素。</p>
+		<h2>伪元素</h2>
+		<p>伪元素用于创建一些不在网页文档树中的元素（即虚拟的元素），并为其添加样式。</p>
+	</body>
+</html>

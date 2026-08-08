@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>鼠标经过动画效果</title>
+		<style>
+			*{
+				padding: 0;
+				margin: 0;
+				list-style: none;
+			}
+			#books{
+				width: 950px;
+				margin: auto;
+				padding: 0 20px;
+			
+			}
+			#books li{
+				width: 280px;
+				height: 322px;
+				display: inline-block;
+				margin: 50px 10px;
+				border: 1px solid #eee;
+				box-shadow: 1px 8px 5px 0px #00ffff;
+				position: relative;
+				overflow: hidden;
+				
+			}
+			#books p{
+				background-color: rgba(0,166,240,0.6);
+				padding: 20px 0;
+				bottom: 0;
+				width: 100%;
+				left: 0;
+				position: absolute;
+				transform: translateY(100%);
+				transition: transform 0.3s ease;
+			}
+			#books span{
+				color: red;
+				font-weight: bold;
+			}
+			li:hover{
+				transform: translateY(-10px);
+			}
+			#books li:hover p{
+				transform: translateY(0);
+			}
+		</style>
+	</head>
+	<body>
+		<ul id="books">
+			<li>
+				<a href="#"><img src="images/1.png" alt="" /></a>
+				<p><span>￥36.00</span>[已售7件]</p>
+			</li>
+			<li>
+				<a href="#"><img src="images/2.png" alt="" /></a>
+				<p><span>￥36.00</span>[已售7件]</p>
+			</li>
+			<li>
+				<a href="#"><img src="images/3.png" alt="" /></a>
+				<p><span>￥36.00</span>[已售7件]</p>
+			</li>
+		</ul>
+	</body>
+</html>

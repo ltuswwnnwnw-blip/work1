@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>东职注册页</title>
+		<style>
+			#wrapper{
+				width: 500px;
+				height: 600px;
+				background-color: aquamarine;
+				margin: 0 auto;
+			}
+			div{
+				margin: 0 auto;
+				padding: 0;
+			}
+			h1{
+				text-align: center;
+				line-height: 50px;
+				border-bottom: 1px solid gray;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<img src="logo.png" alt=""/>
+		</header>
+		<main>
+			<div id="wrapper">
+				<form action="#">
+					<h1>新用户注册</h1>
+					<div>
+						<label for="">学号</label>
+						<input type="text" id="user"/>
+						<span>长度为120位数字</span>
+					</div>
+					<div>
+						<label for="pwd1"></label>
+						<input type="password" id="pwd1"/>
+						<span>长度在8-12之间</span>
+					</div>
+					<div>
+						<label for="pwd2"></label>
+						<input type="password" id="pwd2"/>
+						<span>两次密码要求一致</span>
+					</div>
+					<div>
+						<label>性别</label>
+						<div>
+							<input type="radio" id="man"/><label>男</label>
+							<input type="radio" id="woman"/><label>女</label>
+						</div>
+						<span></span>
+					</div>
+					<div>
+						<label>兴趣爱好</label>
+						<div>
+							<input  type="checkbox" id="c1"/><label for="c1">运动</label>
+							<input  type="checkbox" id="c2"/><label for="c2">阅读</label>
+							<input  type="checkbox" id="c3"/><label for="c3">音乐</label>
+							<input  type="checkbox" id="c4"/><label for="c4">其他</label>
+						</div>
+						<span></span>
+					</div>
+					<div>
+						<label>所属院系</label>
+						<select>
+							<option value="01">艺术设计学院</option>
+							<option value="02">电子信息学院</option>
+							<option value="03">工商管理学院</option>
+						</select>
+					</div>
+					<div>
+						<label>建议</label>
+						<textarea></textarea>
+						<span></span>
+					</div>
+					<div>
+						<input type="submit" value="注册"/>
+						<input type="reset" value="重置"/>
+					</div>
+				</form>
+			</div>
+		</main>
+		<footer>
+			<p>地址：东莞市松山湖高新技术产业开发区大学路3号 邮编：523808</p>
+		</footer>
+	</body>
+</html>

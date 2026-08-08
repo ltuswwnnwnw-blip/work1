@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>box-sizing 重置</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "微软雅黑", sans-serif;
+    background: #f5f5f5;
+    padding: 30px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.row {
+    display: flex;
+    gap: 20px;
+    max-width: 700px;
+    margin: 0 auto 20px;
+}
+
+.col {
+    flex: 1;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.bad {
+    border: 2px solid #e74c3c;
+    background: #fdeaea;
+}
+
+.good {
+    border: 2px solid #27ae60;
+    background: #eafaf1;
+}
+
+.box {
+    background: #3498db;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    margin: 8px 0;
+    width: 50%;
+}
+
+.content-box {
+    box-sizing: content-box;
+}
+
+.border-box {
+    box-sizing: border-box;
+}
+</style>
+</head>
+<body>
+
+<h2>两个 50% 宽度的盒子并排</h2>
+
+<div class="row">
+    <div class="col bad">
+        <h4>content-box（默认）</h4>
+        <div class="box content-box">width:50% + padding → 溢出</div>
+        <div class="box content-box">width:50% + padding → 溢出</div>
+    </div>
+    <div class="col good">
+        <h4>border-box（重置后）</h4>
+        <div class="box border-box">width:50%</div>
+        <div class="box border-box">正好50%</div>
+    </div>
+</div>
+
+</body>
+</html>

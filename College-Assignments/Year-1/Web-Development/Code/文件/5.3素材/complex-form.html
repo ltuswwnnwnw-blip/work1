@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>东职注册页 — 复杂表单页的设计</title>
+    <style>
+        /* ===== 整体布局样式 (PPTX Slide 15) ===== */
+        #outer {
+            width: 100%;
+            background-color: #d7d7d7;
+            padding: 0;
+            margin: 0;
+        }
+        #wrapper {
+            width: 600px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+        /* ===== 表单的整体样式 (PPTX Slide 16) ===== */
+        #registerForm {
+            width: 500px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-sizing: border-box;
+        }
+        /* ===== 标题样式 (PPTX Slide 17) ===== */
+        #registerForm h1 {
+            text-align: center;
+            line-height: 60px;
+            font-size: 33px;
+            font-weight: normal;
+            color: #333;
+            border-bottom: 1px solid #ccc;
+            margin: 0 0 30px 0;
+            padding-bottom: 15px;
+        }
+        /* ===== 标签及输入提示的样式 (PPTX Slide 17) ===== */
+        .form-group {
+            margin-bottom: 18px;
+            line-height: 30px;
+			background-color: #3a7bc8;
+        }
+        .form-group label:first-child {
+            display: inline-block;
+            width: 72px;
+            text-align: right;
+            font-size: 14px;
+            color: #333;
+            vertical-align: middle;
+			background-color: red;
+        }
+        .form-group .hint {
+            font-size: 12px;
+            color: #aaa;
+            vertical-align: middle;
+            margin-left: 6px;
+			background-color: #4a90d9;
+        }
+        /* ===== 相邻兄弟选择器 (PPTX Slide 8) ===== */
+        input[type="text"] + .hint,
+        input[type="password"] + .hint,
+        .icon-input + .hint {
+            font-size: 12px;
+            color: #aaa;
+            vertical-align: middle;
+            margin-left: 6px;
+        }
+        /* ===== 文本框和密码框的样式 (PPTX Slide 18) ===== */
+        .icon-input {
+            display: inline-block;
+            position: relative;
+            vertical-align: middle;
+			background-color: green;
+        }
+        .icon-input img {
+            position: absolute;
+            left: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            pointer-events: none;
+            z-index: 2;
+			background-color: yellow;
+        }
+        .icon-input input {
+            width: 280px;
+            height: 30px;
+            border: 1px solid #ccc;
+            padding: 0 8px 0 30px;
+            font-size: 13px;
+            line-height: 30px;
+            box-sizing: border-box;
+            vertical-align: middle;
+            color: #333;
+			background-color: orange;
+        }
+        .icon-input input:focus {
+            outline: none;
+            border-color: #4a90d9;
+			background-color: hotpink;
+        }
+        /* ===== 单选按钮和复选框的样式 (PPTX Slide 19) ===== */
+        .radio-group,
+        .checkbox-group {
+            display: inline-block;
+            vertical-align: middle;
+            width: 280px;
+            height: 30px;
+            background-color: #5500ff;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            padding: 0 6px;
+            line-height: 28px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .radio-group label,
+        .checkbox-group label {
+            width: auto !important;
+            text-align: left !important;
+            font-size: 13px !important;
+            margin-right: 10px;
+            cursor: pointer;
+            vertical-align: middle;
+			background-color: #aaaaff;
+        }
+        .radio-group input[type="radio"],
+        .checkbox-group input[type="checkbox"] {
+            vertical-align: middle;
+            margin: 0 3px 0 0;
+            cursor: pointer;
+        }
+        /* ===== 下拉列表样式 (PPTX Slide 20) ===== */
+        #registerForm select {
+            width: 280px;
+            height: 30px;
+            border: 1px solid #ccc;
+            padding: 0 6px;
+            font-size: 13px;
+            box-sizing: border-box;
+            vertical-align: middle;
+            background-color: #fff;
+            color: #333;
+            cursor: pointer;
+        }
+        #registerForm select:focus {
+            outline: none;
+            border-color: #4a90d9;
+			background-color: #aaa;
+        }
+        /* ===== 文本域样式 (PPTX Slide 20) ===== */
+        #registerForm textarea {
+            width: 280px;
+            height: 80px;
+            border: 1px solid #ccc;
+            padding: 6px 8px;
+            font-size: 13px;
+            box-sizing: border-box;
+            vertical-align: top;
+            resize: none;
+            color: #333;
+            font-family: inherit;
+        }
+        #registerForm textarea:focus {
+            outline: none;
+            border-color: #4a90d9;
+			background-color: #666;
+        }
+        /* ===== 按钮样式 (PPTX Slide 20) ===== */
+        .button-group {
+            margin-top: 26px;
+            margin-bottom: 8px;
+            text-align: center;
+            padding-left: 72px;
+        }
+        .button-group input[type="submit"],
+        .button-group input[type="reset"] {
+            width: 120px;
+            height: 34px;
+            border: none;
+            font-size: 15px;
+            cursor: pointer;
+            margin: 0 8px;
+            border-radius: 2px;
+        }
+        .button-group input[type="submit"] {
+            background-color: #4a90d9;
+            color: #fff;
+        }
+        .button-group input[type="submit"]:hover {
+            background-color: #3a7bc8;
+        }
+        .button-group input[type="reset"] {
+            background-color: #eee;
+            color: #666;
+        }
+        .button-group input[type="reset"]:hover {
+            background-color: #ddd;
+        }
+        /* ===== 页脚样式 ===== */
+        #footer {
+            width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 18px 0 30px;
+            font-size: 12px;
+            color: #999;
+            line-height: 1.8;
+        }
+        /* ===== 顶部 Logo 和标题栏 ===== */
+        #header {
+            width: 600px;
+            margin: 0 ;
+            padding: 0;
+			height: 100px;
+        }
+        #header img {
+			display: block;
+            vertical-align: middle;
+			float: left;
+			margin-left: 50px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="header">
+        <img src="imgs/logo.png" alt="logo">
+    </div>
+
+    <div id="outer">
+        <div id="wrapper">
+            <form id="registerForm" action="#" name="myForm">
+                <h1>新用户注册</h1>
+
+                <!-- 学号 -->
+                <div class="form-group">
+                    <label for="studentId">学号</label>
+                    <span class="icon-input">
+                        <img src="imgs/number.png" alt="">
+                        <input type="text" id="studentId" placeholder="请输入学号">
+                    </span>
+					<br />
+                    <span class="hint">长度为12位数字</span>
+                </div>
+
+                <!-- 密码 -->
+                <div class="form-group">
+                    <label for="pwd1">密码</label>
+                    <span class="icon-input">
+                        <img src="imgs/password.png" alt="">
+                        <input type="password" id="pwd1" placeholder="请输入密码">
+                    </span>
+					<br />
+                    <span class="hint">长度在8-12之间</span>
+                </div>
+
+                <!-- 确认密码 -->
+                <div class="form-group">
+                    <label for="pwd2">确认密码</label>
+                    <span class="icon-input">
+                        <img src="imgs/password.png" alt="">
+                        <input type="password" id="pwd2" placeholder="请再次输入密码">
+                    </span>
+					<br />
+                    <span class="hint">两次密码要求一致</span>
+                </div>
+
+                <!-- 性别 -- 单选按钮 -->
+                <div class="form-group">
+                    <label>性别</label>
+                    <span class="radio-group">
+                        <input type="radio" name="gender" value="male" id="male" checked>
+                        <label for="male">男</label>
+                        <input type="radio" name="gender" value="female" id="female">
+                        <label for="female">女</label>
+                    </span>
+                </div>
+
+                <!-- 兴趣爱好 -- 复选框 -->
+                <div class="form-group">
+                    <label>兴趣爱好</label>
+                    <span class="checkbox-group">
+                        <input type="checkbox" name="hobby" value="sports" id="c1" checked>
+                        <label for="c1">运动</label>
+                        <input type="checkbox" name="hobby" value="reading" id="c2">
+                        <label for="c2">阅读</label>
+                        <input type="checkbox" name="hobby" value="music" id="c3">
+                        <label for="c3">音乐</label>
+                        <input type="checkbox" name="hobby" value="other" id="c4" checked>
+                        <label for="c4">其他</label>
+                    </span>
+                </div>
+
+                <!-- 所属院系 -- 下拉列表 -->
+                <div class="form-group">
+                    <label for="dept">所属院系</label>
+                    <select name="dept" id="dept">
+                        <option value="01">艺术设计学院</option>
+                        <option value="02">电子信息学院</option>
+                        <option value="03">工商管理学院</option>
+                        <option value="04">智能制造学院</option>
+                        <option value="05">经济管理学院</option>
+                    </select>
+                </div>
+
+                <!-- 建议 -- 文本域 -->
+                <div class="form-group">
+                    <label for="suggestion">建议</label>
+                    <textarea id="suggestion" placeholder="请输入你的建议..."></textarea>
+                </div>
+
+                <!-- 按钮 -->
+                <div class="button-group">
+                    <input type="submit" value="注册">
+                    <input type="reset" value="重置">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="footer">
+        <p>地址：东莞市松山湖高新技术产业开发区大学路3号 &nbsp;邮编：523808</p>
+        <p>版权所有©东莞职业技术学院 | 粤ICP备10022895号 | 粤公网安备 44190002000296号</p>
+    </div>
+
+</body>
+</html>

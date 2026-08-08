@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册表单</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+	body {
+	    background-color: #ffffff;
+	}
+	
+	.container {
+	    width: 800px;
+	    margin: 20px auto;
+	    background-color: #fff;
+	    padding: 20px;
+	    border-radius: 8px;
+	    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+	}
+	
+	.header {
+	    display: flex;
+	    align-items: center;
+	    margin-bottom: 20px;
+	}
+	
+	.logo {
+	    width: auto;
+	    height: auto;
+	    margin-right: 15px;
+	}
+	
+	.school-name h1 {
+	    font-size: 32px;
+	    color: #000;
+	}
+	
+	.school-name p {
+	    font-size: 20px;
+	    color: #333;
+	    letter-spacing: 2px;
+	}
+	
+	.register-title {
+	    text-align: center;
+	    font-size: 24px;
+	    margin: 20px 0 10px;
+	}
+	.register-form {
+	    width: 600px;
+	    margin: 0 auto;
+	}
+	
+	.form-item {
+	   display: flex;
+	    align-items: center;
+	    margin-bottom: 30px;
+	}
+	
+	.form-item label {
+	    width: 100px;
+	    text-align: right;
+	    margin-right: 10px;
+	    font-size: 15px;
+	}
+	
+	.input-box {
+	    position: relative;
+	    width: 400px;
+	}
+	
+	.input-icon {
+	    position: absolute;
+	    left: 10px;
+	    top: 50%;
+	    transform: translateY(-50%);
+	    width: 20px;
+	    height: 20px;
+	}
+	
+	.input-box input {
+	    width: 100%;
+	    height: 35px;
+	    padding-left: 35px;
+	    border: 1px solid #000000;
+	    border-radius: 4px;
+	    font-size: 14px;
+	}
+	
+	.tip {
+	    margin-left: 60px;
+	    font-size: 14px;
+	    color: #666;
+	}
+	
+	.radio-group label,
+	.checkbox-group label {
+	    margin-right: 15px;
+	    font-size: 14px;
+	}
+	
+	select, textarea {
+	    width: 300px;
+	    height: 35px;
+	    border: 1px solid #000000;
+	    border-radius: 4px;
+	    padding: 0 10px;
+	    font-size: 14px;
+	}
+	
+	textarea {
+	    height: 100px;
+	    resize: vertical;
+	    padding: 10px;
+	}
+	
+	.button-group {
+	   display: flex;
+	    justify-content: center;
+	    gap: 50px;
+	    margin-top: 60px;
+	}
+	
+	.btn {
+	    width: 220px;
+	    height: 55px;
+	    border: none;
+	    border-radius: 50px;
+	    background-color: #aa0000;
+	    color: #fff;
+	    font-size: 16px;
+	    cursor: pointer;
+	}
+	
+	.btn:hover {
+	    background-color: #55ffff;
+	}
+	
+	.footer {
+	    margin-top: 40px;
+	    text-align: center;
+	    font-size: 14px;
+	    color: #666;
+	    line-height: 1.8;
+	}
+</style>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="logo.png" class="logo">
+        </div>
+        <h2 class="register-title">新用户注册</h2>
+        <form class="register-form">
+            <div class="form-item">
+                <label>学号</label>
+                <div class="input-box">
+                    <img src="number.png" alt="学号图标" class="input-icon">
+                    <input type="text" placeholder="请输入学号" maxlength="12" pattern="[0-9]{12}" required>
+                </div>
+                <span class="tip">长度为12位的数字</span>
+            </div>
+
+            
+            <div class="form-item">
+                <label>设置密码</label>
+                <div class="input-box">
+                    <img src="password.png" alt="密码图标" class="input-icon">
+                    <input type="password" placeholder="请设置密码" minlength="8" maxlength="12" required>
+                </div>
+                <span class="tip">长度在8-12之间</span>
+            </div>
+
+            
+            <div class="form-item">
+                <label>确认密码</label>
+                <div class="input-box">
+                    <img src="password.png" alt="密码图标" class="input-icon">
+                    <input type="password" placeholder="请再次输入密码" required>
+                </div>
+                <span class="tip">两次密码需一致</span>
+            </div>
+
+            <div class="form-item">
+                <label>性别</label>
+                <div class="radio-group">
+                    <label><input type="checkbox" name="gender" checked> 男</label>
+                    <label><input type="checkbox" name="gender"> 女</label>
+                </div>
+            </div>
+
+            <div class="form-item">
+                <label>兴趣爱好</label>
+                <div class="checkbox-group">
+                    <label><input type="radio" name="hobby"> 运动</label>
+                    <label><input type="radio" name="hobby"> 阅读</label>
+                    <label><input type="radio" name="hobby"> 音乐</label>
+                    <label><input type="radio" name="hobby"> 其他</label>
+                </div>
+            </div>
+
+            <div class="form-item">
+                <label>所属系部</label>
+                <select>
+                    <option value="art">艺术设计系</option>
+                    <option value="computer">计算机工程系</option>
+                    <option value="electrical">电子工程系</option>
+                </select>
+            </div>
+
+            <div class="form-item">
+                <label>您的建议</label>
+                <textarea rows="5" placeholder="请输入您的建议"></textarea>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn register-btn">注册</button>
+                <button type="reset" class="btn reset-btn">重置</button>
+            </div>
+        </form>
+
+        <div class="footer">
+            <p>地址：东莞市松山湖高新技术产业开发区大学路3号 邮编：523808</p>
+            <p>版权所有©东莞职业技术学院 | 粤ICP备10022895号 | 粤公网安备 44190002000296号</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>水平导航条</title>
+		<style>
+			nav{
+				border-top: 1px solid gray;
+				border-bottom: 1px solid gray;
+			}
+			nav a{
+				display: inline-block;
+				width: 100px;
+				height: 50px;
+				text-align: center;
+				line-height: 50px;
+				text-decoration: none;
+				color: red;
+				margin: 2px;
+			}
+			a:link{/*未访问*/
+				color: orange;
+			}
+			a:visited{/*访问过*/
+				color: gray;
+			}
+			a:hover{/*鼠标悬停时*/
+				color: white;
+				text-decoration: underline;
+				background-color: red;
+			}
+			a:active{/*单机不放*/
+				color: yellow;
+				background-color: aqua;
+			}
+		</style>
+	</head>
+	<body>
+		<nav>
+			<a href="example1.html">aa</a>
+		    <a href="example2.html">bb</a>
+		    <a href="example3.html">cc</a>
+		    <a href="example4.html">dd</a>
+		    <a href="example5.html">ee</a>
+		    <a href="http://www.qq.com">ff</a>
+		</nav>
+	</body>
+</html>

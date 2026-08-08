@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>打字动画特效</title>
+    <style>
+        a { text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div>网站最新通知：<a id="hotNews" href="#"></a></div>
+
+    <script>
+        var newsTime = 5000;
+        var wordTime = 50;
+        var newsNum = 0;
+        var wordNum = 0;
+        var id;
+        var news = [
+            "新版块即将上线，敬请期待！",
+            "国庆期间本网站继续为您服务！",
+            "下周一对网站进行更新，届时部分功能将受影响。"
+        ];
+
+        window.onload = function () {
+            start();
+        };
+
+        function start() {
+            id = window.setInterval("showNew()", wordTime);
+        }
+
+        function showNew() {
+            var newStr = news[newsNum];
+            if (wordNum == newStr.length) {
+                clearInterval(id);
+                newsNum++;
+                if (newsNum >= news.length) {
+                    newsNum = 0;
+                }
+                wordNum = 0;
+                window.setTimeout("start()", newsTime);
+            } else {
+                var node = document.getElementById("hotNews");
+                node.innerHTML = newStr.substring(0, wordNum + 1);
+                wordNum++;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>animation复杂用法</title>
+		<style>
+			#box{
+				width: 950px;
+				border-bottom: 1px solid black;
+				margin: 30px;
+			}
+			#box div{
+				width: 50px;
+				height: 50px;
+				border: 1px solid black;
+				border-radius: 50%;
+				text-align: center;
+				line-height: 50px;
+				
+				animation-name: roll;
+				animation-duration: 0.2s;
+				animation-timing-function: ease;
+				animation-delay: 1s;
+				animation-iteration-count: infinite;
+				animation-direction: alternate;
+			}
+			@keyframes roll{
+				from{transform: translate(0px,0px) rotate(0deg);}
+				to{transform: translate(900px,0px) rotate(180deg);}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div>动画</div>
+		</div>
+	</body>
+</html>

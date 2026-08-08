@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>导航条特效</title>
+    <style>
+        #nav {
+            background-color: #96b97d;
+            width: 600px;
+            list-style: none;
+            padding: 0 0 0 10px;
+            margin: 0;
+        }
+        #nav a {
+            text-decoration: none;
+            padding: 8px 25px;
+            display: inline-block;
+            color: white;
+            font-size: 14px;
+        }
+        #nav li {
+            display: inline-block;
+            margin-top: 3px;
+            background-color: #96b97d;
+            position: relative;
+        }
+        #nav li:hover { background-color: #e6e6e6; }
+        #nav li:hover > a { color: black; }
+        #nav li div {
+            background-color: #e6e6e6;
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+        }
+        #nav div a { color: black; font-size: 13px; padding: 10px 10px; }
+        #nav div a:hover { color: blue; }
+    </style>
+</head>
+<body>
+    <ul id="nav">
+        <li>
+            <a href="#">首页</a>
+            <div></div>
+        </li>
+        <li onmouseover="show(1)" onmouseout="hide(1)">
+            <a href="#">跟团游</a>
+            <div>
+                <a href="#">出境跟团游</a>
+                <a href="#">境内跟团游</a>
+                <a href="#">周边跟团游</a>
+            </div>
+        </li>
+        <li onmouseover="show(2)" onmouseout="hide(2)">
+            <a href="#">自由行</a>
+            <div>
+                <a href="#">境内自由行</a>
+                <a href="#">出境自由行</a>
+                <a href="#">港澳台自由行</a>
+            </div>
+        </li>
+        <li>
+            <a href="#">酒店</a>
+            <div></div>
+        </li>
+    </ul>
+
+    <script>
+        var subNodes;
+        var navNodes;
+
+        window.onload = function () {
+            subNodes = document.getElementById("nav").getElementsByTagName("div");
+            navNodes = document.getElementById("nav").children;
+        };
+
+        function show(num) {
+            subNodes[num].style.display = "block";
+        }
+
+        function hide(num) {
+            subNodes[num].style.display = "none";
+        }
+    </script>
+</body>
+</html>

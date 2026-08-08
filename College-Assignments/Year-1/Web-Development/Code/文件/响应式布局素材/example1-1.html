@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>从大屏幕到小屏幕的媒体查询结构</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<style>
+			body{
+				background-color: gray;
+			}
+			h1{
+				font-size: 30px;
+			}
+			@media screen and (max-width:1200px){
+				/*大*/
+				body{
+					background-color: pink;
+					color: aqua;
+				}
+			}
+			@media screen and (max-width:992px){
+				/*中*/
+				body{
+					background-color: green;
+					color: black;
+				}
+			}
+			@media screen and (max-width:768px){
+				/*小*/
+				body{
+					background-color: yellow;
+					color: cadetblue;
+				}
+			}
+			@media screen and (max-width:575px){
+				/*纳*/
+				body{
+					background-color: blue;
+					color: #ffff00;
+				}
+				h1{
+					font-size: 20px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<h1>一级标题</h1>
+	</body>
+</html>

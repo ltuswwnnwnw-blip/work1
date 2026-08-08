@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>定位 position</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:"微软雅黑",sans-serif; background:#f5f5f5; padding:30px; color:#333; }
+.container { max-width:650px; margin:0 auto; }
+h2 { text-align:center; margin:20px 0; }
+
+.parent { position:relative; width:400px; height:180px; background:#ddd; border-radius:6px; margin:15px auto; display:flex; align-items:center; justify-content:center; }
+.child { position:absolute; right:10px; top:10px; background:#e74c3c; color:#fff; padding:8px 16px; border-radius:4px; }
+
+.no-rel { width:400px; height:180px; background:#fdeaea; border:2px dashed #e74c3c; border-radius:6px; margin:15px auto; }
+.no-rel-child { position:absolute; right:10px; top:10px; background:#e74c3c; color:#fff; padding:8px 16px; border-radius:4px; }
+
+.fixed-nav { position:fixed; top:0; left:0; right:0; background:#2c3e50; color:#fff; padding:10px 20px; z-index:100; display:flex; gap:15px; }
+</style>
+</head>
+<body>
+
+<div class="container" style="margin-top:60px;">
+<h2>父相子绝：相对定位父 + 绝对定位子</h2>
+<div class="parent">
+  父元素 position: relative
+  <div class="child">子元素 absolute<br>right:10px top:10px</div>
+</div>
+
+<h2>没有 relative → absolute 飘到页面左上角</h2>
+<div class="no-rel">
+  没有 position: relative
+  <div class="no-rel-child">跑到页面左上角</div>
+</div>
+</div>
+
+</body>
+</html>

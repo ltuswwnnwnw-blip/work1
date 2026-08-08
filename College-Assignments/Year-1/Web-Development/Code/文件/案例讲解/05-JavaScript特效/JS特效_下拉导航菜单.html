@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>JS特效：下拉导航菜单</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"微软雅黑",sans-serif;line-height:1.8;color:#333;background:#f8f9fa;padding:20px;}
+.wrapper{max-width:860px;margin:0 auto;}
+h1{text-align:center;color:#2c3e50;margin-bottom:6px;}
+.subtitle{text-align:center;color:#888;margin-bottom:20px;font-size:14px;}
+h2{color:#2ecc71;border-left:5px solid #2ecc71;padding-left:12px;margin:35px 0 15px;font-size:22px;}
+h3{color:#3498db;margin:22px 0 10px;font-size:18px;}
+p{margin-bottom:12px;}
+pre{background:#2c3e50;color:#ecf0f1;padding:15px;border-radius:6px;overflow-x:auto;font-size:13px;line-height:1.5;margin:10px 0;}
+code{background:#eee;padding:2px 6px;border-radius:3px;font-size:13px;color:#e74c3c;}
+pre code{background:none;padding:0;color:#ecf0f1;}
+.highlight{background:#fff3cd;border-left:4px solid #f39c12;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+.error-box{background:#fdeaea;border-left:4px solid #e74c3c;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+
+/* ===== 下拉菜单演示样式 ===== */
+.nav-demo{margin:20px 0;}
+.nav-bar{list-style:none;display:flex;background:#34495e;border-radius:6px;}
+.nav-bar>li{position:relative;}
+/* >li → 只选一级菜单的li，不选二级菜单里的li */
+/* position:relative → 给二级菜单当定位锚点（父相）*/
+
+.nav-bar>li>a{display:block;padding:12px 24px;color:#fff;text-decoration:none;font-size:15px;white-space:nowrap;}
+.nav-bar>li>a:hover{background:#2ecc71;}
+
+/* 二级菜单 */
+.submenu{position:absolute;top:100%;left:0;background:#fff;border:1px solid #ddd;border-top:none;border-radius:0 0 6px 6px;min-width:140px;display:none;z-index:10;box-shadow:0 4px 8px rgba(0,0,0,0.1);}
+/* position:absolute → 相对于父li定位（子绝）*/
+/* top:100% → 在一级菜单正下方（父li的100%高度处）*/
+/* display:none → 默认隐藏 */
+
+.submenu a{display:block;padding:10px 20px;color:#333;text-decoration:none;font-size:14px;border-bottom:1px solid #f0f0f0;}
+.submenu a:hover{background:#2ecc71;color:#fff;}
+
+/* 有二级菜单的一级项加一个三角标记 */
+.has-sub>a::after{content:" ▼";font-size:10px;margin-left:4px;}
+</style>
+</head>
+<body>
+<hr style="margin-top:50px;border:2px dashed #ccc;">
+<h2 style="text-align:center;color:#333;">🧪 纯净演示区（无注释，仅展示效果）</h2>
+<div style="max-width:600px;margin:20px auto;font-family:'微软雅黑',sans-serif;">
+  <ul style="list-style:none;display:flex;background:#34495e;border-radius:6px;padding:0;">
+    <li style="position:relative;"><a href="#" style="display:block;padding:12px 24px;color:#fff;text-decoration:none;">🏠 首页</a></li>
+    <li style="position:relative;" onmouseover="document.getElementById('dm-sub0').style.display='block'" onmouseout="document.getElementById('dm-sub0').style.display='none'">
+      <a href="#" style="display:block;padding:12px 24px;color:#fff;text-decoration:none;">📱 产品 ▼</a>
+      <div id="dm-sub0" style="position:absolute;top:100%;left:0;background:#fff;border:1px solid #ddd;border-radius:0 0 6px 6px;min-width:120px;display:none;z-index:10;box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+        <a href="#" style="display:block;padding:8px 16px;color:#333;text-decoration:none;border-bottom:1px solid #f0f0f0;">手机</a>
+        <a href="#" style="display:block;padding:8px 16px;color:#333;text-decoration:none;border-bottom:1px solid #f0f0f0;">电脑</a>
+        <a href="#" style="display:block;padding:8px 16px;color:#333;text-decoration:none;">平板</a>
+      </div>
+    </li>
+    <li style="position:relative;" onmouseover="document.getElementById('dm-sub1').style.display='block'" onmouseout="document.getElementById('dm-sub1').style.display='none'">
+      <a href="#" style="display:block;padding:12px 24px;color:#fff;text-decoration:none;">🛠️ 服务 ▼</a>
+      <div id="dm-sub1" style="position:absolute;top:100%;left:0;background:#fff;border:1px solid #ddd;border-radius:0 0 6px 6px;min-width:120px;display:none;z-index:10;box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+        <a href="#" style="display:block;padding:8px 16px;color:#333;text-decoration:none;border-bottom:1px solid #f0f0f0;">咨询</a>
+        <a href="#" style="display:block;padding:8px 16px;color:#333;text-decoration:none;">售后</a>
+      </div>
+    </li>
+    <li style="position:relative;"><a href="#" style="display:block;padding:12px 24px;color:#fff;text-decoration:none;">📞 关于</a></li>
+  </ul>
+</div>
+
+</body>
+</html>
+<hr style="margin-top:50px;border:2px dashed #3498db;">
+<h2 style="text-align:center;color:#555;">📖 教学讲解区</h2>
+
+<div class="wrapper">
+
+<h1>📂 JS特效：下拉导航菜单</h1>
+<p class="subtitle">对应课件 8.4 | 核心：HTML嵌套 + CSS父相子绝 + JS控制显示/隐藏</p>
+
+<!--
+宏观理解：
+下拉菜单 = HTML结构 + CSS定位 + JS交互，三者缺一不可。
+- HTML：二级菜单嵌套在一级菜单的li里面
+- CSS：父相子绝定位 + display:none默认隐藏
+- JS：onmouseover显示 / onmouseout隐藏
+
+为什么二级菜单要嵌套在一级li里面？
+→ 鼠标从一级移到二级时，还在同一个li内部 → 不会触发mouseout
+→ 如果分开，鼠标移到二级时一级触发mouseout → 菜单闪一下就没了
+-->
+
+<h2>一、HTML结构：嵌套关系</h2>
+<pre><code>&lt;ul class="nav-bar"&gt;
+    &lt;li&gt;&lt;a href="#"&gt;首页&lt;/a&gt;&lt;/li&gt;     ← 没有二级菜单的项
+    &lt;li class="has-sub" onmouseover="show(0)" onmouseout="hide(0)"&gt;
+        &lt;a href="#"&gt;产品&lt;/a&gt;              ← 一级菜单文字
+        &lt;div class="submenu"&gt;               ← 二级菜单容器
+            &lt;a href="#"&gt;手机&lt;/a&gt;
+            &lt;a href="#"&gt;电脑&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/li&gt;
+    &lt;li class="has-sub" onmouseover="show(1)" onmouseout="hide(1)"&gt;
+        &lt;a href="#"&gt;服务&lt;/a&gt;
+        &lt;div class="submenu"&gt;
+            &lt;a href="#"&gt;咨询&lt;/a&gt;
+            &lt;a href="#"&gt;售后&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+<h2>二、CSS定位："父相子绝"</h2>
+<pre><code>/* 父：relative（给子元素当坐标系原点） */
+.nav-bar > li {
+    position: relative;
+}
+
+/* 子：absolute（相对于父元素精确定位） */
+.submenu {
+    position: absolute;       /* 脱离正常流，相对于最近的relative祖先定位 */
+    top: 100%;                /* 父li的100%高度处 → 紧贴一级菜单下方 */
+    left: 0;                  /* 和父li左对齐 */
+    display: none;            /* 默认隐藏，JS控制显示 */
+}
+
+/* 为什么top:100%就能刚好在一级菜单下方？
+ * 父li没有设height → 高度由内容撑开 = 一级菜单a的高度
+ * 100% = 父li的完整高度 → absolute子元素的top从父li底部开始 */</code></pre>
+
+<h2>三、JS交互：显示/隐藏</h2>
+<pre><code>function show(index) {
+    所有二级菜单[index].style.display = "block";  // 显示
+}
+function hide(index) {
+    所有二级菜单[index].style.display = "none";   // 隐藏
+}</code></pre>
+
+<h2>四、现场演示</h2>
+<div class="nav-demo">
+    <ul class="nav-bar">
+        <li><a href="#">🏠 首页</a></li>
+        <li class="has-sub" onmouseover="showSub(0)" onmouseout="hideSub(0)">
+            <a href="#">📱 产品</a>
+            <div class="submenu" id="sub0">
+                <a href="#">智能手机</a>
+                <a href="#">笔记本电脑</a>
+                <a href="#">平板电脑</a>
+                <a href="#">智能手表</a>
+            </div>
+        </li>
+        <li class="has-sub" onmouseover="showSub(1)" onmouseout="hideSub(1)">
+            <a href="#">🛠️ 服务</a>
+            <div class="submenu" id="sub1">
+                <a href="#">在线咨询</a>
+                <a href="#">售后维修</a>
+                <a href="#">以旧换新</a>
+            </div>
+        </li>
+        <li><a href="#">📞 关于我们</a></li>
+        <li><a href="#">📧 联系我们</a></li>
+    </ul>
+</div>
+
+<script>
+// ★★★ 下拉菜单完整代码 ★★★
+
+// 获取所有二级菜单元素
+var submenus = document.querySelectorAll(".submenu");
+// querySelectorAll(".submenu") → 选中所有class="submenu"的元素
+
+// 显示第n个二级菜单
+function showSub(index) {
+    submenus[index].style.display = "block";
+    // .style.display → 直接操作元素的CSS display属性
+    // "block" → 块级显示（元素可见）
+}
+
+// 隐藏第n个二级菜单
+function hideSub(index) {
+    submenus[index].style.display = "none";
+    // "none" → 隐藏（元素不可见，不占空间）
+}
+</script>
+
+<h2>五、为什么嵌套？——核心设计原理</h2>
+<pre><code>/* 结构对比 */
+
+/* ✅ 嵌套：二级菜单在li内部 */
+&lt;li&gt;
+    &lt;a&gt;产品&lt;/a&gt;
+    &lt;div class="submenu"&gt;...&lt;/div&gt;  ← 和一级菜单在同一个li里
+&lt;/li&gt;
+/* 鼠标从"产品"移到"手机" → 全程在同一个li内 → 不触发onmouseout */
+
+/* ❌ 分开：二级菜单在外面 */
+&lt;li&gt;&lt;a&gt;产品&lt;/a&gt;&lt;/li&gt;
+&lt;div class="submenu"&gt;...&lt;/div&gt;  ← 在li外面
+/* 鼠标从"产品"移到"手机" → 离开了li → 触发onmouseout → 菜单消失！*/</code></pre>
+
+<div class="error-box">
+<h3>❌ 常见错误：onmouseout加在一级菜单a上而不是li上</h3>
+<p><strong>症状</strong>：鼠标移到二级菜单时，二级菜单消失了。</p>
+<p><strong>原因</strong>：mouseout加在a标签上，鼠标从a移到旁边的二级菜单div → 触发a的mouseout。</p>
+<p><strong>修复</strong>：mouseover/mouseout都加在li上（li包含了a和二级菜单div）。</p>
+</div>
+
+<h2>六、CSS + HTML + JS 协作关系</h2>
+<pre><code>HTML：提供结构
+  └→ nav-bar(ul) > li > a(一级文字) + .submenu(二级容器)
+
+CSS：提供布局和定位
+  └→ li { position: relative }          (父相：当锚点)
+  └→ .submenu { position: absolute;     子绝：相对父定位
+                  top: 100%;            紧贴一级菜单下方
+                  display: none; }      默认隐藏
+
+JS：提供交互
+  └→ onmouseover → style.display="block"  (显示)
+  └→ onmouseout  → style.display="none"   (隐藏)
+
+三者关系：HTML是骨头，CSS是皮肉（长什么样+在哪），JS是神经（什么时候显示/隐藏）</code></pre>
+
+<p style="text-align:center;color:#888;margin-top:50px;">
+👉 下一步：<a href="JS特效_表单验证.html" style="color:#2ecc71;">JS特效_表单验证</a>
+</p>
+
+</div>
+
+</body>
+</html>

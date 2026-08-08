@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>“媒体查询+弹性盒”实现响应式页面</title>
+		<style>
+			/* 要求：
+				1、当屏幕大于640px时，main的宽度为80%，其中nav（宽100px）、article（剩余宽度）、aside（宽100px）从左往右排成一行。
+				2、当屏幕小于640px时，main的宽度为100%，其中article（宽100%）、nav（宽100%）、aside（宽100%）从上往下排成一列。
+			 */
+			header,nav,article,aside,footer{
+				border: 1px solid gray;
+				margin: 5px 0;
+				box-sizing: border-box;
+			}
+			#wrapper{
+				width: 80%;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			main{
+				display: flex;
+				height: 500px;
+			}
+			nav{
+				width: 100px;
+				order: 1;
+			}
+			aside{
+				width: 100px;
+				order: 3;
+			}
+			article{
+				flex: 1;
+				order: 2;
+				margin-left: 10px;
+				margin-right: 10px;
+			}
+			@media screen and (max-width:640px){
+				#wrapper{
+					width: 100%;
+				}
+				main{
+					flex-flow: column;
+				}
+				aside,nav,article{
+					width: 100%;
+					order: 0;
+				}
+				article{
+					margin-left: 0;
+					margin-right: 0;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrapper">
+			<header>header</header>
+			<main>
+				<article>article</article>
+				<nav>nav</nav>
+				<aside>aside</aside>
+			</main>
+			<footer>footer</footer>
+		</div>
+	</body>
+</html>

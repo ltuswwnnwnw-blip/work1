@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>盒模型四层结构 + margin塌陷</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: "微软雅黑", sans-serif; background: #f5f5f5; padding: 30px; color: #333; }
+.container { max-width: 650px; margin: 0 auto; }
+h2 { text-align: center; margin: 20px 0; }
+
+.layer-visual { display: flex; flex-direction: column; align-items: center; margin: 20px 0; }
+.layer { margin: 2px 0; text-align: center; color: #fff; border-radius: 4px; padding: 8px 0; font-size: 14px; }
+
+.demo-box { background: #fff; border-radius: 8px; padding: 20px; margin: 20px 0; }
+
+.collapse-parent { background: #ddd; border-radius: 6px; padding: 1px 15px 15px; margin-top: 20px; }
+.collapse-parent.fixed { overflow: hidden; }
+.collapse-child { background: #e74c3c; color: #fff; padding: 10px; text-align: center; border-radius: 4px; margin-top: 30px; }
+
+.row { display: flex; gap: 15px; }
+.col { flex: 1; padding: 15px; border-radius: 6px; }
+.col.bad { border: 2px solid #e74c3c; background: #fdeaea; }
+.col.good { border: 2px solid #27ae60; background: #eafaf1; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h2>盒模型四层结构</h2>
+<div class="layer-visual">
+    <div class="layer" style="background:#f39c12;width:440px;">margin（外边距）</div>
+    <div class="layer" style="background:#e67e22;width:380px;">border（边框）</div>
+    <div class="layer" style="background:#2ecc71;width:320px;">padding（内边距）</div>
+    <div class="layer" style="background:#3498db;width:260px;">content（内容区）</div>
+</div>
+
+<h2>margin 塌陷：上下间距取最大值</h2>
+<div class="demo-box">
+    <div style="background:#3498db;color:#fff;padding:10px;text-align:center;margin-bottom:30px;">margin-bottom: 30px</div>
+    <div style="background:#e74c3c;color:#fff;padding:10px;text-align:center;margin-top:20px;">margin-top: 20px</div>
+    <p style="text-align:center;color:#888;margin-top:10px;">间距 = max(30, 20) = 30px</p>
+</div>
+
+<h2>父子 margin 塌陷 vs 修复</h2>
+<div class="row">
+    <div class="col bad">
+        <h4>塌陷</h4>
+        <div class="collapse-parent">
+            父元素
+            <div class="collapse-child">子 margin-top:30px</div>
+        </div>
+    </div>
+    <div class="col good">
+        <h4>修复（overflow:hidden）</h4>
+        <div class="collapse-parent fixed">
+            父元素
+            <div class="collapse-child">子 margin-top:30px</div>
+        </div>
+    </div>
+</div>
+
+</div>
+</body>
+</html>

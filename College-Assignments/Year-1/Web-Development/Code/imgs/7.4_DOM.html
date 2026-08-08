@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>文档对象模型</title>
+    <style>
+        body { font: 16px/1.8 Arial, "Microsoft YaHei", sans-serif; margin: 24px; }
+        section { margin: 24px 0; padding: 16px; border: 1px solid #ddd; }
+        button, input[type="button"] { margin: 6px 4px; padding: 4px 10px; }
+        #main { padding: 12px; background: #f5f5f5; }
+        .bg { padding: 4px; }
+        #result { color: #027aa6; }
+        #nodeResult { color: #1f5601; }
+    </style>
+</head>
+<body>
+    <h1>文档对象模型</h1>
+
+    <section id="tagDemo">
+        <h2>通过 id 获取元素</h2>
+        <h3 id="chapter1" onclick="getHTML('chapter1')">第1章 认识JavaScript</h3>
+        <h3 id="chapter2" onclick="getHTML('chapter2')">第2章 JavaScript基础语法</h3>
+        <p id="result"></p>
+    </section>
+
+    <section>
+        <h2>通过 name 获取元素</h2>
+        <p>请选择适合您的时间段：</p>
+        <input type="radio" name="time" value="上午">上午&nbsp;&nbsp;
+        <input type="radio" name="time" value="下午">下午&nbsp;&nbsp;
+        <input type="radio" name="time" value="晚上">晚上
+        <br>
+        <input type="button" value="确认您的选择" onclick="confirmTime()">
+    </section>
+
+    <section>
+        <h2>通过标签名获取元素</h2>
+        姓名：<input type="text" value=""><br><br>
+        班级：<input type="text" value=""><br><br>
+        <input type="button" value="确定" onclick="confirmText()">
+    </section>
+
+    <section>
+        <h2>通过 class 获取元素</h2>
+        <p class="content">这是段落1，class的值为content。</p>
+        <p class="con">这是段落2，class的值为con。</p>
+        <p class="content">这是段落3，class的值为content。</p>
+        <button onclick="myFunction()">获取class="content"的段落</button>
+        <div id="classResult">点击按钮得到：</div>
+    </section>
+
+    <section>
+        <h2>通过节点树获取元素</h2>
+        <ol id="myList">
+            <li>北京</li>
+            <li>上海</li>
+            <li>广州</li>
+            <li>深圳</li>
+        </ol>
+        <input type="button" value="通过兄弟关系获取第二个列表项" onclick="getLi()">
+        <span id="nodeResult">第二个列表项：</span>
+    </section>
+
+    <section>
+        <h2>控制元素的样式</h2>
+        <p>畅销图书目录</p>
+        <ul id="bookList">
+            <li>01 明朝那些事儿</li>
+            <li>02 平凡的世界</li>
+            <li>03 三体</li>
+        </ul>
+        <input type="button" value="改变列表颜色" onclick="change()">
+    </section>
+
+    <section>
+        <h2>DOM 综合示例</h2>
+        <div id="main">
+            <h1>冬季奥林匹克运动会</h1>
+            <h2>简介资料</h2>
+            <p id="p1" class="bg">冬季奥林匹克运动会……</p>
+            <h2>发展历程</h2>
+            <p id="p2" class="bg">19世纪末和20世纪初……<br>19世纪末和20世纪初，一些冰雪运动……</p>
+            <h2>主要项目</h2>
+            <ul id="ul1" class="bg">
+                <li>男子速降(Men's Downhill)</li>
+                <li>花样滑冰</li>
+            </ul>
+        </div>
+        <div>
+            <input id="Button1" type="button" value="蓝色背景">
+            <input id="Button2" type="button" value="绿色背景">
+        </div>
+    </section>
+
+    <script>
+        function getHTML(id) {
+            var node = document.getElementById(id);
+            document.getElementById("result").innerHTML = "您点击：" + node.innerHTML;
+        }
+
+        function confirmTime() {
+            var t = document.getElementsByName("time");
+            for (var i = 0; i < t.length; i++) {
+                if (t[i].checked) {
+                    alert("您选择的是：" + t[i].value);
+                }
+            }
+        }
+
+        function confirmText() {
+            var s = document.getElementById("tagDemo").getElementsByTagName("input");
+            alert("input元素共有：" + s.length + "个；姓名：" + s[0].value + "；班级：" + s[1].value);
+        }
+
+        function myFunction() {
+            var nodes = document.getElementsByClassName("content");
+            var result = document.getElementById("classResult");
+            result.innerHTML = "点击按钮得到：";
+            for (var i = 0; i < nodes.length; i++) {
+                result.innerHTML = result.innerHTML + "<br>" + nodes[i].innerHTML;
+            }
+        }
+
+        function getLi() {
+            var father = document.getElementById("myList");
+            var res = document.getElementById("nodeResult");
+            res.innerHTML = "第二个列表项：" + father.firstElementChild.nextElementSibling.innerHTML;
+        }
+
+        function change() {
+            var list = document.getElementById("bookList").children;
+            for (var i = 0; i < list.length; i++) {
+                list[i].style.color = "red";
+            }
+        }
+
+        function changeGreen(n1, n2, n3) {
+            n1.style.backgroundColor = "#1f5601";
+            n2.style.backgroundColor = "#1f5601";
+            n3.style.backgroundColor = "#1f5601";
+        }
+
+        function changeBlue(n1, n2, n3) {
+            n1.style.backgroundColor = "#027aa6";
+            n2.style.backgroundColor = "#027aa6";
+            n3.style.backgroundColor = "#027aa6";
+        }
+
+        window.onload = function () {
+            var node1, node2, node3;
+            node1 = document.getElementById("p1");
+            node2 = document.getElementById("p2");
+            node3 = document.getElementById("ul1");
+
+            document.getElementById("Button1").onclick = function () {
+                changeBlue(node1, node2, node3);
+            };
+            document.getElementById("Button2").onclick = function () {
+                changeGreen(node1, node2, node3);
+            };
+        };
+    </script>
+</body>
+</html>

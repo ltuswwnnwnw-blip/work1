@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>中国古建筑</title>
+		<style type="text/css">
+			*{
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				font-family: "微软雅黑";
+				text-decoration: none;
+			}
+			#content{
+				background-image: url(imgs/bg.webp);
+				background-color: rgba(0, green, blue, alpha);
+				position: relative;
+			}
+			#content h3{
+				font-size: 30px;
+				text-align: center;
+			}
+			#content h4{
+				text-align: center;
+			}
+			#content p{
+				font-size: 20px;
+				color: black;
+				text-align: center;
+				
+			}
+			/* 补充样式 */
+			#content ul{
+				display: flex;
+				width: 900px;
+				margin-right: auto;
+				margin-left: auto;
+				perspective: 800px;
+			}
+			#content ul img{
+				width: 100%;
+			}
+			#content li{
+				margin-right: 15px;
+				flex: 1;
+				position: relative;
+				transform-style: preserve-3d;
+				transition: all 1s;
+			}
+			#content li a{
+				position: absolute;
+				display: block;
+				overflow: hidden;
+				height: 210px;
+				backface-visibility: hidden;
+			}
+			#content li a:first-child{
+				transform: rotateY(180deg);
+				z-index: 2;
+				
+			}
+			#content li:hover{
+				transform: rotateY(180deg);
+			}
+			#content::before{
+				content: '';
+				width: 100%;
+				height: 100%;
+				background: url(imgs/bg.webp) no-repeat center center;
+				background-size: cover;
+				opacity: 0.3;
+				position: absolute;
+				left: 0;
+				top: 0;
+				z-index: -1;
+			}
+			#content::after{
+				content: '';
+				width: 100%;
+				height: 100%;
+				left: 0;
+				top: 0;
+				z-index: -1;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="content">
+			<p>中国古建筑</p>
+			<h3>中国古建筑有着悠久的历史和丰富的文化内涵，是民族文化的结晶，是人类建筑史上的璀璨明珠。</h3>
+			<ul>
+				<li>
+					<a href="#"><h4>园林建筑</h4><p>园林建筑在我国有着3000多年的悠久历史，它将山、水、花、树木以及精致优雅的木质建筑结合在一起，形成了一种诗意的和谐。</p></a>
+					<a href="#"><img src="imgs/yuanlin.jpg" ></a>
+				</li>
+				<li>
+					<a href="#"><h4>民居建筑类</h4><p>民居建筑是人民满足最基本生活需要建造的居住性建筑，是历史上最早出现的建筑类型。我国民居建筑受到环境、气候、民俗文化等影响，在风格和工艺上有很强的地域性。</p></a>
+					<a href="#"><img src="imgs/minju.jpeg" ></a>
+				</li>
+				<li>
+					<a href="#"><h4>宫殿建筑类</h4><p>宫殿建筑是供皇帝理朝政和满足居住功能的院落式建筑群，它们大都金玉交辉、巍峨壮观，为传统建筑之精华。</p></a>
+					<a href="#"><img src="imgs/gongdian.jpeg" ></a>
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>

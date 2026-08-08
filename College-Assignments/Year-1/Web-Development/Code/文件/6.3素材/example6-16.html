@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>rotate用法</title>
+		<style type="text/css">
+			div{
+				width: 100px;
+				height: 60px;
+				line-height: 60px;
+				border: 10px solid black;
+				text-align: center;
+				margin: 60px;
+				display: inline-block;
+				transition: all 0.5s;
+			}
+			body{
+				perspective: 300px;
+			}
+			div:nth-child(1):hover{
+				transform: rotateX(30deg);
+			}
+			div:nth-child(2):hover{
+				transform: rotateY(60deg);
+			}
+			div:nth-child(3):hover{
+				transform: rotateZ(30deg);
+			}
+			div:nth-child(4):hover{
+				transform: rotate3d(1,1,0,30deg);
+			}
+		</style>
+	</head>
+	<body>
+		<div>围绕X轴旋转</div><div>围绕Y轴旋转</div><div>围绕Z轴旋转</div><div>围绕XY轴旋转</div>
+	</body>
+</html>

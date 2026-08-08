@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>实时时钟</title>
+<style>
+body { font-family:"微软雅黑",sans-serif; background:#1a1a2e; padding:30px; text-align:center; }
+#date { font-size:18px; color:#aaa; font-family:Consolas,monospace; }
+#time { font-size:48px; color:#2ecc71; font-weight:bold; font-family:Consolas,monospace; margin:10px 0; }
+#week { font-size:16px; color:#f39c12; font-family:Consolas,monospace; }
+</style>
+</head>
+<body>
+
+<div id="date"></div>
+<div id="time"></div>
+<div id="week"></div>
+
+<script>
+function tick() {
+    var n = new Date();
+    var w = ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+    var h = n.getHours(), m = n.getMinutes(), s = n.getSeconds();
+    h = h < 10 ? "0"+h : h;
+    m = m < 10 ? "0"+m : m;
+    s = s < 10 ? "0"+s : s;
+    document.getElementById("date").innerHTML = n.getFullYear()+"年"+(n.getMonth()+1)+"月"+n.getDate()+"日";
+    document.getElementById("time").innerHTML = h+":"+m+":"+s;
+    document.getElementById("week").innerHTML = w[n.getDay()];
+    setTimeout(tick, 1000);
+}
+tick();
+</script>
+
+</body>
+</html>

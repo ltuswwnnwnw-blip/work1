@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>CSS优先级 —— 权重计算规则</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+/* ===== 这个文件本身也用来演示权重！注意观察哪些规则生效 ===== */
+
+/* 权重: 1 (元素选择器) */
+body{font-family:"微软雅黑",sans-serif;line-height:1.8;color:#333;background:#f8f9fa;padding:20px;}
+/* 权重: 10 (类选择器) */
+.wrapper{max-width:860px;margin:0 auto;}
+
+/* 权重: 1 */
+h1{text-align:center;color:#2c3e50;margin-bottom:6px;}
+.subtitle{text-align:center;color:#888;margin-bottom:30px;font-size:14px;}
+
+/* 权重: 10+1=11 */
+h2.section-title{color:#e74c3c;border-left:5px solid #e74c3c;padding-left:12px;margin:35px 0 15px;font-size:22px;}
+/* 权重: 1 */
+h3{color:#f39c12;margin:22px 0 10px;font-size:18px;}
+
+p{margin-bottom:12px;}
+
+.demo-section{background:#fff;border:1px solid #ddd;border-radius:8px;padding:20px;margin:20px 0;}
+
+/* ★★★ 关键演示：同一个元素被多个选择器选中 ★★★ */
+/* 权重: 10 */
+.priority-demo{background:#3498db;color:#fff;padding:15px;text-align:center;border-radius:4px;margin:10px 0;}
+/* 权重: 100 */
+#special-demo{background:#e74c3c;} /* 这个会覆盖上面的！因为ID权重(100) > 类权重(10) */
+
+pre{background:#2c3e50;color:#ecf0f1;padding:15px;border-radius:6px;overflow-x:auto;font-size:13px;line-height:1.5;margin:10px 0;}
+code{background:#eee;padding:2px 6px;border-radius:3px;font-size:13px;}
+pre code{background:none;padding:0;color:#ecf0f1;}
+
+.highlight{background:#fff3cd;border-left:4px solid #f39c12;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+.error-box{background:#fdeaea;border-left:4px solid #e74c3c;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+
+table{width:100%;border-collapse:collapse;margin:15px 0;}
+th,td{border:1px solid #ddd;padding:10px 14px;text-align:left;font-size:14px;}
+th{background:#f0f0f0;color:#555;}
+.tag{display:inline-block;padding:2px 8px;border-radius:3px;font-size:12px;font-weight:bold;color:#fff;}
+.tag-id{background:#e74c3c;}
+.tag-class{background:#3498db;}
+.tag-elem{background:#2ecc71;}
+</style>
+</head>
+<body>
+<hr style="margin-top:50px;border:2px dashed #ccc;">
+<h2 style="text-align:center;color:#333;">🧪 纯净演示区（无注释，仅展示效果）</h2>
+
+<style>
+.clean-spec-box { max-width: 600px; margin: 20px auto; background: #fff; padding: 20px; border-radius: 8px; }
+.clean-spec-row { display: flex; gap: 15px; margin-bottom: 15px; }
+.clean-spec-col { flex: 1; padding: 12px; border-radius: 6px; text-align: center; font-size: 14px; }
+</style>
+
+<div class="clean-spec-box">
+<div class="clean-spec-row">
+  <div class="clean-spec-col" style="background:#e8f8f5;border:2px solid #27ae60;">
+    <strong>#id .class</strong><br>权重 100+10=110<br>
+    <span style="font-size:28px;color:#27ae60;">28px ✅</span>
+  </div>
+  <div class="clean-spec-col" style="background:#fef9e7;border:2px solid #f39c12;">
+    <strong>.class</strong><br>权重 10<br>
+    <span style="font-size:24px;color:#f39c12;">24px</span>
+  </div>
+  <div class="clean-spec-col" style="background:#fdedec;border:2px solid #e74c3c;">
+    <strong>p span</strong><br>权重 1+1=2<br>
+    <span style="font-size:20px;color:#e74c3c;">20px</span>
+  </div>
+</div>
+<p style="text-align:center;">同一元素被多个规则选中 → 权重最高者胜出（110 > 10 > 2）</p>
+</div>
+
+</body>
+</html>
+
+<hr style="margin-top:50px;border:2px dashed #3498db;">
+<h2 style="text-align:center;color:#555;">📖 教学讲解区</h2>
+
+<div class="wrapper">
+
+<h1>⚖️ CSS 优先级 —— 权重计算规则</h1>
+<p class="subtitle">当多个CSS规则选中同一个元素时，谁说了算？</p>
+
+<!--
+宏观理解：
+CSS = Cascading Style Sheets（层叠样式表），"层叠"就是优先级规则。
+当多个选择器都指向同一个元素时，浏览器按一套计分系统决定听谁的。
+
+记法：把选择器当成一个三位数——(ID数量, 类数量, 元素数量)
+比较时从左往右比，左边大的直接赢。
+-->
+
+<h2 class="section-title">一、权重计算公式：(ID数, 类数, 元素数)</h2>
+
+<table>
+<tr><th>选择器类型</th><th>权重值</th><th>例子</th><th>计算</th></tr>
+<tr><td>行内样式</td><td>1000</td><td><code>style="color:red"</code></td><td>直接在标签上写的，最高</td></tr>
+<tr><td>ID选择器</td><td>100</td><td><code>#header</code> <span class="tag tag-id">100</span></td><td>每个ID +100</td></tr>
+<tr><td>类/伪类/属性</td><td>10</td><td><code>.box</code> <span class="tag tag-class">10</span> <code>:hover</code> <span class="tag tag-class">10</span></td><td>每个类 +10</td></tr>
+<tr><td>元素/伪元素</td><td>1</td><td><code>div</code> <span class="tag tag-elem">1</span> <code>::before</code> <span class="tag tag-elem">1</span></td><td>每个元素 +1</td></tr>
+<tr><td>通配符 *</td><td>0</td><td><code>*</code></td><td>不参与权重计算</td></tr>
+</table>
+
+<p><strong>注意：这不是真正的三位数！</strong>11个元素选择器(11)不会超过1个类选择器(10)。</p>
+
+<h3>现场演示：看下面这个盒子是什么颜色？</h3>
+
+<div class="demo-section">
+<p>CSS写了：</p>
+<pre><code>.priority-demo { background: #3498db; }  /* 权重: 10 (1个类) */
+#special-demo { background: #e74c3c; }  /* 权重: 100 (1个ID) */</code></pre>
+
+<p>HTML是：<code>&lt;div class="priority-demo" id="special-demo"&gt;</code></p>
+
+<div class="priority-demo" id="special-demo">
+    我是红色（#e74c3c），因为 ID权重(100) > 类权重(10)
+</div>
+<p>✅ 结果是红色。虽然<code>.priority-demo</code>写在后面，但<code>#special-demo</code>权重更高。</p>
+</div>
+
+<h2 class="section-title">二、实战计算题（课程里的例子）</h2>
+
+<pre><code>#content .book   →  权重 = 100 + 10 = 110   (1个ID + 1个类)
+#content span    →  权重 = 100 + 1 = 101    (1个ID + 1个元素)
+.book            →  权重 = 10              (1个类)
+p span           →  权重 = 1 + 1 = 2       (2个元素)</code></pre>
+
+<p>如果有冲突，<code>#content .book</code> (110) 胜出。</p>
+
+<h2 class="section-title">三、!important —— 核武器</h2>
+
+<div class="error-box">
+<p><strong>⚠️ !important 是最强的，但它不参与权重计算——它直接无视所有权重规则。</strong></p>
+<p>多个 !important 之间再比权重。尽量避免使用，因为一旦用了就很难覆盖。</p>
+</div>
+
+<pre><code>em { color: orange !important; }  /* 无视所有其他color规则 */
+p em { color: blue; }             /* 权重101，但被上面的!important覆盖 */</code></pre>
+
+<h2 class="section-title">四、优先级来源顺序</h2>
+<p>当权重相同时：</p>
+<ol>
+<li>行内样式 (style="") —— 权重1000</li>
+<li>内部样式表 (&lt;style&gt;) —— 权重按选择器算</li>
+<li>外部样式表 (&lt;link&gt;) —— 权重按选择器算，后加载的覆盖先加载的</li>
+</ol>
+
+<h2 class="section-title">五、最快判断法</h2>
+<div class="highlight">
+<p>遇到"样式不生效"时，按这个顺序排查：</p>
+<p>1. 是否被更高权重的选择器覆盖了？（浏览器F12看Computed面板）</p>
+<p>2. 选择器是否写错了？（类名拼错、后代关系不对）</p>
+<p>3. 是否有 !important 在干扰？</p>
+<p>4. calc() 等函数值是否语法错误被丢弃？</p>
+</div>
+
+<p style="text-align:center;color:#888;margin-top:50px;">
+👉 下一步：<a href="响应式布局_完整案例.html" style="color:#e74c3c;">响应式布局_完整案例</a>
+</p>
+
+</div>
+
+</body>
+</html>

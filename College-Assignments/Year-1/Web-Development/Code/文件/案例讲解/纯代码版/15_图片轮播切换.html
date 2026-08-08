@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>图片轮播切换</title>
+<style>
+body { font-family:"微软雅黑",sans-serif; background:#f5f5f5; padding:30px; text-align:center; }
+
+#main { width:400px; height:250px; margin:0 auto; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:28px; transition:background 0.4s; }
+
+.thumb-row { display:flex; justify-content:center; gap:8px; margin-top:12px; }
+.thumb { width:70px; height:45px; border-radius:4px; cursor:pointer; opacity:0.4; transition:opacity 0.3s; }
+.thumb.active { opacity:1; box-shadow:0 0 0 3px #333; }
+.thumb:hover { opacity:0.8; }
+</style>
+</head>
+<body>
+
+<h2>图片轮播（自动播放 + 鼠标切换）</h2>
+<div id="main">图1</div>
+<div class="thumb-row">
+    <div class="thumb active" style="background:#3498db;" data-i="0" onmouseover="goto(0)"></div>
+    <div class="thumb" style="background:#e74c3c;" data-i="1" onmouseover="goto(1)"></div>
+    <div class="thumb" style="background:#2ecc71;" data-i="2" onmouseover="goto(2)"></div>
+    <div class="thumb" style="background:#f39c12;" data-i="3" onmouseover="goto(3)"></div>
+</div>
+
+<script>
+var colors = ["#3498db","#e74c3c","#2ecc71","#f39c12"];
+var labels = ["图1","图2","图3","图4"];
+var cur = 0, auto = null;
+var mainEl = document.getElementById("main");
+var thumbs = document.querySelectorAll(".thumb");
+
+function goto(n) {
+    cur = n;
+    mainEl.style.background = colors[n];
+    mainEl.innerText = labels[n];
+    thumbs.forEach(function(t,i) { t.style.opacity = i===n ? "1" : "0.4"; t.classList.toggle("active", i===n); });
+    if (auto) clearInterval(auto);
+    auto = setInterval(next, 3000);
+}
+
+function next() { cur++; if (cur>=4) cur=0; goto(cur); }
+
+goto(0);
+</script>
+
+</body>
+</html>

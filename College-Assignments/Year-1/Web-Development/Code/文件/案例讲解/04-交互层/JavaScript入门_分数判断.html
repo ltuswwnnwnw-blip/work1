@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>JavaScript入门 —— 分数等级判断器</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"微软雅黑",sans-serif;line-height:1.8;color:#333;background:#f8f9fa;padding:20px;}
+.wrapper{max-width:860px;margin:0 auto;}
+h1{text-align:center;color:#2c3e50;margin-bottom:6px;}
+.subtitle{text-align:center;color:#888;margin-bottom:30px;font-size:14px;}
+h2{color:#f39c12;border-left:5px solid #f39c12;padding-left:12px;margin:35px 0 15px;font-size:22px;}
+h3{color:#2ecc71;margin:22px 0 10px;font-size:18px;}
+p{margin-bottom:12px;}
+
+pre{background:#2c3e50;color:#ecf0f1;padding:15px;border-radius:6px;overflow-x:auto;font-size:13px;line-height:1.5;margin:10px 0;}
+code{background:#eee;padding:2px 6px;border-radius:3px;font-size:13px;color:#e74c3c;}
+pre code{background:none;padding:0;color:#ecf0f1;}
+.highlight{background:#fff3cd;border-left:4px solid #f39c12;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+.error-box{background:#fdeaea;border-left:4px solid #e74c3c;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+table{width:100%;border-collapse:collapse;margin:15px 0;}
+th,td{border:1px solid #ddd;padding:10px 14px;text-align:left;font-size:14px;}
+th{background:#f0f0f0;color:#555;}
+.tag{display:inline-block;padding:2px 8px;border-radius:3px;font-size:12px;font-weight:bold;color:#fff;}
+.tag-js{background:#f39c12;}
+
+/* 演示面板 */
+.demo-panel{background:#2c3e50;color:#ecf0f1;padding:25px;border-radius:10px;margin:20px 0;text-align:center;}
+.demo-panel button{background:#f39c12;color:#fff;border:none;padding:12px 30px;
+    font-size:16px;border-radius:6px;cursor:pointer;margin:10px 5px;}
+.demo-panel button:hover{background:#e67e22;}
+#demo-output{background:#1a1a2e;color:#2ecc71;padding:15px;border-radius:6px;margin-top:15px;
+    font-family:"Consolas",monospace;font-size:15px;min-height:50px;line-height:1.6;}
+</style>
+</head>
+<body>
+<hr style="margin-top:50px;border:2px dashed #ccc;">
+<h2 style="text-align:center;color:#333;">🧪 纯净演示区（无注释，仅展示效果）</h2>
+<div style="max-width:500px;margin:20px auto;background:#2c3e50;padding:25px;border-radius:10px;text-align:center;">
+  <button onclick="demoJudge()" style="background:#f39c12;color:#fff;border:none;padding:12px 30px;font-size:16px;border-radius:6px;cursor:pointer;">🎯 判断分数等级</button>
+  <div id="demo-output" style="background:#1a1a2e;color:#2ecc71;padding:15px;border-radius:6px;margin-top:15px;font-family:Consolas,monospace;font-size:15px;min-height:50px;line-height:1.6;"></div>
+</div>
+<script>
+function demoJudge() {
+  var name = prompt("请输入你的名字：");
+  if (name === "" || name === null) { return; }
+  var score = Number(prompt("请输入" + name + "的分数："));
+  var grade;
+  if (score >= 90) { grade = "🏆 优秀"; }
+  else if (score >= 80) { grade = "🥇 良好"; }
+  else if (score >= 70) { grade = "🥈 中等"; }
+  else if (score >= 60) { grade = "🥉 及格"; }
+  else { grade = "📚 不及格"; }
+  document.getElementById("demo-output").innerHTML += "👤 " + name + " ｜ 📊 " + score + "分 ｜ " + grade + "<br>";
+}
+</script>
+
+</body>
+</html>
+<hr style="margin-top:50px;border:2px dashed #3498db;">
+<h2 style="text-align:center;color:#555;">📖 教学讲解区</h2>
+
+<div class="wrapper">
+
+<h1>⚡ JavaScript 入门</h1>
+<p class="subtitle">从 Python 到 JavaScript —— 让网页"有脑子"</p>
+
+<!--
+JS和Python的关系：你之前学的input_students/output_students就是Python。
+现在学的JavaScript是做网页交互的——它运行在浏览器里，不是命令行。
+
+核心区别：
+- Python: print()、input()、运行在终端
+- JavaScript: document.write()、prompt()、运行在浏览器
+- 两者语法很像：都有变量、if/else、函数、循环
+-->
+
+<h2>一、Python vs JavaScript 对照表</h2>
+
+<table>
+<tr><th>概念</th><th>Python</th><th>JavaScript</th></tr>
+<tr><td>变量声明</td><td><code>name = "张三"</code></td><td><code><span class="tag tag-js">var</span> name = "张三";</code></td></tr>
+<tr><td>输入</td><td><code>input("提示")</code></td><td><code>prompt("提示")</code></td></tr>
+<tr><td>输出</td><td><code>print(内容)</code></td><td><code>document.write(内容)</code></td></tr>
+<tr><td>数字转字符串</td><td><code>str(85)</code></td><td><code>String(85)</code></td></tr>
+<tr><td>字符串转数字</td><td><code>int("85")</code></td><td><code>Number("85")</code> 或 <code>parseInt("85")</code></td></tr>
+<tr><td>if条件</td><td><code>if score >= 90:</code></td><td><code>if (score >= 90) { }</code></td></tr>
+<tr><td>列表/数组</td><td><code>students = []</code></td><td><code>var students = [];</code></td></tr>
+<tr><td>往列表加元素</td><td><code>students.append(stu)</code></td><td><code>students.push(stu);</code></td></tr>
+<tr><td>定义函数</td><td><code>def 函数名():</code></td><td><code>function 函数名() { }</code></td></tr>
+<tr><td>循环</td><td><code>for stu in students:</code></td><td><code>for (var i=0;i&lt;len;i++) { }</code></td></tr>
+</table>
+
+<h2>二、类型转换 —— 你之前踩过的坑</h2>
+
+<div class="error-box">
+<h3>❌ prompt() 返回的永远是字符串</h3>
+<pre><code>var score = prompt("请输入分数");  // 用户输入85
+// score 现在是 "85"（字符串），不是 85（数字）！
+
+score + 5;    // → "855"（字符串拼接！不是数学加法！）
+Number(score) + 5;  // → 90（先转数字再加）</code></pre>
+<p>这和你Python里的 <code>input()</code> 一样——输入永远是字符串。要做数学运算必须先转成数字。</p>
+</div>
+
+<h2>三、现场演示：分数等级判断器</h2>
+
+<div class="demo-panel">
+    <p style="margin-bottom:15px;">点击按钮，输入分数，程序会判断等级并显示在下方</p>
+    <button onclick="startJudge()">🎯 开始判断分数</button>
+    <button onclick="document.getElementById('demo-output').innerHTML=''">🗑️ 清空</button>
+    <!-- onclick → 点击事件，触发后面的JavaScript代码 -->
+    <div id="demo-output"></div>
+</div>
+
+<script>
+    // ===== JavaScript 代码开始 =====
+
+    // function：定义一个函数（相当于Python的def）
+    // 这个函数是"生产者"——自己用prompt()问用户要数据，不需要参数
+    function startJudge() {
+        // 问用户要名字和分数
+        var name = prompt("请输入你的名字：");
+        // var → 声明变量（JS里必须先声明才能用）
+        // prompt("提示") → 弹出一个输入框，和Python的input()一样的功能
+        // 用户的输入以字符串形式返回，存到name变量里
+
+        // 如果用户按了"取消"或没输入，直接结束
+        if (name === "" || name === null) {
+            // === → 严格等于（值和类型都相等）
+            // "" → 空字符串（用户直接点了确定）
+            // null → 用户点了取消按钮
+            document.getElementById("demo-output").innerHTML += "❌ 你取消了输入<br>";
+            // document.getElementById("id") → 通过HTML元素的id找到它
+            // .innerHTML → 获取或设置这个元素内部的HTML内容
+            // += → 追加（不是覆盖），每次判断结果都加到后面
+            return;
+            // return → 结束函数，不往下执行（和Python一样）
+        }
+
+        var scoreStr = prompt("请输入" + name + "的分数：");
+        // "请输入" + name + "的分数：" → 字符串拼接
+        // 如果name是"张三"，就显示"请输入张三的分数："
+
+        // ★★★ 类型转换：prompt返回的是字符串，必须先转数字 ★★★
+        var score = Number(scoreStr);
+        // Number() → 把字符串转成数字
+        // 如果scoreStr是"85"，score就是数字85
+        // 如果不转：score + 10 = "8510"（字符串拼接，不是数学！）
+
+        // 判断分数等级（if...else if...else结构）
+        var grade;  // 先声明变量，稍后赋值
+        if (score >= 90) {
+            grade = "优秀";          // 90分及以上
+        } else if (score >= 80) {
+            grade = "良好";          // 80-89
+        } else if (score >= 70) {
+            grade = "中等";          // 70-79
+        } else if (score >= 60) {
+            grade = "及格";          // 60-69
+        } else {
+            grade = "不及格";         // 60以下
+        }
+        // if (条件) { 代码块 } else if (条件) { 代码块 } else { 代码块 }
+        // 和Python的区别：
+        //   Python: 靠缩进 + 冒号
+        //   JS: 靠花括号{} + 圆括号()
+
+        // 把结果写到网页上
+        document.getElementById("demo-output").innerHTML +=
+            "👤 " + name + " | 📊 " + score + "分 | 🏆 " + grade + "<br>";
+        // innerHTML += → 追加写，每次结果都保留在页面上
+    }
+    // ===== JavaScript 代码结束 =====
+</script>
+
+<h2>四、逐行因果关系分析</h2>
+
+<pre><code>prompt() → 返回字符串 "85"
+→ 不转类型直接用 → "85" + 5 = "855"（字符串拼接，不是数学）
+→ 用Number()转 → 85 + 5 = 90（数学加法）
+→ 用if判断 → 90≥90 → 输出"优秀"
+
+if (条件) {
+    条件成立时执行;
+} else {
+    条件不成立时执行;
+}
+→ 只会有一种情况被执行，不会同时执行两个分支
+→ return 之后函数结束，后面代码不执行</code></pre>
+
+<h2>五、JS 和 Python 的函数调用对比</h2>
+
+<pre><code>/* Python 调用函数 */
+students_input = input_students()      # 无参调用，返回列表
+output_students(students_input)        # 有参调用，传入列表
+
+/* JavaScript 调用函数 */
+startJudge();                          // 无参调用，不返回值（void）
+// 通过onclick事件触发，用户点按钮才执行
+// 结果直接写到页面上，不返回值给调用者</code></pre>
+
+<h2>六、onclick 事件 —— JS 和 HTML 的"接头方式"</h2>
+
+<pre><code>&lt;button onclick="startJudge()"&gt;开始判断&lt;/button&gt;
+&lt;!--
+onclick → HTML属性，当用户点击这个按钮时触发
+"startJudge()" → 调用我们上面定义的JavaScript函数
+这就把HTML（按钮）和JavaScript（逻辑）连接在一起了
+--&gt;</code></pre>
+
+<div class="highlight">
+<p><strong>💡 核心类比</strong>：<br>
+HTML = 遥控器（按钮、输入框、文字）<br>
+JavaScript = 遥控器里的电路（逻辑、判断、计算）<br>
+onclick = 按下按钮 → 电路开始工作 → 结果出现在屏幕上</p>
+</div>
+
+<p style="text-align:center;color:#888;margin-top:60px;font-size:13px;">
+🏁 案例讲解系列到此结束 | 回到总览：<a href="../00-CSS七层体系/七层体系总览.html" style="color:#f39c12;">CSS七层体系总览</a>
+</p>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>关键帧动画</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:"微软雅黑",sans-serif; background:#f5f5f5; padding:30px; }
+h2 { text-align:center; margin:20px 0; color:#333; }
+
+.row { display:flex; gap:40px; justify-content:center; align-items:flex-end; }
+
+.bounce { width:50px; height:50px; background:radial-gradient(circle at 35% 35%,#ff6b6b,#c0392b); border-radius:50%; animation:bounce 1s ease infinite alternate; }
+@keyframes bounce { from { transform:translateY(0); } to { transform:translateY(-100px); } }
+
+.spinner { width:50px; height:50px; border:5px solid #ecf0f1; border-top-color:#3498db; border-radius:50%; animation:spin 0.8s linear infinite; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+.pulse { width:80px; height:80px; background:#e74c3c; border-radius:50%; animation:pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { transform:scale(1); opacity:1; } 50% { transform:scale(1.2); opacity:0.7; } }
+</style>
+</head>
+<body>
+<h2>自动播放动画</h2>
+<div class="row">
+    <div style="text-align:center;"><div class="bounce"></div><p style="margin-top:8px;font-size:12px;">弹跳</p></div>
+    <div style="text-align:center;"><div class="spinner"></div><p style="margin-top:8px;font-size:12px;">旋转</p></div>
+    <div style="text-align:center;"><div class="pulse"></div><p style="margin-top:8px;font-size:12px;">呼吸</p></div>
+</div>
+</body>
+</html>

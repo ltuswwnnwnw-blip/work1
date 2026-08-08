@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>浮动布局 —— float与清除浮动</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"微软雅黑",sans-serif;line-height:1.8;color:#333;background:#f8f9fa;padding:20px;}
+.wrapper{max-width:860px;margin:0 auto;}
+h1{text-align:center;color:#2c3e50;margin-bottom:6px;}
+.subtitle{text-align:center;color:#888;margin-bottom:30px;font-size:14px;}
+h2{color:#16a085;border-left:5px solid #16a085;padding-left:12px;margin:35px 0 15px;font-size:22px;}
+h3{color:#e67e22;margin:22px 0 10px;font-size:18px;}
+p{margin-bottom:12px;}
+
+.demo-section{background:#fff;border:1px solid #ddd;border-radius:8px;padding:20px;margin:20px 0;}
+.compare-row{display:flex;gap:20px;margin:15px 0;flex-wrap:wrap;}
+.compare-col{flex:1;min-width:280px;padding:15px;border:2px solid #ddd;border-radius:6px;}
+.compare-col.bad{border-color:#e74c3c;background:#fdeaea;}
+.compare-col.good{border-color:#27ae60;background:#eafaf1;}
+
+/* float 演示 */
+.float-container{border:2px dashed #3498db;border-radius:6px;padding:10px;margin:10px 0;}
+.float-container.collapsed{min-height:auto;}
+.float-box{background:#3498db;color:#fff;padding:20px;text-align:center;border-radius:4px;width:150px;margin:5px;}
+.float-left{float:left;}
+.float-right{float:right;}
+
+/* clearfix */
+.clearfix::after{content:"";display:block;clear:both;}
+/* ::after：在容器末尾插入一个看不见的元素
+ * content:""：必须有，否则伪元素不生成
+ * display:block：这个伪元素必须是块级
+ * clear:both：清除左右两边的浮动 → 容器撑开 */
+
+pre{background:#2c3e50;color:#ecf0f1;padding:15px;border-radius:6px;overflow-x:auto;font-size:13px;line-height:1.5;margin:10px 0;}
+code{background:#eee;padding:2px 6px;border-radius:3px;font-size:13px;color:#e74c3c;}
+pre code{background:none;padding:0;color:#ecf0f1;}
+
+.highlight{background:#fff3cd;border-left:4px solid #f39c12;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+.error-box{background:#fdeaea;border-left:4px solid #e74c3c;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+</style>
+</head>
+<body>
+<hr style="margin-top:50px;border:2px dashed #ccc;">
+<h2 style="text-align:center;color:#333;">🧪 纯净演示区（无注释，仅展示效果）</h2>
+
+<style>
+.clean-float-box { max-width: 600px; margin: 20px auto; background: #fff; padding: 20px; border-radius: 8px; }
+.clean-float-img { float: left; width: 120px; height: 80px; background: #3498db; color: #fff; text-align: center; line-height: 80px; margin-right: 15px; margin-bottom: 10px; border-radius: 4px; }
+.clean-float-clear { clear: both; }
+.clean-float-parent-fix { overflow: hidden; border: 2px solid #27ae60; padding: 10px; border-radius: 6px; }
+</style>
+
+<div class="clean-float-box">
+<h4>float 文字环绕</h4>
+<div>图片浮动在左边，文字自动环绕。</div>
+<h4>父元素塌陷修复：overflow: hidden</h4>
+<div class="clean-float-parent-fix">
+  <div class="clean-float-img">float 图片</div>
+  <p>这段文字会环绕图片。父元素加了 overflow:hidden，所以背景色包含了浮动图片。</p>
+  <div class="clean-float-clear"></div>
+</div>
+</div>
+
+</body>
+</html>
+
+<hr style="margin-top:50px;border:2px dashed #3498db;">
+<h2 style="text-align:center;color:#555;">📖 教学讲解区</h2>
+
+<div class="wrapper">
+
+<h1>🌊 浮动布局 —— float与父元素塌陷</h1>
+<p class="subtitle">float（浮动）是CSS最早的横排方案，现在基本被flex取代，但"父元素塌陷"的问题值得理解</p>
+
+<!--
+宏观理解：
+float 最初的设计目的不是"做布局"，而是"让文字环绕图片"（就像报纸排版）。
+后来人们把它滥用来做多列布局，直到flex出现。
+
+现在float的唯一正经用途：文字环绕图片。
+其他所有布局场景都用flex/grid。
+
+但你课程里学了float，所以这里讲清楚它的核心问题：父元素塌陷。
+-->
+
+<h2>一、float 的两个作用</h2>
+
+<table>
+<tr><th>作用</th><th>怎么用</th><th>现在还用吗</th></tr>
+<tr><td>文字环绕图片</td><td>img { float: left; } → 图片在左边，文字在右边环绕</td><td>✅ 唯一正经用途</td></tr>
+<tr><td>多列布局</td><td>三个div都 float: left → 横着一排</td><td>❌ 已被flex取代</td></tr>
+</table>
+
+<h2>二、float 的核心问题：父元素塌陷</h2>
+
+<p>float 元素<strong>脱离正常文档流</strong>（类似absolute），父元素感知不到它的高度，导致父元素高度塌成0。</p>
+
+<div class="compare-row">
+<div class="compare-col bad">
+<h4>❌ 没清除浮动——父元素塌陷</h4>
+<div class="float-container collapsed">
+    <div class="float-box float-left">浮动盒子1</div>
+    <div class="float-box float-left">浮动盒子2</div>
+    <!-- 父容器感知不到这两个浮动子元素 → 高度塌成0 -->
+</div>
+<p style="font-size:12px;color:#e74c3c;">👆 蓝色虚线框高度为0！背景色不显示，边框贴在一起</p>
+</div>
+
+<div class="compare-col good">
+<h4>✅ 清除了浮动——父元素正常</h4>
+<div class="float-container clearfix">
+    <div class="float-box float-left">浮动盒子1</div>
+    <div class="float-box float-left">浮动盒子2</div>
+    <!-- clearfix::after 在末尾插入清除元素 → 父容器感知到高度 -->
+</div>
+<p style="font-size:12px;color:#27ae60;">👆 蓝色虚线框正常包裹浮动盒子，高度正确</p>
+</div>
+</div>
+
+<h2>三、清除浮动的三种方法</h2>
+
+<h3>方法1：clearfix（最推荐）</h3>
+<pre><code>/* 给浮动元素的父容器加这个类 */
+.clearfix::after {
+    content: "";          /* 伪元素必须有content，空字符串也行 */
+    display: block;       /* 必须是块级元素才能撑开 */
+    clear: both;          /* 清除左右两边的浮动 → 父容器感知到高度 */
+}
+
+/* 使用 */
+&lt;div class="float-parent clearfix"&gt;
+    &lt;div style="float:left"&gt;...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+<h3>方法2：overflow: hidden（触发BFC）</h3>
+<pre><code>.float-parent { overflow: hidden; }
+/* 原理：overflow:hidden 触发BFC（块级格式化上下文），BFC会包含浮动子元素
+ * 优点：一行搞定
+ * 缺点：溢出内容会被裁剪（如果有弹出层会出问题） */</code></pre>
+
+<h3>方法3：在末尾加空元素（不推荐）</h3>
+<pre><code>&lt;div style="clear:both;"&gt;&lt;/div&gt;  &lt;!-- 多一个无意义的空div，不优雅 --></code></pre>
+
+<h2>四、因果关系链</h2>
+<pre><code>子元素 float → 脱离文档流 → 父元素感知不到高度 → 父元素塌陷
+→ 背景色不显示 → 边框贴在一起 → 下面的内容顶上来
+
+修复：父元素设 clearfix → ::after 插入"清除元素" → 父容器恢复高度</code></pre>
+
+<div class="highlight">
+<p><strong>💡 记法</strong>：float 让元素"飘"起来了，父元素不知道它多高（就像你跳起来的时候，体重秤读数为0）。clearfix 相当于在最后放一个"不飘的标记"，告诉父元素"这里才是底"。</p>
+</div>
+
+<p style="text-align:center;color:#888;margin-top:50px;">
+👉 下一步：<a href="../03-视觉与动效层/第5层_视觉样式.html" style="color:#16a085;">第5层_视觉样式</a>
+</p>
+
+</div>
+
+</body>
+</html>

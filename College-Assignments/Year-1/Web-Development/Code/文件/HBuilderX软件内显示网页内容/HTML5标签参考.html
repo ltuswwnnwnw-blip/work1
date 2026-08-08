@@ -1,0 +1,2340 @@
+﻿<!DOCTYPE html>
+<html lang='zh-CN'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>HTML5 标签参考手册</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font:'Microsoft YaHei',sans-serif;background:#f5f5f5;color:#333}
+.header{background:linear-gradient(135deg,#e44d26,#c13d1a);color:#fff;padding:18px 30px;position:fixed;top:0;left:0;right:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+.header h1{font-size:20px;margin-bottom:4px}
+.header p{font-size:13px;opacity:.8}
+.wrapper{display:flex;margin-top:75px;min-height:calc(100vh-75px)}
+.side{width:210px;background:#2c3e50;position:fixed;top:75px;left:0;bottom:0;overflow-y:auto;padding:8px 0;z-index:50;scrollbar-width:thin}
+.side a{display:block;padding:6px 16px;color:#bdc3c7;text-decoration:none;font-size:13px;transition:.2s}
+.side a:hover{background:#34495e;color:#fff;padding-left:22px}
+.main{margin-left:210px;flex:1;padding:25px 35px;max-width:980px}
+.card{background:#fff;border-radius:8px;padding:25px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.card h2{font-size:20px;color:#e44d26;border-bottom:2px solid #e44d26;padding-bottom:8px;margin-bottom:12px}
+.card h3{font-size:16px;color:#555;margin:12px 0 6px}
+.card p{line-height:1.7;margin:6px 0;color:#444}
+.card pre.code{background:#f8f8f8;border:1px solid #ddd;border-radius:4px;padding:10px;font-family:Consolas,monospace;font-size:13px;overflow-x:auto;margin:8px 0}
+.card code{background:#f0f0f0;padding:2px 5px;border-radius:3px;font-size:13px}
+.card blockquote{border-left:4px solid #e44d26;background:#fef9f7;padding:8px 14px;margin:8px 0;border-radius:0 4px;color:#666}
+.card ul{margin:4px 0 4px 18px}
+.card li{margin:3px 0;line-height:1.6}
+.card hr{border:none;border-top:1px solid #eee;margin:15px 0}
+.card table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13px}
+.card th,.card td{border:1px solid #ddd;padding:6px 10px;text-align:left}
+.card th{background:#f5f5f5;font-weight:bold}
+.card tr:nth-child(even){background:#fafafa}
+.card strong{color:#e44d26}
+</style>
+</head>
+<body>
+<div class='header'><h1>HTML5 标签参考手册</h1><p>共 103 个标签 · 自然语言版</p></div>
+<div class='wrapper'><div class='side'><a href='#t-a'>&lt;a&gt;</a>
+<a href='#t-abbr'>&lt;abbr&gt;</a>
+<a href='#t-acronym'>&lt;acronym&gt;</a>
+<a href='#t-address'>&lt;address&gt;</a>
+<a href='#t-applet'>&lt;applet&gt;</a>
+<a href='#t-area'>&lt;area&gt;</a>
+<a href='#t-article'>&lt;article&gt;</a>
+<a href='#t-aside'>&lt;aside&gt;</a>
+<a href='#t-audio'>&lt;audio&gt;</a>
+<a href='#t-b'>&lt;b&gt;</a>
+<a href='#t-base'>&lt;base&gt;</a>
+<a href='#t-basefont'>&lt;basefont&gt;</a>
+<a href='#t-bdo'>&lt;bdo&gt;</a>
+<a href='#t-big'>&lt;big&gt;</a>
+<a href='#t-blockquote'>&lt;blockquote&gt;</a>
+<a href='#t-body'>&lt;body&gt;</a>
+<a href='#t-br'>&lt;br&gt;</a>
+<a href='#t-button'>&lt;button&gt;</a>
+<a href='#t-canvas'>&lt;canvas&gt;</a>
+<a href='#t-caption'>&lt;caption&gt;</a>
+<a href='#t-center'>&lt;center&gt;</a>
+<a href='#t-col'>&lt;col&gt;</a>
+<a href='#t-colgroup'>&lt;colgroup&gt;</a>
+<a href='#t-command'>&lt;command&gt;</a>
+<a href='#t-comment'>&lt;comment&gt;</a>
+<a href='#t-datagrid'>&lt;datagrid&gt;</a>
+<a href='#t-datalist'>&lt;datalist&gt;</a>
+<a href='#t-datatemplate'>&lt;datatemplate&gt;</a>
+<a href='#t-dd'>&lt;dd&gt;</a>
+<a href='#t-del'>&lt;del&gt;</a>
+<a href='#t-details'>&lt;details&gt;</a>
+<a href='#t-dialog'>&lt;dialog&gt;</a>
+<a href='#t-dir'>&lt;dir&gt;</a>
+<a href='#t-div'>&lt;div&gt;</a>
+<a href='#t-dl'>&lt;dl&gt;</a>
+<a href='#t-doctype'>&lt;doctype&gt;</a>
+<a href='#t-dt'>&lt;dt&gt;</a>
+<a href='#t-embed'>&lt;embed&gt;</a>
+<a href='#t-eventsource'>&lt;eventsource&gt;</a>
+<a href='#t-fieldset'>&lt;fieldset&gt;</a>
+<a href='#t-figure'>&lt;figure&gt;</a>
+<a href='#t-font'>&lt;font&gt;</a>
+<a href='#t-footer'>&lt;footer&gt;</a>
+<a href='#t-form'>&lt;form&gt;</a>
+<a href='#t-frame'>&lt;frame&gt;</a>
+<a href='#t-frameset'>&lt;frameset&gt;</a>
+<a href='#t-head'>&lt;head&gt;</a>
+<a href='#t-header'>&lt;header&gt;</a>
+<a href='#t-hn'>&lt;hn&gt;</a>
+<a href='#t-hr'>&lt;hr&gt;</a>
+<a href='#t-html'>&lt;html&gt;</a>
+<a href='#t-i'>&lt;i&gt;</a>
+<a href='#t-iframe'>&lt;iframe&gt;</a>
+<a href='#t-img'>&lt;img&gt;</a>
+<a href='#t-input'>&lt;input&gt;</a>
+<a href='#t-ins'>&lt;ins&gt;</a>
+<a href='#t-label'>&lt;label&gt;</a>
+<a href='#t-legend'>&lt;legend&gt;</a>
+<a href='#t-li'>&lt;li&gt;</a>
+<a href='#t-link'>&lt;link&gt;</a>
+<a href='#t-m'>&lt;m&gt;</a>
+<a href='#t-map'>&lt;map&gt;</a>
+<a href='#t-menu'>&lt;menu&gt;</a>
+<a href='#t-meta'>&lt;meta&gt;</a>
+<a href='#t-meter'>&lt;meter&gt;</a>
+<a href='#t-nav'>&lt;nav&gt;</a>
+<a href='#t-nest'>&lt;nest&gt;</a>
+<a href='#t-noframes'>&lt;noframes&gt;</a>
+<a href='#t-noscript'>&lt;noscript&gt;</a>
+<a href='#t-object'>&lt;object&gt;</a>
+<a href='#t-ol'>&lt;ol&gt;</a>
+<a href='#t-optgroup'>&lt;optgroup&gt;</a>
+<a href='#t-option'>&lt;option&gt;</a>
+<a href='#t-output'>&lt;output&gt;</a>
+<a href='#t-p'>&lt;p&gt;</a>
+<a href='#t-param'>&lt;param&gt;</a>
+<a href='#t-pre'>&lt;pre&gt;</a>
+<a href='#t-progress'>&lt;progress&gt;</a>
+<a href='#t-q'>&lt;q&gt;</a>
+<a href='#t-rule'>&lt;rule&gt;</a>
+<a href='#t-s'>&lt;s&gt;</a>
+<a href='#t-script'>&lt;script&gt;</a>
+<a href='#t-section'>&lt;section&gt;</a>
+<a href='#t-select'>&lt;select&gt;</a>
+<a href='#t-small'>&lt;small&gt;</a>
+<a href='#t-source'>&lt;source&gt;</a>
+<a href='#t-span'>&lt;span&gt;</a>
+<a href='#t-strike'>&lt;strike&gt;</a>
+<a href='#t-style'>&lt;style&gt;</a>
+<a href='#t-table'>&lt;table&gt;</a>
+<a href='#t-tbody'>&lt;tbody&gt;</a>
+<a href='#t-td'>&lt;td&gt;</a>
+<a href='#t-textarea'>&lt;textarea&gt;</a>
+<a href='#t-tfoot'>&lt;tfoot&gt;</a>
+<a href='#t-th'>&lt;th&gt;</a>
+<a href='#t-thead'>&lt;thead&gt;</a>
+<a href='#t-time'>&lt;time&gt;</a>
+<a href='#t-title'>&lt;title&gt;</a>
+<a href='#t-tr'>&lt;tr&gt;</a>
+<a href='#t-tt'>&lt;tt&gt;</a>
+<a href='#t-u'>&lt;u&gt;</a>
+<a href='#t-ul'>&lt;ul&gt;</a>
+<a href='#t-video'>&lt;video&gt;</a>
+</div><div class='main'><div class='card' id='t-a'>
+<h2>&lt;a&gt; 标签</h2>
+<p>在 HTML 4.01 中，&lt;a&gt; 标签既可以是超链接，也可以是锚。这取决于是否描述了 href 属性。 在 HTML 5 中，&lt;a&gt; 是超链接，但是假如没有 href 属性，它仅仅是超链接的一个占位符。 HTML 5 有一些新的属性，同时不再支持一些 HTML 4.01 的属性。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>charset</td></tr>
+<tr><td>不赞成。规定目标 URL 的字符编码。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>coords</td></tr>
+<tr><th>不赞成。规定适于 shape 属性的坐标，为图像映射定义图像的区域。</th></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>href</td></tr>
+<tr><td>链接的目标 URL。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>hreflang</td></tr>
+<tr><th>规定目标 URL 的基准语言。仅在 href 属性存在时使用。</th></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>media</td></tr>
+<tr><th>规定目标 URL 的媒介类型。默认值：all。仅在 href 属性存在时使用。</th></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>name</td></tr>
+<tr><td>不赞成。命名一个锚。不支持。使用 id 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>ping</td></tr>
+<tr></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>rel</td></tr>
+<tr><th>规定当前文档与目标 URL 之间的关系。仅在 href 属性存在时使用。</th></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>rev</td></tr>
+<tr><td>不赞成。规定目标 URL 与当前文档之间的关系。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>shape</td></tr>
+<tr><th>不赞成。为当前 area 标签中的映射定义的地区类型。与 coords 属性一起使用。</th></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>target</td></tr>
+<tr><th>在何处打开目标 URL。仅在 href 属性存在时使用。</th></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>type</td></tr>
+<tr><th>规定目标 URL 的 MIME 类型。仅在 href 属性存在时使用。</th></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-abbr'>
+<h2>&lt;abbr&gt; 标签</h2>
+<p>NONE</p>
+<p>&gt; <strong>注意：</strong> 在某些浏览器中，当您把鼠标移至缩略词语上时，<em>title</em></p>
+<p>&gt; 可被用来展示表达的完整版本。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-acronym'>
+<h2>&lt;acronym&gt; 标签</h2>
+<p>HTML 5 不支持 &lt;acronym&gt;。请使用 &lt;abbr&gt; 代替。</p>
+<p>&gt; <strong>注意：</strong> 在某些浏览器中，当您把鼠标移至缩略词语上时，<em>title</em></p>
+<p>&gt; 可被用来展示表达的完整版本。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-address'>
+<h2>&lt;address&gt; 标签</h2>
+<p>NONE</p>
+<p>&gt; <strong>注意：</strong> address 通常被呈现为斜体。大多数浏览器会在 address</p>
+<p>&gt; 元素的前后添加一个换行符，不过如果有必要的话，您需要在地址文本的内容添加额外的换行符。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-applet'>
+<h2>&lt;applet&gt; 标签</h2>
+<p>HTML 4.01 中不赞成使用 applet 元素。 HTML 5 中不支持 applet 元素。</p>
+<p>&gt; <strong>提示：</strong> HTML 5 中不支持 applet 元素。请使用 &lt;object&gt;</p>
+<p>&gt; 代替。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-area'>
+<h2>&lt;area&gt; 标签</h2>
+<p>HTML 5 有一些新的属性，且不再支持 HTML 4.01 的一些属性。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>alt</td></tr>
+<tr></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>coords</td></tr>
+<tr><td>定义可点击区域的坐标。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>href</td></tr>
+<tr><td>定义此区域的目标 URL。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>hreflang</td></tr>
+<tr><th>规定目标 URL 的基准语言。仅在 href 属性存在时使用。</th></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>nohref</td></tr>
+<tr><td>不赞成。从图像映射排除一个区域。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>media</td></tr>
+<tr><th>规定目标 URL 的媒介类型。默认值：all。仅在 href 属性存在时使用。</th></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>ping</td></tr>
+<tr></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>rel</td></tr>
+<tr><th>规定当前文档与目标 URL 之间的关系。仅在 href 属性存在时使用。</th></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>shape</td></tr>
+<tr><td>规定区域的形状。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>target</td></tr>
+<tr><td>在何处打开目标 URL。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>type</td></tr>
+<tr><th>规定目标 URL 的 MIME 类型。仅在 href 属性存在时使用。</th></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-article'>
+<h2>&lt;article&gt; 标签</h2>
+<p>&lt;article&gt; 标签是 HTML 5 的新标签。</p>
+<p>&gt; <strong>注意：</strong> &lt;article&gt; 标签的内容独立于文档的其余部分。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-aside'>
+<h2>&lt;aside&gt; 标签</h2>
+<p>&lt;aside&gt; 标签是 HTML 5 的新标签。</p>
+<p>&gt; <strong>注意：</strong> &lt;aside&gt; 的内容可用作文档的侧栏。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-audio'>
+<h2>&lt;audio&gt; 标签</h2>
+<p>&lt;audio&gt; 标签是 HTML 5 的新标签。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</TR></td></tr>
+<tr><td>autoplay</td></tr>
+<tr><td>true</td><td>false</td></tr>
+<tr><td>如果是 true，则音频在就绪后马上播放。</TR></td></tr>
+<tr><td>controls</td></tr>
+<tr><td>true</td><td>false</td></tr>
+<tr><td>如果是 true，则向用户显示控件，比如播放按钮。</TR></td></tr>
+<tr><td>end</td></tr>
+<tr><td><I>numeric value</I></td></tr>
+<tr><td>定义播放器在音频流中的何处停止播放。默认地，声音会播放到结尾。</TR></td></tr>
+<tr><td>loopend</td></tr>
+<tr><td><I>numeric value</I></td></tr>
+<tr><th>定义在音频流中循环播放停止的位置，默认是 end 属性的值。</TR></th></tr>
+<tr><td>loopstart</td></tr>
+<tr><td><I>numeric value</I></td></tr>
+<tr><th>定义在音频流中循环播放的开始位置。默认是 start 属性的值。</TR></th></tr>
+<tr><td>playcount</td></tr>
+<tr><td><I>numeric value</I></td></tr>
+<tr><td>定义音频片断播放多少次。默认是 1。</TR></td></tr>
+<tr><td>src</td></tr>
+<tr><td><I>url</I></td></tr>
+<tr><td>所播放音频的 url。</TR></td></tr>
+<tr><td>start</td></tr>
+<tr><td><I>numeric value</I></td></tr>
+<tr><td>定义播放器在音频流中开始播放的位置。默认地，声音在开头进行播放。</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-b'>
+<h2>&lt;b&gt; 标签</h2>
+<p>没有区别。 但是在 HTML 4.01 中，我们的理解是使用 CSS 来制作粗体的文本。在 HTML 5 中，我们仍然可以这么理解，不过我们应该使用 &lt;b&gt; 标签定义文本中更重要的部分。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-base'>
+<h2>&lt;base&gt; 标签</h2>
+<p>None</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>描述</td></tr>
+<tr><td>5</td></tr>
+<tr><td>4</TR></td></tr>
+<tr><td>href</td></tr>
+<tr><td>规定作为基准 URL 在页面中使用的 URL。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>target</td></tr>
+<tr><th>在何处打开页面上的链接。该属性会被每个链接中的 target 属性覆盖。</th></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-basefont'>
+<h2>&lt;basefont&gt; 标签</h2>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-bdo'>
+<h2>&lt;bdo&gt; 标签</h2>
+<p>NONE</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>dir</td></tr>
+<tr></tr>
+<tr><td>必需。定义文本方向。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-big'>
+<h2>&lt;big&gt; 标签</h2>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-blockquote'>
+<h2>&lt;blockquote&gt; 标签</h2>
+<p>无。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>cite</td></tr>
+<tr><td>URL</td></tr>
+<tr><td>引用的 URL，如果引用来自网络的话。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-body'>
+<h2>&lt;body&gt; 标签</h2>
+<p>在 HTML 5 中，删除了所有 &lt;body&gt; 的特殊属性。而那些属性在 HTML 4.01 中是不被赞成使用的。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-br'>
+<h2>&lt;br&gt; 标签</h2>
+<p>无。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-button'>
+<h2>&lt;button&gt; 标签</h2>
+<p>在 HTML 5 中有一个新属性：autofocus。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>autofocus</td></tr>
+<tr><td>true</td><td>false</td></tr>
+<tr><td>在页面加载时，是否让按钮获得焦点。</td></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>disabled</td></tr>
+<tr><td>disabled</td></tr>
+<tr><td>禁用按钮</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>name</td></tr>
+<tr><td><I>button_name</I></td></tr>
+<tr><td>为按钮规定为一的名称。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>type</td></tr>
+<tr></tr>
+<tr><td>定义按钮的类型。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>value</td></tr>
+<tr><td><I>some_value</I></td></tr>
+<tr><td>为按钮规定初始值。该值可通过脚本改变。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-canvas'>
+<h2>&lt;canvas&gt; 标签</h2>
+<p>&lt;canvas&gt; 标签是 HTML 5 中的新标签。 &lt;canvas&gt; 标记和 SVG 以及 VML 之间的一个重要的不同是，&lt;canvas&gt; 有一个基于 JavaScript 的绘图 API，而 SVG 和 VML 使用一个 XML 文档来描述绘图。 这两种方式在功能上是等同的，任何一种都可以用另一种来模拟。从表面上看，它们很不相同，可是，每一种都有强项和弱点。例如，SVG 绘图很容易编辑，只要从其描述中移除元素就行。 要从同一图形的一个 &lt;canvas&gt; 标记中移除元素，往往需要擦掉绘图重新绘制它。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</TR></td></tr>
+<tr><td>height</td></tr>
+<tr><td><I>pixels</I></td></tr>
+<tr><td>设置 canvas 的高度。</TR></td></tr>
+<tr><td>width</td></tr>
+<tr><td><I>pixels</I></td></tr>
+<tr><td>设置 canvas 的宽度。</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-caption'>
+<h2>&lt;caption&gt; 标签</h2>
+<p>HTML 4.01 不赞成使用 align 属性。在 HTML 5 中，不支持该标签。请使用 CSS 代替。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>align</td></tr>
+<tr></tr>
+<tr><td>如何对齐标题。不支持。请使用样式代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-center'>
+<h2>&lt;center&gt; 标签</h2>
+<p>在 HTML 5 中，不支持该标签。请使用 CSS 代替。</p>
+<p>&gt; <strong>提示：</strong> 请使用 CSS 来居中文本。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-col'>
+<h2>&lt;col&gt; 标签</h2>
+<p>4.01 中的大多数属性都不再得到支持。</p>
+<p>&gt; <strong>注意：</strong> col 元素是空元素。如需创建列，必须在 tr 元素内规定 td 元素。</p>
+<p>&gt; <strong>提示：</strong> 如果需要为一个或多个列规定属性值，请使用该元素。</p>
+<p>&gt; <strong>提示：</strong> 如果需要向一个列组规定相同的属性值，请使用 &lt;colgroup&gt;</p>
+<p>&gt; 元素。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>align</td></tr>
+<tr></tr>
+<tr><td>定义列中的单元格内容的水平对齐方式。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>char</td></tr>
+<tr><td><I>character</I></td></tr>
+<tr></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>charoff</td></tr>
+<tr></tr>
+<tr><td>规定第一个对齐字符的偏移量。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>span</td></tr>
+<tr><td><I>number</I></td></tr>
+<tr><td>定义 <col> 应当横跨的列数。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>valign</td></tr>
+<tr></tr>
+<tr><td>定义列中的单元格内容的垂直对齐方式。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>width</td></tr>
+<tr></tr>
+<tr><td>定义列的宽度。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-colgroup'>
+<h2>&lt;colgroup&gt; 标签</h2>
+<p>4.01 中的大多数属性都不再得到支持。</p>
+<p>&gt; <strong>注意：</strong> colgroup 元素只能包含 col 元素。</p>
+<p>&gt; <strong>注意：</strong> colgroup 元素无法创建表格列。如需创建列，必须在 tr 元素内规定 td 元素。</p>
+<p>&gt; <strong>提示：</strong> 如果需要向一个列组规定相同的属性值，请使用该元素。</p>
+<p>&gt; <strong>提示：</strong> 如果需要为一个或多个列规定属性值，请使用 col 元素。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>align</td></tr>
+<tr></tr>
+<tr><td>定义列中的单元格内容的水平对齐方式。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>char</td></tr>
+<tr><td><I>character</I></td></tr>
+<tr><td>定义一个字符，按照该字符对齐文本。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>charoff</td></tr>
+<tr></tr>
+<tr><td>规定第一个对齐字符的偏移量。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>span</td></tr>
+<tr><td><I>number</I></td></tr>
+<tr><td>定义 <colgroup> 应当横跨的列数。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>valign</td></tr>
+<tr></tr>
+<tr><td>定义列中的单元格内容的垂直对齐方式。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>width</td></tr>
+<tr></tr>
+<tr><td>定义列的宽度。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-command'>
+<h2>&lt;command&gt; 标签</h2>
+<p>&lt;command&gt; 标签是 HTML 5 中的新标签。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</TR></td></tr>
+<tr><td>checked</td></tr>
+<tr><td>true</td><td>false</td></tr>
+<tr><td>定义是否被选中。仅用于 radio 或 checkbox 类型。</TR></td></tr>
+<tr><td>default</td></tr>
+<tr><td>true</td><td>false</td></tr>
+<tr><td>如果为 true，则被激活。仅用于该 command 位于菜单中时。</TR></td></tr>
+<tr><td>disabled</td></tr>
+<tr><td>true</td><td>false</td></tr>
+<tr><td>定义 command 是否可用。</TR></td></tr>
+<tr><td>hidden</td></tr>
+<tr><td>true</td><td>false</td></tr>
+<tr><td>定义 command 是否可见。</TR></td></tr>
+<tr><td>icon</td></tr>
+<tr><td><I>url</I></td></tr>
+<tr><td>定义作为 command 来显示的图像的 url。</TR></td></tr>
+<tr><td>label</td></tr>
+<tr><td><I>command name</I></td></tr>
+<tr><td>为 command 定义名称。label 是可见的。</TR></td></tr>
+<tr><td>radiogroup</td></tr>
+<tr><td><I>name of radiogroup</I></td></tr>
+<tr><td>定义该 command 所属的 radiogroup 的名称。仅在类型为 radio 时使用。</TR></td></tr>
+<tr><td>type</td></tr>
+<tr></tr>
+<tr><td>定义该 command 的类型。默认是 command。</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-comment'>
+<h2>&lt;comment&gt; 标签</h2>
+<p>NONE</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-datagrid'>
+<h2>&lt;datagrid&gt; 标签</h2>
+<p>&lt;datagrid&gt; 标签是 HTML 5 中的新标签。</p>
+<p>&gt; <strong>提示：</strong> 如果把 multiple 属性设置为 true，则可以在列表中选取一个以上的项目。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</TR></td></tr>
+<tr><td>disabled</td></tr>
+<tr><td>true</td><td>false</td></tr>
+<tr><td>如果为 true，则禁用整个 datagrid。</TR></td></tr>
+<tr><td>multiple</td></tr>
+<tr><td>true</td><td>false</td></tr>
+<tr><td>如果为 true，则可以在 datagrid 中选择一个以上的项目。</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-datalist'>
+<h2>&lt;datalist&gt; 标签</h2>
+<p>&lt;datalist&gt; 标签是 HTML 5 中的新标签。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</TR></td></tr>
+<tr><td>data</td></tr>
+<tr><td><I>value</I></td></tr>
+<tr><td>供自动插入数据。</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-datatemplate'>
+<h2>&lt;datatemplate&gt; 标签</h2>
+<p>&lt;datatemplate&gt; 标签是 HTML 5 中的新标签。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-dd'>
+<h2>&lt;dd&gt; 标签</h2>
+<p>无。 &lt;dl&gt; &lt;dt&gt;Coffee&lt;/dt&gt; <code>&lt;dd&gt;Black hot drink&lt;/dd&gt;</code> &lt;dt&gt;Milk&lt;/dt&gt; <code>&lt;dd&gt;White cold drink&lt;/dd&gt;</code> &lt;/dl&gt; ``</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-del'>
+<h2>&lt;del&gt; 标签</h2>
+<p>无。</p>
+<p>&gt; <strong>提示：</strong> 与 &lt;ins&gt; 一起使用，描述文档中的更新和修正。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>cite</td></tr>
+<tr><td>URL</td></tr>
+<tr><td>定义指向另一个文档的 URL，该文档解释了文本被删除或插入的原因。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>datetime</td></tr>
+<tr><td>YYYYMMDD</td></tr>
+<tr><td>定义文本被删除的日期和时间。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-details'>
+<h2>&lt;details&gt; 标签</h2>
+<p>&lt;details&gt; 标签是 HTML 5 中的新标签。</p>
+<p>&gt; <strong>提示：</strong> 与 &lt;legend&gt; 一起使用，来制作 detail</p>
+<p>&gt; 的标题。该标题对用户是可见的，当在其上点击时可打开或关闭 detail。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</TR></td></tr>
+<tr><td>open</td></tr>
+<tr><td>true</td><td>false</td></tr>
+<tr><td>定义 details 是否可见。默认是 false。</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-dialog'>
+<h2>&lt;dialog&gt; 标签</h2>
+<p>&lt;dialog&gt; 标签是 HTML 5 中的新标签。</p>
+<p>&gt; <strong>提示：</strong> 对话中的每个句子都必须属于 &lt;dt&gt;</p>
+<p>&gt; 标签所定义的部分。请看下面的例子。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-dir'>
+<h2>&lt;dir&gt; 标签</h2>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-div'>
+<h2>&lt;div&gt; 标签</h2>
+<p>HTML 4.01 中的 "align" 是不赞成使用的，在 HTML 5 中不支持该属性。</p>
+<p>&gt; <strong>注意：</strong> 浏览器通常会在 div 元素之前和之后插入换行符。</p>
+<p>&gt; <strong>提示：</strong> 请使用 &lt;div&gt;</p>
+<p>&gt; 标签对块级元素进行组合，这样就可以使用样式对它们进行格式化。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-dl'>
+<h2>&lt;dl&gt; 标签</h2>
+<p>无。 <code>&lt;dl&gt;</code> &lt;dt&gt;Coffee&lt;/dt&gt; &lt;dd&gt;Black hot drink&lt;/dd&gt; &lt;dt&gt;Milk&lt;/dt&gt; &lt;dd&gt;White cold drink&lt;/dd&gt; <code>&lt;/dl&gt;</code> ``</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-doctype'>
+<h2>&lt;doctype&gt; 标签</h2>
+<p>在 HTML 4.01 中有 3 个不同的文档类型，在 HTML 5 中只有一个：&lt;!DOCTYPE HTML&gt;。</p>
+<p>&gt; <strong>注意：</strong> &lt;!DOCTYPE&gt; 标签没有结束标签！</p>
+<p>&gt; <strong>提示：</strong> &lt;!DOCTYPE&gt; 对大小写不敏感。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-dt'>
+<h2>&lt;dt&gt; 标签</h2>
+<p>HTML 5 引入了 &lt;dialog&gt; 标签。在 dialog 中，&lt;dt&gt; 标签定义句子所属的角色。参见例子 2。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-embed'>
+<h2>&lt;embed&gt; 标签</h2>
+<p>&lt;embed&gt; 标签是 HTML 5 中的新标签。</p>
+<p>&gt; <strong>注意：</strong> &lt;embed&gt; 标签必须有 src 属性。</p>
+<p>&gt; <strong>提示：</strong> 您无法在开始标签和结束标签之间写文本，来说明旧式的浏览器不支持该标签，就像 &lt;audio&gt;</p>
+<p>&gt; 和 &lt;video&gt;。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</TR></td></tr>
+<tr><td>height</td></tr>
+<tr><td><I>pixels</I></td></tr>
+<tr><td>设置嵌入内容的高度。</TR></td></tr>
+<tr><td>src</td></tr>
+<tr><td><I>url</I></td></tr>
+<tr><td>嵌入内容的 URL。</TR></td></tr>
+<tr><td>type</td></tr>
+<tr><td><I>type</I></td></tr>
+<tr><td>定义嵌入内容的类型。</TR></td></tr>
+<tr><td>width</td></tr>
+<tr><td><I>pixels</I></td></tr>
+<tr><td>设置嵌入内容的宽度。</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-eventsource'>
+<h2>&lt;eventsource&gt; 标签</h2>
+<p>&lt;event-source&gt; 标签是 HTML 5 中的新标签。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</TR></td></tr>
+<tr><td>src</td></tr>
+<tr><td><I>url</I></td></tr>
+<tr><td>其内容类型为 "application/x-dom-event-stream" 的源的 URL。</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-fieldset'>
+<h2>&lt;fieldset&gt; 标签</h2>
+<p>在 HTML 5 中有一些新属性，同时不再支持 HTML 4.01 中的一些属性。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>disabled</td></tr>
+<tr><td>true</td><td>false</td></tr>
+<tr><td>定义 fieldset 是否可见。</td></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>form</td></tr>
+<tr><td>true</td><td>false</td></tr>
+<tr><td>定义该 fieldset 所属的一个或多个表单。</td></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-figure'>
+<h2>&lt;figure&gt; 标签</h2>
+<p>&lt;figure&gt; 标签是 HTML 5 中的新标签。</p>
+<p>&gt; <strong>提示：</strong> 请使用 &lt;legend&gt; 元素为元素组添加标题。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-font'>
+<h2>&lt;font&gt; 标签</h2>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-footer'>
+<h2>&lt;footer&gt; 标签</h2>
+<p>&lt;footer&gt; 标签是 HTML 5 中的新标签。</p>
+<p>&gt; <strong>提示：</strong> 假如您使用 footer 来插入联系信息，应该使用 &lt;address&gt;</p>
+<p>&gt; 元素。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-form'>
+<h2>&lt;form&gt; 标签</h2>
+<p>在 HTML 5 中有一些新属性，同时不再支持 HTML 4.01 中的一些属性。 在 HTML 5 中有一个新属性：replace。它定义表单被提交后所做的事情。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>action</td></tr>
+<tr><td>定义一个 URL。当点击提交按钮时，向这个 URL 发送数据。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>data</td></tr>
+<tr><td>供自动插入数据。</td></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>replace</td></tr>
+<tr><td>定义表单提交时所做的事情。</td></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>accept</td></tr>
+<tr><td>处理该表单的服务器可正确处理的内容类型列表（用逗号分隔）。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>accept-charset</td></tr>
+<tr><td>表单数据的可能的字符集列表（逗号分隔）。默认值是 "unknown"。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>enctype</td></tr>
+<tr><td>用于对表单内容进行编码的 MIME 类型。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>method</td></tr>
+<tr><td>用于向 action URL 发送数据的 HTTP 方法。默认是 get。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>name</td></tr>
+<tr><td>为表单定义一个唯一的名称。不支持。用 id 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>target</td></tr>
+<tr><td>在何处打开目标 URL。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-frame'>
+<h2>&lt;frame&gt; 标签</h2>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-frameset'>
+<h2>&lt;frameset&gt; 标签</h2>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-head'>
+<h2>&lt;head&gt; 标签</h2>
+<p>在 HTML 5 中不再支持 profile 属性。</p>
+<p>&gt; <strong>提示：</strong> 请记住始终为文档规定标题！</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-header'>
+<h2>&lt;header&gt; 标签</h2>
+<p>&lt;header&gt; 标签是 HTML 5 中的新标签。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-hn'>
+<h2>&lt;hn&gt; 标签</h2>
+<p>在 HTML 4.01 中，h1 - h6 元素的 "align" 属性不被赞成使用。 在 HTML 5 中，h1 - h6 元素的 "align" 属性不被支持。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-hr'>
+<h2>&lt;hr&gt; 标签</h2>
+<p>属性：在 HTML 4.01 中，不赞成使用 align, noshade, size 以及 width 属性。在 HTML 5 中不再支持这些属性。 在 HTML 5 中，&lt;hr&gt; 标签定义内容中的主题变化，并显示为一条水平线。 在 HTML 4.01 中，它仅仅显示为一条水平线。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-html'>
+<h2>&lt;html&gt; 标签</h2>
+<p>在 HTML 4.01 中的 xmlns 属性，在 XHTML 中是必须的。实际上它没有任何效果，但是出于验证的原因，在把 HTML 转换为 XHTML 的过程中，是很有帮助的。在 HTML 5 中，没有理由这么做，但是你仍然可以把 xmlns 属性定义为 "http://www.w3.org/1999/xhtml"。 在 HTML 5 中，有一个新属性：manifest。</p>
+<p>&gt; <strong>注意：</strong> 如果您出于某种原因，希望定义 xmlns 属性，唯一合法的值是</p>
+<p>&gt; "http://www.w3.org/1999/xhtml"。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>manifest</td></tr>
+<tr><td><I>url</I></td></tr>
+<tr><td>为脱机使用定义缓存信息。</td></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>xmlns</td></tr>
+<tr><td>http://www.w3.org/1999/xhtml</td></tr>
+<tr></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-i'>
+<h2>&lt;i&gt; 标签</h2>
+<p>没有区别。 但是在 HTML 4.01 中，存在着一种理解，即应该使用 CSS 来制作斜体文本。在 HTML 5 中，情况没有改变，但是你应该使用 &lt;i&gt; 标签把部分文本定义为某种类型，而不只是利用它在布局中所呈现的样式。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-iframe'>
+<h2>&lt;iframe&gt; 标签</h2>
+<p>在 HTML 5 中，仅仅支持 src 属性</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-img'>
+<h2>&lt;img&gt; 标签</h2>
+<p>在 HTML 4.01 中，图像的 "align", "border", "hspace" 以及 "vspace" 不赞成使用。在 HTML 5 中，不再支持这些属性。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>alt</td></tr>
+<tr><td>text</td></tr>
+<tr><td>定义有关图形的短的描述。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>src</td></tr>
+<tr><td>URL</td></tr>
+<tr><td>要显示的图像的 URL。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>align</td></tr>
+<tr></tr>
+<tr><td>规定如何根据周围的文本来对齐图像。不支持。请使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>border</td></tr>
+<tr><td>pixels</td></tr>
+<tr><td>定义图像周围的边框。不支持。请使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>height</td></tr>
+<tr><td>pixels %</td></tr>
+<tr><td>定义图像的高度。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>hspace</td></tr>
+<tr><td>pixels</td></tr>
+<tr><td>定义图像左侧和右侧的空白。不支持。请使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>ismap</td></tr>
+<tr><td>URL</td></tr>
+<tr><td>把图像定义为服务器端的图像映射。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>longdesc</td></tr>
+<tr><td>URL</td></tr>
+<tr><td>一个 URL，指向了描述该图像的文档。不支持。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>usemap</td></tr>
+<tr><td>URL</td></tr>
+<tr><td>定义作为客户端图像映射的一幅图像。请参阅 <map> 和 <area> 标签，了解其工作原理。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>vspace</td></tr>
+<tr><td>pixels</td></tr>
+<tr><td>定义图像顶部和底部的空白。不支持。请使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>width</td></tr>
+<tr><td>pixels %</td></tr>
+<tr><td>设置图像的宽度。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-input'>
+<h2>&lt;input&gt; 标签</h2>
+<p>在 HTML 5 中，该元素有很多新属性，同时不再支持 HTML 4.01 中的一些属性。 在 HTML 5 中，type 属性有很多新的值。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>accept</td></tr>
+<tr><td><I>list_of_mime_types</I></td></tr>
+<tr><td>一个逗号分隔的 MIME 类型列表，指示文件传输的 MIME 类型。注释：仅可与 type="file" 配合使用。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>align</td></tr>
+<tr></tr>
+<tr></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>alt</td></tr>
+<tr><td><I>text</I></td></tr>
+<tr></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>autocomplete</td></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>autofocus</td></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>checked</td></tr>
+<tr></tr>
+<tr></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>disabled</td></tr>
+<tr></tr>
+<tr></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>form</td></tr>
+<tr></tr>
+<tr><td>定义输入字段属于一个或多个表单。</td></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>inputmode</td></tr>
+<tr><td><I>inputmode</I></td></tr>
+<tr><td>定义预期的输入类型。</td></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>list</td></tr>
+<tr><td><I>id of a datalist</I></td></tr>
+<tr><td>引用 datalist 元素。如果定义，则一个下拉列表可用于向输入字段插入值。</td></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>max</td></tr>
+<tr><td><I>number</I></td></tr>
+<tr><td>输入字段的最大值。</td></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>maxlength</td></tr>
+<tr><td><I>number</I></td></tr>
+<tr><td>定义文本域中所允许的字符最大数目。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>min</td></tr>
+<tr><td><I>number</I></td></tr>
+<tr><td>输入字段的最小值。</td></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>name</td></tr>
+<tr><td><I>field_name</I></td></tr>
+<tr><td>为 input 元素定义唯一的名称。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>pattern</td></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>readonly</td></tr>
+<tr><td>readonly</td></tr>
+<tr><td>指示是否可修改该字段的值。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>replace</td></tr>
+<tr><td><I>text</I></td></tr>
+<tr><td>定义当表单提交时如何处理该输入字段。</td></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>required</td></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>size</td></tr>
+<tr><td>number_of_char</td></tr>
+<tr><td>定义 input 元素的大小。不再支持。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>src</td></tr>
+<tr><td>URL</td></tr>
+<tr></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>step</td></tr>
+<tr></tr>
+<tr></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>template</td></tr>
+<tr><td><I>template</I></td></tr>
+<tr><td>定义一个或多个模板。</td></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>type</td></tr>
+<tr></tr>
+<tr></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>value</td></tr>
+<tr><td>value</td></tr>
+<tr></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-ins'>
+<h2>&lt;ins&gt; 标签</h2>
+<p>没有。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>cite</td></tr>
+<tr><td>URL</td></tr>
+<tr><td>指向另一个文档的 URL，该文档解释文本插入的原因。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>datetime</td></tr>
+<tr><td>YYYYMMDD</td></tr>
+<tr><td>定义文本插入的日期和时间。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-label'>
+<h2>&lt;label&gt; 标签</h2>
+<p>没有。</p>
+<p>&gt; <strong>注意：</strong> "for" 属性可把 label 绑定到另外一个元素。请把 "for" 属性的值设置为相关元素的</p>
+<p>&gt; id 属性的值。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>for</td></tr>
+<tr><td>id_of_another_field</td></tr>
+<tr></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-legend'>
+<h2>&lt;legend&gt; 标签</h2>
+<p>在 HTML 4.01 中， &lt;legend&gt; 仅用于 &lt;fieldset&gt; 元素。 在 HTML 5 中， &lt;legend&gt; 标签应用于 &lt;fieldset&gt;、&lt;figure&gt; 以及 &lt;details&gt; 元素。 在 HTML 5 中，不支持 align 属性。请使用 CSS 代替。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-li'>
+<h2>&lt;li&gt; 标签</h2>
+<p>在 HTML 4.01 中， 不赞成使用 "type" 和 "value" 属性。 在 HTML 5 中，不再支持 "type" 属性。 在 HTML 5 中， 并没有不赞成使用 "value" 属性，但是仅能够与 &lt;ol&gt; 元素一起使用。</p>
+<p>&gt; <strong>提示：</strong> 请使用 CSS 来定义列表的类型。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>DTD</TR></td></tr>
+<tr><td>type</td></tr>
+<tr></tr>
+<tr><td>规定列表的类型。不赞成使用。请使用样式替代。</td></tr>
+<tr><td>TF</TR></td></tr>
+<tr><td>value</td></tr>
+<tr><td>number_of_list_item</td></tr>
+<tr><td>不赞成使用。请使用样式替代。</td></tr>
+<tr><td>TF</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-link'>
+<h2>&lt;link&gt; 标签</h2>
+<p>不再支持 HTML 4.01 中的一些属性。</p>
+<p>&gt; <strong>注意：</strong> link 元素是空元素，它仅包含属性。</p>
+<p>&gt; <strong>注意：</strong> 此元素只能存在于 head 部分，不过它可出现任意次数。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>charset</td></tr>
+<tr><td>定义目标 URL 的字符编码方式。默认值是 "ISO-8859-1"。不支持。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>href</td></tr>
+<tr><td>目标文档或资源的 URL。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>hreflang</td></tr>
+<tr><td>定义目标 URL 的基准语言。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>media</td></tr>
+<tr><td>规定文档将显示在什么设备上。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>rel</td></tr>
+<tr><td>定义当前文档与目标文档之间的关系。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>rev</td></tr>
+<tr><td>定义目标文档与当前文档之间的关系。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>target</td></tr>
+<tr><td>在何处打开目标 URL。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>type</td></tr>
+<tr><td>规定目标 URL 的 MIME 类型。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-m'>
+<h2>&lt;m&gt; 标签</h2>
+<p>&lt;m&gt; 标签是 HTML 5 中的新标签。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-map'>
+<h2>&lt;map&gt; 标签</h2>
+<p>在 HTML 5 中，不再支持 name 属性。</p>
+<p>&gt; <strong>注意：</strong> area 元素永远嵌套在 map 元素内部。area</p>
+<p>&gt; 元素可定义图像映射中的区域。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>id</td></tr>
+<tr><td>unique_name</td></tr>
+<tr><td>为 map 标签定义唯一的名称。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>name</td></tr>
+<tr><td>unique_name</td></tr>
+<tr><td>为 map 标签定义唯一的名称。不支持。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-menu'>
+<h2>&lt;menu&gt; 标签</h2>
+<p>在 HTML 4.01 中，不赞成使用 menu 元素。 在 HTML 5 中，重新定义了 menu 元素，且使用用于排列表单控件。</p>
+<p>&gt; <strong>提示：</strong> 请使用 CSS 来定义列表的类型。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>autosubmit</td></tr>
+<tr><td>true false</td></tr>
+<tr><td>如果为 true，那么当表单控件改变时会自动提交。</td></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>compact</td></tr>
+<tr><td>compact_rendering</td></tr>
+<tr><td>不支持。请使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>label</td></tr>
+<tr><td><I>menulabel</I></td></tr>
+<tr><td>为菜单定义一个可见的标注。</td></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>type</td></tr>
+<tr></tr>
+<tr><td>定义显示那种类型的菜单。默认值是 "list"。</td></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-meta'>
+<h2>&lt;meta&gt; 标签</h2>
+<p>在 HTML 5 中，不再支持 scheme 属性。 在 HTML 5 中，有一个新的 charset 属性，它使字符集的定义更加容易。 在 HTML 4.01 中，不得不这么写： &lt;meta http-equiv="content-type" content="text/html; charset=ISO-8859-1"&gt; `<code> 在 HTML 5 中，这样就够了： &lt;meta charset="ISO-8859-1"&gt; </code>`</p>
+<p>&gt; <strong>提示：</strong> 请使用 CSS 来定义列表的类型。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>charset</td></tr>
+<tr><td><I>character encoding</I></td></tr>
+<tr><td>定义文档的字符编码。</td></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>content</td></tr>
+<tr><td>some_text</td></tr>
+<tr><th>定义与 http-equiv 或 name 属性相关的元信息。</th></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>http-equiv</td></tr>
+<tr></tr>
+<tr><th>把 content 属性关联到 HTTP 头部。</th></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>name</td></tr>
+<tr></tr>
+<tr><th>把 content 属性关联到一个名称。</th></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>scheme</td></tr>
+<tr><td>some_text</td></tr>
+<tr><th>定义用于翻译 content 属性值的格式。不支持。</th></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-meter'>
+<h2>&lt;meter&gt; 标签</h2>
+<p>&lt;meter&gt; 标签是 HTML 5 中的新标签。</p>
+<p>&gt; <strong>注意：</strong> 必须定义度量的范围，既可以在 text 中，也可以在 min/max</p>
+<p>&gt; 属性中定义。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</TR></td></tr>
+<tr><td>high</td></tr>
+<tr><td><I>number</I></td></tr>
+<tr><td>定义度量的值位于哪个点，被界定为高的值。</TR></td></tr>
+<tr><td>low</td></tr>
+<tr><td><I>number</I></td></tr>
+<tr><td>定义度量的值位于哪个点，被界定为低的值。</TR></td></tr>
+<tr><td>max</td></tr>
+<tr><td><I>number</I></td></tr>
+<tr><td>定义最大值。默认值是 1。</TR></td></tr>
+<tr><td>min</td></tr>
+<tr><td><I>number</I></td></tr>
+<tr><td>定义最小值。默认值是 0。</TR></td></tr>
+<tr><td>optimum</td></tr>
+<tr><td><I>number</I></td></tr>
+<tr><th>定义什么样的度量值是最佳的值。如果该值高于 "high" 属性，则意味着值越高越好。如果该值低于 "low"</th></tr>
+<tr><td>value</td></tr>
+<tr><td><I>number</I></td></tr>
+<tr><td>定义度量的值。</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-nav'>
+<h2>&lt;nav&gt; 标签</h2>
+<p>&lt;nav&gt; 标签是 HTML 5 中的新标签。</p>
+<p>&gt; <strong>提示：</strong> 如果文档中有“前后”按钮，则应该把它放到 &lt;nav&gt; 元素中。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-nest'>
+<h2>&lt;nest&gt; 标签</h2>
+<p>&lt;nest&gt; 标签是 HTML 5 中的新标签。</p>
+<p>&gt; <strong>提示：</strong> 插入的子节点必须匹配 &lt;nest&gt; 元素的 &lt;rule&gt;</p>
+<p>&gt; 元素。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</TR></td></tr>
+<tr><td>filter</td></tr>
+<tr><td><I>selector</I></td></tr>
+<tr><td>定义能够进一步处理哪个子节点。</TR></td></tr>
+<tr><td>mode</td></tr>
+<tr><td><I>mode</I></td></tr>
+<tr><td>定义数据模板的规则将拥有哪种模式。</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-noframes'>
+<h2>&lt;noframes&gt; 标签</h2>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-noscript'>
+<h2>&lt;noscript&gt; 标签</h2>
+<p>没有。</p>
+<p>&gt; <strong>注意：</strong> 如果浏览器支持脚本，那么它不会显示出 noscript 元素中的文本。</p>
+<p>&gt; <strong>注意：</strong> 无法识别 &lt;script&gt;</p>
+<p>&gt; <strong>注意：</strong> 标签的浏览器会把标签的内容显示到页面上。为了避免浏览器这样做，您应当在注释标签中隐藏脚本。老式的（无法识别 &lt;script&gt;</p>
+<p>&gt; <strong>注意：</strong> 标签的）浏览器会忽略注释，这样就不会把标签的内容写到页面上，而新式的浏览器则懂得执行这些脚本，即使它们被包围在注释标签中！</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-object'>
+<h2>&lt;object&gt; 标签</h2>
+<p>不再支持 HTML 4.01 中的一些属性。</p>
+<p>&gt; <strong>注意：</strong> object 元素可位于在 head 元素或 body 元素内部。&lt;object&gt; 与</p>
+<p>&gt; &lt;/object&gt; 之间的文本是替换文本，针对不支持此标签的浏览器。&lt;param&gt; 标签可定义用于对象的 run-time</p>
+<p>&gt; 设置。</p>
+<p>&gt; <strong>提示：</strong> 至于图像，请使用 &lt;img&gt; 标签代替 &lt;object&gt; 标签。</p>
+<p>&gt; <strong>提示：</strong> 至少必须定义 "data" 和 "type" 属性之一。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>align</td></tr>
+<tr></tr>
+<tr><td>定义围绕该对象的文本对齐方式。不支持。使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>archive</td></tr>
+<tr><td><I>URL</I></td></tr>
+<tr><td>一个空格分隔的指向档案文件的 URL 列表。这些档案文件包含了与对象相关的资源。不支持。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>border</td></tr>
+<tr><td><I>pixels</I></td></tr>
+<tr><td>定义对象周围的边框。不支持。使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>classid</td></tr>
+<tr><td><I>class ID</I></td></tr>
+<tr><td>用于指定浏览器中包含的对象的位置。不支持。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>codebase</td></tr>
+<tr><td><I>URL</I></td></tr>
+<tr><td>定义在何处可找到对象所需的代码。不支持。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>codetype</td></tr>
+<tr><td><I>MIME type</I></td></tr>
+<tr><th>通过 classid 属性所引用的代码的 MIME 类型。不支持。</th></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>data</td></tr>
+<tr><td><I>URL</I></td></tr>
+<tr><td>定义引用对象数据的 URL。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>declare</td></tr>
+<tr></tr>
+<tr><td>可定义此对象仅可被声明，但不能被创建或例示，直到此对象得到应用为止。不支持。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>height</td></tr>
+<tr><td><I>pixels</I></td></tr>
+<tr><td>定义对象的高度。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>hspace</td></tr>
+<tr><td><I>pixels</I></td></tr>
+<tr><td>定义对象周围水平方向的空白。不支持。使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>name</td></tr>
+<tr><td><I>unique_name</I></td></tr>
+<tr><td>为对象定义唯一的名称（以便在脚本中使用）。不支持。使用 id 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>standby</td></tr>
+<tr><td><I>text</I></td></tr>
+<tr><td>定义当对象正在加载时所显示的文本。不支持。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>type</td></tr>
+<tr><td><I>MIME_type</I></td></tr>
+<tr><th>定义被规定在 data 属性中指定的文件中出现的数据的 MIME 类型。</th></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>usemap</td></tr>
+<tr><td><I>URL</I></td></tr>
+<tr><td>规定与对象一同使用的客户端图像映射的 URL。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>vspace</td></tr>
+<tr><td><I>pixels</I></td></tr>
+<tr><td>定义对象的垂直方向的空白。不支持。使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>width</td></tr>
+<tr><td><I>pixels</I></td></tr>
+<tr><td>定义对象的宽度。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-ol'>
+<h2>&lt;ol&gt; 标签</h2>
+<p>在 HTML 4.01 中，不赞成使用 "start" 属性，在 HTML 5 中是允许的。 在 HTML 4.01 中，不赞成使用 "compact" 和 "type" 属性，在 HTML 5 中，不再支持这两个属性。</p>
+<p>&gt; <strong>提示：</strong> 请使用 CSS 来定义列表的类型。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>compact</td></tr>
+<tr><td>compact_rendering</td></tr>
+<tr><td>不赞成。使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>start</td></tr>
+<tr><td>start_on_number</td></tr>
+<tr><td>规定起始数字。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>type</td></tr>
+<tr></tr>
+<tr><td>规定列表的类型。不赞成。使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-optgroup'>
+<h2>&lt;optgroup&gt; 标签</h2>
+<p>没有。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>label</td></tr>
+<tr><td>text_label</td></tr>
+<tr><td>定义选项组的标注。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>disabled</td></tr>
+<tr><td>disabled</td></tr>
+<tr><td>在其首次加载时，禁用该选项组。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-option'>
+<h2>&lt;option&gt; 标签</h2>
+<p>在 HTML 5 中，&lt;option&gt; 标签也用于新元素 &lt;datalist&gt; 中。</p>
+<p>&gt; <strong>注意：</strong> &lt;option&gt; 标签能够在不带任何属性的情况下使用，但是通常需要 value</p>
+<p>&gt; 属性，该属性定义了发送到服务器的数据。</p>
+<p>&gt; <strong>注意：</strong> 请与 &lt;select&gt; 或 &lt;datalist&gt;</p>
+<p>&gt; 标签结合使用。在其他地方，&lt;option&gt; 标签是无意义的。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>disabled</td></tr>
+<tr><td>disabled</td></tr>
+<tr><td>规定此选项应在首次加载时被禁用。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>label</td></tr>
+<tr><td>text</td></tr>
+<tr><td>定义当使用 <optgroup> 时所使用的标注。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>selected</td></tr>
+<tr><td>selected</td></tr>
+<tr><td>规定选项（在首次显示在列表中时）表现为选中状态。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>value</td></tr>
+<tr><td>text</td></tr>
+<tr><td>定义送往服务器的选项值。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-output'>
+<h2>&lt;output&gt; 标签</h2>
+<p>&lt;output&gt; 标签是 HTML 5 中的新标签。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</TR></td></tr>
+<tr><td>form</td></tr>
+<tr></tr>
+<tr><td>定义输入字段所属的一个或多个表单。</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-p'>
+<h2>&lt;p&gt; 标签</h2>
+<p>在 HTML 4.01 中，不赞成使用 align 属性，在 HTML 5 中不再支持该属性。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-param'>
+<h2>&lt;param&gt; 标签</h2>
+<p>不再支持 HTML 4.01 中的一些属性。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>name</td></tr>
+<tr><td>unique_name</td></tr>
+<tr><td>定义参数的唯一的名称（唯一标识符）。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>type</td></tr>
+<tr><td>MIME type</td></tr>
+<tr><td>规定参数的 MIME 类型（internet media type）。不支持。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>value</td></tr>
+<tr><td>value</td></tr>
+<tr><td>规定参数的值。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>valuetype</td></tr>
+<tr></tr>
+<tr><td>规定值的 MIME 类型。不支持。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-pre'>
+<h2>&lt;pre&gt; 标签</h2>
+<p>在 HTML 4.01 中，不赞成使用 width 属性，在 HTML 5 中不再支持该属性。</p>
+<p>&gt; <strong>提示：</strong> 请使用 &lt;pre&gt; 标签来显示非常规的格式化内容，或者某类计算机代码。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-progress'>
+<h2>&lt;progress&gt; 标签</h2>
+<p>&lt;progress&gt; 标签是 HTML 5 中的新标签。</p>
+<p>&gt; <strong>提示：</strong> 请使用 &lt;progress&gt; 标签来显示下载的进程。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</TR></td></tr>
+<tr><td>max</td></tr>
+<tr><td><I>number</I></td></tr>
+<tr><td>定义完成的值。</TR></td></tr>
+<tr><td>value</td></tr>
+<tr><td><I>number</I></td></tr>
+<tr><td>定义进程的当前值。</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-q'>
+<h2>&lt;q&gt; 标签</h2>
+<p>没有。</p>
+<p>&gt; <strong>提示：</strong> 请使用 cite 属性来定义该引用的来源。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>cite</td></tr>
+<tr><td><I>url</I></td></tr>
+<tr><td>定义引用的引文。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-rule'>
+<h2>&lt;rule&gt; 标签</h2>
+<p>&lt;rule&gt; 标签是 HTML 5 中的新标签。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</TR></td></tr>
+<tr><td>condition</td></tr>
+<tr><td><I>selector</I></td></tr>
+<tr><td>定义将更新哪个元素。</TR></td></tr>
+<tr><td>mode</td></tr>
+<tr><td><I>mode</I></td></tr>
+<tr><td>定义数据模板拥有的模式。</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-s'>
+<h2>&lt;s&gt; 标签</h2>
+<p>在 HTML 4.01 中不赞成使用 &lt;s&gt; 标签。 在 HTML 5 中不支持 &lt;s&gt; 标签。</p>
+<p>&gt; <strong>提示：</strong> 请使用 &lt;del&gt; 标签代替。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-script'>
+<h2>&lt;script&gt; 标签</h2>
+<p>在 HTML 5 中，有一些新属性，同时不再支持 HTML 4.01 中的一些属性。</p>
+<p>&gt; <strong>提示：</strong> 如果存在 src 属性，则 &lt;script&gt; 标签必须是空的。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>async</td></tr>
+<tr></tr>
+<tr><td>定义脚本是否异步执行。</td></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>type</td></tr>
+<tr></tr>
+<tr><td>指示脚本的 MIME 类型。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>charset</td></tr>
+<tr><td>charset</td></tr>
+<tr><td>定义脚本中使用的字符编码。不支持。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>defer</td></tr>
+<tr></tr>
+<tr><td>指示脚本不会生成任何的文档内容。浏览器可以继续解析并绘制页面。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>language</td></tr>
+<tr></tr>
+<tr><th>规定脚本语言。不赞成使用。请使用 type 属性代替它。</th></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>src</td></tr>
+<tr><td>URL</td></tr>
+<tr><td>定义指向包含脚本的文件的 URL（这样您就可以引用某个包含脚本的文件，而不是直接把脚本插入您的 HTML 文档中）。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-section'>
+<h2>&lt;section&gt; 标签</h2>
+<p>&lt;section&gt; 标签是 HTML 5 中的新标签。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-select'>
+<h2>&lt;select&gt; 标签</h2>
+<p>HTML 5 有一些新的属性，同时不再支持一些 HTML 4.01 的属性。</p>
+<p>&gt; <strong>提示：</strong> 请在 form 元素中使用此标签来接受用户的输入。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>autofocus</td></tr>
+<tr></tr>
+<tr><td>在页面加载时使这个 select 字段获得焦点。</td></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>data</td></tr>
+<tr><td><I>url</I></td></tr>
+<tr><td>供自动插入数据。</td></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>disabled</td></tr>
+<tr></tr>
+<tr><th>当该属性为 true 时，会禁用该菜单。</th></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>form</td></tr>
+<tr></tr>
+<tr><td>定义 select 字段所属的一个或多个表单。</td></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>multiple</td></tr>
+<tr></tr>
+<tr><th>当该属性为 true 时，规定可一次选定多个项目。</th></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>name</td></tr>
+<tr><td>unique_name</td></tr>
+<tr><td>定义下拉列表的唯一标识符。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>size</td></tr>
+<tr><td>number</td></tr>
+<tr><td>定义菜单中可见项目的数目。不支持。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-small'>
+<h2>&lt;small&gt; 标签</h2>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-source'>
+<h2>&lt;source&gt; 标签</h2>
+<p>&lt;source&gt; 标签是 HTML 5 中的新标签。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</TR></td></tr>
+<tr><td>media</td></tr>
+<tr><td><I>media query</I></td></tr>
+<tr><td>定义媒介资源的类型，供浏览器决定是否下载。</TR></td></tr>
+<tr><td>src</td></tr>
+<tr><td><I>url</I></td></tr>
+<tr><td>媒介的 URL。</TR></td></tr>
+<tr><td>type</td></tr>
+<tr><td><I>numeric value</I></td></tr>
+<tr><td>定义播放器在音频流中的什么位置开始播放。默认地，音频从开头播放。</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-span'>
+<h2>&lt;span&gt; 标签</h2>
+<p>没有。</p>
+<p>&gt; <strong>提示：</strong> 请使用 span 元素对行内元素进行分组，以便通过样式对它们进行格式化。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-strike'>
+<h2>&lt;strike&gt; 标签</h2>
+<p>在 HTML 4.01 中不赞成使用 &lt;strike&gt; 标签。 在 HTML 5 中不支持 &lt;strike&gt; 标签。</p>
+<p>&gt; <strong>提示：</strong> 请使用 &lt;del&gt; 标签代替。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-style'>
+<h2>&lt;style&gt; 标签</h2>
+<p>scoped 属性是 HTML 5 中的新属性，它允许我们为文档的指定部分定义样式，而不是整个文档。</p>
+<p>&gt; <strong>提示：</strong> 如需学习更多有关样式表的内容，请访问我们的 CSS</p>
+<p>&gt; 教程。</p>
+<p>&gt; <strong>提示：</strong> 在 HTML 5 中，所有元素都不支持 *style</p>
+<p>&gt; 属性*，如需为一个元素添加样式，请在 style 元素中使用 scoped 属性。</p>
+<p>&gt; <strong>注意：</strong> 如果没有定义 scoped 属性，则 &lt;style&gt; 元素必须是 head</p>
+<p>&gt; 元素的子元素，或者是（属于 head 元素的子元素的） noscript 元素的子元素。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>type</td></tr>
+<tr><td>text/css</td></tr>
+<tr><td>定义内容类型。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>media</td></tr>
+<tr></tr>
+<tr><td>样式信息的目标媒介。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>scoped</td></tr>
+<tr></tr>
+<tr><td>如果设置为 true，则样式仅仅应用到 style 元素的父元素及其子元素。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-table'>
+<h2>&lt;table&gt; 标签</h2>
+<p>在 HTML 4.01 中，不赞成使用 "align" 和 "bgcolor" 属性。 在 HTML 5 中，不支持 &lt;table&gt; 标签的任何属性。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-tbody'>
+<h2>&lt;tbody&gt; 标签</h2>
+<p>在 HTML 5 中，不支持 &lt;tbody&gt; 标签的任何属性。</p>
+<p>&gt; <strong>注意：</strong> &lt;thead&gt; 内部必须拥有 &lt;tr&gt; 标签！</p>
+<p>&gt; <strong>注意：</strong> 如果您使用 thead、tfoot 以及 tbody</p>
+<p>&gt; 元素，您就必须使用全部的元素。它们的出现次序是：thead、tfoot、tbody，这样浏览器就可以在收到所有数据前呈现页脚了。您必须在 table</p>
+<p>&gt; 元素内部使用这些标签。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-td'>
+<h2>&lt;td&gt; 标签</h2>
+<p>在 HTML 4.01 中，td 元素的 "bgcolor"、"height"、"width" 以及 "nowrap" 是不被赞成使用的。 在 HTML 5 中，仅仅支持 "colspan" 和 "rowspan" 属性。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>abbr</td></tr>
+<tr><td>abbr_text</td></tr>
+<tr><td>规定单元格中内容的缩写版本。不支持。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>align</td></tr>
+<tr></tr>
+<tr><td>规定单元格内容的水平排列方式。不支持。请使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>axis</td></tr>
+<tr><td>category_names</td></tr>
+<tr><td>为单元格定义一个名字。不支持。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>bgcolor</td></tr>
+<tr></tr>
+<tr><td>规定单元格的背景颜色。不支持。请使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>char</td></tr>
+<tr><td>character</td></tr>
+<tr><td>规定根据哪个字符来进行文本对齐。不支持。请使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>charoff</td></tr>
+<tr></tr>
+<tr><td>规定第一个对齐字符的偏移量。不支持。请使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>colspan</td></tr>
+<tr><td>number</td></tr>
+<tr><td>规定此单元格可横跨的列数。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>headers</td></tr>
+<tr><td>header_cells'_id</td></tr>
+<tr><td>空格分隔的单元格 ID 列表。不支持。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>height</td></tr>
+<tr><td>pixels</td></tr>
+<tr><td>规定表格单元格的高度。不支持。请使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>nowrap</td></tr>
+<tr><td>nowrap</td></tr>
+<tr><td>是否禁用或启用单元格中的文本环绕。不支持。请使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>rowspan</td></tr>
+<tr><td>number</td></tr>
+<tr><td>规定此单元格可横跨的行数。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>scope</td></tr>
+<tr></tr>
+<tr><td>规定此单元格是否为以下部分提供表头信息：包含此单元格的行 row) 的其余部分，包含此单元格的列 (col) 的其余部分，包含此单元格的行组</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>valign</td></tr>
+<tr></tr>
+<tr><td>规定单元格内容的垂直排列方式。不支持。请使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>width</td></tr>
+<tr></tr>
+<tr><td>规定表格单元格的宽度。不支持。请使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-textarea'>
+<h2>&lt;textarea&gt; 标签</h2>
+<p>在 HTML 5 中有一些新属性，同时不再支持 HTML 4.01 中的一些属性。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>autofocus</td></tr>
+<tr></tr>
+<tr><td>在页面加载时，使这个 textarea 获得焦点。</td></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>cols</td></tr>
+<tr><td><I>number</I></td></tr>
+<tr><td>规定文本区内可见的列数。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>disabled</td></tr>
+<tr></tr>
+<tr><td>当此文本区首次加载时禁用此文本区。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>form</td></tr>
+<tr></tr>
+<tr><td>定义该 textarea 所属的一个或多个表单。</td></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>inputmode</td></tr>
+<tr><td><I>inputmode</I></td></tr>
+<tr><td>定义该 textarea 所期望的输入类型。</td></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>name</td></tr>
+<tr><td><I>name_of_textarea</I></td></tr>
+<tr><td>为此文本区规定的一个名称。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>readonly</td></tr>
+<tr></tr>
+<tr><td>指示用户无法修改文本区内的内容。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>required</td></tr>
+<tr></tr>
+<tr><td>定义为了提交该表单，该 textarea 的值是否是必需的。</td></tr>
+<tr></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>rows</td></tr>
+<tr><td>number</td></tr>
+<tr><td>规定文本区内可见的行数。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-tfoot'>
+<h2>&lt;tfoot&gt; 标签</h2>
+<p>在 HTML 5 中，不支持 &lt;tfoot&gt; 标签的任何属性。</p>
+<p>&gt; <strong>注意：</strong> &lt;tfoot&gt; 内部必须拥有 &lt;tr&gt; 标签！</p>
+<p>&gt; <strong>注意：</strong> 如果您使用 thead、tfoot 以及 tbody</p>
+<p>&gt; 元素，您就必须使用全部的元素。它们的出现次序是：thead、tfoot、tbody，这样浏览器就可以在收到所有数据前呈现页脚了。您必须在 table</p>
+<p>&gt; 元素内部使用这些标签。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-th'>
+<h2>&lt;th&gt; 标签</h2>
+<p>在 HTML 4.01 中，th 元素的 "bgcolor"、"height"、"width" 以及 "nowrap" 属性是不被赞成使用的。 在 HTML 5 中，仅仅支持 "colspan" 、 "rowspan" 以及 "scope" 属性。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>abbr</td></tr>
+<tr><td>abbr_text</td></tr>
+<tr><td>规定单元格中内容的缩写版本。不支持。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>align</td></tr>
+<tr></tr>
+<tr><td>规定单元格内容的水平排列方式。不支持。请使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>axis</td></tr>
+<tr><td>category_names</td></tr>
+<tr><td>为单元格定义一个名字。不支持。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>bgcolor</td></tr>
+<tr></tr>
+<tr><td>规定单元格的背景颜色。不支持。请使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>char</td></tr>
+<tr><td>character</td></tr>
+<tr><td>规定根据哪个字符来进行文本对齐。不支持。请使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>charoff</td></tr>
+<tr></tr>
+<tr><td>规定第一个对齐字符的偏移量。不支持。请使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>colspan</td></tr>
+<tr><td>number</td></tr>
+<tr><td>规定此单元格可横跨的列数。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>headers</td></tr>
+<tr><td>header_cells'_id</td></tr>
+<tr><td>空格分隔的单元格 ID 列表。不支持。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>height</td></tr>
+<tr><td>pixels</td></tr>
+<tr><td>规定表格单元格的高度。不支持。请使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>nowrap</td></tr>
+<tr><td>nowrap</td></tr>
+<tr><td>是否禁用或启用单元格中的文本环绕。不支持。请使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>rowspan</td></tr>
+<tr><td>number</td></tr>
+<tr><td>规定此单元格可横跨的行数。</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>scope</td></tr>
+<tr></tr>
+<tr><td>规定此单元格是否为以下部分提供表头信息：包含此单元格的行 row) 的其余部分，包含此单元格的列 (col) 的其余部分，包含此单元格的行组</td></tr>
+<tr><td>4</td></tr>
+<tr><td>5</TR></td></tr>
+<tr><td>valign</td></tr>
+<tr></tr>
+<tr><td>规定单元格内容的垂直排列方式。不支持。请使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+<tr><td>width</td></tr>
+<tr></tr>
+<tr><td>规定表格单元格的宽度。不支持。请使用 CSS 代替。</td></tr>
+<tr><td>4</td></tr>
+<tr><td></TR></td></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-thead'>
+<h2>&lt;thead&gt; 标签</h2>
+<p>在 HTML 5 中，不支持 &lt;thead&gt; 标签的任何属性。</p>
+<p>&gt; <strong>注意：</strong> &lt;thead&gt; 内部必须拥有 &lt;tr&gt; 标签！</p>
+<p>&gt; <strong>注意：</strong> 如果您使用 thead、tfoot 以及 tbody</p>
+<p>&gt; 元素，您就必须使用全部的元素。它们的出现次序是：thead、tfoot、tbody，这样浏览器就可以在收到所有数据前呈现页脚了。您必须在 table</p>
+<p>&gt; 元素内部使用这些标签。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-time'>
+<h2>&lt;time&gt; 标签</h2>
+<p>&lt;time&gt; 标签是 HTML 5 中的新标签。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</TR></td></tr>
+<tr><td>datetime</td></tr>
+<tr><td><I>datetime</I></td></tr>
+<tr></tr>
+</table>
+<hr>
+</div>
+<div class='card' id='t-title'>
+<h2>&lt;title&gt; 标签</h2>
+<p>没有。</p>
+<p>&gt; <strong>注意：</strong> 一个文档中不能有一个以上的 &lt;title&gt; 元素。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-tr'>
+<h2>&lt;tr&gt; 标签</h2>
+<p>在 HTML 5 中，不支持 &lt;tr&gt; 标签的任何属性。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-tt'>
+<h2>&lt;tt&gt; 标签</h2>
+<p>在 HTML 5 中不支持 &lt;tt&gt; 标签。</p>
+<p>&gt; <strong>提示：</strong> 请使用 CSS 向元素添加样式。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-u'>
+<h2>&lt;u&gt; 标签</h2>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-ul'>
+<h2>&lt;ul&gt; 标签</h2>
+<p>在 HTML 4.01 中，ul 元素的 "compact" 和 "type" 属性是不被赞成使用的。在 HTML 5 中，不再支持这两个属性。</p>
+<p>&gt; <strong>提示：</strong> 请使用 CSS 来定义列表的类型。</p>
+<h3>功能定义</h3>
+<hr>
+</div>
+<div class='card' id='t-video'>
+<h2>&lt;video&gt; 标签</h2>
+<p>&lt;video&gt; 标签是 HTML 5 的新标签。</p>
+<p>&gt; <strong>提示：</strong> 可以在开始标签和结束标签之间放置文本内容，这样老的浏览器就可以显示出不支持该标签的信息。</p>
+<h3>功能定义</h3>
+<h3>属性列表</h3>
+<table>
+<tr><th>属性名</th><th>说明</th><th>HTML4</th><th>HTML5</th></tr>
+<tr><td>值</td></tr>
+<tr><td>描述</TR></td></tr>
+<tr><td>autoplay</td></tr>
+<tr><td>true</td><td>false</td></tr>
+<tr><td>如果是 true，则视频在就绪后马上播放。</TR></td></tr>
+<tr><td>controls</td></tr>
+<tr><td>true</td><td>false</td></tr>
+<tr><td>如果是 true，则向用户显示控件，比如播放按钮。</TR></td></tr>
+<tr><td>end</td></tr>
+<tr><td><I>numeric value</I></td></tr>
+<tr><td>定义播放器在视频流中的何处停止播放。默认地，声音会播放到结尾。</TR></td></tr>
+<tr><td>height</td></tr>
+<tr><td><I>pixels</I></td></tr>
+<tr><td>设置视频播放器的高度。</TR></td></tr>
+<tr><td>loopend</td></tr>
+<tr><td><I>numeric value</I></td></tr>
+<tr><th>定义在视频流中循环播放停止的位置，默认是 end 属性的值。</TR></th></tr>
+<tr><td>loopstart</td></tr>
+<tr><td><I>numeric value</I></td></tr>
+<tr><th>定义在视频流中循环播放的开始位置。默认是 start 属性的值</TR></th></tr>
+<tr><td>playcount</td></tr>
+<tr><td><I>numeric value</I></td></tr>
+<tr><td>定义视频片段播放多少次。默认是 1。</TR></td></tr>
+<tr><td>poster</td></tr>
+<tr><td><I>url</I></td></tr>
+<tr><td>在视频播放之前所显示的图片的 URL。</TR></td></tr>
+<tr><td>src</td></tr>
+<tr><td><I>url</I></td></tr>
+<tr><td>要播放的视频的 URL。</TR></td></tr>
+<tr><td>start</td></tr>
+<tr><td><I>numeric value</I></td></tr>
+<tr><td>定义播放器在音频流中开始播放的位置。默认地，声音在开头进行播放。</TR></td></tr>
+<tr><td>width</td></tr>
+<tr><td><I>pixels</I></td></tr>
+<tr><td>设置视频播放器的宽度。</TR></td></tr>
+</table>
+</div>
+</div></div>
+</body>
+</html>

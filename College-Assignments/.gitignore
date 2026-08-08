@@ -1,0 +1,52 @@
+# IDE and editor state
+.vs/
+.idea/
+.vscode/
+*.user
+*.suo
+
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# JavaScript dependencies
+node_modules/
+
+# Build output and generated binaries
+bin/
+obj/
+Debug/
+Release/
+build/
+dist/
+*.exe
+*.dll
+*.pdb
+*.ilk
+*.tlog
+*.obj
+*.idb
+*.lastbuildstate
+*.recipe
+*.lst
+*.log
+*.db
+*.sqlite
+
+# Toolchains, installers, and archives
+Arduino IDE/
+HBuilderX/
+Drivers/
+*.msi
+*.nipkg
+*.zip
+*.rar
+*.7z
+
+# Local user-specific project state
+*.23000
+*.Administrator
+*.Identifier
+~$*

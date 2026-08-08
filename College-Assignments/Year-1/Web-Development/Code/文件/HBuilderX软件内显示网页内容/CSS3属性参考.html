@@ -1,0 +1,5212 @@
+﻿<!DOCTYPE html>
+<html lang='zh-CN'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>CSS3 属性参考手册</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font:'Microsoft YaHei',sans-serif;background:#f5f5f5;color:#333}
+.header{background:linear-gradient(135deg,#1572b6,#0d5e9e);color:#fff;padding:18px 30px;position:fixed;top:0;left:0;right:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+.header h1{font-size:20px;margin-bottom:4px}
+.header p{font-size:13px;opacity:.8}
+.wrapper{display:flex;margin-top:75px;min-height:calc(100vh-75px)}
+.side{width:230px;background:#1a1a2e;position:fixed;top:75px;left:0;bottom:0;overflow-y:auto;padding:8px 0;z-index:50}
+.side h3{padding:8px 14px;font-size:13px;color:#f39c12;border-bottom:1px solid #333;margin:4px 0 0}
+.side a{display:block;padding:4px 14px 4px 20px;color:#888;text-decoration:none;font-size:12px;font-family:Consolas,monospace;transition:.2s}
+.side a:hover{color:#fff;background:#16213e}
+.main{margin-left:230px;flex:1;padding:25px 35px;max-width:980px}
+.card{background:#fff;border-radius:8px;padding:25px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.card h2{font-size:18px;color:#1572b6;border-bottom:2px solid #1572b6;padding-bottom:8px;margin-bottom:12px;font-family:Consolas,monospace}
+.card h3{font-size:16px;color:#555;margin:12px 0 6px}
+.card p{line-height:1.7;margin:6px 0;color:#444}
+.card pre.code{background:#f8f8f8;border:1px solid #ddd;border-left:3px solid #1572b6;border-radius:4px;padding:10px;font-family:Consolas,monospace;font-size:13px;overflow-x:auto;margin:8px 0}
+.card code{background:#e8f4fd;color:#1572b6;padding:2px 5px;border-radius:3px;font-size:13px;font-family:Consolas,monospace}
+.card blockquote{border-left:4px solid #1572b6;background:#f0f7fd;padding:8px 14px;margin:8px 0;border-radius:0 4px}
+.card ul{margin:4px 0 4px 18px}
+.card li{margin:3px 0;line-height:1.6}
+.card hr{border:none;border-top:1px solid #eee;margin:15px 0}
+.card strong{color:#1572b6}
+.badge{display:inline-block;background:#1572b6;color:#fff;padding:2px 10px;border-radius:10px;font-size:11px;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class='header'><h1>CSS3 属性参考手册</h1><p>共 178 个属性 · 自然语言版</p></div>
+<div class='wrapper'><div class='side'><h3>animation (8)</h3>
+<a href='#css-animation'>animation</a>
+<a href='#css-animation-delay'>animation-delay</a>
+<a href='#css-animation-direction'>animation-direction</a>
+<a href='#css-animation-duration'>animation-duration</a>
+<a href='#css-animation-iteration-count'>animation-iteration-count</a>
+<a href='#css-animation-name'>animation-name</a>
+<a href='#css-animation-play-state'>animation-play-state</a>
+<a href='#css-animation-timing-function'>animation-timing-function</a>
+<h3>background (10)</h3>
+<a href='#css-background'>background</a>
+<a href='#css-background-attachment'>background-attachment</a>
+<a href='#css-background-clip'>background-clip</a>
+<a href='#css-background-color'>background-color</a>
+<a href='#css-background-image'>background-image</a>
+<a href='#css-background-origin'>background-origin</a>
+<a href='#css-background-position'>background-position</a>
+<a href='#css-background-repeat'>background-repeat</a>
+<a href='#css-background-size'>background-size</a>
+<a href='#css-multiple-background'>multiple-background</a>
+<h3>border (32)</h3>
+<a href='#css-border'>border</a>
+<a href='#css-border-bottom'>border-bottom</a>
+<a href='#css-border-bottom-color'>border-bottom-color</a>
+<a href='#css-border-bottom-colors'>border-bottom-colors</a>
+<a href='#css-border-bottom-left-radius'>border-bottom-left-radius</a>
+<a href='#css-border-bottom-right-radius'>border-bottom-right-radius</a>
+<a href='#css-border-bottom-style'>border-bottom-style</a>
+<a href='#css-border-bottom-width'>border-bottom-width</a>
+<a href='#css-border-color'>border-color</a>
+<a href='#css-border-colors'>border-colors</a>
+<a href='#css-border-image'>border-image</a>
+<a href='#css-border-left'>border-left</a>
+<a href='#css-border-left-color'>border-left-color</a>
+<a href='#css-border-left-colors'>border-left-colors</a>
+<a href='#css-border-left-style'>border-left-style</a>
+<a href='#css-border-left-width'>border-left-width</a>
+<a href='#css-border-radius'>border-radius</a>
+<a href='#css-border-right'>border-right</a>
+<a href='#css-border-right-color'>border-right-color</a>
+<a href='#css-border-right-colors'>border-right-colors</a>
+<a href='#css-border-right-style'>border-right-style</a>
+<a href='#css-border-right-width'>border-right-width</a>
+<a href='#css-border-style'>border-style</a>
+<a href='#css-border-top'>border-top</a>
+<a href='#css-border-top-color'>border-top-color</a>
+<a href='#css-border-top-colors'>border-top-colors</a>
+<a href='#css-border-top-left-radius'>border-top-left-radius</a>
+<a href='#css-border-top-right-radius'>border-top-right-radius</a>
+<a href='#css-border-top-style'>border-top-style</a>
+<a href='#css-border-top-width'>border-top-width</a>
+<a href='#css-border-width'>border-width</a>
+<a href='#css-box-shadow'>box-shadow</a>
+<h3>color (2)</h3>
+<a href='#css-color'>color</a>
+<a href='#css-opacity'>opacity</a>
+<h3>content (4)</h3>
+<a href='#css-content'>content</a>
+<a href='#css-counter-increment'>counter-increment</a>
+<a href='#css-counter-reset'>counter-reset</a>
+<a href='#css-quotes'>quotes</a>
+<h3>dimension (6)</h3>
+<a href='#css-height'>height</a>
+<a href='#css-max-height'>max-height</a>
+<a href='#css-max-width'>max-width</a>
+<a href='#css-min-height'>min-height</a>
+<a href='#css-min-width'>min-width</a>
+<a href='#css-width'>width</a>
+<h3>font (7)</h3>
+<a href='#css-font'>font</a>
+<a href='#css-font-family'>font-family</a>
+<a href='#css-font-size'>font-size</a>
+<a href='#css-font-stretch'>font-stretch</a>
+<a href='#css-font-style'>font-style</a>
+<a href='#css-font-variant'>font-variant</a>
+<a href='#css-font-weight'>font-weight</a>
+<h3>layout (8)</h3>
+<a href='#css-clear'>clear</a>
+<a href='#css-clip'>clip</a>
+<a href='#css-display'>display</a>
+<a href='#css-float'>float</a>
+<a href='#css-overflow'>overflow</a>
+<a href='#css-overflow-x'>overflow-x</a>
+<a href='#css-overflow-y'>overflow-y</a>
+<a href='#css-visibility'>visibility</a>
+<h3>list (4)</h3>
+<a href='#css-list-style'>list-style</a>
+<a href='#css-list-style-image'>list-style-image</a>
+<a href='#css-list-style-position'>list-style-position</a>
+<a href='#css-list-style-type'>list-style-type</a>
+<h3>margin (5)</h3>
+<a href='#css-margin'>margin</a>
+<a href='#css-margin-bottom'>margin-bottom</a>
+<a href='#css-margin-left'>margin-left</a>
+<a href='#css-margin-right'>margin-right</a>
+<a href='#css-margin-top'>margin-top</a>
+<h3>media-queries (13)</h3>
+<a href='#css-aspect-ratio'>aspect-ratio</a>
+<a href='#css-color'>color</a>
+<a href='#css-color-index'>color-index</a>
+<a href='#css-device-aspect-ratio'>device-aspect-ratio</a>
+<a href='#css-device-height'>device-height</a>
+<a href='#css-device-width'>device-width</a>
+<a href='#css-grid'>grid</a>
+<a href='#css-height'>height</a>
+<a href='#css-monochrome'>monochrome</a>
+<a href='#css-orientation'>orientation</a>
+<a href='#css-resolution'>resolution</a>
+<a href='#css-scan'>scan</a>
+<a href='#css-width'>width</a>
+<h3>multi-column (13)</h3>
+<a href='#css-column-break-after'>column-break-after</a>
+<a href='#css-column-break-before'>column-break-before</a>
+<a href='#css-column-break-inside'>column-break-inside</a>
+<a href='#css-column-count'>column-count</a>
+<a href='#css-column-fill'>column-fill</a>
+<a href='#css-column-gap'>column-gap</a>
+<a href='#css-column-rule'>column-rule</a>
+<a href='#css-column-rule-color'>column-rule-color</a>
+<a href='#css-column-rule-style'>column-rule-style</a>
+<a href='#css-column-rule-width'>column-rule-width</a>
+<a href='#css-column-span'>column-span</a>
+<a href='#css-column-width'>column-width</a>
+<a href='#css-columns'>columns</a>
+<h3>only-ie (10)</h3>
+<a href='#css-behavior'>behavior</a>
+<a href='#css-filter'>filter</a>
+<a href='#css-scrollbar-3dlight-color'>scrollbar-3dlight-color</a>
+<a href='#css-scrollbar-arrow-color'>scrollbar-arrow-color</a>
+<a href='#css-scrollbar-base-color'>scrollbar-base-color</a>
+<a href='#css-scrollbar-darkshadow-color'>scrollbar-darkshadow-color</a>
+<a href='#css-scrollbar-face-color'>scrollbar-face-color</a>
+<a href='#css-scrollbar-highlight-color'>scrollbar-highlight-color</a>
+<a href='#css-scrollbar-shadow-color'>scrollbar-shadow-color</a>
+<a href='#css-scrollbar-track-color'>scrollbar-track-color</a>
+<h3>padding (5)</h3>
+<a href='#css-padding'>padding</a>
+<a href='#css-padding-bottom'>padding-bottom</a>
+<a href='#css-padding-left'>padding-left</a>
+<a href='#css-padding-right'>padding-right</a>
+<a href='#css-padding-top'>padding-top</a>
+<h3>positioning (6)</h3>
+<a href='#css-bottom'>bottom</a>
+<a href='#css-left'>left</a>
+<a href='#css-position'>position</a>
+<a href='#css-right'>right</a>
+<a href='#css-top'>top</a>
+<a href='#css-z-index'>z-index</a>
+<h3>printing (4)</h3>
+<a href='#css-page'>page</a>
+<a href='#css-page-break-after'>page-break-after</a>
+<a href='#css-page-break-before'>page-break-before</a>
+<a href='#css-page-break-inside'>page-break-inside</a>
+<h3>table (5)</h3>
+<a href='#css-border-collapse'>border-collapse</a>
+<a href='#css-border-spacing'>border-spacing</a>
+<a href='#css-caption-side'>caption-side</a>
+<a href='#css-empty-cells'>empty-cells</a>
+<a href='#css-table-layout'>table-layout</a>
+<h3>text (15)</h3>
+<a href='#css-direction'>direction</a>
+<a href='#css-letter-spacing'>letter-spacing</a>
+<a href='#css-line-height'>line-height</a>
+<a href='#css-tab-size'>tab-size</a>
+<a href='#css-text-align'>text-align</a>
+<a href='#css-text-decoration'>text-decoration</a>
+<a href='#css-text-indent'>text-indent</a>
+<a href='#css-text-overflow'>text-overflow</a>
+<a href='#css-text-shadow'>text-shadow</a>
+<a href='#css-text-transform'>text-transform</a>
+<a href='#css-unicode-bidi'>unicode-bidi</a>
+<a href='#css-vertical-align'>vertical-align</a>
+<a href='#css-white-space'>white-space</a>
+<a href='#css-word-spacing'>word-spacing</a>
+<a href='#css-word-wrap'>word-wrap</a>
+<h3>transform (2)</h3>
+<a href='#css-transform'>transform</a>
+<a href='#css-transform-origin'>transform-origin</a>
+<h3>transition (5)</h3>
+<a href='#css-transition'>transition</a>
+<a href='#css-transition-delay'>transition-delay</a>
+<a href='#css-transition-duration'>transition-duration</a>
+<a href='#css-transition-property'>transition-property</a>
+<a href='#css-transition-timing-function'>transition-timing-function</a>
+<h3>user-interface (14)</h3>
+<a href='#css-box-sizing'>box-sizing</a>
+<a href='#css-cursor'>cursor</a>
+<a href='#css-nav-down'>nav-down</a>
+<a href='#css-nav-index'>nav-index</a>
+<a href='#css-nav-left'>nav-left</a>
+<a href='#css-nav-right'>nav-right</a>
+<a href='#css-nav-up'>nav-up</a>
+<a href='#css-outline'>outline</a>
+<a href='#css-outline-color'>outline-color</a>
+<a href='#css-outline-offset'>outline-offset</a>
+<a href='#css-outline-style'>outline-style</a>
+<a href='#css-outline-width'>outline-width</a>
+<a href='#css-resize'>resize</a>
+<a href='#css-zoom'>zoom</a>
+</div><div class='main'><div class='card' id='css-animation'>
+<span class='badge'>animation</span>
+<h2>animation</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>复合属性。检索或设置对象所应用的动画特效。</strong> - 如果提供多组属性值，以逗号进行分隔。 - 对应的脚本特性为<strong>animation</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>animation</strong>：[[ animation-name ] || [ animation-duration ] || [ animation-timing-function ] || [ animation-delay ] || [ animation-iteration-count ] || [ animation-direction ]] [ , [ animation-name ] || [ animation-duration ] || [ animation-timing-function ] || [ animation-delay ] || [ animation-iteration-count ] || [ animation-direction ]]*</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;看每个独立属性&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ animation-play-state ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**[ animation-name ]：**</li>
+</ul>
+<p>: 检索或设置对象所应用的动画名称</p>
+<ul>
+<li>**[ animation-duration ]：**</li>
+</ul>
+<p>: 检索或设置对象动画的持续时间</p>
+<ul>
+<li>**[ animation-timing-function ]：**</li>
+</ul>
+<p>: 检索或设置对象动画的过渡类型</p>
+<ul>
+<li>**[ animation-delay ]：**</li>
+</ul>
+<p>: 检索或设置对象动画延迟的时间</p>
+<ul>
+<li>**[ animation-iteration-count ]：**</li>
+</ul>
+<p>: 检索或设置对象动画的循环次数</p>
+<ul>
+<li>**[ animation-direction ]：**</li>
+</ul>
+<p>: 检索或设置对象动画在循环中是否反向运动</p>
+<ul>
+<li>**[ animation-play-state ]：**</li>
+</ul>
+<p>: 检索或设置对象动画的状态。<em>w3c正考虑是否将该属性移除，因为动画的状态可以通过其它的方式实现，比如重设样式</em></p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-animation-delay'>
+<span class='badge'>animation</span>
+<h2>animation-delay</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象动画的延迟时间</strong> - 如果提供多个属性值，以逗号进行分隔。 - 对应的脚本特性为<strong>animationDelay</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>animation-delay</strong>：&lt;time&gt; [ , &lt;time&gt; ]*</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;0&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<time>：**</li>
+</ul>
+<p>: 指定对象动画延迟的时间</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-animation-direction'>
+<span class='badge'>animation</span>
+<h2>animation-direction</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象动画在循环中是否反向运动</strong> - 如果提供多个属性值，以逗号进行分隔。 - 对应的脚本特性为<strong>animationDirection</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>animation-direction</strong>：normal | alternate [ , normal | alternate ]*</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;normal&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**normal：**</li>
+</ul>
+<p>: 正常方向</p>
+<ul>
+<li>**alternate：**</li>
+</ul>
+<p>: 正常与反向交替</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-animation-duration'>
+<span class='badge'>animation</span>
+<h2>animation-duration</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象动画的持续时间</strong> - 如果提供多个属性值，以逗号进行分隔。 - 对应的脚本特性为<strong>animationDuration</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>animation-duration</strong>：&lt;time&gt; [ , &lt;time&gt; ]*</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;0&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<time>：**</li>
+</ul>
+<p>: 指定对象动画的持续时间</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-animation-iteration-count'>
+<span class='badge'>animation</span>
+<h2>animation-iteration-count</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象动画的循环次数</strong> - 如果提供多个属性值，以逗号进行分隔。 - 对应的脚本特性为<strong>animationIterationCount</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>animation-iteration-count</strong>：infinite | &lt;number&gt; [ , infinite | &lt;number&gt; ]*</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;1&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**infinite：**</li>
+</ul>
+<p>: 无限循环</p>
+<ul>
+<li>**<number>：**</li>
+</ul>
+<p>: 指定对象动画的具体循环次数</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-animation-name'>
+<span class='badge'>animation</span>
+<h2>animation-name</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象所应用的动画名称</strong>，必须与规则@keyframes配合使用，因为动画名称由@keyframes定义 - 如果提供多个属性值，以逗号进行分隔。 - 对应的脚本特性为<strong>animationName</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>animation-name</strong>：none | &lt;identifier&gt; [ , none | &lt;identifier&gt; ]*</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;none&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ @keyframes ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 不引用任何动画名称</p>
+<ul>
+<li>**<identifier>：**</li>
+</ul>
+<p>: identifier定义一个或多个动画名称</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-animation-play-state'>
+<span class='badge'>animation</span>
+<h2>animation-play-state</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象动画的状态</strong> - 如果提供多个属性值，以逗号进行分隔。 - 对应的脚本特性为<strong>animationPlayState</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>animation-play-state</strong>：running | paused [ , running | paused ]*</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;running&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**running：**</li>
+</ul>
+<p>: 运动</p>
+<ul>
+<li>**paused：**</li>
+</ul>
+<p>: 暂停</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-animation-timing-function'>
+<span class='badge'>animation</span>
+<h2>animation-timing-function</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象动画的过渡类型</strong> - 如果提供多个属性值，以逗号进行分隔。 - 对应的脚本特性为<strong>animationTimingFunction</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>animation-timing-function</strong>：linear | ease | ease-in | ease-out | ease-in-out | cubic-bezier(&lt;number&gt;, &lt;number&gt;, &lt;number&gt;, &lt;number&gt;) [ , linear | ease | ease-in | ease-out | ease-in-out | cubic-bezier(&lt;number&gt;, &lt;number&gt;, &lt;number&gt;, &lt;number&gt;) ]*</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;ease&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**linear：**</li>
+</ul>
+<p>: 线性过渡。等同于贝塞尔曲线(0.0, 0.0, 1.0, 1.0)</p>
+<ul>
+<li>**ease：**</li>
+</ul>
+<p>: 平滑过渡。等同于贝塞尔曲线(0.25, 0.1, 0.25, 1.0)</p>
+<ul>
+<li>**ease-in：**</li>
+</ul>
+<p>: 由慢到快。等同于贝塞尔曲线(0.42, 0, 1.0, 1.0)</p>
+<ul>
+<li>**ease-out：**</li>
+</ul>
+<p>: 由快到慢。等同于贝塞尔曲线(0, 0, 0.58, 1.0)</p>
+<ul>
+<li>**ease-in-out：**</li>
+</ul>
+<p>: 由慢到快再到慢。等同于贝塞尔曲线(0.42, 0, 0.58, 1.0)</p>
+<ul>
+<li>**cubic-bezier(<number>, <number>, <number>, <number>)：**</li>
+</ul>
+<p>: 特定的贝塞尔曲线类型，4个数值需在[0, 1]区间内</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+</div>
+<div class='card' id='css-background'>
+<span class='badge'>background</span>
+<h2>background</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>复合属性。设置对象的背景特性。</strong> - 如使用该复合属性定义其单个参数，则其他参数的默认值将无条件覆盖各自对应的单个属性设置。 - 对应的脚本特性为<strong>background</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>background</strong>：[ background-color ] || [ background-image ] || [ background-repeat ] || [ background-attachment ] || [ background-position ]</p>
+<p><strong>相关属性</strong>：[ background-origin ] || [ background-clip ] || [ background-size ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**[ background-color ]：**</li>
+</ul>
+<p>: 指定对象的背景颜色。</p>
+<ul>
+<li>**[ background-image ]：**</li>
+</ul>
+<p>: 指定对象的背景图像。可以是真实图片路径或使用渐变创建的“背景图像”</p>
+<ul>
+<li>**[ background-repeat ]：**</li>
+</ul>
+<p>: 指定对象的背景图像如何铺排填充。</p>
+<ul>
+<li>**[ background-attachment ]：**</li>
+</ul>
+<p>: 指定对象的背景图像是随对象内容滚动还是固定的。</p>
+<ul>
+<li>**[ background-position ]：**</li>
+</ul>
+<p>: 指定对象的背景图像位置。</p>
+<ul>
+<li>**[ background-origin ]：**</li>
+</ul>
+<p>: 指定对象的背景图像显示的原点。</p>
+<ul>
+<li>**[ background-clip ]：**</li>
+</ul>
+<p>: 指定对象的背景图像向外裁剪的区域。</p>
+<ul>
+<li>**[ background-size ]：**</li>
+</ul>
+<p>: 指定对象的背景图像的尺寸大小。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-background-attachment'>
+<span class='badge'>background</span>
+<h2>background-attachment</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索背景图像是随对象内容滚动还是固定的。必须先指定background-image属性。</strong> - 对应的脚本特性为<strong>backgroundAttachment</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>background-attachment</strong>：&lt;attachment&gt; [ , &lt;attachment&gt; ]*</p>
+<p><strong>&lt;attachment&gt;</strong> = fixed | local | scroll</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;scroll&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**fixed：**</li>
+</ul>
+<p>: 背景图像相对于窗体固定。</p>
+<ul>
+<li>**scroll：**</li>
+</ul>
+<p>: 背景图像相对于元素固定，也就是说当元素内容滚动时背景图像不会跟着滚动，因为背景图像总是要跟着元素本身。但会随元素的祖先元素或窗体一起滚动。</p>
+<ul>
+<li>**local：**</li>
+</ul>
+<p>: 背景图像相对于元素内容固定，也就是说当元素随元素滚动时背景图像也会跟着滚动，因为背景图像总是要跟着内容。（CSS3）</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-background-clip'>
+<span class='badge'>background</span>
+<h2>background-clip</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>指定对象的背景图像向外裁剪的区域。</strong> - 对应的脚本特性为<strong>backgroundClip</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>background-clip</strong>：&lt;box&gt; [ , &lt;box&gt; ]*</p>
+<p><strong>&lt;box&gt;</strong> = border-box | padding-box | content-box</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;border-box&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**padding-box：**</li>
+</ul>
+<p>: 从padding区域（不含padding）开始向外裁剪背景。</p>
+<ul>
+<li>**border-box：**</li>
+</ul>
+<p>: 从border区域（不含border）开始向外裁剪背景。</p>
+<ul>
+<li>**content-box：**</li>
+</ul>
+<p>: 从content区域开始向外裁剪背景。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-background-color'>
+<span class='badge'>background</span>
+<h2>background-color</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的背景颜色。</strong> - 当同时定义了背景颜色和背景图像时，背景图像覆盖在背景颜色之上。 - 如果设置了background-image，同时也建议作者设置background-color用于当背景图像不可见时保持与文本一定的对比。 - 对应的脚本特性为<strong>backgroundColor</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>background-color</strong>：&lt;color&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;transparent&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<color>：**</li>
+</ul>
+<p>: 指定颜色。请参阅颜色值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-background-image'>
+<span class='badge'>background</span>
+<h2>background-image</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的背景图像。</strong> - 如果设置了background-image，同时也建议作者设置background-color用于当背景图像不可见时保持与文本一定的对比。 - 对应的脚本特性为<strong>backgroundImage</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>background-image</strong>：&lt;bg-image&gt; [ , &lt;bg-image&gt; ]*</p>
+<p><strong>&lt;bg-image&gt;</strong> = none | &lt;url&gt; | &lt;linear-gradient&gt; | &lt;radial-gradient&gt; | &lt;repeating-linear-gradient&gt; | &lt;repeating-radial-gradient&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;none&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 无背景图。</p>
+<ul>
+<li>**<url>：**</li>
+</ul>
+<p>: 使用绝对或相对地址指定背景图像。</p>
+<ul>
+<li>**<linear-gradient>：**</li>
+</ul>
+<p>: 使用线性渐变创建背景图像。（CSS3）</p>
+<ul>
+<li>**<radial-gradient>：**</li>
+</ul>
+<p>: 使用径向(放射性)渐变创建背景图像。（CSS3）</p>
+<ul>
+<li>**<repeating-linear-gradient>：**</li>
+</ul>
+<p>: 使用重复的线性渐变创建背景图像。（CSS3）</p>
+<ul>
+<li>**<repeating-radial-gradient>：**</li>
+</ul>
+<p>: 使用重复的径向(放射性)渐变创建背景图像。（CSS3）</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-background-origin'>
+<span class='badge'>background</span>
+<h2>background-origin</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的背景图像计算background-position时的参考原点(位置)。</strong> - 对应的脚本特性为<strong>backgroundOrigin</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>background-origin</strong>：&lt;box&gt; [ , &lt;box&gt; ]*</p>
+<p><strong>&lt;box&gt;</strong> = border-box | padding-box | content-box</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;padding-box&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**padding-box：**</li>
+</ul>
+<p>: 从padding区域（含padding）开始显示背景图像。</p>
+<ul>
+<li>**border-box：**</li>
+</ul>
+<p>: 从border区域（含border）开始显示背景图像。</p>
+<ul>
+<li>**content-box：**</li>
+</ul>
+<p>: 从content区域开始显示背景图像。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-background-position'>
+<span class='badge'>background</span>
+<h2>background-position</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的背景图像位置。必须先指定background-image属性。</strong> - 该属性提供2个参数值。 - 如果提供两个，第一个用于横坐标，第二个用于纵坐标。 - 如果只提供一个，该值将用于横坐标；纵坐标将默认为50%。 - 对应的脚本特性为<strong>backgroundPosition</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>background-position</strong>：&lt;bg-position&gt; [ , &lt;bg-position&gt; ]*</p>
+<p><strong>&lt;bg-position&gt;</strong> = [ &lt;percentage&gt; | &lt;length&gt; | left | center① | right ] [ &lt;percentage&gt; | &lt;length&gt; | top | center② | bottom ]?</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;0% 0%&lt;/mark&gt;，效果等同于left top</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比指定背景图像填充的位置。可以为负值。</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值指定背景图像填充的位置。可以为负值。</p>
+<ul>
+<li>**left：**</li>
+</ul>
+<p>: 背景图像在横向上填充从左边开始。</p>
+<ul>
+<li>**center①：**</li>
+</ul>
+<p>: 背景图像在横向上填充从中间开始。</p>
+<ul>
+<li>**right：**</li>
+</ul>
+<p>: 背景图像在横向上填充从右边开始。</p>
+<ul>
+<li>**top：**</li>
+</ul>
+<p>: 背景图像在纵向上填充从顶部开始。</p>
+<ul>
+<li>**center②：**</li>
+</ul>
+<p>: 背景图像在纵向上填充从中间开始。</p>
+<ul>
+<li>**bottom：**</li>
+</ul>
+<p>: 背景图像在纵向上填充从底部开始。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-background-repeat'>
+<span class='badge'>background</span>
+<h2>background-repeat</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的背景图像如何铺排填充。必须先指定background-image属性。</strong> - 允许提供2个参数，如果提供全部2个参数，第1个用于横向，第二个用于纵向。 - 如果只提供1个参数，则用于横向和纵向。<em>特殊值repeat-x和repeat-y除外，因为repeat-x相当于repeat no-repeat，repeat-y相当于no-repeat repeat，即其实repeat-x和repeat-y等价于提供了2个参数值</em> - 对应的脚本特性为<strong>backgroundRepeat</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>background-repeat</strong>：&lt;repeat-style&gt; [ , &lt;repeat-style&gt; ]*</p>
+<p><strong>&lt;repeat-style&gt;</strong> = repeat-x | repeat-y | [repeat | space | round | no-repeat]{1,2}</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;repeat&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**repeat-x：**</li>
+</ul>
+<p>: 背景图像在横向上平铺</p>
+<ul>
+<li>**repeat-y：**</li>
+</ul>
+<p>: 背景图像在纵向上平铺</p>
+<ul>
+<li>**repeat：**</li>
+</ul>
+<p>: 背景图像在横向和纵向平铺</p>
+<ul>
+<li>**no-repeat：**</li>
+</ul>
+<p>: 背景图像不平铺</p>
+<ul>
+<li>**round：**</li>
+</ul>
+<p>: 背景图像自动缩放直到适应且填充满整个容器。（CSS3）</p>
+<ul>
+<li>**space：**</li>
+</ul>
+<p>: 背景图像以相同的间距平铺且填充满整个容器或某个方向。（CSS3）</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-background-size'>
+<span class='badge'>background</span>
+<h2>background-size</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象的背景图像的尺寸大小。</strong> - 该属性提供2个参数值(特性值cover和contain除外)。 - 如果提供两个，第一个用于定义背景图像的宽度，第二个用于定义背景图像的高度。 - 如果只提供一个，该值将用于定义背景图像的宽度，第2个值默认为auto，即高度为auto，此时背景图以提供的宽度作为参照来进行等比缩放。 - 对应的脚本特性为<strong>backgroundSize</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>background-size</strong>：&lt;bg-size&gt; [ , &lt;bg-size&gt; ]*</p>
+<p><strong>&lt;bg-size&gt;</strong> = [ &lt;length&gt; | &lt;percentage&gt; | auto ]{1,2} | cover | contain</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;auto&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值指定背景图像大小。不允许负值。</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比指定背景图像大小。不允许负值。</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 背景图像的真实大小。</p>
+<ul>
+<li>**cover：**</li>
+</ul>
+<p>: 将背景图像等比缩放到完全覆盖容器，背景图像有可能超出容器。</p>
+<ul>
+<li>**contain：**</li>
+</ul>
+<p>: 将背景图像等比缩放到宽度或高度与容器的宽度或高度相等，背景图像始终被包含在容器内。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-multiple-background'>
+<span class='badge'>background</span>
+<h2>multiple-background</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>复合属性。检索或设置对象的多重背景图像（背景色background-color不能设置多重）。</strong> - 一个元素可以设置多重背景图像。 - 每组属性间使用逗号分隔。 - 如果设置的多重背景图之间存在着交集（即存在着重叠关系），前面的背景图会覆盖在后面的背景图之上。 - <strong>示例：假设要在同一个元素上定义3个背景图像</strong> <strong>缩写方式：</strong> &lt;blockquote class="gquote-cont"&gt; <code>background:url(test1.jpg) no-repeat scroll 10px 20px,url(test2.jpg) no-repeat scroll 50px 60px,url(test3.jpg) no-repeat scroll 90px 100px; background-origin:content-box,content-box,content-box; background-clip:padding-box,padding-box,padding-box; background-size:50px 60px,50px 60px,50px 60px;</code> `<code>&lt;/blockquote&gt; <strong>拆分方式：</strong> &lt;blockquote class="gquote-cont"&gt; </code>background-image:url(test1.jpg),url(test2.jpg),url(test3.jpg); background-repeat:no-repeat,no-repeat,no-repeat; background-attachment:scroll,scroll,scroll; background-repeat:10px 20px,50px 60px,90px 100px; background-origin:content-box,content-box,content-box; background-clip:padding-box,padding-box,padding-box; background-size:50px 60px,50px 60px,50px 60px;<code> </code><code>&lt;/blockquote&gt; - 如果定义了多个背景图片，而其他属性只有一个参数值，则表明所有背景图片的该属性都应用同一个参数值。据此可以对上面的例子进行缩写： <strong>缩写方式：</strong> &lt;blockquote class="gquote-cont"&gt; </code>background:url(test1.jpg) no-repeat scroll 10px 20px,url(test2.jpg) no-repeat scroll 50px 60px,url(test3.jpg) no-repeat scroll 90px 100px; background-origin:content-box; background-clip:padding-box; background-size:50px 60px;<code> </code><code>&lt;/blockquote&gt; <strong>拆分方式：</strong> &lt;blockquote class="gquote-cont"&gt; </code>background-image:url(test1.jpg),url(test2.jpg),url(test3.jpg); background-repeat:no-repeat; background-attachment:scroll; background-repeat:10px 20px,50px 60px,90px 100px; background-origin:content-box; background-clip:padding-box; background-size:50px 60px;<code> </code>`&lt;/blockquote&gt; &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>background</strong>：[ background-image ] || [ background-repeat ] || [ background-attachment ] || [ background-position ]</p>
+<p><strong>相关属性</strong>：[ background-origin ] || [ background-clip ] || [ background-size ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**[ background-image ]：**</li>
+</ul>
+<p>: 指定对象的背景图像。可以是真实图片路径或使用渐变创建的“背景图像”</p>
+<ul>
+<li>**[ background-repeat ]：**</li>
+</ul>
+<p>: 指定对象的背景图像如何铺排填充。</p>
+<ul>
+<li>**[ background-attachment ]：**</li>
+</ul>
+<p>: 指定对象的背景图像是随对象内容滚动还是固定的。</p>
+<ul>
+<li>**[ background-position ]：**</li>
+</ul>
+<p>: 指定对象的背景图像位置。</p>
+<ul>
+<li>**[ background-origin ]：**</li>
+</ul>
+<p>: 指定对象的背景图像显示的原点。</p>
+<ul>
+<li>**[ background-clip ]：**</li>
+</ul>
+<p>: 指定对象的背景图像向外裁剪的区域。</p>
+<ul>
+<li>**[ background-size ]：**</li>
+</ul>
+<p>: 指定对象的背景图像的尺寸大小。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+</div>
+<div class='card' id='css-border'>
+<span class='badge'>border</span>
+<h2>border</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>复合属性。设置对象边框的特性。</strong>参阅outline属性。 - 如使用该复合属性定义其单个参数，则其他参数的默认值将无条件覆盖各自对应的单个属性设置。 - 对应的脚本特性为<strong>border</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border</strong>：[ border-width ] || [ border-style ] || [ border-color ]</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;看每个独立属性&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ border-top ] || [ border-right ] || [ border-bottom ] || [ border-left ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**[ border-width ]：**</li>
+</ul>
+<p>: 设置或检索对象边框宽度。</p>
+<ul>
+<li>**[ border-style ]：**</li>
+</ul>
+<p>: 设置或检索对象边框样式。</p>
+<ul>
+<li>**[ border-color ]：**</li>
+</ul>
+<p>: 设置或检索对象边框颜色。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-bottom'>
+<span class='badge'>border</span>
+<h2>border-bottom</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>复合属性。设置对象底部边框的特性。</strong>参阅border属性。 - 如使用该复合属性定义其单个参数，则其他参数的默认值将无条件覆盖各自对应的单个属性设置。 - 对应的脚本特性为<strong>borderBottom</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-bottom</strong>：[ border-bottom-width ] || [ border-bottom-style ] || [ border-bottom-color ]</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;看每个独立属性&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ border ] || [ border-top ] || [ border-right ] || [ border-left ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**[ border-bottom-width ]：**</li>
+</ul>
+<p>: 设置或检索对象的底部边框宽度。</p>
+<ul>
+<li>**[ border-bottom-style ]：**</li>
+</ul>
+<p>: 设置或检索对象的底部边框样式。</p>
+<ul>
+<li>**[ border-bottom-color ]：**</li>
+</ul>
+<p>: 设置或检索对象的底部边框颜色。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-bottom-color'>
+<span class='badge'>border</span>
+<h2>border-bottom-color</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的底部边框颜色。</strong>参阅border-bottom-colors属性。 - 如果border-width等于0或border-style设置为none，本属性将被忽略。 - 对应的脚本特性为<strong>borderBottomColor</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-bottom-color</strong>：&lt;color&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;采用文本颜色&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ border-color ] || [ border-top-color ] || [ border-right-color ] || [ border-left-color ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<color>：**</li>
+</ul>
+<p>: 指定颜色。请参阅颜色值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-bottom-colors'>
+<span class='badge'>border</span>
+<h2>border-bottom-colors</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象底部边框的多重颜色。</strong>参阅border-bottom-color属性。 - border的width为(n)px，那么最多可以设置n组边框色，每组边框色宽度为1px；如果border的width为10px，却只设置了6组边框色，那么最后一组边框色将自动渲染剩余的宽度 - 对应的脚本特性为<strong>borderBottomColors</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-bottom-colors</strong>：&lt;color&gt; [, &lt;color&gt; ]*</p>
+<p><strong>相关属性</strong>：[ border-top-colors ] || [ border-right-colors ] || [ border-left-colors ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<color>：**</li>
+</ul>
+<p>: 指定颜色。请参阅颜色值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-bottom-left-radius'>
+<span class='badge'>border</span>
+<h2>border-bottom-left-radius</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的左下角圆角边框。提供2个参数，2个参数以空格分隔，每个参数允许设置1个参数值，第1个参数表示水平半径，第2个参数表示垂直半径，如第2个参数省略，则默认等于第1个参数</strong> - 如设置border-bottom-left-radius:5px 10px;表示bottom-left这个角的水平圆角半径为5px，垂直圆角半径为10px。 - 对应的脚本特性为<strong>borderBottomLeftRadius</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-bottom-left-radius</strong>：[ &lt;length&gt; | &lt;percentage&gt; ] [ &lt;length&gt; | &lt;percentage&gt; ]?</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;0&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值设置对象的左下角(bottom-left)圆角半径长度。不允许负值</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比设置对象的左上角(bottom-left)圆角半径长度。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-bottom-right-radius'>
+<span class='badge'>border</span>
+<h2>border-bottom-right-radius</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的右下角圆角边框。提供2个参数，2个参数以空格分隔，每个参数允许设置1个参数值，第1个参数表示水平半径，第2个参数表示垂直半径，如第2个参数省略，则默认等于第1个参数</strong> - 如设置border-bottom-right-radius:5px 10px;表示bottom-right这个角的水平圆角半径为5px，垂直圆角半径为10px。 - 对应的脚本特性为<strong>borderBottomRightRadius</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-bottom-right-radius</strong>：[ &lt;length&gt; | &lt;percentage&gt; ] [ &lt;length&gt; | &lt;percentage&gt; ]?</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;0&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值设置对象的右下角(bottom-right)圆角半径长度。不允许负值</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比设置对象的左上角(bottom-right)圆角半径长度。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-bottom-style'>
+<span class='badge'>border</span>
+<h2>border-bottom-style</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的底部边框样式。</strong> - 如果border-width等于0，本属性将失去作用。 - 对应的脚本特性为<strong>borderBottomStyle</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-bottom-style</strong>：&lt;border-style&gt;</p>
+<p><strong>&lt;border-style&gt;</strong> = none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;	none&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ border-style ] || [ border-top-style ] || [ border-right-style ] || [ border-left-style ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 无轮廓。border-color与border-width将被忽略</p>
+<ul>
+<li>**hidden：**</li>
+</ul>
+<p>: 隐藏边框。<em>IE7及以下尚不支持</em></p>
+<ul>
+<li>**dotted：**</li>
+</ul>
+<p>: 点状轮廓。<em>IE6下显示为dashed效果</em></p>
+<ul>
+<li>**dashed：**</li>
+</ul>
+<p>: 虚线轮廓。</p>
+<ul>
+<li>**solid：**</li>
+</ul>
+<p>: 实线轮廓</p>
+<ul>
+<li>**double：**</li>
+</ul>
+<p>: 双线轮廓。两条单线与其间隔的和等于指定的border-width值</p>
+<ul>
+<li>**groove：**</li>
+</ul>
+<p>: 3D凹槽轮廓。</p>
+<ul>
+<li>**ridge：**</li>
+</ul>
+<p>: 3D凸槽轮廓。</p>
+<ul>
+<li>**inset：**</li>
+</ul>
+<p>: 3D凹边轮廓。</p>
+<ul>
+<li>**outset：**</li>
+</ul>
+<p>: 3D凸边轮廓。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-bottom-width'>
+<span class='badge'>border</span>
+<h2>border-bottom-width</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的底部边框宽度。</strong> - 如果border-style设置为none，本属性将失去作用。 - 对应的脚本特性为<strong>borderBottomWidth</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-bottom-width</strong>：&lt;border-width&gt;</p>
+<p><strong>&lt;border-width&gt;</strong> = &lt;length&gt; | thin | medium | thick</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;medium&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ border-width ] || [ border-top-width ] || [ border-right-width ] || [ border-left-width ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义边框的厚度。不允许负值</p>
+<ul>
+<li>**medium：**</li>
+</ul>
+<p>: 定义默认厚度的边框。</p>
+<ul>
+<li>**thin：**</li>
+</ul>
+<p>: 定义比默认厚度细的边框。</p>
+<ul>
+<li>**thick：**</li>
+</ul>
+<p>: 定义比默认厚度粗的边框。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-color'>
+<span class='badge'>border</span>
+<h2>border-color</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的边框颜色。</strong>参阅border-colors属性。 - 如果提供全部四个参数值，将按上、右、下、左的顺序作用于四边。 - 如果只提供一个，将用于全部的四边。 - 如果提供两个，第一个用于上、下，第二个用于左、右。 - 如果提供三个，第一个用于上，第二个用于左、右，第三个用于下。 - 如果border-width等于0或border-style设置为none，本属性将被忽略。 - 对应的脚本特性为<strong>borderColor</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-color</strong>：&lt;color&gt;{1,4}</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;看每个独立属性&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ border-top-color ] || [ border-right-color ] || [ border-bottom-color ] || [ border-left-color ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<color>：**</li>
+</ul>
+<p>: 指定颜色。请参阅颜色值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-colors'>
+<span class='badge'>border</span>
+<h2>border-colors</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象边框的多重颜色。</strong>参阅border-color属性。 - border的width为(n)px，那么最多可以设置n组边框色，每组边框色宽度为1px；如果border的width为10px，却只设置了6组边框色，那么最后一组边框色将自动渲染剩余的宽度 - <em>本属性为伪属性</em>，其分裂后的border-top-colors, border-right-colors, border-bottom-colors, border-left-colors才是有效属性。 &lt;/section&gt; &lt;section id="example" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-colors</strong>：&lt;color&gt;</p>
+<p><strong>相关属性</strong>：[ border-top-colors ] || [ border-right-colors ] || [ border-bottom-colors ] || [ border-left-colors ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<color>：**</li>
+</ul>
+<p>: 指定颜色。请参阅颜色值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-image'>
+<span class='badge'>border</span>
+<h2>border-image</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的边框样式使用图像来填充。</strong> - 使用图像替代border-style去定义边框样式。当border-image为none或图像不可见时，将会显示border-style所定义的边框样式效果。 - 对应的脚本特性为<strong>borderImage</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-image</strong>：&lt;border-image-source&gt; || &lt;border-image-slice&gt; [ / &lt;border-image-width&gt;? [ / &lt;border-image-outset&gt; ]? ]? || &lt;border-image-repeat&gt;</p>
+<p><strong>为了方便理解border-image的取值，可将border-image理解成由以下5个伪属性组成：</strong></p>
+<p>-</p>
+<p><strong>border-image-source</strong> : none | &lt;url&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;none&lt;/mark&gt;</p>
+<p>该属性用于指定是否用图像定义边框样式或图像来源路径。</p>
+<p>-</p>
+<p><strong>border-image-slice</strong> : [ &lt;number&gt; | &lt;percentage&gt; ]{1,4} &amp;&amp; fill?</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;100%&lt;/mark&gt;</p>
+<p>该属性用于指定对边框背景图的分割方式</p>
+<p><em>写本文档时尚无浏览器支持参数值 fill 关键字</em></p>
+<p>-</p>
+<p><strong>border-image-width</strong> : [ &lt;length&gt; | &lt;percentage&gt; | &lt;number&gt; | auto ]{1,4}</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;1&lt;/mark&gt;</p>
+<p>该属性用于指定边框宽度。该属性可省略，由外部的border-width来定义</p>
+<p><em>写本文档时所有浏览器只支持&lt;length&gt;类型的参数值</em></p>
+<p><em>也可以省略此属性，在外部用border-width属性来设置该值</em></p>
+<p>-</p>
+<p><strong>border-image-outset</strong> : [ &lt;length&gt; | &lt;number&gt; ]{1,4}</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;0&lt;/mark&gt;</p>
+<p>该属性用于指定对边框背景图的扩展</p>
+<p><em>写本文档时尚无浏览器支持该属性</em></p>
+<p>-</p>
+<p><strong>border-image-repeat</strong> : [ stretch | repeat | round ]{1,2}</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;stretch&lt;/mark&gt;</p>
+<p>该属性用于指定边框背景图的填充方式。可定义0-2个参数值，即水平和垂直方向。如果2个值相同，可合并成1个，表示水平和垂直方向都用相同的方式填充边框背景图；如果2个值都为stretch，则可省略不写。</p>
+<p><em>写本文档时Opera尚不支持该属性，但却默认使用了stretch的效果</em></p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 无背景图片。</p>
+<ul>
+<li>**<url>：**</li>
+</ul>
+<p>: 使用绝对或相对地址指定图像。</p>
+<ul>
+<li>**<number>：**</li>
+</ul>
+<p>: 用浮点数指定宽度。不允许负值。</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比指定宽度。不允许负值。</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值指定宽度。不允许负值。</p>
+<ul>
+<li>**stretch：**</li>
+</ul>
+<p>: 指定用拉伸方式来填充边框背景图。</p>
+<ul>
+<li>**repeat：**</li>
+</ul>
+<p>: 指定用平铺方式来填充边框背景图。当图片碰到边界时，如果超过则被截断。</p>
+<ul>
+<li>**round：**</li>
+</ul>
+<p>: 指定用平铺方式来填充边框背景图。图片会根据边框的尺寸动态调整图片的大小直至正好可以铺满整个边框。<em>写本文档时仅Firefox能看到该效果</em></p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-left'>
+<span class='badge'>border</span>
+<h2>border-left</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>复合属性。设置对象底部边框的特性。</strong>参阅border属性。 - 如使用该复合属性定义其单个参数，则其他参数的默认值将无条件覆盖各自对应的单个属性设置。 - 对应的脚本特性为<strong>borderLeft</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-left</strong>：[ border-left-width ] || [ border-left-style ] || [ border-left-color ]</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;看每个独立属性&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ border ] || [ border-top ] || [ border-right ] || [ border-bottom ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**[ border-left-width ]：**</li>
+</ul>
+<p>: 设置或检索对象的左边边框宽度。</p>
+<ul>
+<li>**[ border-left-style ]：**</li>
+</ul>
+<p>: 设置或检索对象的左边边框样式。</p>
+<ul>
+<li>**[ border-left-color ]：**</li>
+</ul>
+<p>: 设置或检索对象的左边边框颜色。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-left-color'>
+<span class='badge'>border</span>
+<h2>border-left-color</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的左边边框颜色。</strong>参阅border-left-colors属性。 - 如果border-width等于0或border-style设置为none，本属性将被忽略。 - 对应的脚本特性为<strong>borderLeftColor</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-left-color</strong>：&lt;color&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;采用文本颜色&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ border-color ] || [ border-top-color ] || [ border-right-color ] || [ border-bottom-color ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<color>：**</li>
+</ul>
+<p>: 指定颜色。请参阅颜色值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-left-colors'>
+<span class='badge'>border</span>
+<h2>border-left-colors</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象左边边框的多重颜色。</strong>参阅border-left-color属性。 - border的width为(n)px，那么最多可以设置n组边框色，每组边框色宽度为1px；如果border的width为10px，却只设置了6组边框色，那么最后一组边框色将自动渲染剩余的宽度 - 对应的脚本特性为<strong>borderLeftColors</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-left-colors</strong>：&lt;color&gt; [, &lt;color&gt; ]*</p>
+<p><strong>相关属性</strong>：[ border-top-colors ] || [ border-right-colors ] || [ border-bottom-colors ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<color>：**</li>
+</ul>
+<p>: 指定颜色。请参阅颜色值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-left-style'>
+<span class='badge'>border</span>
+<h2>border-left-style</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的左边边框样式。</strong> - 如果border-width等于0，本属性将失去作用。 - 对应的脚本特性为<strong>borderLeftStyle</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-left-style</strong>：&lt;border-style&gt;</p>
+<p><strong>&lt;border-style&gt;</strong> = none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;	none&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ border-style ] || [ border-top-style ] || [ border-right-style ] || [ border-bottom-style ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 无轮廓。border-color与border-width将被忽略</p>
+<ul>
+<li>**hidden：**</li>
+</ul>
+<p>: 隐藏边框。<em>IE7及以下尚不支持</em></p>
+<ul>
+<li>**dotted：**</li>
+</ul>
+<p>: 点状轮廓。<em>IE6下显示为dashed效果</em></p>
+<ul>
+<li>**dashed：**</li>
+</ul>
+<p>: 虚线轮廓。</p>
+<ul>
+<li>**solid：**</li>
+</ul>
+<p>: 实线轮廓</p>
+<ul>
+<li>**double：**</li>
+</ul>
+<p>: 双线轮廓。两条单线与其间隔的和等于指定的border-width值</p>
+<ul>
+<li>**groove：**</li>
+</ul>
+<p>: 3D凹槽轮廓。</p>
+<ul>
+<li>**ridge：**</li>
+</ul>
+<p>: 3D凸槽轮廓。</p>
+<ul>
+<li>**inset：**</li>
+</ul>
+<p>: 3D凹边轮廓。</p>
+<ul>
+<li>**outset：**</li>
+</ul>
+<p>: 3D凸边轮廓。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-left-width'>
+<span class='badge'>border</span>
+<h2>border-left-width</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的左边边框宽度。</strong> - 如果border-style设置为none，本属性将失去作用。 - 对应的脚本特性为<strong>borderLeftWidth</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-left-width</strong>：&lt;border-width&gt;</p>
+<p><strong>&lt;border-width&gt;</strong> = &lt;length&gt; | thin | medium | thick</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;medium&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ border-width ] || [ border-top-width ] || [ border-right-width ] || [ border-bottom-width ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义边框的厚度。不允许负值</p>
+<ul>
+<li>**medium：**</li>
+</ul>
+<p>: 定义默认厚度的边框。</p>
+<ul>
+<li>**thin：**</li>
+</ul>
+<p>: 定义比默认厚度细的边框。</p>
+<ul>
+<li>**thick：**</li>
+</ul>
+<p>: 定义比默认厚度粗的边框。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-radius'>
+<span class='badge'>border</span>
+<h2>border-radius</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象使用圆角边框。提供2个参数，2个参数以“/”分隔，每个参数允许设置1~4个参数值，第1个参数表示水平半径，第2个参数表示垂直半径，如第2个参数省略，则默认等于第1个参数</strong> - 水平半径：如果提供全部四个参数值，将按上左(top-left)、上右(top-right)、下右(bottom-right)、下左(bottom-left)的顺序作用于四个角。 - 如果只提供一个，将用于全部的于四个角。 - 如果提供两个，第一个用于上左(top-left)、下右(bottom-right)，第二个用于上右(top-right)、下左(bottom-left)。 - 如果提供三个，第一个用于上左(top-left)，第二个用于上右(top-right)、下左(bottom-left)，第三个用于下右(bottom-right)。 - 垂直半径也遵循以上4点。 - 对应的脚本特性为<strong>borderRadius</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-radius</strong>：[ &lt;length&gt; | &lt;percentage&gt; ]{1,4} [ / [ &lt;length&gt; | &lt;percentage&gt; ]{1,4} ]?</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;0&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值设置对象的圆角半径长度。不允许负值</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比设置对象的圆角半径长度。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-right'>
+<span class='badge'>border</span>
+<h2>border-right</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>复合属性。设置对象右边边框的特性。</strong>参阅border属性。 - 如使用该复合属性定义其单个参数，则其他参数的默认值将无条件覆盖各自对应的单个属性设置。 - 对应的脚本特性为<strong>borderRight</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-right</strong>：[ border-right-width ] || [ border-right-style ] || [ border-right-color ]</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;看每个独立属性&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ border ] || [ border-top ] || [ border-bottom ] || [ border-left ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**[ border-right-width ]：**</li>
+</ul>
+<p>: 设置或检索对象的右边边框宽度。</p>
+<ul>
+<li>**[ border-right-style ]：**</li>
+</ul>
+<p>: 设置或检索对象的右边边框样式。</p>
+<ul>
+<li>**[ border-right-color ]：**</li>
+</ul>
+<p>: 设置或检索对象的右边边框颜色。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-right-color'>
+<span class='badge'>border</span>
+<h2>border-right-color</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的右边边框颜色。</strong>参阅border-right-colors属性。 - 如果border-width等于0或border-style设置为none，本属性将被忽略。 - 对应的脚本特性为<strong>borderRightColor</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-right-color</strong>：&lt;color&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;采用文本颜色&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ border-color ] || [ border-top-color ] || [ border-bottom-color ] || [ border-left-color ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<color>：**</li>
+</ul>
+<p>: 指定颜色。请参阅颜色值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-right-colors'>
+<span class='badge'>border</span>
+<h2>border-right-colors</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象右边边框的多重颜色。</strong>参阅border-right-color属性。 - border的width为(n)px，那么最多可以设置n组边框色，每组边框色宽度为1px；如果border的width为10px，却只设置了6组边框色，那么最后一组边框色将自动渲染剩余的宽度 - 对应的脚本特性为<strong>borderRightColors</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-right-colors</strong>：&lt;color&gt; [, &lt;color&gt; ]*</p>
+<p><strong>相关属性</strong>：[ border-top-colors ] || [ border-bottom-colors ] || [ border-left-colors ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<color>：**</li>
+</ul>
+<p>: 指定颜色。请参阅颜色值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-right-style'>
+<span class='badge'>border</span>
+<h2>border-right-style</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的右边边框样式。</strong> - 如果border-width等于0，本属性将失去作用。 - 对应的脚本特性为<strong>borderRightStyle</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-right-style</strong>：&lt;border-style&gt;</p>
+<p><strong>&lt;border-style&gt;</strong> = none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;	none&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ border-style ] || [ border-top-style ] || [ border-bottom-style ] || [ border-left-style ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 无轮廓。border-color与border-width将被忽略</p>
+<ul>
+<li>**hidden：**</li>
+</ul>
+<p>: 隐藏边框。<em>IE7及以下尚不支持</em></p>
+<ul>
+<li>**dotted：**</li>
+</ul>
+<p>: 点状轮廓。<em>IE6下显示为dashed效果</em></p>
+<ul>
+<li>**dashed：**</li>
+</ul>
+<p>: 虚线轮廓。</p>
+<ul>
+<li>**solid：**</li>
+</ul>
+<p>: 实线轮廓</p>
+<ul>
+<li>**double：**</li>
+</ul>
+<p>: 双线轮廓。两条单线与其间隔的和等于指定的border-width值</p>
+<ul>
+<li>**groove：**</li>
+</ul>
+<p>: 3D凹槽轮廓。</p>
+<ul>
+<li>**ridge：**</li>
+</ul>
+<p>: 3D凸槽轮廓。</p>
+<ul>
+<li>**inset：**</li>
+</ul>
+<p>: 3D凹边轮廓。</p>
+<ul>
+<li>**outset：**</li>
+</ul>
+<p>: 3D凸边轮廓。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-right-width'>
+<span class='badge'>border</span>
+<h2>border-right-width</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的右边边框宽度。</strong> - 如果border-style设置为none，本属性将失去作用。 - 对应的脚本特性为<strong>borderRightWidth</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-right-width</strong>：&lt;border-width&gt;</p>
+<p><strong>&lt;border-width&gt;</strong> = &lt;length&gt; | thin | medium | thick</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;medium&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ border-width ] || [ border-top-width ] || [ border-bottom-width ] || [ border-left-width ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义边框的厚度。不允许负值</p>
+<ul>
+<li>**medium：**</li>
+</ul>
+<p>: 定义默认厚度的边框。</p>
+<ul>
+<li>**thin：**</li>
+</ul>
+<p>: 定义比默认厚度细的边框。</p>
+<ul>
+<li>**thick：**</li>
+</ul>
+<p>: 定义比默认厚度粗的边框。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-style'>
+<span class='badge'>border</span>
+<h2>border-style</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的边框样式。</strong> - 如果提供全部四个参数值，将按上、右、下、左的顺序作用于四边。 - 如果只提供一个，将用于全部的四边。 - 如果提供两个，第一个用于上、下，第二个用于左、右。 - 如果提供三个，第一个用于上，第二个用于左、右，第三个用于下。 - 如果border-width等于0，本属性将失去作用。 - 对应的脚本特性为<strong>borderStyle</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-style</strong>：&lt;border-style&gt;{1,4}</p>
+<p><strong>&lt;border-style&gt;</strong> = none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;看每个独立属性&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ border-top-style ] || [ border-right-style ] || [ border-bottom-style ] || [ border-left-style ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 无轮廓。border-color与border-width将被忽略</p>
+<ul>
+<li>**hidden：**</li>
+</ul>
+<p>: 隐藏边框。<em>IE7及以下尚不支持</em></p>
+<ul>
+<li>**dotted：**</li>
+</ul>
+<p>: 点状轮廓。<em>IE6下显示为dashed效果</em></p>
+<ul>
+<li>**dashed：**</li>
+</ul>
+<p>: 虚线轮廓。</p>
+<ul>
+<li>**solid：**</li>
+</ul>
+<p>: 实线轮廓</p>
+<ul>
+<li>**double：**</li>
+</ul>
+<p>: 双线轮廓。两条单线与其间隔的和等于指定的border-width值</p>
+<ul>
+<li>**groove：**</li>
+</ul>
+<p>: 3D凹槽轮廓。</p>
+<ul>
+<li>**ridge：**</li>
+</ul>
+<p>: 3D凸槽轮廓。</p>
+<ul>
+<li>**inset：**</li>
+</ul>
+<p>: 3D凹边轮廓。</p>
+<ul>
+<li>**outset：**</li>
+</ul>
+<p>: 3D凸边轮廓。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-top'>
+<span class='badge'>border</span>
+<h2>border-top</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>复合属性。设置对象顶部边框的特性。</strong>参阅border属性。 - 如使用该复合属性定义其单个参数，则其他参数的默认值将无条件覆盖各自对应的单个属性设置。 - 对应的脚本特性为<strong>borderTop</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-top</strong>：[ border-top-width ] || [ border-top-style ] || [ border-top-color ]</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;看每个独立属性&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ border ] || [ border-right ] || [ border-bottom ] || [ border-left ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**[ border-top-width ]：**</li>
+</ul>
+<p>: 设置或检索对象的顶部边框宽度。</p>
+<ul>
+<li>**[ border-top-style ]：**</li>
+</ul>
+<p>: 设置或检索对象的顶部边框样式。</p>
+<ul>
+<li>**[ border-top-color ]：**</li>
+</ul>
+<p>: 设置或检索对象的顶部边框颜色。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-top-color'>
+<span class='badge'>border</span>
+<h2>border-top-color</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的顶部边框颜色。</strong>参阅border-top-colors属性。 - 如果border-width等于0或border-style设置为none，本属性将被忽略。 - 对应的脚本特性为<strong>borderTopColor</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-top-color</strong>：&lt;color&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;采用文本颜色&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ border-color ] || [ border-right-color ] || [ border-bottom-color ] || [ border-left-color ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<color>：**</li>
+</ul>
+<p>: 指定颜色。请参阅颜色值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-top-colors'>
+<span class='badge'>border</span>
+<h2>border-top-colors</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象顶部边框的多重颜色。</strong>参阅border-top-color属性。 - border的width为(n)px，那么最多可以设置n组边框色，每组边框色宽度为1px；如果border的width为10px，却只设置了6组边框色，那么最后一组边框色将自动渲染剩余的宽度 - 对应的脚本特性为<strong>borderTopColors</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-top-colors</strong>：&lt;color&gt; [, &lt;color&gt; ]*</p>
+<p><strong>相关属性</strong>：[ border-right-colors ] || [ border-bottom-colors ] || [ border-left-colors ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<color>：**</li>
+</ul>
+<p>: 指定颜色。请参阅颜色值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-top-left-radius'>
+<span class='badge'>border</span>
+<h2>border-top-left-radius</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的左上角圆角边框。提供2个参数，2个参数以空格分隔，每个参数允许设置1个参数值，第1个参数表示水平半径，第2个参数表示垂直半径，如第2个参数省略，则默认等于第1个参数</strong> - 如设置border-top-left-radius:5px 10px;表示top-left这个角的水平圆角半径为5px，垂直圆角半径为10px。 - 对应的脚本特性为<strong>borderTopLeftRadius</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-top-left-radius</strong>：[ &lt;length&gt; | &lt;percentage&gt; ] [ &lt;length&gt; | &lt;percentage&gt; ]?</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;0&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值设置对象的左上角(top-left)圆角半径长度。不允许负值</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比设置对象的左上角(top-left)圆角半径长度。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-top-right-radius'>
+<span class='badge'>border</span>
+<h2>border-top-right-radius</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的右上角圆角边框。提供2个参数，2个参数以空格分隔，每个参数允许设置1个参数值，第1个参数表示水平半径，第2个参数表示垂直半径，如第2个参数省略，则默认等于第1个参数</strong> - 如设置border-top-right-radius:5px 10px;表示top-right这个角的水平圆角半径为5px，垂直圆角半径为10px。 - 对应的脚本特性为<strong>borderTopRightRadius</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-top-right-radius</strong>：[ &lt;length&gt; | &lt;percentage&gt; ] [ &lt;length&gt; | &lt;percentage&gt; ]?</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;0&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值设置对象的右上角(top-right)圆角半径长度。不允许负值</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比设置对象的左上角(top-right)圆角半径长度。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-top-style'>
+<span class='badge'>border</span>
+<h2>border-top-style</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的顶部边框样式。</strong> - 如果border-width等于0，本属性将失去作用。 - 对应的脚本特性为<strong>borderTopStyle</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-top-style</strong>：&lt;border-style&gt;</p>
+<p><strong>&lt;border-style&gt;</strong> = none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;none&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ border-style ] || [ border-right-style ] || [ border-bottom-style ] || [ border-left-style ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 无轮廓。border-color与border-width将被忽略</p>
+<ul>
+<li>**hidden：**</li>
+</ul>
+<p>: 隐藏边框。<em>IE7及以下尚不支持</em></p>
+<ul>
+<li>**dotted：**</li>
+</ul>
+<p>: 点状轮廓。<em>IE6下显示为dashed效果</em></p>
+<ul>
+<li>**dashed：**</li>
+</ul>
+<p>: 虚线轮廓。</p>
+<ul>
+<li>**solid：**</li>
+</ul>
+<p>: 实线轮廓</p>
+<ul>
+<li>**double：**</li>
+</ul>
+<p>: 双线轮廓。两条单线与其间隔的和等于指定的border-width值</p>
+<ul>
+<li>**groove：**</li>
+</ul>
+<p>: 3D凹槽轮廓。</p>
+<ul>
+<li>**ridge：**</li>
+</ul>
+<p>: 3D凸槽轮廓。</p>
+<ul>
+<li>**inset：**</li>
+</ul>
+<p>: 3D凹边轮廓。</p>
+<ul>
+<li>**outset：**</li>
+</ul>
+<p>: 3D凸边轮廓。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-top-width'>
+<span class='badge'>border</span>
+<h2>border-top-width</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的顶部边框宽度。</strong> - 如果border-style设置为none，本属性将失去作用。 - 对应的脚本特性为<strong>borderTopWidth</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-top-width</strong>：&lt;border-width&gt;</p>
+<p><strong>&lt;border-width&gt;</strong> = &lt;length&gt; | thin | medium | thick</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;medium&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ border-width ] || [ border-right-width ] || [ border-bottom-width ] || [ border-left-width ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义边框的厚度。不允许负值</p>
+<ul>
+<li>**medium：**</li>
+</ul>
+<p>: 定义默认厚度的边框。</p>
+<ul>
+<li>**thin：**</li>
+</ul>
+<p>: 定义比默认厚度细的边框。</p>
+<ul>
+<li>**thick：**</li>
+</ul>
+<p>: 定义比默认厚度粗的边框。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-width'>
+<span class='badge'>border</span>
+<h2>border-width</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的边框宽度。</strong> - 如果提供全部四个参数值，将按上、右、下、左的顺序作用于四边。 - 如果只提供一个，将用于全部的四边。 - 如果提供两个，第一个用于上、下，第二个用于左、右。 - 如果提供三个，第一个用于上，第二个用于左、右，第三个用于下。 - 如果border-style设置为none，本属性将失去作用。 - 对应的脚本特性为<strong>borderWidth</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-width</strong>：&lt;border-width&gt;{1,4}</p>
+<p><strong>&lt;border-width&gt;</strong> = &lt;length&gt; | thin | medium | thick</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;看每个独立属性&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ border-top-width ] || [ border-right-width ] || [ border-bottom-width ] || [ border-left-width ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义边框的厚度。不允许负值</p>
+<ul>
+<li>**medium：**</li>
+</ul>
+<p>: 定义默认厚度的边框。</p>
+<ul>
+<li>**thin：**</li>
+</ul>
+<p>: 定义比默认厚度细的边框。</p>
+<ul>
+<li>**thick：**</li>
+</ul>
+<p>: 定义比默认厚度粗的边框。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-box-shadow'>
+<span class='badge'>border</span>
+<h2>box-shadow</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象阴影。</strong>参阅text-shadow属性 - 可以设定多组效果，每组参数值以逗号分隔。 - 对应的脚本特性为<strong>boxShadow</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>box-shadow</strong>：none | &lt;shadow&gt; [ , &lt;shadow&gt; ]*</p>
+<p><strong>&lt;shadow&gt;</strong> = inset? &amp;&amp; [ &lt;length&gt;{2,4} &amp;&amp; &lt;color&gt;? ]</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;	none&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 无阴影</p>
+<ul>
+<li>**<length>①：**</li>
+</ul>
+<p>: 第1个长度值用来设置对象的阴影水平偏移值。可以为负值</p>
+<ul>
+<li>**<length>②：**</li>
+</ul>
+<p>: 第2个长度值用来设置对象的阴影垂直偏移值。可以为负值</p>
+<ul>
+<li>**<length>③：**</li>
+</ul>
+<p>: 如果提供了第3个长度值则用来设置对象的阴影模糊值。不允许负值</p>
+<ul>
+<li>**<length>④：**</li>
+</ul>
+<p>: 如果提供了第4个长度值则用来设置对象的阴影外延值。不允许负值</p>
+<ul>
+<li>**<color>：**</li>
+</ul>
+<p>: 设置对象的阴影的颜色。请参阅颜色值</p>
+<ul>
+<li>**inset：**</li>
+</ul>
+<p>: 设置对象的阴影类型为内阴影。该值为空时，则对象的阴影类型为外阴影</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+</div>
+<div class='card' id='css-color'>
+<span class='badge'>color</span>
+<h2>color</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象的文本颜色。无默认值</strong> - 可以使用Color Name(颜色名称), HEX, RGB, RGBA, HSL, HSLA, transparent来指定color。 - 注意，用颜色名称指定color可能不被一些浏览器接受。 - 对应的脚本特性为<strong>color</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>color</strong>：&lt;color&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<color>：**</li>
+</ul>
+<p>: 指定颜色。请参阅颜色值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-opacity'>
+<span class='badge'>color</span>
+<h2>opacity</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象的不透明度。</strong> - <strong>对于尚不支持opacity属性的IE浏览器可以使用IE私有的滤镜属性来实现与opacity相同的效果</strong> <strong>示例代码：</strong> &lt;blockquote class="gquote-cont"&gt; <code>div{filter:alpha(opacity=50);} /<em> for IE8 and earlier </em>/ div{opacity:.5;} /<em> for IE9 and other browsers </em>/</code> ``&lt;/blockquote&gt; 以上2段代码的效果相同 - 对应的脚本特性为<strong>opacity</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>opacity</strong>：&lt;number&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;	1&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<number>：**</li>
+</ul>
+<p>: 使用浮点数指定对象的不透明度。值被约束在[0.0-1.0]范围内，如果超过了这个范围，其计算结果将截取到与之最相近的值。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+</div>
+<div class='card' id='css-content'>
+<span class='badge'>content</span>
+<h2>content</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>用来和:after及:before伪元素一起使用，在对象前或后显示内容。</strong> - 对应的脚本特性为<strong>content</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>content</strong>：normal | none | [&lt;attr&gt; | &lt;url&gt; | &lt;string&gt; | counter(name) | counter(name,list-style-type) | counters(name,string) | counters(name,string,list-style-type) | no-close-quote | no-open-quote | close-quote | open-quote]+</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;normal&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**normal：**</li>
+</ul>
+<p>: 默认值。表现与none值相同</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 不生成任何值。</p>
+<ul>
+<li>**<attr>：**</li>
+</ul>
+<p>: 插入标签属性值</p>
+<ul>
+<li>**<url>：**</li>
+</ul>
+<p>: 使用指定的绝对或相对地址插入一个外部资源（图像，声频，视频或浏览器支持的其他任何资源）</p>
+<ul>
+<li>**<string>：**</li>
+</ul>
+<p>: 插入字符串</p>
+<ul>
+<li>**counter(name)：**</li>
+</ul>
+<p>: 使用已命名的计数器</p>
+<ul>
+<li>**counter(name,list-style-type)：**</li>
+</ul>
+<p>: 使用已命名的计数器并遵从指定的list-style-type属性</p>
+<ul>
+<li>**counters(name,string)：**</li>
+</ul>
+<p>: 使用所有已命名的计数器</p>
+<ul>
+<li>**counters(name,string,list-style-type)：**</li>
+</ul>
+<p>: 使用所有已命名的计数器并遵从指定的list-style-type属性</p>
+<ul>
+<li>**no-close-quote：**</li>
+</ul>
+<p>: 并不插入quotes属性的后标记。但增加其嵌套级别</p>
+<ul>
+<li>**no-open-quote：**</li>
+</ul>
+<p>: 并不插入quotes属性的前标记。但减少其嵌套级别</p>
+<ul>
+<li>**close-quote：**</li>
+</ul>
+<p>: 插入quotes属性的后标记</p>
+<ul>
+<li>**open-quote：**</li>
+</ul>
+<p>: 插入quotes属性的前标记</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-counter-increment'>
+<span class='badge'>content</span>
+<h2>counter-increment</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设定当一个selector发生时计数器增加的值。</strong> - 对应的脚本特性为<strong>counterIncrement</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>counter-increment</strong>：none | [&lt;identifier&gt; &lt;integer&gt;]+</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;none&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 阻止计数器增加</p>
+<ul>
+<li>**<identifier>：**</li>
+</ul>
+<p>: identifier定义一个或多个将被增加的selector，id，或者class</p>
+<ul>
+<li>**<integer>：**</li>
+</ul>
+<p>: 定义计算器每次增加的数值，可以为负值，默认值是1</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-counter-reset'>
+<span class='badge'>content</span>
+<h2>counter-reset</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>将指定selector的计数器复位。</strong> - 对应的脚本特性为<strong>counterReset</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>counter-reset</strong>：none | [&lt;identifier&gt; &lt;integer&gt;]+</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;none&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 阻止计数器复位</p>
+<ul>
+<li>**<identifier>：**</li>
+</ul>
+<p>: identifier定义一个或多个将被复位的selector，id，或者class</p>
+<ul>
+<li>**<integer>：**</li>
+</ul>
+<p>: 定义被复位的数值，可以为负值，默认值是0</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-quotes'>
+<span class='badge'>content</span>
+<h2>quotes</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象内使用的嵌套标记。</strong> - 对应的脚本特性为<strong>quotes</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>quotes</strong>：none | [&lt;string&gt; &lt;string&gt;]+</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;none&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: content属性的open-quote和close-quote值将不会生成任何标记</p>
+<ul>
+<li>**<string>：**</li>
+</ul>
+<p>: 定义content属性的open-quote和close-quote值的标记，2个为一组</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+</div>
+<div class='card' id='css-height'>
+<span class='badge'>dimension</span>
+<h2>height</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象的高度。</strong> - 对于img对象来说，仅指定此属性，其width值将根据图片源尺寸等比例缩放。 - 对于盒模型规则，请参阅box-sizing属性。 - 对应的脚本特性为<strong>height</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>height</strong>：&lt;length&gt; | &lt;percentage&gt; | auto</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;	auto&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 无特定高度值，取决于其它属性值</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义高度。不允许负值</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比来定义高度。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-max-height'>
+<span class='badge'>dimension</span>
+<h2>max-height</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象的最大高度。</strong> - 如果max-height属性的值小于min-height属性的值，max-height将会自动以min-height的值作为自己的值。 - IE6尚不支持此属性 - 对应的脚本特性为<strong>maxHeight</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>max-height</strong>：&lt;length&gt; | &lt;percentage&gt; | none</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;none&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 无最小高度限制</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义最大高度。不允许负值</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比来定义最大高度。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-max-width'>
+<span class='badge'>dimension</span>
+<h2>max-width</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的最大宽度。</strong> - 如果max-width属性的值小于min-width属性的值，max-width将会自动以min-width的值作为自己的值。 - IE6尚不支持此属性 - 对应的脚本特性为<strong>maxWidth</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>max-width</strong>：&lt;length&gt; | &lt;percentage&gt; | none</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;none&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 无最大宽度限制</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义最大宽度。不允许负值</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比来定义最大宽度。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-min-height'>
+<span class='badge'>dimension</span>
+<h2>min-height</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象的最小高度。</strong> - 如果min-height属性的值大于max-height属性的值，max-height将会自动以min-height的值作为自己的值。 - IE6尚不支持此属性。IE6的变通实现方法请参与CSS探索之旅的相关文章。 - 对应的脚本特性为<strong>minHeight</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>min-height</strong>：&lt;length&gt; | &lt;percentage&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;0&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义最小高度。不允许负值</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比来定义最小高度。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-min-width'>
+<span class='badge'>dimension</span>
+<h2>min-width</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的最小宽度。</strong> - 如果min-width属性的值大于max-width属性的值，max-width将会自动以min-width的值作为自己的值。 - IE6尚不支持此属性 - 对应的脚本特性为<strong>minWidth</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>min-width</strong>：&lt;length&gt; | &lt;percentage&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;0&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义最小宽度。不允许负值</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比来定义最小宽度。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-width'>
+<span class='badge'>dimension</span>
+<h2>width</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象的宽度。</strong> - 对于img对象来说，仅指定此属性，其height值将根据图片源尺寸等比例缩放。 - 对于盒模型规则，请参阅box-sizing属性。 - 对应的脚本特性为<strong>width</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>width</strong>：&lt;length&gt; | &lt;percentage&gt; | auto</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;	auto&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 无特定宽度值，取决于其它属性值</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义宽度。不允许负值</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比来定义宽度。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+</div>
+<div class='card' id='css-font'>
+<span class='badge'>font</span>
+<h2>font</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象中的文本特性。该属性是复合属性。</strong> - 使用第一种声明方式参数必须按照如上的排列顺序，且font-size和font-family是不可忽略的。每个参数仅允许有一个值。忽略的将使用其参数对应的独立属性的默认值。 - 对于如何使用客户端系统可能没有的字体，可以参阅@font-face规则。 - 对应的脚本特性为<strong>font</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>font</strong>：[ [ &lt;font-style&gt; || &lt;font-variant&gt; || &lt;font-weight&gt; ]? &lt;font-size&gt; [ / &lt;line-height&gt; ]? &lt;font-family&gt; ] | caption | icon | menu | message-box | small-caption | status-bar</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;看独立属性自身&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<font-style>：**</li>
+</ul>
+<p>: 指定文本字体样式</p>
+<ul>
+<li>**<font-variant>：**</li>
+</ul>
+<p>: 指定文本是否为小型的大写字母</p>
+<ul>
+<li>**<font-weight>：**</li>
+</ul>
+<p>: 指定文本字体的粗细</p>
+<ul>
+<li>**<font-size>：**</li>
+</ul>
+<p>: 指定文本字体尺寸</p>
+<ul>
+<li>**<line-height>：**</li>
+</ul>
+<p>: 指定文本字体的行高</p>
+<ul>
+<li>**<font-family>：**</li>
+</ul>
+<p>: 指定文本使用某个字体或字体序列</p>
+<ul>
+<li>**caption：**</li>
+</ul>
+<p>: 使用有标题的系统控件的文本字体（如按钮，菜单等）（CSS2）</p>
+<ul>
+<li>**icon：**</li>
+</ul>
+<p>: 使用图标标签的字体（CSS2）</p>
+<ul>
+<li>**menu：**</li>
+</ul>
+<p>: 使用菜单的字体（CSS2）</p>
+<ul>
+<li>**message-box：**</li>
+</ul>
+<p>: 使用信息对话框的文本字体（CSS2）</p>
+<ul>
+<li>**small-caption：**</li>
+</ul>
+<p>: 使用小控件的字体（CSS2）</p>
+<ul>
+<li>**status-bar：**</li>
+</ul>
+<p>: 使用窗口状态栏的字体（CSS2）</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-font-family'>
+<span class='badge'>font</span>
+<h2>font-family</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索用于对象中文本的字体名称序列。</strong> - 序列可包含嵌入字体。请参阅@font-face规则。 - 对应的脚本特性为<strong>fontFamily</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>font-family</strong>：[ &lt;family-name&gt; | &lt;generic-family&gt; ] [, &lt;family-name&gt; | &lt;generic-family&gt;]*</p>
+<p><strong>&lt;family-name&gt;</strong> = arial | georgia | verdana | helvetica | simsun and etc.</p>
+<p><strong>&lt;generic-family&gt;</strong> = cursive | fantasy | monospace | serif | sans-serif</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;由浏览器确定&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<family-name>：**</li>
+</ul>
+<p>: 字体名称。按优先顺序排列。以逗号隔开。如果字体名称包含空格或中文，则应使用引号括起</p>
+<ul>
+<li>**<generic-family>：**</li>
+</ul>
+<p>: 字体序列名称。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-font-size'>
+<span class='badge'>font</span>
+<h2>font-size</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象中的字体尺寸。</strong> - 对应的脚本特性为<strong>fontSize</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>font-size</strong>：&lt;absolute-size&gt; | &lt;relative-size&gt; | &lt;length&gt; | &lt;percentage&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;medium&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<absolute-size>：**</li>
+</ul>
+<p>: 根据对象字体进行调节。可选参数值：xx-small | x-small | small | medium | large | x-large | xx-large</p>
+<ul>
+<li>**<relative-size>：**</li>
+</ul>
+<p>: 相对于父对像中字体尺寸进行相对调节。使用成比例的em单位计算。可选参数值：smaller | larger</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值指定文字大小。不允许负值。</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比指定文字大小。其百分比取值是基于父对象中字体的尺寸。不允许负值。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-font-stretch'>
+<span class='badge'>font</span>
+<h2>font-stretch</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象中的文字是否横向拉伸变形。</strong> - 文字的拉伸是相对于浏览器显示的字体的正常宽度。 - 对应的脚本特性为<strong>fontStretch</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>font-stretch</strong>：ultra-condensed | extra-condensed | condensed | semi-condensed | normal | semi-expanded | expanded | extra-expanded | ultra-expanded</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;normal&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**ultra-condensed：**</li>
+</ul>
+<p>: 比正常文字宽度窄4个基数。</p>
+<ul>
+<li>**extra-condensed：**</li>
+</ul>
+<p>: 比正常文字宽度窄3个基数。</p>
+<ul>
+<li>**condensed：**</li>
+</ul>
+<p>: 比正常文字宽度窄2个基数。</p>
+<ul>
+<li>**semi-condensed：**</li>
+</ul>
+<p>: 比正常文字宽度窄1个基数。</p>
+<ul>
+<li>**normal：**</li>
+</ul>
+<p>: 正常文字宽度</p>
+<ul>
+<li>**semi-expanded：**</li>
+</ul>
+<p>: 比正常文字宽度宽1个基数。</p>
+<ul>
+<li>**expanded：**</li>
+</ul>
+<p>: 比正常文字宽度宽2个基数。</p>
+<ul>
+<li>**extra-expanded：**</li>
+</ul>
+<p>: 比正常文字宽度宽3个基数。</p>
+<ul>
+<li>**ultra-expanded：**</li>
+</ul>
+<p>: 比正常文字宽度宽4个基数。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-font-style'>
+<span class='badge'>font</span>
+<h2>font-style</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象中的文本字体样式。</strong> - 对应的脚本特性为<strong>fontStyle</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>font-style</strong>：normal | italic | oblique</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;normal&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**normal：**</li>
+</ul>
+<p>: 指定文本字体样式为正常的字体</p>
+<ul>
+<li>**italic：**</li>
+</ul>
+<p>: 指定文本字体样式为斜体。对于没有斜体变量的特殊字体，将应用oblique</p>
+<ul>
+<li>**oblique：**</li>
+</ul>
+<p>: 指定文本字体样式为倾斜的字体</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-font-variant'>
+<span class='badge'>font</span>
+<h2>font-variant</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象中的文本是否为小型的大写字母。</strong> - 对应的脚本特性为<strong>fontVariant</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>font-variant</strong>：normal | small-caps</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;normal&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**normal：**</li>
+</ul>
+<p>: 正常的字体</p>
+<ul>
+<li>**small-caps：**</li>
+</ul>
+<p>: 小型的大写字母字体</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-font-weight'>
+<span class='badge'>font</span>
+<h2>font-weight</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象中的文本字体的粗细。</strong> - 作用由客户端系统安装的字体的特定字体变量映射决定。系统选择最近的匹配。也就是说，用户可能看不到不同值之间的差异。 - 对应的脚本特性为<strong>fontWeight</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>font-weight</strong>：normal | bold | bolder | lighter | &lt;integer&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;normal&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**normal：**</li>
+</ul>
+<p>: 正常的字体。相当于number为400</p>
+<ul>
+<li>**bold：**</li>
+</ul>
+<p>: 粗体。相当于number为700。</p>
+<ul>
+<li>**bolder：**</li>
+</ul>
+<p>: 特粗体。也相当于strong和b对象的作用</p>
+<ul>
+<li>**lighter：**</li>
+</ul>
+<p>: 细体</p>
+<ul>
+<li>**<integer>：**</li>
+</ul>
+<p>: 用数字表示文本字体粗细。取值范围：100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+</div>
+<div class='card' id='css-clear'>
+<span class='badge'>layout</span>
+<h2>clear</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>该属性的值指出了不允许有浮动对象的边。</strong>请参阅float属性 - 对应的脚本特性为<strong>clear</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>clear</strong>：none | left | right | both</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;	none&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 允许两边都可以有浮动对象</p>
+<ul>
+<li>**both：**</li>
+</ul>
+<p>: 不允许有浮动对象</p>
+<ul>
+<li>**left：**</li>
+</ul>
+<p>: 不允许左边有浮动对象</p>
+<ul>
+<li>**right：**</li>
+</ul>
+<p>: 不允许右边有浮动对象</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-clip'>
+<span class='badge'>layout</span>
+<h2>clip</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象的可视区域。区域外的部分是透明的。</strong> - 必须将position的值设为absolute，此属性方可使用。 - 对应的脚本特性为<strong>clip</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>clip</strong>：auto | rect(&lt;number&gt;|auto &lt;number&gt;|auto &lt;number&gt;|auto &lt;number&gt;|auto)</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;auto&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 对象无剪切</p>
+<ul>
+<li>**rect(<number>|auto <number>|auto <number>|auto <number>|auto)：**</li>
+</ul>
+<p>:</p>
+<p>依据上-右-下-左的顺序提供自对象左上角为(0,0)坐标计算的四个偏移数值，其中任一数值都可用auto替换，即此边不剪切。</p>
+<p>示例：clip:rect(auto 50px 20px auto);</p>
+<p>说明：上边不剪切，右边从第50个像素开始剪切直至最右边，下边从第20个像素开始剪切直至最底部，左边不剪切</p>
+<p>IE7及以下浏览器只支持rect(&lt;number&gt; &lt;number&gt; &lt;number&gt; &lt;number&gt;)的方式，其它浏览器还支持rect(&lt;number&gt;,&lt;number&gt;,&lt;number&gt;,&lt;number&gt;)加逗号的方式。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-display'>
+<span class='badge'>layout</span>
+<h2>display</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象是否及如何显示。</strong> - <em>IE7及以下浏览器不支持table相关的参数值</em>，如：table, inline-table, table-caption, table-cell, table-row, table-row-group, table-column, table-column-group, table-footer-group, table-header-group - <em>写本文档时尚无浏览器支持ruby相关的参数值</em>，如：ruby, ruby-base, ruby-text, ruby-base-group, ruby-text-group - 对应的脚本特性为<strong>display</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>display</strong>：none | inline | block | list-item | inline-block | table | inline-table | table-caption | table-cell | table-row | table-row-group | table-column | table-column-group | table-footer-group | table-header-group | compact | run-in | ruby | ruby-base | ruby-text | ruby-base-group | ruby-text-group</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 隐藏对象。与visibility属性的hidden值不同，其不为被隐藏的对象保留其物理空间</p>
+<ul>
+<li>**inline：**</li>
+</ul>
+<p>: 指定对象为内联元素。</p>
+<ul>
+<li>**block：**</li>
+</ul>
+<p>: 指定对象为块元素。</p>
+<ul>
+<li>**list-item：**</li>
+</ul>
+<p>: 指定对象为列表项目。</p>
+<ul>
+<li>**inline-block：**</li>
+</ul>
+<p>: 指定对象为内联块元素。（CSS2）</p>
+<ul>
+<li>**table：**</li>
+</ul>
+<p>: 指定对象作为块元素级的表格。类同于html标签&lt;table&gt;（CSS2）</p>
+<ul>
+<li>**inline-table：**</li>
+</ul>
+<p>: 指定对象作为内联元素级的表格。类同于html标签&lt;table&gt;（CSS2）</p>
+<ul>
+<li>**table-caption：**</li>
+</ul>
+<p>: 指定对象作为表格标题。类同于html标签&lt;caption&gt;（CSS2）</p>
+<ul>
+<li>**table-cell：**</li>
+</ul>
+<p>: 指定对象作为表格单元格。类同于html标签&lt;td&gt;（CSS2）</p>
+<ul>
+<li>**table-row：**</li>
+</ul>
+<p>: 指定对象作为表格行。类同于html标签&lt;tr&gt;（CSS2）</p>
+<ul>
+<li>**table-row-group：**</li>
+</ul>
+<p>: 指定对象作为表格行组。类同于html标签&lt;tbody&gt;（CSS2）</p>
+<ul>
+<li>**table-column：**</li>
+</ul>
+<p>: 指定对象作为表格列。类同于html标签&lt;col&gt;（CSS2）</p>
+<ul>
+<li>**table-column-group：**</li>
+</ul>
+<p>: 指定对象作为表格列组显示。类同于html标签&lt;colgroup&gt;（CSS2）</p>
+<ul>
+<li>**table-header-group：**</li>
+</ul>
+<p>: 指定对象作为表格标题组。类同于html标签&lt;thead&gt;（CSS2）</p>
+<ul>
+<li>**table-footer-group：**</li>
+</ul>
+<p>: 指定对象作为表格脚注组。类同于html标签&lt;tfoot&gt;（CSS2）</p>
+<ul>
+<li>**compact：**</li>
+</ul>
+<p>: 分配对象为块对象或基于内容之上的内联对象（CSS3）</p>
+<ul>
+<li>**run-in：**</li>
+</ul>
+<p>: 分配对象为块对象或基于内容之上的内联对象（CSS3）</p>
+<ul>
+<li>**ruby：**</li>
+</ul>
+<p>: 将对象作为表格脚注组显示（CSS3）</p>
+<ul>
+<li>**ruby-base：**</li>
+</ul>
+<p>: 将对象作为表格脚注组显示（CSS3）</p>
+<ul>
+<li>**ruby-text：**</li>
+</ul>
+<p>: 将对象作为表格脚注组显示（CSS3）</p>
+<ul>
+<li>**ruby-base-group：**</li>
+</ul>
+<p>: 将对象作为表格脚注组显示（CSS3）</p>
+<ul>
+<li>**ruby-text-group：**</li>
+</ul>
+<p>: 将对象作为表格脚注组显示（CSS3）</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-float'>
+<span class='badge'>layout</span>
+<h2>float</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>该属性的值指出了对象是否及如何浮动。</strong>请参阅clear属性 - 当该属性不等于none引起对象浮动时，对象将被视作块对象(block-level)，即display属性等于block。也就是说，浮动对象的display特性将被忽略。 - 该属性可以被应用在非绝对定位的任何元素上。 - 对应的脚本特性为<strong>styleFloat</strong>（IE）或<strong>cssFloat</strong>（非IE）。<em>(注意这里为styleFloat或cssFloat，而不是float)</em> &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>float</strong>：none | left | right</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;	none&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 设置对象不浮动</p>
+<ul>
+<li>**left：**</li>
+</ul>
+<p>: 设置对象浮在左边</p>
+<ul>
+<li>**right：**</li>
+</ul>
+<p>: 设置对象浮在右边</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-overflow'>
+<span class='badge'>layout</span>
+<h2>overflow</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置当对象的内容超过其指定高度及宽度时如何管理内容。</strong>参阅overflow-x、overflow-y属性 - 对于table来说，假如table-layout属性设置为fixed，则td对象支持带有默认值为hidden的overflow属性。如果设为hidden，scroll或者auto，那么超出td尺寸的内容将被剪切。如果设为visible，将导致额外的文本溢出到右边或左边（视direction属性设置而定）的单元格。 - 对应的脚本特性为<strong>overflow</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>overflow</strong>：&lt;overflow-style&gt;{1,2}</p>
+<p><strong>&lt;overflow-style&gt;</strong> = visible | hidden | scroll | auto</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;visible&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**visible：**</li>
+</ul>
+<p>: 不剪切内容。</p>
+<ul>
+<li>**hidden：**</li>
+</ul>
+<p>: 将超出对象尺寸的内容进行裁剪，将不出现滚动条。</p>
+<ul>
+<li>**scroll：**</li>
+</ul>
+<p>: 将超出对象尺寸的内容进行裁剪，并以滚动条的方式显示超出的内容。</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 在需要时剪切内容并添加滚动条，此为body对象和textarea的默认值。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-overflow-x'>
+<span class='badge'>layout</span>
+<h2>overflow-x</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置当对象的内容超过其指定宽度时如何管理内容。</strong>参阅overflow、overflow-y属性 - 对应的脚本特性为<strong>overflowX</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>overflow-x</strong>：&lt;overflow-style&gt;</p>
+<p><strong>&lt;overflow-style&gt;</strong> = visible | hidden | scroll | auto</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;visible&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**visible：**</li>
+</ul>
+<p>: 不剪切内容。</p>
+<ul>
+<li>**hidden：**</li>
+</ul>
+<p>: 将超出对象宽度的内容进行裁剪，将不出现滚动条。</p>
+<ul>
+<li>**scroll：**</li>
+</ul>
+<p>: 将超出对象宽度的内容进行裁剪，并以滚动条的方式显示超出的内容。</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 在需要时剪切内容并添加滚动条，此为body对象和textarea的默认值。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-overflow-y'>
+<span class='badge'>layout</span>
+<h2>overflow-y</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置当对象的内容超过其指定高度时如何管理内容。</strong>参阅overflow、overflow-x属性 - 对应的脚本特性为<strong>overflowY</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>overflow-y</strong>：&lt;overflow-style&gt;</p>
+<p><strong>&lt;overflow-style&gt;</strong> = visible | hidden | scroll | auto</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;visible&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**visible：**</li>
+</ul>
+<p>: 不剪切内容。</p>
+<ul>
+<li>**hidden：**</li>
+</ul>
+<p>: 将超出对象高度的内容进行裁剪，将不出现滚动条。</p>
+<ul>
+<li>**scroll：**</li>
+</ul>
+<p>: 将超出对象高度的内容进行裁剪，并以滚动条的方式显示超出的内容。</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 在需要时剪切内容并添加滚动条，此为body对象和textarea的默认值。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-visibility'>
+<span class='badge'>layout</span>
+<h2>visibility</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索是否显示对象。</strong>与display属性不同，此属性为隐藏的对象保留其占据的物理空间 - 如果希望对象为可视，其父对象也必须是可视的。 - 对应的脚本特性为<strong>visibility</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>visibility</strong>：visible | hidden | collapse</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;visible&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**visible：**</li>
+</ul>
+<p>: 设置对象可视</p>
+<ul>
+<li>**hidden：**</li>
+</ul>
+<p>: 设置对象隐藏</p>
+<ul>
+<li>**collapse：**</li>
+</ul>
+<p>: 主要用来隐藏表格的行或列。隐藏的行或列能够被其他内容使用。对于表格外的其他对象，其作用等同于hidden。<em>IE6及以下不支持此参数值</em></p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+</div>
+<div class='card' id='css-list-style'>
+<span class='badge'>list</span>
+<h2>list-style</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>复合属性。设置列表项目相关内容</strong> - 对应的脚本特性为<strong>listStyle</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>list-style</strong>：[ list-style-image ] || [ list-style-position ] || [ list-style-type ]</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;看独立属性自身&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**[ list-style-image ]：**</li>
+</ul>
+<p>: 设置或检索作为对象的列表项标记的图像</p>
+<ul>
+<li>**[ list-style-position ]：**</li>
+</ul>
+<p>: 设置或检索作为对象的列表项标记如何根据文本排列</p>
+<ul>
+<li>**[ list-style-type ]：**</li>
+</ul>
+<p>: 设置或检索对象的列表项所使用的预设标记</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-list-style-image'>
+<span class='badge'>list</span>
+<h2>list-style-image</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索作为对象的列表项标记的图像。</strong> - 若list-style-image属性为none或指定图像不可用时，list-style-type属性将发生作用。 - 对应的脚本特性为<strong>listStyleImage</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>list-style-image</strong>：none | &lt;url&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;none&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 不指定图像</p>
+<ul>
+<li>**<url>：**</li>
+</ul>
+<p>: 使用绝对或相对地址指定列表项标记图像。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-list-style-position'>
+<span class='badge'>list</span>
+<h2>list-style-position</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索作为对象的列表项标记如何根据文本排列。</strong> - 仅作用于具有display值等于list-item的对象（如li对象）。 - 注意：ol对象和ul对象的type特性为其后的所有列表项目（如li对象）指明列表属性。 - 对应的脚本特性为<strong>listStylePosition</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>list-style-position</strong>：outside | inside</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;outside&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**outside：**</li>
+</ul>
+<p>: 列表项目标记放置在文本以外，且环绕文本不根据标记对齐</p>
+<ul>
+<li>**inside：**</li>
+</ul>
+<p>: 列表项目标记放置在文本以内，且环绕文本根据标记对齐</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-list-style-type'>
+<span class='badge'>list</span>
+<h2>list-style-type</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的列表项所使用的预设标记。</strong> - 若list-style-image属性为none或指定图像不可用时，list-style-type属性将发生作用。 - 仅作用于具有display值等于list-item的对象（如li对象）。 - 注意：ol对象和ul对象的type特性为其后的所有列表项目（如li对象）指明列表属性。 - 对应的脚本特性为<strong>listStyleType</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>list-style-type</strong>：disc | circle | square | decimal | lower-roman | upper-roman | lower-alpha | upper-alpha | none | armenian | cjk-ideographic | georgian | lower-greek | hebrew | hiragana | hiragana-iroha | katakana | katakana-iroha | lower-latin | upper-latin</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;disc&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**disc：**</li>
+</ul>
+<p>: 实心圆(CSS1)</p>
+<ul>
+<li>**circle：**</li>
+</ul>
+<p>: 空心圆(CSS1)</p>
+<ul>
+<li>**square：**</li>
+</ul>
+<p>: 实心方块(CSS1)</p>
+<ul>
+<li>**decimal：**</li>
+</ul>
+<p>: 阿拉伯数字(CSS1)</p>
+<ul>
+<li>**lower-roman：**</li>
+</ul>
+<p>: 小写罗马数字(CSS1)</p>
+<ul>
+<li>**upper-roman：**</li>
+</ul>
+<p>: 大写罗马数字(CSS1)</p>
+<ul>
+<li>**lower-alpha：**</li>
+</ul>
+<p>: 小写英文字母(CSS1)</p>
+<ul>
+<li>**upper-alpha：**</li>
+</ul>
+<p>: 大写英文字母(CSS1)</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 不使用项目符号(CSS1)</p>
+<ul>
+<li>**armenian：**</li>
+</ul>
+<p>: 传统的亚美尼亚数字(CSS2)</p>
+<ul>
+<li>**cjk-ideographic：**</li>
+</ul>
+<p>: 浅白的表意数字(CSS2)</p>
+<ul>
+<li>**georgian：**</li>
+</ul>
+<p>: 传统的乔治数字(CSS2)</p>
+<ul>
+<li>**lower-greek：**</li>
+</ul>
+<p>: 基本的希腊小写字母(CSS2)</p>
+<ul>
+<li>**hebrew：**</li>
+</ul>
+<p>: 传统的希伯莱数字(CSS2)</p>
+<ul>
+<li>**hiragana：**</li>
+</ul>
+<p>: 日文平假名字符(CSS2)</p>
+<ul>
+<li>**hiragana-iroha：**</li>
+</ul>
+<p>: 日文平假名序号(CSS2)</p>
+<ul>
+<li>**katakana：**</li>
+</ul>
+<p>: 日文片假名字符(CSS2)</p>
+<ul>
+<li>**katakana-iroha：**</li>
+</ul>
+<p>: 日文片假名序号(CSS2)</p>
+<ul>
+<li>**lower-latin：**</li>
+</ul>
+<p>: 小写拉丁字母(CSS2)</p>
+<ul>
+<li>**upper-latin：**</li>
+</ul>
+<p>: 大写拉丁字母(CSS2)</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+</div>
+<div class='card' id='css-margin'>
+<span class='badge'>margin</span>
+<h2>margin</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象四边的外延边距。</strong> - 如果提供全部四个参数值，将按上、右、下、左的顺序作用于四边。 - 如果只提供一个，将用于全部的四边。 - 如果提供两个，第一个用于上、下，第二个用于左、右。 - 如果提供三个，第一个用于上，第二个用于左、右，第三个用于下。 - 内联对象可以使用该属性设置左、右两边的外补丁；若要设置上、下两边的外补丁，必须先使该对象表现为块级或内联块级。 - 外延边距始终透明。 - 对应的脚本特性为<strong>margin</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>margin</strong>：[ &lt;length&gt; | &lt;percentage&gt; | auto ]{1,4}</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;看每个独立属性&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ margin-top ] || [ margin-right ] || [ margin-bottom ] || [ margin-left ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 值被设置为相对边的值</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义外补白。可以为负值</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比来定义外补白。可以为负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-margin-bottom'>
+<span class='badge'>margin</span>
+<h2>margin-bottom</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象底边的外延边距。</strong> - 内联对象要使用该属性必须先使该对象表现为块级或内联块级。 - 外延边距始终透明。 - 对应的脚本特性为<strong>marginBottom</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>margin-bottom</strong>：[ &lt;length&gt; | &lt;percentage&gt; | auto ]{1,4}</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;	0&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ margin ] || [ margin-top ] || [ margin-right ] || [ margin-left ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 值被设置为相对边的值</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义外补白。可以为负值</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比来定义外补白。可以为负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-margin-left'>
+<span class='badge'>margin</span>
+<h2>margin-left</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象左边的外延边距。</strong> - 内联对象可以使用该属性设置左边距。 - 外延边距始终透明。 - 对应的脚本特性为<strong>marginLeft</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>margin-left</strong>：[ &lt;length&gt; | &lt;percentage&gt; | auto ]{1,4}</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;	0&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ margin ] || [ margin-top ] || [ margin-right ] || [ margin-bottom ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 值被设置为相对边的值</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义外补白。可以为负值</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比来定义外补白。可以为负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-margin-right'>
+<span class='badge'>margin</span>
+<h2>margin-right</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象右边的外延边距。</strong> - 内联对象可以使用该属性设置右边距。 - 外延边距始终透明。 - 对应的脚本特性为<strong>marginRight</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>margin-right</strong>：[ &lt;length&gt; | &lt;percentage&gt; | auto ]{1,4}</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;	0&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ margin ] || [ margin-top ] || [ margin-bottom ] || [ margin-left ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 值被设置为相对边的值</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义外补白。可以为负值</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比来定义外补白。可以为负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-margin-top'>
+<span class='badge'>margin</span>
+<h2>margin-top</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象顶边的外延边距。</strong> - 内联对象要使用该属性必须先使该对象表现为块级或内联块级。 - 外延边距始终透明。 - 对应的脚本特性为<strong>marginTop</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>margin-top</strong>：[ &lt;length&gt; | &lt;percentage&gt; | auto ]{1,4}</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;	0&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ margin ] || [ margin-right ] || [ margin-bottom ] || [ margin-left ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 值被设置为相对边的值</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义外补白。可以为负值</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比来定义外补白。可以为负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+</div>
+<div class='card' id='css-aspect-ratio'>
+<span class='badge'>media-queries</span>
+<h2>aspect-ratio</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>定义输出设备中的页面可见区域宽度与高度的比率。</strong> - 本特性接受min和max前缀，因此可以派生出<em>min-aspect-ratio</em>和<em>max-aspect-ratio</em>两个媒体特性。 - <strong>简单列举几个应用示例：</strong> &lt;blockquote class="gquote-cont"&gt; <code>@media screen and (aspect-ratio:1680/957){ … } @import url(example.css) screen and (max-aspect-ratio:20/11);</code> ``&lt;/blockquote&gt; &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>aspect-ratio</strong>：&lt;ratio&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<ratio>：**</li>
+</ul>
+<p>: 指定比率</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-color'>
+<span class='badge'>media-queries</span>
+<h2>color</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>定义输出设备每一组彩色原件的个数。如果不是彩色设备，则值等于0</strong> - 与色彩color不同，媒体特性color的取值只能是&lt;integer&gt;，用来表示色彩数。 - 本特性接受min和max前缀，因此可以派生出<em>min-color</em>和<em>max-color</em>两个媒体特性。 - <strong>简单列举几个应用示例：</strong> &lt;blockquote class="gquote-cont"&gt; <code>@media screen and (color){ … } @import url(example.css) screen and (color:0); &lt;link media="screen and (min-color:1)" rel="stylesheet" href="example.css" /&gt;</code> ``&lt;/blockquote&gt; &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>color</strong>：&lt;integer&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<integer>：**</li>
+</ul>
+<p>: 用用整数值来定义彩色原件数。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-color-index'>
+<span class='badge'>media-queries</span>
+<h2>color-index</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>定义在输出设备的彩色查询表中的条目数。如果没有使用彩色查询表，则值等于0</strong> - 本特性接受min和max前缀，因此可以派生出<em>min-color-index</em>和<em>max-color-index</em>两个媒体特性。 - <strong>简单列举几个应用示例：</strong> &lt;blockquote class="gquote-cont"&gt; <code>@media screen and (color-index){ … } @import url(example.css) screen and (min-color-index:1); &lt;link media="screen and (color-index:0)" rel="stylesheet" href="example.css" /&gt;</code> ``&lt;/blockquote&gt; &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>color-index</strong>：&lt;integer&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<integer>：**</li>
+</ul>
+<p>: 用用整数值来定义彩色查询表中的条目数。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-device-aspect-ratio'>
+<span class='badge'>media-queries</span>
+<h2>device-aspect-ratio</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>定义输出设备的屏幕可见宽度与高度的比率。</strong> - 如常讲的显示器屏幕比率：4/3, 16/9, 16/10 - 本特性接受min和max前缀，因此可以派生出<em>min-device-aspect-ratio</em>和<em>max-device-aspect-ratio</em>两个媒体特性。 - <strong>简单列举几个应用示例：</strong> &lt;blockquote class="gquote-cont"&gt; <code>@media screen and (device-aspect-ratio:4/3){ … } @import url(example.css) screen and (min-device-aspect-ratio:4/3);</code> ``&lt;/blockquote&gt; &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>device-aspect-ratio</strong>：&lt;ratio&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<ratio>：**</li>
+</ul>
+<p>: 指定比率</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-device-height'>
+<span class='badge'>media-queries</span>
+<h2>device-height</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>定义输出设备的屏幕可见高度。</strong> - 本特性接受min和max前缀，因此可以派生出<em>min-device-height</em>和<em>max-device-height</em>两个媒体特性。 - <strong>简单列举几个应用示例：</strong> &lt;blockquote class="gquote-cont"&gt; <code>@media screen and (device-height:800px){ … } @import url(example.css) screen and (min-device-height:800px); &lt;link media="screen and (min-device-height:300px) and (max-device-height:900px)" rel="stylesheet" href="example.css" /&gt; </code> ``&lt;/blockquote&gt; &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>device-height</strong>：&lt;length&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义高度。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-device-width'>
+<span class='badge'>media-queries</span>
+<h2>device-width</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>定义输出设备的屏幕可见宽度。</strong> - 本特性接受min和max前缀，因此可以派生出<em>min-device-width</em>和<em>max-device-width</em>两个媒体特性。 - <strong>简单列举几个应用示例：</strong> &lt;blockquote class="gquote-cont"&gt; <code>@media screen and (device-width:1024px){ … } @import url(example.css) screen and (min-device-width:800px); &lt;link media="screen and (min-device-width:300px) and (max-device-width:900px)" rel="stylesheet" href="example.css" /&gt; </code> ``&lt;/blockquote&gt; &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>device-width</strong>：&lt;length&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义宽度。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-grid'>
+<span class='badge'>media-queries</span>
+<h2>grid</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>用来查询输出设备是否使用栅格或点阵。</strong> - 本特性不接受min和max前缀。 - <strong>简单列举几个应用示例：</strong> &lt;blockquote class="gquote-cont"&gt; <code>@media all and (grid){ … } @import url(example.css) all and (grid:0);</code> ``&lt;/blockquote&gt; &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>grid</strong>：&lt;integer&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<integer>：**</li>
+</ul>
+<p>: 用整数值来定义是否使用栅格或点阵。只有1和0才是有效值，1代表是，0代表否</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-height'>
+<span class='badge'>media-queries</span>
+<h2>height</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>定义输出设备中的页面可见区域高度。</strong> - 与盒模型height不同，媒体特性height的取值只能是&lt;length&gt;。 - 本特性接受min和max前缀，因此可以派生出<em>min-height</em>和<em>max-height</em>两个媒体特性。 - <strong>简单列举几个应用示例：</strong> &lt;blockquote class="gquote-cont"&gt; <code>@media (min-height:400px){ … } @media screen and (height:600px){ … } @import url(example.css) screen and (height:800px);</code> ``&lt;/blockquote&gt; &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>height</strong>：&lt;length&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义高度。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-monochrome'>
+<span class='badge'>media-queries</span>
+<h2>monochrome</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>定义在一个单色框架缓冲区中每像素包含的单色原件个数。如果不是单色设备，则值等于0</strong> - 本特性接受min和max前缀，因此可以派生出<em>min-monochrome</em>和<em>max-monochrome</em>两个媒体特性。 - <strong>简单列举几个应用示例：</strong> &lt;blockquote class="gquote-cont"&gt; <code>@media screen and (monochrome){ … } @import url(example.css) screen and (monochrome:0); &lt;link media="screen and (min-monochrome:0) and (max-monochrome:10)" rel="stylesheet" href="example.css" /&gt; &lt;?xml-stylesheet media="not screen and (monochrome)" rel="stylesheet" href="example.css" ?&gt;</code> ``&lt;/blockquote&gt; &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>monochrome</strong>：&lt;integer&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<integer>：**</li>
+</ul>
+<p>: 用整数值来定义宽度。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-orientation'>
+<span class='badge'>media-queries</span>
+<h2>orientation</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>定义输出设备中的页面可见区域高度是否大于或等于宽度。</strong> - 本特性不接受min和max前缀。 - <strong>简单列举几个应用示例：</strong> &lt;blockquote class="gquote-cont"&gt; <code>@media screen and (orientation:portrait){ … } @import url(example.css) screen and (orientation:landscape);</code> ``&lt;/blockquote&gt; &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>orientation</strong>：portrait | landscape</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**portrait：**</li>
+</ul>
+<p>: 指定输出设备中的页面可见区域高度大于或等于宽度</p>
+<ul>
+<li>**landscape：**</li>
+</ul>
+<p>: 除portrait值情况外，都是landscape</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-resolution'>
+<span class='badge'>media-queries</span>
+<h2>resolution</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>定义设备的分辨率。如：96dpi, 300dpi, 118dpcm</strong> - 本特性接受min和max前缀，因此可以派生出<em>min-resolution</em>和<em>max-resolution</em>两个媒体特性。 - <strong>简单列举几个应用示例：</strong> &lt;blockquote class="gquote-cont"&gt; <code>@media screen and (resolution){ … } @import url(example.css) screen and (min-resolution:96dpi); &lt;link media="screen and (resolution:96dpi)" rel="stylesheet" href="example.css" /&gt;</code> ``&lt;/blockquote&gt; &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>resolution</strong>：&lt;resolution&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<resolution>：**</li>
+</ul>
+<p>: 用整数值来定义宽度。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-scan'>
+<span class='badge'>media-queries</span>
+<h2>scan</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>定义电视类设备的扫描工序。</strong> - 本特性不接受min和max前缀。 - <strong>简单列举几个应用示例：</strong> &lt;blockquote class="gquote-cont"&gt; <code>@media tv and (scan:progressive){ … } @import url(example.css) tv and (scan:interlace);</code> ``&lt;/blockquote&gt; &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>scan</strong>：progressive | interlace</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**progressive：**</li>
+</ul>
+<p>: 连续扫描</p>
+<ul>
+<li>**interlace：**</li>
+</ul>
+<p>: 交织扫描</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-width'>
+<span class='badge'>media-queries</span>
+<h2>width</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>定义输出设备中的页面可见区域宽度。</strong> - 与盒模型width不同，媒体特性width的取值只能是&lt;length&gt;。 - 本特性接受min和max前缀，因此可以派生出<em>min-width</em>和<em>max-width</em>两个媒体特性。 - <strong>简单列举几个应用示例：</strong> &lt;blockquote class="gquote-cont"&gt; <code>@media screen and (width){ … } @import url(example.css) screen and (width:800px); &lt;link media="screen and (min-width:400px) and (max-width:900px)" rel="stylesheet" href="example.css" /&gt; &lt;?xml-stylesheet media="not screen and (width:800px)" rel="stylesheet" href="example.css" ?&gt;</code> ``&lt;/blockquote&gt; &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>width</strong>：&lt;length&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义宽度。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+</div>
+<div class='card' id='css-column-break-after'>
+<span class='badge'>multi-column</span>
+<h2>column-break-after</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象之后是否断行。</strong> - 对应的脚本特性为<strong>columnBreakAfter</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>column-break-after</strong>：auto | always | avoid | left | right | page | column | avoid-page | avoid-column</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;auto&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 既不强迫也不禁止在元素之后断行并产生新列</p>
+<ul>
+<li>**always：**</li>
+</ul>
+<p>: 总是在元素之后断行并产生新列</p>
+<ul>
+<li>**avoid：**</li>
+</ul>
+<p>: 避免在元素之后断行并产生新列</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-column-break-before'>
+<span class='badge'>multi-column</span>
+<h2>column-break-before</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象之前是否断行。</strong> - 对应的脚本特性为<strong>columnBreakBefore</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>column-break-before</strong>：auto | always | avoid | left | right | page | column | avoid-page | avoid-column</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;auto&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 既不强迫也不禁止在元素之前断行并产生新列</p>
+<ul>
+<li>**always：**</li>
+</ul>
+<p>: 总是在元素之前断行并产生新列</p>
+<ul>
+<li>**avoid：**</li>
+</ul>
+<p>: 避免在元素之前断行并产生新列</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-column-break-inside'>
+<span class='badge'>multi-column</span>
+<h2>column-break-inside</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象内部是否断行。</strong> - 对应的脚本特性为<strong>columnBreakInside</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>column-break-inside</strong>：auto | avoid | avoid-page | avoid-column</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;auto&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 既不强迫也不禁止在元素内部断行并产生新列</p>
+<ul>
+<li>**avoid：**</li>
+</ul>
+<p>: 避免在元素内部断行并产生新列</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-column-count'>
+<span class='badge'>multi-column</span>
+<h2>column-count</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的列数</strong> - 对应的脚本特性为<strong>columnCount</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>column-count</strong>：&lt;integer&gt; | auto</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;auto&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<integer>：**</li>
+</ul>
+<p>: 用整数值来定义列数。不允许负值</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 根据column-width自定分配宽度</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-column-fill'>
+<span class='badge'>multi-column</span>
+<h2>column-fill</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象所有列的高度是否统一。</strong> - 对应的脚本特性为<strong>columnFill</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>column-fill</strong>：auto | balance</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;auto&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 列高度自适应内容</p>
+<ul>
+<li>**balance：**</li>
+</ul>
+<p>: 所有列的高度以其中最高的一列统一</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-column-gap'>
+<span class='badge'>multi-column</span>
+<h2>column-gap</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的列与列之间的间隙</strong> - 对应的脚本特性为<strong>columnGap</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>column-gap</strong>：&lt;length&gt; | normal</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;normal&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义列与列之间的间隙。不允许负值</p>
+<ul>
+<li>**normal：**</li>
+</ul>
+<p>: 与font-size大小相同。假设该对象的font-size为16px，则normal值为16px，类推。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-column-rule'>
+<span class='badge'>multi-column</span>
+<h2>column-rule</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的列与列之间的边框。复合属性。</strong>参阅border属性 - 对应的脚本特性为<strong>columnRule</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt; This module describes multi-column layout in CSS. By using functionality described in this document, style sheets can declare that the content of an element is to be laid out in multiple columns. On the Web, tables have also been used to describe multi-column layouts. The main benefit of using CSS-based columns is flexibility; content can flow from one column to another, and the number of columns can vary depending on the size of the viewport. Removing presentation table markup from documents allows them to more easily be presented on various output devices including speech synthesizers and small mobile devices.</p>
+<h3>语法/取值</h3>
+<p><strong>column-rule</strong>：[ column-rule-width ] || [ column-rule-style ] || [ column-rule-color ]</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;看每个独立属性&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**[ column-rule-width ]：**</li>
+</ul>
+<p>: 设置或检索对象的列与列之间的边框厚度。</p>
+<ul>
+<li>**[ column-rule-style ]：**</li>
+</ul>
+<p>: 设置或检索对象的列与列之间的边框样式。</p>
+<ul>
+<li>**[ column-rule-color ]：**</li>
+</ul>
+<p>: 设置或检索对象的列与列之间的边框颜色。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-column-rule-color'>
+<span class='badge'>multi-column</span>
+<h2>column-rule-color</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的列与列之间的边框颜色。</strong>参阅border-color属性 - 如果column-rule-width等于0或column-rule-style设置为none，本属性将被忽略。 - 对应的脚本特性为<strong>columnRuleWidth</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>column-rule-color</strong>：&lt;color&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;采用文本颜色&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<color>：**</li>
+</ul>
+<p>: 指定颜色。请参阅颜色值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-column-rule-style'>
+<span class='badge'>multi-column</span>
+<h2>column-rule-style</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的列与列之间的边框样式。</strong>参阅border-style属性 - 如果column-rule-width等于0，本属性将失去作用。 - 对应的脚本特性为<strong>columnRuleStyle</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>column-rule-style</strong>：none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;none&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 无轮廓。column-rule-color与column-rule-width将被忽略</p>
+<ul>
+<li>**hidden：**</li>
+</ul>
+<p>: 隐藏边框。</p>
+<ul>
+<li>**dotted：**</li>
+</ul>
+<p>: 点状轮廓。</p>
+<ul>
+<li>**dashed：**</li>
+</ul>
+<p>: 虚线轮廓。</p>
+<ul>
+<li>**solid：**</li>
+</ul>
+<p>: 实线轮廓</p>
+<ul>
+<li>**double：**</li>
+</ul>
+<p>: 双线轮廓。两条单线与其间隔的和等于指定的column-rule-width值</p>
+<ul>
+<li>**groove：**</li>
+</ul>
+<p>: 3D凹槽轮廓。</p>
+<ul>
+<li>**ridge：**</li>
+</ul>
+<p>: 3D凸槽轮廓。</p>
+<ul>
+<li>**inset：**</li>
+</ul>
+<p>: 3D凹边轮廓。</p>
+<ul>
+<li>**outset：**</li>
+</ul>
+<p>: 3D凸边轮廓。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-column-rule-width'>
+<span class='badge'>multi-column</span>
+<h2>column-rule-width</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的列与列之间的边框厚度。</strong>参阅border-width属性 - 如果column-rule-style设置为none，本属性将失去作用。 - 对应的脚本特性为<strong>columnRuleWidth</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>column-rule-width</strong>：&lt;length&gt; | thin | medium | thick</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;medium&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义边框的厚度。不允许负值</p>
+<ul>
+<li>**medium：**</li>
+</ul>
+<p>: 定义默认厚度的边框。</p>
+<ul>
+<li>**thin：**</li>
+</ul>
+<p>: 定义比默认厚度细的边框。</p>
+<ul>
+<li>**thick：**</li>
+</ul>
+<p>: 定义比默认厚度粗的边框。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-column-span'>
+<span class='badge'>multi-column</span>
+<h2>column-span</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象元素是否横跨所有列。</strong> - 对应的脚本特性为<strong>columnSpan</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>column-span</strong>：none | all</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;none&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 不跨列</p>
+<ul>
+<li>**all：**</li>
+</ul>
+<p>: 横跨所有列</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-column-width'>
+<span class='badge'>multi-column</span>
+<h2>column-width</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象每列的宽度</strong> - 对应的脚本特性为<strong>columnWidth</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>column-width</strong>：&lt;length&gt; | auto</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;auto&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义列宽。不允许负值</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 根据column-count自定分配宽度</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-columns'>
+<span class='badge'>multi-column</span>
+<h2>columns</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的列数和每列的宽度。复合属性</strong> - 对应的脚本特性为<strong>columns</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>columns</strong>：[ column-width ] || [ column-count ]</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;看每个独立属性&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**[ column-width ]：**</li>
+</ul>
+<p>: 设置或检索对象每列的宽度</p>
+<ul>
+<li>**[ column-count ]：**</li>
+</ul>
+<p>: 设置或检索对象的列数</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+</div>
+<div class='card' id='css-behavior'>
+<span class='badge'>only-ie</span>
+<h2>behavior</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的DHTML行为。</strong> - 多个行为之间用空格隔开。 - 对应的脚本特性为<strong>behavior</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>behavior</strong>：&lt;url&gt; | url(#objID) | url(#default#behaviorName)</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<url>：**</li>
+</ul>
+<p>: 使用绝对或相对地址指定DHTML行为组件（.htc）</p>
+<ul>
+<li>**url(#objID)：**</li>
+</ul>
+<p>: 用二进制实现DHTML行为，#objID为object对象指定的id特性</p>
+<ul>
+<li>**url(#default#behaviorName)：**</li>
+</ul>
+<p>: IE的默认行为。由behaviorName指定</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-filter'>
+<span class='badge'>only-ie</span>
+<h2>filter</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象所应用的滤镜效果。</strong> - 最常用的滤镜效果是不透明效果，如果要实现50%的不透明度（其它高级浏览器的实现参阅opacity）： <strong>示例代码：</strong> &lt;blockquote class="gquote-cont"&gt; <code>div{filter:alpha(opacity=50);} /<em> for IE8 and earlier </em>/ div{opacity:.5;} /<em> for IE9 and other browsers </em>/</code> ``&lt;/blockquote&gt; 以上2段代码的效果相同 - 对应的脚本特性为<strong>filter</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>filter</strong>：&lt;filter&gt;+</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<filter>：**</li>
+</ul>
+<p>: 要使用的滤镜效果。多个滤镜之间用空格隔开。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-scrollbar-3dlight-color'>
+<span class='badge'>only-ie</span>
+<h2>scrollbar-3dlight-color</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象滚动条3d亮色阴影边框(threedlightshadow)的外观颜色。</strong> - 对应的脚本特性为<strong>scrollbar3dLightColor</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>scrollbar-3dlight-color</strong>：&lt;color&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;threedlightshadow&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<color>：**</li>
+</ul>
+<p>: 指定颜色。请参阅颜色值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-scrollbar-arrow-color'>
+<span class='badge'>only-ie</span>
+<h2>scrollbar-arrow-color</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象滚动条方向箭头的颜色。当滚动条出现但不可用时，此属性失效。</strong> - 对应的脚本特性为<strong>scrollbarArrowColor</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>scrollbar-arrow-color</strong>：&lt;color&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;buttontext&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<color>：**</li>
+</ul>
+<p>: 指定颜色。请参阅颜色值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-scrollbar-base-color'>
+<span class='badge'>only-ie</span>
+<h2>scrollbar-base-color</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象滚动条基准颜色。其它界面颜色将据此自动调整。</strong> - 对应的脚本特性为<strong>scrollbarBaseColor</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>scrollbar-base-color</strong>：&lt;color&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;transparent&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<color>：**</li>
+</ul>
+<p>: 指定颜色。请参阅颜色值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-scrollbar-darkshadow-color'>
+<span class='badge'>only-ie</span>
+<h2>scrollbar-darkshadow-color</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象滚动条3d暗色阴影边框(threeddarkshadow)的外观颜色。</strong> - 对应的脚本特性为<strong>scrollbarDarkShadowColor</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>scrollbar-darkshadow-color</strong>：&lt;color&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;threeddarkshadow&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<color>：**</li>
+</ul>
+<p>: 指定颜色。请参阅颜色值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-scrollbar-face-color'>
+<span class='badge'>only-ie</span>
+<h2>scrollbar-face-color</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象滚动条3D表面的(threedface)的外观颜色。</strong> - 对应的脚本特性为<strong>scrollbarFaceColor</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>scrollbar-face-color</strong>：&lt;color&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;threedface&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<color>：**</li>
+</ul>
+<p>: 指定颜色。请参阅颜色值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-scrollbar-highlight-color'>
+<span class='badge'>only-ie</span>
+<h2>scrollbar-highlight-color</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象滚动条3d高亮边框(threedhighlight)的外观颜色。</strong> - 对应的脚本特性为<strong>scrollbarHighlightColor</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>scrollbar-highlight-color</strong>：&lt;color&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;threedhighlight&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<color>：**</li>
+</ul>
+<p>: 指定颜色。请参阅颜色值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-scrollbar-shadow-color'>
+<span class='badge'>only-ie</span>
+<h2>scrollbar-shadow-color</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象滚动条3d阴影边框(threedshadow)的外观颜色。</strong> - 对应的脚本特性为<strong>scrollbarShadowColor</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>scrollbar-shadow-color</strong>：&lt;color&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;threedshadow&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<color>：**</li>
+</ul>
+<p>: 指定颜色。请参阅颜色值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-scrollbar-track-color'>
+<span class='badge'>only-ie</span>
+<h2>scrollbar-track-color</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象滚动条拖动区域的外观颜色。</strong> - 对应的脚本特性为<strong>scrollbarTrackColor</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>scrollbar-track-color</strong>：&lt;color&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;transparent&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<color>：**</li>
+</ul>
+<p>: 指定颜色。请参阅颜色值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+</div>
+<div class='card' id='css-padding'>
+<span class='badge'>padding</span>
+<h2>padding</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象四边的内部边距。</strong> - 如果提供全部四个参数值，将按上、右、下、左的顺序作用于四边。 - 如果只提供一个，将用于全部的四边。 - 如果提供两个，第一个用于上、下，第二个用于左、右。 - 如果提供三个，第一个用于上，第二个用于左、右，第三个用于下。 - 内联对象可以使用该属性设置左、右两边的内补丁；若要设置上、下两边的内补丁，必须先使该对象表现为块级或内联块级。 - 对应的脚本特性为<strong>padding</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>padding</strong>：[ &lt;length&gt; | &lt;percentage&gt; ]{1,4}</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;看每个独立属性&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ padding-top ] || [ padding-right ] || [ padding-bottom ] || [ padding-left ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义内补白。不允许负值</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比来定义内补白。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-padding-bottom'>
+<span class='badge'>padding</span>
+<h2>padding-bottom</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象底边的内补白。</strong> - 内联对象要使用该属性必须先使该对象表现为块级或内联块级。 - 对应的脚本特性为<strong>paddingBottom</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>padding-bottom</strong>：[ &lt;length&gt; | &lt;percentage&gt; ]{1,4}</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;	0&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ padding ] || [ padding-top ] || [ padding-right ] || [ padding-left ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义内补白。不允许负值</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比来定义内补白。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-padding-left'>
+<span class='badge'>padding</span>
+<h2>padding-left</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象左边的内补白。</strong> - 内联对象可以使用该属性设置左边内补白。 - 对应的脚本特性为<strong>paddingLeft</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>padding-left</strong>：[ &lt;length&gt; | &lt;percentage&gt; ]{1,4}</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;	0&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ padding ] || [ padding-top ] || [ padding-right ] || [ padding-bottom ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义内补白。不允许负值</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比来定义内补白。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-padding-right'>
+<span class='badge'>padding</span>
+<h2>padding-right</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象右边的内补白。</strong> - 内联对象可以使用该属性设置内补白。 - 对应的脚本特性为<strong>paddingRight</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>padding-right</strong>：[ &lt;length&gt; | &lt;percentage&gt; ]{1,4}</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;	0&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ padding ] || [ padding-top ] || [ padding-bottom ] || [ padding-left ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义内补白。不允许负值</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比来定义内补白。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-padding-top'>
+<span class='badge'>padding</span>
+<h2>padding-top</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象顶边的内补白。</strong> - 内联对象要使用该属性必须先使该对象表现为块级或内联块级。 - 对应的脚本特性为<strong>paddingTop</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>padding-top</strong>：[ &lt;length&gt; | &lt;percentage&gt; ]{1,4}</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;	0&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ padding ] || [ padding-right ] || [ padding-bottom ] || [ padding-left ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义内补白。不允许负值</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比来定义内补白。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+</div>
+<div class='card' id='css-bottom'>
+<span class='badge'>positioning</span>
+<h2>bottom</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象与其最近一个定位的父对象底边相关的位置。</strong> - 必须定义position属性值为absolute、relative或fixed，此取值方可生效。 - 对应的脚本特性为<strong>bottom</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>bottom</strong>: &lt;length&gt; | &lt;percentage&gt; | auto</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;auto&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 无特殊定位，根据HTML定位规则在文档流中分配</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义距离底部的偏移量。可以为负值。</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比来定义距离底部的偏移量。可以为负值。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-left'>
+<span class='badge'>positioning</span>
+<h2>left</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象与其最近一个定位的父对象左边相关的位置。</strong> - 必须定义position属性值为absolute、relative或fixed，此取值方可生效。 - 对应的脚本特性为<strong>left</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>left</strong>: &lt;length&gt; | &lt;percentage&gt; | auto</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;auto&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 无特殊定位，根据HTML定位规则在文档流中分配</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义距离左边的偏移量。可以为负值。</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比来定义距离左边的偏移量。可以为负值。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-position'>
+<span class='badge'>positioning</span>
+<h2>position</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索对象的定位方式。</strong> - 对应的脚本特性为<strong>position</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>position</strong>：static | relative | absolute | fixed</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;static&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**static：**</li>
+</ul>
+<p>: 无特殊定位，对象遵循正常文档流。top，right，bottom，left等属性不会被应用。</p>
+<ul>
+<li>**relative：**</li>
+</ul>
+<p>: 对象遵循正常文档流，但将依据top，right，bottom，left等属性在正常文档流中偏移位置。</p>
+<ul>
+<li>**absolute：**</li>
+</ul>
+<p>: 对象脱离正常文档流，使用top，right，bottom，left等属性进行绝对定位。而其层叠通过z-index属性定义。</p>
+<ul>
+<li>**fixed：**</li>
+</ul>
+<p>: 对象脱离正常文档流，使用top，right，bottom，left等属性以窗口为参考点进行定位，当出现滚动条时，对象不会随着滚动。<em>IE6及以下不支持此参数值</em></p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-right'>
+<span class='badge'>positioning</span>
+<h2>right</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象与其最近一个定位的父对象右边相关的位置。</strong> - 必须定义position属性值为absolute、relative或fixed，此取值方可生效。 - 对应的脚本特性为<strong>right</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>right</strong>：&lt;length&gt; | &lt;percentage&gt; | auto</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;auto&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 无特殊定位，根据HTML定位规则在文档流中分配</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义距离右边的偏移量。可以为负值。</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比来定义距离右边的偏移量。可以为负值。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-top'>
+<span class='badge'>positioning</span>
+<h2>top</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象与其最近一个定位的父对象顶部相关的位置。</strong> - 必须定义position属性值为absolute、relative或fixed，此取值方可生效。 - 对应的脚本特性为<strong>top</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>top</strong>: &lt;length&gt; | &lt;percentage&gt; | auto</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;auto&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 无特殊定位，根据HTML定位规则在文档流中分配</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义距离顶部的偏移量。可以为负值。</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比来定义距离顶部的偏移量。可以为负值。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-z-index'>
+<span class='badge'>positioning</span>
+<h2>z-index</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象的层叠顺序。</strong> - 并级的对象，此属性参数值越大，则被层叠在最上面。 - 如两个对象的此属性具有同样的值，那么将依据它们在HTML文档中流的顺序层叠，写在后面的将会覆盖前面的。 - 必须定义position属性值为absolute、relative或fixed，此取值方可生效。 - 对应的脚本特性为<strong>zIndex</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>z-index</strong>: &lt;mark class="defaultvalue"&gt;auto&lt;/mark&gt; | &lt;integer&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;auto&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 遵从其父对象的定位</p>
+<ul>
+<li>**<integer>：**</li>
+</ul>
+<p>: 用整数值来定义堆叠级别。可以为负值。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+</div>
+<div class='card' id='css-page'>
+<span class='badge'>printing</span>
+<h2>page</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或指定显示对象容器时使用的页面类型。</strong>参阅@page - <strong>示例代码：</strong> &lt;blockquote class="gquote-cont"&gt; <code>@page rotated{size:landscape;} p{page:rotated;page-break-before:left;}</code> ``&lt;/blockquote&gt; - 对应的脚本特性为<strong>page</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>page</strong>：auto | &lt;identifier&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;auto&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 参照当前的默认页面</p>
+<ul>
+<li>**<identifier>：**</li>
+</ul>
+<p>: 指定@page规则下的页面类型定义</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-page-break-after'>
+<span class='badge'>printing</span>
+<h2>page-break-after</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象之后出现的页分割符。</strong> - 对应的脚本特性为<strong>pageBreakAfter</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>page-break-after</strong>：auto | always | avoid | left | right</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;auto&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 如果需要，在对象之后插入页分割符</p>
+<ul>
+<li>**always：**</li>
+</ul>
+<p>: 始终在对象之后插入页分割符</p>
+<ul>
+<li>**avoid：**</li>
+</ul>
+<p>: 避免在对象之后插入页分割符</p>
+<ul>
+<li>**left：**</li>
+</ul>
+<p>: 在对象之后插入页分割符直到它到达一个空白的左页边</p>
+<ul>
+<li>**right：**</li>
+</ul>
+<p>: 在对象之后插入页分割符直到它到达一个空白的右页边</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-page-break-before'>
+<span class='badge'>printing</span>
+<h2>page-break-before</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象之前出现的页分割符。</strong> - 对应的脚本特性为<strong>pageBreakBefore</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>page-break-before</strong>：auto | always | avoid | left | right</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;auto&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 如果需要，在对象之前插入页分割符</p>
+<ul>
+<li>**always：**</li>
+</ul>
+<p>: 始终在对象之前插入页分割符</p>
+<ul>
+<li>**avoid：**</li>
+</ul>
+<p>: 避免在对象前面插入页分割符</p>
+<ul>
+<li>**left：**</li>
+</ul>
+<p>: 在对象前面插入页分割符直到它到达一个空白的左页边</p>
+<ul>
+<li>**right：**</li>
+</ul>
+<p>: 在对象前面插入页分割符直到它到达一个空白的右页边</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-page-break-inside'>
+<span class='badge'>printing</span>
+<h2>page-break-inside</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象容器内部出现的页分割符。</strong> - 对应的脚本特性为<strong>pageBreakInside</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>page-break-inside</strong>：auto | avoid</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;auto&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 如果需要，在当前对象内部插入页分割符</p>
+<ul>
+<li>**avoid：**</li>
+</ul>
+<p>: 避免在当前对象内部插入页分割符</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+</div>
+<div class='card' id='css-border-collapse'>
+<span class='badge'>table</span>
+<h2>border-collapse</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索表格的行和单元格的边是合并还是独立。</strong> - 对应的脚本特性为<strong>borderCollapse</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-collapse</strong>：separate | collapse</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;separate&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**separate：**</li>
+</ul>
+<p>: 边框独立</p>
+<ul>
+<li>**collapse：**</li>
+</ul>
+<p>: 相邻边被合并</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-border-spacing'>
+<span class='badge'>table</span>
+<h2>border-spacing</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索当表格边框独立时，行和单元格的边框在横向和纵向上的间距</strong> - 该属性作用等同于标签属性cellspacing。 - 只有当表格边框独立（即border-collapse属性等于separate时）此属性才起作用。 - 如果提供全部两个length值时，第一个作用于横向间距，第二个作用于纵向间距。 - 如果只提供一个length值时，这个值将作用于横向和纵向上的间距。 - 对应的脚本特性为<strong>borderSpacing</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>border-spacing</strong>：&lt;length&gt;{1,2}</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;0&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义行和单元格的边框在横向和纵向上的间距。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-caption-side'>
+<span class='badge'>table</span>
+<h2>caption-side</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索表格的caption对象是在表格的那一边。</strong> - <em>要在IE7及以下浏览器中实现top与bottom参数值的效果，可直接在caption标签内定义标签属性valign为top和bottom。</em> - 对应的脚本特性为<strong>captionSide</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>caption-side</strong>：top | right | bottom | left</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;top&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**top：**</li>
+</ul>
+<p>: 指定caption在表格上边</p>
+<ul>
+<li>**bottom：**</li>
+</ul>
+<p>: 指定caption在表格下边</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-empty-cells'>
+<span class='badge'>table</span>
+<h2>empty-cells</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索当表格的单元格无内容时，是否显示该单元格的边框。</strong> - <em>IE7及以下浏览器中默认隐藏无内容的单元格边框，要想使其获得与show参数值相同的效果，可以变相给该空单元格加个占位且不可见的元素，例如全角空格或&amp;ampnbsp;等等。</em> - 只有当表格边框独立（即border-collapse属性等于separate时）此属性才起作用。 - 对应的脚本特性为<strong>emptyCells</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>empty-cells</strong>：hide | show</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;show&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**hide：**</li>
+</ul>
+<p>: 指定当表格的单元格无内容时，隐藏该单元格的边框。</p>
+<ul>
+<li>**show：**</li>
+</ul>
+<p>: 指定当表格的单元格无内容时，显示该单元格的边框。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-table-layout'>
+<span class='badge'>table</span>
+<h2>table-layout</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索表格的布局算法。</strong> - 对应的脚本特性为<strong>tableLayout</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>table-layout</strong>：auto | fixed</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;auto&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 默认的自动算法。布局将基于各单元格的内容。表格在每一单元格读取计算之后才会显示出来。速度很慢</p>
+<ul>
+<li>**fixed：**</li>
+</ul>
+<p>: 固定布局的算法。在这算法中，水平布局是仅仅基于表格的宽度，表格边框的宽度，单元格间距，列的宽度，而和表格内容无关。也就是说，内容可能被裁切</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+</div>
+<div class='card' id='css-direction'>
+<span class='badge'>text</span>
+<h2>direction</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置文本流的方向。</strong> - 假如您想应用direction属性于内联元素的文本，您必须设定unicode-bidi属性为embed或bidi-override。 - 对应的脚本特性为<strong>direction</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>direction</strong>：ltr | rtl</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;ltr&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**ltr：**</li>
+</ul>
+<p>: 文本流从左到右。</p>
+<ul>
+<li>**rtl：**</li>
+</ul>
+<p>: 文本流从右到左。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-letter-spacing'>
+<span class='badge'>text</span>
+<h2>letter-spacing</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象中的文字之间的间隔。</strong> - 该属性将指定的间隔添加到每个文字(包括单词内的每个字母)之后。 - 对应的脚本特性为<strong>letterSpacing</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>letter-spacing</strong>：normal | &lt;length&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;normal&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ word-spacing ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**normal：**</li>
+</ul>
+<p>: 默认间隔</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值指定间隔。可以为负值。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-line-height'>
+<span class='badge'>text</span>
+<h2>line-height</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象的行高。即字体最底端与字体内部顶端之间的距离。</strong> - 对应的脚本特性为<strong>lineHeight</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>line-height</strong>：normal | &lt;length&gt; | &lt;percentage&gt; | &lt;number&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;normal&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**normal：**</li>
+</ul>
+<p>: 允许内容顶开或溢出指定的容器边界。</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值指定行高。可以为负值。</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比指定行高，其百分比取值是基于字体的高度尺寸。可以为负值。</p>
+<ul>
+<li>**<number>：**</li>
+</ul>
+<p>: 用乘积因子指定行高。可以为负值。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-tab-size'>
+<span class='badge'>text</span>
+<h2>tab-size</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象中的制表符的长度。</strong> - 对应的脚本特性为<strong>tabSize</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>word-wrap</strong>：&lt;integer&gt; | &lt;length&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;8&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<integer>：**</li>
+</ul>
+<p>: 用整数值指定制表符的长度。不允许负值。</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值指定制表符的长度。不允许负值。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-text-align'>
+<span class='badge'>text</span>
+<h2>text-align</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象中内容的水平对齐方式。</strong> - 对应的脚本特性为<strong>textAlign</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>text-align</strong>：left | center | right | justify | start | end</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;start&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**left：**</li>
+</ul>
+<p>: 内容左对齐。</p>
+<ul>
+<li>**center：**</li>
+</ul>
+<p>: 内容居中对齐。</p>
+<ul>
+<li>**right：**</li>
+</ul>
+<p>: 内容右对齐。</p>
+<ul>
+<li>**justify：**</li>
+</ul>
+<p>: 内容两端对齐。<em>写本文档时仅Firefox能看到正确效果</em></p>
+<ul>
+<li>**start：**</li>
+</ul>
+<p>: 内容对齐开始边界。（CSS3）</p>
+<ul>
+<li>**end：**</li>
+</ul>
+<p>: 内容对齐结束边界。（CSS3）</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-text-decoration'>
+<span class='badge'>text</span>
+<h2>text-decoration</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象中的文本的装饰。</strong> - 对应的脚本特性为<strong>textDecoration</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>text-decoration</strong>：none | underline | overline | line-through | blink</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;none&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 指定文字无装饰</p>
+<ul>
+<li>**underline：**</li>
+</ul>
+<p>: 指定文字的装饰是下划线</p>
+<ul>
+<li>**overline：**</li>
+</ul>
+<p>: 指定文字的装饰是上划线</p>
+<ul>
+<li>**line-through：**</li>
+</ul>
+<p>: 指定文字的装饰是贯穿线</p>
+<ul>
+<li>**blink：**</li>
+</ul>
+<p>: 指定文字的装饰是闪烁。<em>写本文档时仅Firefox和Opera支持该参数值</em></p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-text-indent'>
+<span class='badge'>text</span>
+<h2>text-indent</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象中的文本的缩进。</strong> - 内联对象要使用该属性必须先使该对象表现为块级或内联块级。 - 对应的脚本特性为<strong>textIndent</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>text-indent</strong>：&lt;length&gt; | &lt;percentage&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;0&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值指定文本的缩进。可以为负值。</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比指定文本的缩进。可以为负值。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-text-overflow'>
+<span class='badge'>text</span>
+<h2>text-overflow</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索是否使用一个省略标记（...）标示对象内文本的溢出。</strong> - 对应的脚本特性为<strong>textOverflow</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>text-overflow</strong>：clip | ellipsis</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;clip&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**clip：**</li>
+</ul>
+<p>: 当对象内文本溢出时不显示省略标记（...），而是将溢出的部分裁切掉。</p>
+<ul>
+<li>**ellipsis：**</li>
+</ul>
+<p>: 当对象内文本溢出时显示省略标记（...）。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-text-shadow'>
+<span class='badge'>text</span>
+<h2>text-shadow</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象中文本的文字是否有阴影及模糊效果。</strong>参阅box-shadow属性。 - 可以设定多组效果，每组参数值以逗号分隔。 - 对应的脚本特性为<strong>textShadow</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>text-shadow</strong>：none | &lt;shadow&gt; [ , &lt;shadow&gt; ]*</p>
+<p><strong>&lt;shadow&gt;</strong> = &lt;length&gt;{2,3} &amp;&amp; &lt;color&gt;?</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;none&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 无阴影</p>
+<ul>
+<li>**<length>①：**</li>
+</ul>
+<p>: 第1个长度值用来设置对象的阴影水平偏移值。可以为负值</p>
+<ul>
+<li>**<length>②：**</li>
+</ul>
+<p>: 第2个长度值用来设置对象的阴影垂直偏移值。可以为负值</p>
+<ul>
+<li>**<length>③：**</li>
+</ul>
+<p>: 如果提供了第3个长度值则用来设置对象的阴影模糊值。不允许负值</p>
+<ul>
+<li>**<color>：**</li>
+</ul>
+<p>: 设置对象的阴影的颜色。请参阅颜色值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-text-transform'>
+<span class='badge'>text</span>
+<h2>text-transform</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象中的文本的大小写。</strong> - 对应的脚本特性为<strong>textTransform</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>text-transform</strong>：none | capitalize | uppercase | lowercase</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;none&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 无转换</p>
+<ul>
+<li>**capitalize：**</li>
+</ul>
+<p>: 将每个单词的第一个字母转换成大写</p>
+<ul>
+<li>**uppercase：**</li>
+</ul>
+<p>: 转换成大写</p>
+<ul>
+<li>**lowercase：**</li>
+</ul>
+<p>: 转换成小写</p>
+<ul>
+<li>**full-width：**</li>
+</ul>
+<p>: ??（CSS3）</p>
+<ul>
+<li>**full-size-kana：**</li>
+</ul>
+<p>: ??（CSS3）</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-unicode-bidi'>
+<span class='badge'>text</span>
+<h2>unicode-bidi</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>用于同一个页面里存在从不同方向读进的文本显示。与direction属性一起使用</strong> - 假如您想应用direction属性于内联元素的文本，您必须设定unicode-bidi属性为embed或bidi-override。 - 对应的脚本特性为<strong>unicodeBidi</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>unicode-bidi</strong>：normal | embed | bidi-override</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;normal&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**normal：**</li>
+</ul>
+<p>: 对象不打开附加的嵌入层，对于内联要素，隐式重排序跨对象边界进行工作。</p>
+<ul>
+<li>**embed：**</li>
+</ul>
+<p>: 对象打开附加的嵌入层，direction属性的值指定嵌入层，在对象内部进行隐式重排序。</p>
+<ul>
+<li>**bidi-override：**</li>
+</ul>
+<p>: 严格按照direction属性的值重排序。忽略隐式双向运算规则。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-vertical-align'>
+<span class='badge'>text</span>
+<h2>vertical-align</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象内容的垂直对其方式。</strong> - 对应的脚本特性为<strong>verticalAlign</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>vertical-align</strong>：baseline | sub | super | top | text-top | middle | bottom | text-bottom | &lt;percentage&gt; | &lt;length&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;baseline&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**baseline：**</li>
+</ul>
+<p>: 将支持valign特性的对象的内容与基线对齐</p>
+<ul>
+<li>**sub：**</li>
+</ul>
+<p>: 垂直对齐文本的下标</p>
+<ul>
+<li>**super：**</li>
+</ul>
+<p>: 垂直对齐文本的上标</p>
+<ul>
+<li>**top：**</li>
+</ul>
+<p>: 将支持valign特性的对象的内容与对象顶端对齐</p>
+<ul>
+<li>**text-top：**</li>
+</ul>
+<p>: 将支持valign特性的对象的文本与对象顶端对齐</p>
+<ul>
+<li>**middle：**</li>
+</ul>
+<p>: 将支持valign特性的对象的内容与对象中部对齐</p>
+<ul>
+<li>**bottom：**</li>
+</ul>
+<p>: 将支持valign特性的对象的文本与对象底端对齐</p>
+<ul>
+<li>**text-bottom：**</li>
+</ul>
+<p>: 将支持valign特性的对象的文本与对象顶端对齐</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比指定由基线算起的偏移量。可以为负值。基线对于百分数来说就是0%。</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值指定由基线算起的偏移量。可以为负值。基线对于数值来说为0。（CSS2）</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-white-space'>
+<span class='badge'>text</span>
+<h2>white-space</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象内空格的处理方式。</strong> - 对应的脚本特性为<strong>whiteSpace</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>white-space</strong>：normal | pre | nowrap | pre-wrap | pre-line</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;normal&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**normal：**</li>
+</ul>
+<p>: 默认处理方式。</p>
+<ul>
+<li>**pre：**</li>
+</ul>
+<p>: 用等宽字体显示预先格式化的文本，不合并文字间的空白距离，当文字超出边界时不换行。可查阅pre对象</p>
+<ul>
+<li>**nowrap：**</li>
+</ul>
+<p>: 强制在同一行内显示所有文本，直到文本结束或者遭遇br对象。</p>
+<ul>
+<li>**pre-wrap：**</li>
+</ul>
+<p>: 用等宽字体显示预先格式化的文本，不合并文字间的空白距离，当文字碰到边界时发生换行。</p>
+<ul>
+<li>**pre-line：**</li>
+</ul>
+<p>: 保持文本的换行，不保留文字间的空白距离，当文字碰到边界时发生换行。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-word-spacing'>
+<span class='badge'>text</span>
+<h2>word-spacing</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象中的单词之间间隔。</strong> - 该属性将指定的间隔添加到每个单词(词内不发生)之后，但最后一个字将被排除在外。 - 判断是否为单词的依据是单词间是否有空格。 - 对应的脚本特性为<strong>wordSpacing</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>letter-spacing</strong>：normal | &lt;length&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;normal&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>：[ letter-spacing ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**normal：**</li>
+</ul>
+<p>: 默认间隔</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值指定间隔。可以为负值。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-word-wrap'>
+<span class='badge'>text</span>
+<h2>word-wrap</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象中的单词之间间隔。</strong> - 对应的脚本特性为<strong>wordWrap</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>word-wrap</strong>：normal | break-word</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;normal&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**normal：**</li>
+</ul>
+<p>: 允许内容顶开或溢出指定的容器边界。</p>
+<ul>
+<li>**break-word：**</li>
+</ul>
+<p>: 内容将在边界内换行。如果需要，单词内部允许断行。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+</div>
+<div class='card' id='css-transform'>
+<span class='badge'>transform</span>
+<h2>transform</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的转换。</strong> - 对应的脚本特性为<strong>transform</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>transform</strong>：none | matrix(&lt;number&gt;,&lt;number&gt;,&lt;number&gt;,&lt;number&gt;,&lt;number&gt;,&lt;number&gt;)? translate(&lt;length&gt;[,&lt;length&gt;])? translateX(&lt;length&gt;)? translateY(&lt;length&gt;)? rotate(&lt;angle&gt;)? scale(&lt;number&gt;[,&lt;number&gt;])? scaleX(&lt;number&gt;)? scaleY(&lt;number&gt;)? skew(&lt;angle&gt;[,&lt;angle&gt;])? skewX(&lt;angle&gt;) || skewY(&lt;angle&gt;)?</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;none&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 无转换</p>
+<ul>
+<li>**matrix(<number>,<number>,<number>,<number>,<number>,<number>)：**</li>
+</ul>
+<p>: 以一个含六值的(a,b,c,d,e,f)变换矩阵的形式指定一个2D变换，相当于直接应用一个[a,b,c,d,e,f]变换矩阵</p>
+<ul>
+<li>**translate(<length>[, <length>])：**</li>
+</ul>
+<p>: 指定对象的2D translation（2D平移）。第一个参数对应X轴，第二个参数对应Y轴。如果第二个参数未提供，则默认值为0</p>
+<ul>
+<li>**translateX(<length>)：**</li>
+</ul>
+<p>: 指定对象X轴（水平方向）的平移</p>
+<ul>
+<li>**translateY(<length>)：**</li>
+</ul>
+<p>: 指定对象Y轴（垂直方向）的平移</p>
+<ul>
+<li>**rotate(<angle>)：**</li>
+</ul>
+<p>: 指定对象的2D rotation（2D旋转），需先有transform-origin属性的定义</p>
+<ul>
+<li>**scale(<number>[, <number>])：**</li>
+</ul>
+<p>: 指定对象的2D scale（2D缩放）。第一个参数对应X轴，第二个参数对应Y轴。如果第二个参数未提供，则默认取第一个参数的值</p>
+<ul>
+<li>**scaleX(<number>)：**</li>
+</ul>
+<p>: 指定对象X轴的（水平方向）缩放</p>
+<ul>
+<li>**scaleY(<number>)：**</li>
+</ul>
+<p>: 指定对象Y轴的（垂直方向）缩放</p>
+<ul>
+<li>**skew(<angle> [, <angle>])：**</li>
+</ul>
+<p>: 指定对象skew transformation（斜切扭曲）。第一个参数对应X轴，第二个参数对应Y轴。如果第二个参数未提供，则默认值为0</p>
+<ul>
+<li>**skewX(<angle>)：**</li>
+</ul>
+<p>: 指定对象X轴的（水平方向）扭曲</p>
+<ul>
+<li>**skewY(<angle>)：**</li>
+</ul>
+<p>: 指定对象Y轴的（垂直方向）扭曲</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-transform-origin'>
+<span class='badge'>transform</span>
+<h2>transform-origin</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象以某个原点进行转换。</strong> - 该属性提供2个参数值。 - 如果提供两个，第一个用于横坐标，第二个用于纵坐标。 - 如果只提供一个，该值将用于横坐标；纵坐标将默认为50%。 - 对应的脚本特性为<strong>transformOrigin</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>transform-origin</strong>：[ &lt;percentage&gt; | &lt;length&gt; | left | center① | right ] [ &lt;percentage&gt; | &lt;length&gt; | top | center② | bottom ]?</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;50% 50%&lt;/mark&gt;，效果等同于center center</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比指定坐标值。可以为负值。</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值指定坐标值。可以为负值。</p>
+<ul>
+<li>**left：**</li>
+</ul>
+<p>: 指定原点的横坐标为left</p>
+<ul>
+<li>**center①：**</li>
+</ul>
+<p>: 指定原点的横坐标为center</p>
+<ul>
+<li>**right：**</li>
+</ul>
+<p>: 指定原点的横坐标为right</p>
+<ul>
+<li>**top：**</li>
+</ul>
+<p>: 指定原点的纵坐标为top</p>
+<ul>
+<li>**center②：**</li>
+</ul>
+<p>: 指定原点的纵坐标为center</p>
+<ul>
+<li>**bottom：**</li>
+</ul>
+<p>: 指定原点的纵坐标为bottom</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+</div>
+<div class='card' id='css-transition'>
+<span class='badge'>transition</span>
+<h2>transition</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>复合属性。检索或设置对象变换时的过渡。</strong> - 可以为同一元素的多个属性定义过渡效果。示例： <strong>缩写方式：</strong> &lt;blockquote class="gquote-cont"&gt; <code>transition:border-color .5s ease-in .1s, background-color .5s ease-in .1s, color .5s ease-in .1s;</code> `<code>&lt;/blockquote&gt; <strong>拆分方式：</strong> &lt;blockquote class="gquote-cont"&gt; </code>transition-property:border-color, background-color, color; transition-duration:.5s, .5s, .5s; transition-timing-function:ease-in, ease-in, ease-in; transition-delay:.1s, .1s, .1s;<code> </code><code>&lt;/blockquote&gt; - 如果定义了多个过渡的属性，而其他属性只有一个参数值，则表明所有需要过渡的属性都应用同一个参数值。据此可以对上面的例子进行缩写： <strong>拆分方式：</strong> &lt;blockquote class="gquote-cont"&gt; </code>transition-property:border-color, background-color, color; transition-duration:.5s; transition-timing-function:ease-in; transition-delay:.1s;<code> </code><code>&lt;/blockquote&gt; - 如果需要定义多个过渡属性且不想指定具体是哪些属性过渡，同时其他属性只有一个参数值，据此可以对上面的例子进行缩写： <strong>缩写方式：</strong> &lt;blockquote class="gquote-cont"&gt; </code>transition:all .5s ease-in .1s;<code> </code><code>&lt;/blockquote&gt; <strong>拆分方式：</strong> &lt;blockquote class="gquote-cont"&gt; </code>transition-property:all; transition-duration:.5s; transition-timing-function:ease-in; transition-delay:.1s;<code> </code>`&lt;/blockquote&gt; - 对应的脚本特性为<strong>transition</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>transition</strong>：[ transition-property ] || [ transition-duration ] || [ transition-timing-function ] || [ transition-delay ]</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;看每个独立属性&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**[ transition-property ]：**</li>
+</ul>
+<p>: 检索或设置对象中的参与过渡的属性</p>
+<ul>
+<li>**[ transition-duration ]：**</li>
+</ul>
+<p>: 检索或设置对象过渡的持续时间</p>
+<ul>
+<li>**[ transition-timing-function ]：**</li>
+</ul>
+<p>: 检索或设置对象中过渡的动画类型</p>
+<ul>
+<li>**[ transition-delay ]：**</li>
+</ul>
+<p>: 检索或设置对象延迟过渡的时间</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-transition-delay'>
+<span class='badge'>transition</span>
+<h2>transition-delay</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象延迟过渡的时间。</strong> - 如果提供多个属性值，以逗号进行分隔。 - 对应的脚本特性为<strong>transitionDelay</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>transition-delay</strong>：&lt;time&gt;[ ,&lt;time&gt; ]*</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;0&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<time>：**</li>
+</ul>
+<p>: 指定对象过渡的延迟时间</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-transition-duration'>
+<span class='badge'>transition</span>
+<h2>transition-duration</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象过渡的持续时间。</strong> - 如果提供多个属性值，以逗号进行分隔。 - 对应的脚本特性为<strong>transitionDuration</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>transition-duration</strong>：&lt;time&gt;[ ,&lt;time&gt; ]*</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;0&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<time>：**</li>
+</ul>
+<p>: 指定对象过渡的持续时间</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-transition-property'>
+<span class='badge'>transition</span>
+<h2>transition-property</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象中的参与过渡的属性。</strong> - 默认值为：all。默认为所有可以进行过渡的css属性。 - 如果提供多个属性值，以逗号进行分隔。 - 对应的脚本特性为<strong>transitionProperty</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>transition-property</strong>：all | none | &lt;property&gt;[ ,&lt;property&gt; ]*</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;all&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**all：**</li>
+</ul>
+<p>: 所有可以进行过渡的css属性</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 不指定过渡的css属性</p>
+<ul>
+<li>**<property>：**</li>
+</ul>
+<p>: 指定要进行过渡的css属性</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-transition-timing-function'>
+<span class='badge'>transition</span>
+<h2>transition-timing-function</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>检索或设置对象中过渡的动画类型。</strong> - 如果提供多个属性值，以逗号进行分隔。 - 对应的脚本特性为<strong>transitionTimingFunction</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>transition-timing-function</strong>：linear | ease | ease-in | ease-out | ease-in-out | cubic-bezier(&lt;number&gt;, &lt;number&gt;, &lt;number&gt;, &lt;number&gt;)[ ,linear | ease | ease-in | ease-out | ease-in-out | cubic-bezier(&lt;number&gt;, &lt;number&gt;, &lt;number&gt;, &lt;number&gt;) ]*</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;ease&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**linear：**</li>
+</ul>
+<p>: 线性过渡。等同于贝塞尔曲线(0.0, 0.0, 1.0, 1.0)</p>
+<ul>
+<li>**ease：**</li>
+</ul>
+<p>: 平滑过渡。等同于贝塞尔曲线(0.25, 0.1, 0.25, 1.0)</p>
+<ul>
+<li>**ease-in：**</li>
+</ul>
+<p>: 由慢到快。等同于贝塞尔曲线(0.42, 0, 1.0, 1.0)</p>
+<ul>
+<li>**ease-out：**</li>
+</ul>
+<p>: 由快到慢。等同于贝塞尔曲线(0, 0, 0.58, 1.0)</p>
+<ul>
+<li>**ease-in-out：**</li>
+</ul>
+<p>: 由慢到快再到慢。等同于贝塞尔曲线(0.42, 0, 0.58, 1.0)</p>
+<ul>
+<li>**cubic-bezier(<number>, <number>, <number>, <number>)：**</li>
+</ul>
+<p>: 特定的贝塞尔曲线类型，4个数值需在[0, 1]区间内</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+</div>
+<div class='card' id='css-box-sizing'>
+<span class='badge'>user-interface</span>
+<h2>box-sizing</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的盒模型组成模式。</strong> - 对应的脚本特性为<strong>boxSizing</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>box-sizing</strong>：content-box | border-box</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;content-box&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**content-box：**</li>
+</ul>
+<p>: padding和border不被包含在定义的width和height之内。对象的实际宽度等于设置的width值和border、padding之和，即 ( Element width = width + border + padding )</p>
+<p>: 此属性表现为标准模式下的盒模型。</p>
+<ul>
+<li>**border-box：**</li>
+</ul>
+<p>: padding和border被包含在定义的width和height之内。对象的实际宽度就等于设置的width值，即使定义有border和padding也不会改变对象的实际宽度，即 ( Element width = width )</p>
+<p>: 此属性表现为怪异模式下的盒模型。</p>
+<hr>
+</div>
+<div class='card' id='css-cursor'>
+<span class='badge'>user-interface</span>
+<h2>cursor</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索在对象上移动的鼠标指针采用何种系统预定义的光标形状。</strong> - 使用自定义图像作为光标类型，IE, Opera只支持<em>.cur等特定的图片格式；Firefox, Chrome, Safari既支持特定图片类型也支持常见的</em>.jpg, <em>.gif, </em>.jpg等图片格式。 - <strong>cursor的属性值可以是一个序列</strong> <strong>示例代码：</strong> &lt;blockquote class="gquote-cont"&gt; <code>:link,:visited{ cursor:url(example.svg#linkcursor), url(hyper.cur), url(hyper.png) 2 3, pointer; }</code> ``&lt;/blockquote&gt; 本例用来给所有的超链接定义光标类型，客户端如果不支持SVG类型的光标，则使用下个"hyper.cur"；如果cur类型也不支持，则使用下个"hyper.png"；依次类推。 - 对应的脚本特性为<strong>cursor</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>cursor</strong>：[&lt;url&gt; [&lt;x&gt; &lt;y&gt;]?,]*[ auto | default | none | context-menu | help | pointer | progress | wait | cell | crosshair | text | vertical-text | alias | copy | move | no-drop | not-allowed | e-resize | n-resize | ne-resize | nw-resize | s-resize | se-resize | sw-resize | w-resize | ew-resize | ns-resize | nesw-resize | nwse-resize | col-resize | row-resize | all-scroll]</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;auto&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-nav-down'>
+<span class='badge'>user-interface</span>
+<h2>nav-down</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的导航方向。</strong> - 只有支持nav-index属性的元素才能参与导航排序。 - 被禁用的元素将不参与导航排序。 - 对应的脚本特性为<strong>navDown</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>nav-down</strong>：auto | &lt;id&gt; [ current | root | &lt;target-name&gt; ]?</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;auto&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>: [ nav-index ] || [ nav-up ] || [ nav-right ] || [ nav-left ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 默认顺序。</p>
+<ul>
+<li>**<id>：**</li>
+</ul>
+<p>: 被导航元素的id。</p>
+<ul>
+<li>**<target-name>：**</li>
+</ul>
+<p>: 框架目标页面之间的元素焦点导航。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-nav-index'>
+<span class='badge'>user-interface</span>
+<h2>nav-index</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的导航顺序。</strong> - 该属性是HTML4/XHTML1中标签属性tabindex的替代品。 - 只有支持nav-index属性的元素才能参与导航排序。 - 被禁用的元素将不参与导航排序。 - 对应的脚本特性为<strong>navIndex</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>nav-index</strong>：auto | &lt;number&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;auto&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>: [ nav-up ] || [ nav-right ] || [ nav-down ] || [ nav-left ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 元素的导航焦点顺序由客户端自动分配。</p>
+<ul>
+<li>**<number>：**</li>
+</ul>
+<p>: 用浮点数来定义元素的导航焦点顺序。若某元素的该值等于1则意味着该元素最先被导航。当若干个元素的nav-index值相同时，则按照文档的先后顺序进行导航。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-nav-left'>
+<span class='badge'>user-interface</span>
+<h2>nav-left</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的导航方向。</strong> - 只有支持nav-index属性的元素才能参与导航排序。 - 被禁用的元素将不参与导航排序。 - 对应的脚本特性为<strong>navLeft</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>nav-left</strong>：auto | &lt;id&gt; [ current | root | &lt;target-name&gt; ]?</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;auto&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>: [ nav-index ] || [ nav-up ] || [ nav-right ] || [ nav-down ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 默认顺序。</p>
+<ul>
+<li>**<id>：**</li>
+</ul>
+<p>: 被导航元素的id。</p>
+<ul>
+<li>**<target-name>：**</li>
+</ul>
+<p>: 框架目标页面之间的元素焦点导航。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-nav-right'>
+<span class='badge'>user-interface</span>
+<h2>nav-right</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的导航方向。</strong> - 只有支持nav-index属性的元素才能参与导航排序。 - 被禁用的元素将不参与导航排序。 - 对应的脚本特性为<strong>navRight</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>nav-right</strong>：auto | &lt;id&gt; [ current | root | &lt;target-name&gt; ]?</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;auto&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>: [ nav-index ] || [ nav-up ] || [ nav-down ] || [ nav-left ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 默认顺序。</p>
+<ul>
+<li>**<id>：**</li>
+</ul>
+<p>: 被导航元素的id。</p>
+<ul>
+<li>**<target-name>：**</li>
+</ul>
+<p>: 框架目标页面之间的元素焦点导航。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-nav-up'>
+<span class='badge'>user-interface</span>
+<h2>nav-up</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的导航方向。</strong> - 只有支持nav-index属性的元素才能参与导航排序。 - 被禁用的元素将不参与导航排序。 - 对应的脚本特性为<strong>navUp</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>nav-up</strong>：auto | &lt;id&gt; [ current | root | &lt;target-name&gt; ]?</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;auto&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>: [ nav-index ] || [ nav-right ] || [ nav-down ] || [ nav-left ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**auto：**</li>
+</ul>
+<p>: 默认顺序。</p>
+<ul>
+<li>**<id>：**</li>
+</ul>
+<p>: 被导航元素的id。</p>
+<ul>
+<li>**<target-name>：**</li>
+</ul>
+<p>: 框架目标页面之间的元素焦点导航。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-outline'>
+<span class='badge'>user-interface</span>
+<h2>outline</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>复合属性。设置或检索对象外的线条轮廓。</strong>outline画在border外面 - 不允许类似border属性那样能将自身拆分为border-top,border-right,border-bottom,border-left - IE8暂时还不支持outline-offset相关属性 - 对应的脚本特性为<strong>outline</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>outline</strong>：[ outline-width ] || [ outline-style ] || [ outline-color ]</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;看每个独立属性&lt;/mark&gt;</p>
+<p><strong>相关属性</strong>: [ outline-offset ]</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**[ outline-width ]：**</li>
+</ul>
+<p>: 指定轮廓边框的宽度。</p>
+<ul>
+<li>**[ outline-style ]：**</li>
+</ul>
+<p>: 指定轮廓边框的样式。</p>
+<ul>
+<li>**[ outline-color ]：**</li>
+</ul>
+<p>: 指定轮廓边框的颜色。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-outline-color'>
+<span class='badge'>user-interface</span>
+<h2>outline-color</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象外的线条轮廓的颜色。</strong>参阅outline属性。 - 不允许类似border-color属性那样能将自身拆分为border-top-color,border-right-color,border-bottom-color,border-left-color - 对应的脚本特性为<strong>outlineColor</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>outline-color</strong>：&lt;color&gt; | invert</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;invert&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**color：**</li>
+</ul>
+<p>: 指定颜色。请参阅颜色值</p>
+<ul>
+<li>**invert：**</li>
+</ul>
+<p>: 使用背景色的反色。<em>该参数值目前仅在IE及Opera下有效</em></p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-outline-offset'>
+<span class='badge'>user-interface</span>
+<h2>outline-offset</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象外的线条轮廓偏移容器的值。</strong>参阅outline属性。 - 对应的脚本特性为<strong>outlineOffset</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>outline-offset</strong>：&lt;length&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义轮廓偏移。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-outline-style'>
+<span class='badge'>user-interface</span>
+<h2>outline-style</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象外的线条轮廓的样式。</strong>参阅outline属性。 - 不允许类似border-style属性那样能将自身拆分为border-top-style,border-right-style,border-bottom-style,border-left-style - 对应的脚本特性为<strong>outlineStyle</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>outline-style</strong>：none | dotted | dashed | solid | double | groove | ridge | inset | outset</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;none&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 无轮廓。与任何指定的outline-width值无关</p>
+<ul>
+<li>**dotted：**</li>
+</ul>
+<p>: 点状轮廓。</p>
+<ul>
+<li>**dashed：**</li>
+</ul>
+<p>: 虚线轮廓。</p>
+<ul>
+<li>**solid：**</li>
+</ul>
+<p>: 实线轮廓</p>
+<ul>
+<li>**double：**</li>
+</ul>
+<p>: 双线轮廓。两条单线与其间隔的和等于指定的outline-width值</p>
+<ul>
+<li>**groove：**</li>
+</ul>
+<p>: 3D凹槽轮廓。</p>
+<ul>
+<li>**ridge：**</li>
+</ul>
+<p>: 3D凸槽轮廓。</p>
+<ul>
+<li>**inset：**</li>
+</ul>
+<p>: 3D凹边轮廓。</p>
+<ul>
+<li>**outset：**</li>
+</ul>
+<p>: 3D凸边轮廓。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-outline-width'>
+<span class='badge'>user-interface</span>
+<h2>outline-width</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象外的线条轮廓的宽度。</strong>参阅outline属性。 - 不允许类似border-width属性那样能将自身拆分为border-top-width,border-right-width,border-bottom-width,border-left-width - 对应的脚本特性为<strong>outlineWidth</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>outline-width</strong>：&lt;length&gt; | thin | medium | thick</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;medium&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**<length>：**</li>
+</ul>
+<p>: 用长度值来定义轮廓的厚度。不允许负值</p>
+<ul>
+<li>**medium：**</li>
+</ul>
+<p>: 定义默认宽度的轮廓。</p>
+<ul>
+<li>**thin：**</li>
+</ul>
+<p>: 定义比默认宽度细的轮廓。</p>
+<ul>
+<li>**thick：**</li>
+</ul>
+<p>: 定义比默认宽度粗的轮廓。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-resize'>
+<span class='badge'>user-interface</span>
+<h2>resize</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的区域是否允许用户缩放，调节元素尺寸大小。</strong> - 如果希望此属性生效，需要设置对象的overflow属性，值可以是auto,hidden或scroll。 - 对应的脚本特性为<strong>resize</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>resize</strong>：none | both | horizontal | vertical</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;none&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**none：**</li>
+</ul>
+<p>: 不允许用户调整元素大小。</p>
+<ul>
+<li>**both：**</li>
+</ul>
+<p>: 用户可以调节元素的宽度和高度。</p>
+<ul>
+<li>**horizontal：**</li>
+</ul>
+<p>: 用户可以调节元素的宽度</p>
+<ul>
+<li>**vertical：**</li>
+</ul>
+<p>: 用户可以调节元素的高度。</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+<hr>
+</div>
+<div class='card' id='css-zoom'>
+<span class='badge'>user-interface</span>
+<h2>zoom</h2>
+<h3>功能说明</h3>
+<p>&lt;header id="hd"&gt; <strong>设置或检索对象的缩放比例。</strong> - 对应的脚本特性为<strong>zoom</strong>。 &lt;/section&gt; &lt;section id="compatible" class="gmodule gattr"&gt;</p>
+<h3>语法/取值</h3>
+<p><strong>zoom</strong>：normal | &lt;number&gt; | &lt;percentage&gt;</p>
+<p><strong>默认值</strong>：&lt;mark class="defaultvalue"&gt;normal&lt;/mark&gt;</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="value" class="gmodule gattr"&gt;</p>
+<ul>
+<li>**normal：**</li>
+</ul>
+<p>: 使用对象的实际尺寸。</p>
+<ul>
+<li>**<number>：**</li>
+</ul>
+<p>: 用浮点数来定义缩放比例。不允许负值</p>
+<ul>
+<li>**<percentage>：**</li>
+</ul>
+<p>: 用百分比来定义缩放比例。不允许负值</p>
+<p>&lt;/section&gt;</p>
+<p>&lt;section id="intro" class="gmodule gattr"&gt;</p>
+</div>
+</div></div>
+</body>
+</html>

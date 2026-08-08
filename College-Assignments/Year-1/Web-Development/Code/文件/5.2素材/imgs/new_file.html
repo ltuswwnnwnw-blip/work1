@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>登录表单</title>
+		<style type="text/css">
+			#outer{
+				width: 100%;
+			}
+			#inner{
+				background-color: #2f4f94;
+				width: 1600px;
+				margin: auto;
+			}
+			.main{
+				width: 100%;
+				position: relative;
+			}
+			#box{
+				background-color: white;
+				position: absolute;
+				width: 30%;
+				top: 20%;
+				right: 80px;
+				padding: 10px 15px;
+				margin-right: 30px;
+			}
+			.header{
+				background-color: white;
+			}
+			.header img{
+				margin-left: 50px;
+				margin-top: 0;
+				display: block;
+			}
+			.main img{
+				width: 60%;
+				display: block;
+			}
+			.login h1{
+				text-align: center;
+				border-bottom: 1px solid gray;
+				line-height: 60px;
+				font-weight: normal;
+				padding: 0;
+				margin: 0 0 20px 0;
+			}
+			.login .field{
+				display: flex;
+				align-items: center;
+				margin-bottom: 10px;
+			}
+			.login label{
+				text-align: right;
+				font-size: 16px;
+				width: 70px;
+				margin-right: 10px;
+			}
+			.login input{
+				flex: 1;
+				height: 36px;
+				padding: 0 8px;
+				margin: 0;
+				border: 1px solid black;
+				outline: none;
+			}
+			.login input:focus{
+				border-color: #2f4f94;
+			}
+			.hint{
+				margin-left: 80px;
+				margin-bottom: 10px;
+				font-size: 12px;
+				color: #999;
+			}
+			.btn{
+				display: flex;
+				justify-content: space-between;
+				margin: 30px 0 0 30px;
+			}
+			.btn button{
+				background-color: #ff0000;
+				color: #ffffff;
+				height: 38px;
+				width: 45%;
+				cursor: pointer;
+				border: none;
+				font-size: 14px;
+			}
+			.btn button:hover{
+				background-color: #aa0000;
+			}
+			.forget{
+				cursor: pointer;
+				text-decoration: none;
+				color: #ff0000;
+			}
+			.forget:hover{
+				cursor: pointer;
+				text-decoration: underline;
+				color: #00aaff;
+			}
+			.forgett{
+				display: flex;
+				justify-content: flex-end;
+			}
+			footer{
+				text-align: center;
+				line-height: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="outer">
+			<div class="header">
+				<img src="logo.png"/>
+			</div>
+			<div id="inner">
+				<div class="main">
+					<img src="pic.jpg"/>
+					<div id="box">
+						<div class="login">
+							<h1>账户登录</h1>
+							<div class="field">
+								<label>用户名</label>
+								<input type="text" name="username" placeholder="请输入用户名">
+							</div>
+							<div class="hint">可由数字、字母和下划线组成</div>
+
+							<div class="field">
+								<label>密码</label>
+								<input type="password" placeholder="请输入密码">
+							</div>
+							<div class="hint">密码为6-18位字符，区分大小写</div>
+
+							<div class="forgett">
+								<a href="#" class="forget">忘记密码</a>
+							</div>
+							<div class="btn">
+								<button type="submit">登录</button>
+								<button type="reset">重置</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer>
+			<p>kjwenfjklranwkjnrkgljawernanwerlgwkargnrklgnawe</p>
+		</footer>
+	</body>
+</html>

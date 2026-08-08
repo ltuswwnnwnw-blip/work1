@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>打字机文字效果</title>
+<style>
+body { font-family:"微软雅黑",sans-serif; background:#f5f5f5; padding:30px; text-align:center; }
+#screen { background:#2c3e50; color:#2ecc71; padding:20px; border-radius:6px; font-family:Consolas,monospace; font-size:20px; min-height:60px; line-height:1.6; max-width:550px; margin:20px auto; }
+button { background:#e67e22; color:#fff; border:none; padding:8px 20px; border-radius:4px; cursor:pointer; margin:5px; }
+button:hover { background:#d35400; }
+</style>
+</head>
+<body>
+
+<h2>打字机效果</h2>
+<div id="screen"></div>
+<button onclick="play()">播放</button>
+<button onclick="stop()">停止</button>
+
+<script>
+var notices = [
+    "欢迎来到文馨书屋！这里有上万本好书等你来读。",
+    "本周推荐：《明朝那些事儿》——历史可以写得很好看。",
+    "新书上架：《三体》全集限时8折。"
+];
+var idx = 0, pos = 0, timer = null;
+
+function play() {
+    idx = 0; pos = 0;
+    if (timer) clearInterval(timer);
+    timer = setInterval(tick, 100);
+}
+
+function tick() {
+    var full = notices[idx];
+    document.getElementById("screen").innerText = full.substr(0, pos + 1);
+    pos++;
+    if (pos >= full.length) {
+        clearInterval(timer);
+        setTimeout(function() {
+            idx++;
+            if (idx >= notices.length) idx = 0;
+            pos = 0;
+            timer = setInterval(tick, 100);
+        }, 3000);
+    }
+}
+
+function stop() {
+    if (timer) { clearInterval(timer); timer = null; }
+    document.getElementById("screen").innerText = "";
+}
+</script>
+
+</body>
+</html>

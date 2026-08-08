@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>JS特效：打字机文字效果</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"微软雅黑",sans-serif;line-height:1.8;color:#333;background:#f8f9fa;padding:20px;}
+.wrapper{max-width:860px;margin:0 auto;}
+h1{text-align:center;color:#2c3e50;margin-bottom:6px;}
+.subtitle{text-align:center;color:#888;margin-bottom:20px;font-size:14px;}
+h2{color:#e67e22;border-left:5px solid #e67e22;padding-left:12px;margin:35px 0 15px;font-size:22px;}
+h3{color:#2ecc71;margin:22px 0 10px;font-size:18px;}
+p{margin-bottom:12px;}
+pre{background:#2c3e50;color:#ecf0f1;padding:15px;border-radius:6px;overflow-x:auto;font-size:13px;line-height:1.5;margin:10px 0;}
+code{background:#eee;padding:2px 6px;border-radius:3px;font-size:13px;color:#e74c3c;}
+pre code{background:none;padding:0;color:#ecf0f1;}
+.highlight{background:#fff3cd;border-left:4px solid #f39c12;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+.error-box{background:#fdeaea;border-left:4px solid #e74c3c;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+
+/* 演示区 */
+.demo-section{background:#fff;border:1px solid #ddd;border-radius:8px;padding:20px;margin:20px 0;text-align:center;}
+#typewriter-box{background:#2c3e50;color:#2ecc71;padding:20px;border-radius:6px;font-family:"Consolas",monospace;font-size:20px;min-height:60px;line-height:1.6;margin:15px 0;}
+#typewriter-box .cursor{display:inline-block;width:2px;height:22px;background:#2ecc71;animation:blink 0.5s infinite;vertical-align:middle;margin-left:3px;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+.demo-panel button{background:#e67e22;color:#fff;border:none;padding:8px 20px;font-size:14px;border-radius:4px;cursor:pointer;margin:5px;}
+.demo-panel button:hover{background:#d35400;}
+</style>
+</head>
+<body>
+<hr style="margin-top:50px;border:2px dashed #ccc;">
+<h2 style="text-align:center;color:#333;">🧪 纯净演示区（无注释，仅展示效果）</h2>
+<div style="max-width:550px;margin:20px auto;background:#fff;padding:20px;border-radius:8px;text-align:center;">
+  <div id="demo-tw" style="background:#2c3e50;color:#2ecc71;padding:18px;border-radius:6px;font-family:Consolas,monospace;font-size:18px;min-height:50px;line-height:1.6;"></div>
+  <button onclick="demoTypeStart()" style="margin-top:12px;background:#e67e22;color:#fff;border:none;padding:8px 20px;border-radius:4px;cursor:pointer;">▶ 播放</button>
+</div>
+<script>
+var demoNotices = ["欢迎来到文馨书屋！这里有上万本好书。","本周推荐：《明朝那些事儿》。","新书上架：《三体》全集限时8折！"];
+var demoIdx = 0, demoChar = 0, demoTimer = null;
+function demoTypeStart() { demoIdx = 0; demoChar = 0; demoTimer = setInterval(demoTypeTick, 100); }
+function demoTypeTick() {
+  var full = demoNotices[demoIdx];
+  document.getElementById("demo-tw").innerText = full.substr(0, demoChar + 1);
+  demoChar++;
+  if (demoChar >= full.length) {
+    clearInterval(demoTimer);
+    setTimeout(function() { demoIdx++; if (demoIdx >= demoNotices.length) demoIdx = 0; demoChar = 0; demoTimer = setInterval(demoTypeTick, 100); }, 3000);
+  }
+}
+</script>
+
+</body>
+</html>
+<hr style="margin-top:50px;border:2px dashed #3498db;">
+<h2 style="text-align:center;color:#555;">📖 教学讲解区</h2>
+
+<div class="wrapper">
+
+<h1>⌨️ JS特效：打字机文字效果</h1>
+<p class="subtitle">对应课件 8.1 | 核心：setInterval + substr 逐字显示</p>
+
+<!--
+宏观理解：
+打字机效果 = 每隔一段时间多显示一个字。
+原理：用定时器每100ms刷新一次，每次用substr()多截取一个字显示出来。
+
+三个关键函数：
+1. setInterval(fn, ms) → 每隔ms毫秒执行一次fn（反复执行）
+2. setTimeout(fn, ms) → ms毫秒后执行一次fn（只执行一次）
+3. clearInterval(id) → 停止setInterval（停掉反复执行的定时器）
+-->
+
+<h2>一、定时器：JS的"闹钟"</h2>
+<table>
+<tr><th></th><th>setInterval()</th><th>setTimeout()</th></tr>
+<tr><td>翻译</td><td>"每隔X毫秒，做一次"</td><td>"X毫秒后，做一次"</td></tr>
+<tr><td>执行次数</td><td>反复执行，直到clearInterval()叫停</td><td>只执行一次</td></tr>
+<tr><td>停止方式</td><td>clearInterval(定时器ID)</td><td>自动停</td></tr>
+<tr><td>生活类比</td><td>闹钟每天早上7点都响</td><td>设一个倒计时，到点响一次</td></tr>
+<tr><td>打字机中用途</td><td>每100ms多显示一个字</td><td>打完一条后等5秒再打下一条</td></tr>
+</table>
+
+<pre><code>// setInterval：反复执行
+var timer = setInterval(function(){
+    显示下一个字();            // 这个函数每100ms被调用一次
+}, 100);
+// 参数1：要执行的函数
+// 参数2：间隔时间（毫秒），100ms = 0.1秒
+// 返回值：定时器ID（数字），用于clearInterval来停止它
+
+// clearInterval：停止定时器
+clearInterval(timer);
+// 不停止会怎样？定时器永远跑下去，占用CPU，用户离开页面也不停
+// 而且多个定时器同时跑会互相干扰
+
+// setTimeout：延迟执行一次
+setTimeout(function(){
+    开始下一条通知();
+}, 5000);
+// 5000ms = 5秒后执行一次，然后自动结束
+// 不需要clearInterval来停止</code></pre>
+
+<h2>二、substr()：从字符串里切一段出来</h2>
+<pre><code>var text = "欢迎来到文馨书屋";
+
+text.substr(0, 1);   // → "欢"   (从位置0开始取1个)
+text.substr(0, 2);   // → "欢迎" (从位置0开始取2个)
+text.substr(0, 3);   // → "欢迎来"(从位置0开始取3个)
+
+// sub = substring = 子串
+// str = string = 字符串
+// substr(起始位置, 取几个字)
+// 起始位置从0开始数！0=第一个字，1=第二个字
+
+// substring(from, to) 是类似的：substring(0,3) → "欢迎来"（0到3，不包括3）
+</code></pre>
+
+<h2>三、打字机效果原理（核心逻辑）</h2>
+<pre><code>// 假设通知文字是 "欢迎来到文馨书屋"
+
+// 第100ms：substr(0, 1) → 显示 "欢"
+// 第200ms：substr(0, 2) → 显示 "欢迎"
+// 第300ms：substr(0, 3) → 显示 "欢迎来"
+// ...
+// 第900ms：substr(0, 9) → 显示 "欢迎来到文馨书屋"（完整文字）
+// → 触发clearInterval()停止 → setTimeout 5秒后开始下一条
+
+// 每次比上一次多显示一个字 → 肉眼看到的就是"一个字一个字往外蹦"</code></pre>
+
+<h2>四、完整流程图</h2>
+<pre><code>页面加载完成(onload)
+  → 启动start()函数
+  → 取数组里第一条通知文字
+  → setInterval每100ms执行一次typeEffect()
+      → typeEffect里：substr(0, 当前字数+1)
+      → 显示到页面上
+      → 当前字数++
+      → 如果当前字数 >= 通知总字数：
+          → clearInterval() 停止打字
+          → setTimeout 5秒后
+              → 取数组里下一条通知
+              → 重启setInterval打下一段文字</code></pre>
+
+<h2>五、现场演示</h2>
+<div class="demo-section">
+    <h3>打字机效果</h3>
+    <div id="typewriter-box"><span id="tw-text"></span><span class="cursor" id="tw-cursor"></span></div>
+    <div class="demo-panel">
+        <button onclick="startTyping()">▶ 开始播放</button>
+        <button onclick="resetTyping()">🔄 重置</button>
+    </div>
+</div>
+
+<script>
+// ★★★ 打字机完整代码 ★★★
+
+// 1. 全局变量：用数组存多条通知
+var notices = [
+    "欢迎来到文馨书屋！这里有上万本好书等你来读。",
+    "本周推荐：《明朝那些事儿》——历史可以写得很好看。",
+    "新书上架：《三体》全集限时8折，数量有限，先到先得！"
+];
+// 数组 = 一个可以装多个值的容器（Python的list）
+// var notices = ["第一条", "第二条", "第三条"];
+// 访问方式：notices[0] = "第一条", notices[1] = "第二条"
+
+var currentNotice = 0;   // 当前播放到第几条通知（从0开始）
+var currentChar = 0;     // 当前显示到第几个字
+var typeTimer = null;    // 打字定时器的ID（用于清除）
+
+// 2. 打字函数：每次多显示一个字
+function typeEffect() {
+    // 获取当前通知的完整文字
+    var fullText = notices[currentNotice];
+    // notices[0] → "欢迎来到文馨书屋..."
+
+    // 用substr切出要显示的部分
+    var showText = fullText.substr(0, currentChar + 1);
+    // currentChar=0时：substr(0,1) → "欢"
+    // currentChar=1时：substr(0,2) → "欢迎"
+    // 每次+1，取出比上次多一个字的子串
+
+    // 把文字显示到页面上
+    document.getElementById("tw-text").innerText = showText;
+    // .innerText → 设置纯文本（和innerHTML的区别：innerText不解析HTML标签）
+
+    currentChar++;  // 字数+1，下一次会多显示一个字
+
+    // 如果整条通知都打完了
+    if (currentChar >= fullText.length) {
+        // .length → 字符串的长度（有多少个字）
+        clearInterval(typeTimer);  // 先停掉打字定时器
+        typeTimer = null;
+
+        // 5秒后播放下一段文字
+        setTimeout(function(){
+            nextNotice();  // 切到下一条通知
+        }, 5000);
+    }
+}
+
+// 3. 切到下一条通知
+function nextNotice() {
+    currentNotice++;  // 索引+1，指向下一条通知
+    if (currentNotice >= notices.length) {
+        currentNotice = 0;  // 播完了，回到第一条（循环播放）
+    }
+    currentChar = 0;  // 字数归零，从头开始打
+    startInterval();  // 重新启动打字定时器
+}
+
+// 4. 启动打字定时器
+function startInterval() {
+    // 先清除旧的定时器（防止多个定时器同时跑 → 字会跳着显示）
+    if (typeTimer !== null) {
+        clearInterval(typeTimer);
+    }
+    // 每100毫秒调用一次typeEffect → 打字速度 = 每秒10个字
+    typeTimer = setInterval(typeEffect, 100);
+    // 为什么100ms？太快（50ms）眼睛跟不上，太慢（300ms）等得不耐烦
+}
+
+// 5. 外部控制按钮
+function startTyping() {
+    currentNotice = 0;  // 从第一条开始
+    currentChar = 0;     // 从第一个字开始
+    startInterval();     // 启动定时器
+}
+
+function resetTyping() {
+    // 清除定时器 → 停止打字
+    if (typeTimer !== null) {
+        clearInterval(typeTimer);
+        typeTimer = null;
+    }
+    // 清空显示 → 回到空白状态
+    document.getElementById("tw-text").innerText = "";
+    currentNotice = 0;
+    currentChar = 0;
+}
+
+// 6. 页面加载时自动开始
+window.onload = function(){
+    startTyping();
+};
+// window.onload → 页面全部加载完成后自动执行
+// 为什么不用直接在script标签里写？因为那时候HTML元素可能还没加载完
+// document.getElementById会找不到元素→报错
+</script>
+
+<h2>六、因果关系链</h2>
+<pre><code>setInterval每100ms触发一次
+  → typeEffect()被执行 → substr(0, currentChar+1)比上次多取一个字
+  → 更新页面 → currentChar++
+  → currentChar >= 文字总长度？
+      → 是：clearInterval()停打字 → setTimeout 5秒后 → nextNotice()
+      → 否：继续等下一个100ms → 重复循环
+
+没有clearInterval会怎样？
+  → 第一条通知打完后，定时器还在跑
+  → currentChar无限增大 → substr(0, 999)还是那几个字 → 浪费CPU
+  → 同时第二条通知的定时器也在跑 → 两个定时器抢着更新同一个位置 → 乱码</code></pre>
+
+<div class="error-box">
+<h3>❌ 常见错误：忘了clearInterval</h3>
+<p><strong>症状</strong>：第一条通知打完后，永远停不下来，或者新老定时器重叠运行。</p>
+<p><strong>原因</strong>：setInterval会一直跑，直到clearInterval被调用或页面关闭。</p>
+<p><strong>修复</strong>：每次启动新定时器前，先clearInterval旧的；每条通知打完后，clearInterval当前定时器。</p>
+</div>
+
+<p style="text-align:center;color:#888;margin-top:50px;">
+👉 下一步：<a href="JS特效_图片轮播切换.html" style="color:#e67e22;">JS特效_图片轮播切换</a>
+</p>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>第6层：3D翻转卡片 —— 正面图片翻过去是文字</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"微软雅黑",sans-serif;line-height:1.8;color:#333;background:#f8f9fa;padding:20px;}
+.wrapper{max-width:860px;margin:0 auto;}
+h1{text-align:center;color:#2c3e50;margin-bottom:6px;}
+.subtitle{text-align:center;color:#888;margin-bottom:30px;font-size:14px;}
+h2{color:#e67e22;border-left:5px solid #e67e22;padding-left:12px;margin:35px 0 15px;font-size:22px;}
+h3{color:#2ecc71;margin:22px 0 10px;font-size:18px;}
+p{margin-bottom:12px;}
+
+.demo-section{background:#fff;border:1px solid #ddd;border-radius:8px;padding:20px;margin:20px 0;}
+
+/* ★★★ 3D翻转卡片 ★★★ */
+.card-row{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin:20px 0;}
+
+/* 第4层：卡片容器——relative是给子元素absolute当锚点 */
+.flip-card{width:200px;height:260px;perspective:800px;cursor:pointer;}
+/* perspective: 800px → 透视距离，越小3D效果越强。相当于"眼睛离屏幕多远"
+ * 必须设在父元素上才能生效 */
+
+/* 第4层：卡片内层——relative + preserve-3d + 过渡 */
+.flip-card-inner{position:relative;width:100%;height:100%;
+    transform-style:preserve-3d;transition:transform 0.8s ease;}
+/* transform-style: preserve-3d → ★★★ 最关键的一行 ★★★
+ * 做什么：让子元素保持3D空间位置，而不是压扁成2D
+ * 不写：子元素的3D变换全部失效，卡片翻转变成2D的缩放 */
+
+/* hover触发翻转 */
+.flip-card:hover .flip-card-inner{transform:rotateY(180deg);}
+/* rotateY(180deg) → 绕Y轴旋转180度 → 卡片翻面 */
+
+/* 第4层：正面（图片面）——absolute + backface-visibility */
+.flip-card-front,.flip-card-back{position:absolute;width:100%;height:100%;
+    border-radius:10px;display:flex;align-items:center;justify-content:center;
+    text-align:center;padding:15px;backface-visibility:hidden;}
+/* backface-visibility: hidden → ★★★ 翻转时隐藏背面 ★★★
+ * 做什么：当这个面背对着我们时，把它隐藏
+ * 不写：翻过去之后能看到反过来的镜像（很丑） */
+
+/* 第5层：正面样式 */
+.flip-card-front{background:linear-gradient(135deg,#3498db,#2ecc71);color:#fff;
+    z-index:2;font-size:60px;}
+/* z-index:2 → 默认正面在上层（朝向我们） */
+
+/* 第5层：背面样式（预翻转180°） */
+.flip-card-back{background:linear-gradient(135deg,#e74c3c,#f39c12);color:#fff;
+    transform:rotateY(180deg);font-size:14px;}
+/* transform: rotateY(180deg) → ★★★ 背面预先翻转180° ★★★
+ * 为什么：默认朝向和正面一样朝向我们，预先翻180°让它背对我们
+ * 这样当卡片整体翻180°时，背面就正好转过来面向我们了 */</style>
+</head>
+<body>
+<hr style="margin-top:50px;border:2px dashed #ccc;">
+<h2 style="text-align:center;color:#333;">🧪 纯净演示区（无注释，仅展示效果）</h2>
+
+<div style="max-width:400px;margin:20px auto;text-align:center;">
+<div style="perspective:800px;width:200px;height:200px;margin:0 auto;">
+  <div style="position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 0.8s;cursor:pointer;" onmouseover="this.style.transform='rotateY(180deg)'" onmouseout="this.style.transform='rotateY(0deg)'">
+    <div style="position:absolute;width:100%;height:100%;background:#3498db;color:#fff;display:flex;align-items:center;justify-content:center;border-radius:10px;font-size:18px;backface-visibility:hidden;">正面</div>
+    <div style="position:absolute;width:100%;height:100%;background:#e74c3c;color:#fff;display:flex;align-items:center;justify-content:center;border-radius:10px;font-size:18px;backface-visibility:hidden;transform:rotateY(180deg);">背面</div>
+  </div>
+</div>
+<p style="margin-top:10px;color:#888;">鼠标放上去看翻转效果</p>
+</div>
+
+</body>
+</html>
+
+<hr style="margin-top:50px;border:2px dashed #3498db;">
+<h2 style="text-align:center;color:#555;">📖 教学讲解区</h2>
+
+<div class="wrapper">
+
+<h1>🃏 第6层：3D翻转卡片</h1>
+<p class="subtitle">鼠标悬停翻面——结合了定位(第4层)、视觉(第5层)、动效(第6层)的三层协作</p>
+
+<!--
+3D翻转是课程中最复杂的案例之一，因为需要三层协作：
+- 第4层：position:relative/absolute 让正反面叠在一起
+- 第5层：背景渐变、圆角、颜色、字号
+- 第6层：perspective透视、transform旋转、transition过渡
+-->
+
+<h2>一、现场演示</h2>
+<div class="card-row">
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">🏯</div>
+            <div class="flip-card-back">
+                <div><h4>园林建筑</h4><p>有3000多年历史，将山水花木与木质建筑结合，形成诗意的和谐。</p></div>
+            </div>
+        </div>
+    </div>
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">🏠</div>
+            <div class="flip-card-back">
+                <div><h4>民居建筑</h4><p>受环境、气候、民俗文化影响，有很强的地域性。</p></div>
+            </div>
+        </div>
+    </div>
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">🏰</div>
+            <div class="flip-card-back">
+                <div><h4>宫殿建筑</h4><p>金玉交辉、巍峨壮观，是传统建筑之精华。</p></div>
+            </div>
+        </div>
+    </div>
+</div>
+<p style="text-align:center;font-size:13px;color:#888;">👆 鼠标放上去看翻转效果</p>
+
+<h2>二、3D翻转的四个必要条件</h2>
+
+<pre><code>/* 条件1：父元素设 perspective（透视距离） */
+.flip-card { perspective: 800px; }
+/* 800px = 眼睛离屏幕的距离，越小3D效果越夸张 */
+
+/* 条件2：翻转容器设 transform-style: preserve-3d */
+.flip-card-inner { transform-style: preserve-3d; }
+/* ★ 这一行不写，所有子元素的3D变换全部压扁成2D！ */
+
+/* 条件3：正反面都要 backface-visibility: hidden */
+.flip-card-front, .flip-card-back { backface-visibility: hidden; }
+/* 不写 → 翻过去看到反过来的镜像 → 不是"翻转"是"透视" */
+
+/* 条件4：背面预先 rotateY(180deg) */
+.flip-card-back { transform: rotateY(180deg); }
+/* 背面默认朝向我们，先翻180°让它背对我们
+ * 等hover时整体再翻180° → 背面正好转过来面对我们 */</code></pre>
+
+<h2>三、你踩过的坑</h2>
+
+<div class="error-box">
+<h3>❌ 坑1：li没设height，absolute子元素导致塌陷</h3>
+<p>两个a都是<code>position:absolute</code>→li感知不到子元素→li高度=0→ul也是0→flex布局废了。</p>
+<p><strong>修复</strong>：<code>li { height: 210px; }</code>手动给高度。</p>
+</div>
+
+<div class="error-box">
+<h3>❌ 坑2：z-index层级反了</h3>
+<p>正面（图片）应该在上层，背面在下层预翻转。你给文字面设了z-index:2→反了。</p>
+<p><strong>修复</strong>：图片面(last-child)设z-index:2，文字面(first-child)默认下层。</p>
+</div>
+
+<h2>四、因果关系链</h2>
+<pre><code>没写 perspective → 没有3D空间 → 卡片只能2D缩放，不会翻
+
+没写 transform-style: preserve-3d → 子元素3D变换压扁 → 看不到翻转
+
+没写 backface-visibility: hidden → 翻过去看到反镜像 → 像X光透视
+
+li没写height → absolute子元素让父元素塌陷 → flex布局崩
+
+正面z-index反了 → 默认看到的就是背面 → 翻过去才看到正面 → 本末倒置</code></pre>
+
+<p style="text-align:center;color:#888;margin-top:50px;">
+👉 下一步：<a href="第6层_关键帧动画.html" style="color:#e67e22;">第6层_关键帧动画</a>
+</p>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>学习教程库 - 响应式布局</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <style>
+		*{
+			box-sizing: border-box;
+		
+		}
+		#wrapper{
+			max-width: 1440px;
+			margin: 0 auto;
+			padding: 0 15px;
+		}
+		h2{
+			color: black;
+			text-align: center;
+			justify-content: center;
+			margin: 10px auto;
+		}
+		#box{
+			display: flex;
+			flex-wrap: wrap;
+			border-bottom: none;
+			list-style: none;
+			gap: 15px;
+			justify-content: flex-start;
+		}
+		#box li{
+			width: 100%;
+		}
+		a{
+			text-decoration: none;
+		}
+		li a img{
+			display: block;
+			width: 100%;
+			height: 180px;
+			object-fit: cover;
+			border-radius: 10px;
+		}
+		.bottom_box{
+			text-decoration-line: none;
+			color: black;
+			justify-content: space-between;
+			display: flex;
+			width: 100%;
+			align-items: center;
+		}
+		@media screen and (min-width: 576px){
+			#box li{
+				width: calc((100% - 15px) / 2);
+			}
+		}
+		@media screen and (min-width: 768px) {
+		    #box li {
+		        width: calc((100% - 30px) / 3);
+		    }
+		}
+		@media screen and (min-width: 992px) {
+		    #box li {
+		        width: calc((100% - 45px) / 4);
+		    }
+		}
+		@media screen and (min-width: 1200px){
+			#box li {
+			    width: calc((100% - 60px) / 5);
+			}
+		}
+		@media screen and (max-width: 576px) {
+		    h2 {
+		        font-size: 20px;
+		    }
+		    #box li h4 {
+		        font-size: 13px;
+		    }
+		}
+    </style>
+</head>
+<body>
+    <!--
+        #wrapper：整页的外层容器
+        作用：限制最大宽度 + 居中 + 给内容留呼吸空间
+    -->
+    <div id="wrapper">
+
+        <!-- 标题行：两张装饰图 + 文字，用 flex 排成一行 -->
+        <h2>
+            <img src="images/box_hd_left.png" alt="">
+            免费教程资源
+            <img src="images/box_hd_right.png" alt="">
+        </h2>
+
+        <!--
+            ul#box：卡片网格容器
+            所有 li 在 flex 弹性盒里自动排列，配合 flex-wrap 自动换行
+            每个 li 的宽度由媒体查询控制，从 1 列逐步过渡到 5 列
+        -->
+        <ul id="box">
+            <li>
+                <a href="#">
+                    <img src="images/1.jpg" alt="">
+                    <h4>2020年Python入门到精通（19天全）</h4>
+                    <div class="bottom_box">
+                        <span>初级</span>
+                        <p>138991人学习</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="images/2.jpg" alt="">
+                    <h4>9天快速掌握Java基础，更适合小白学习的Java基础</h4>
+                    <div class="bottom_box">
+                        <span>初级</span>
+                        <p>2300人学习</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="images/3.jpg" alt="">
+                    <h4>0基础小白也能学会的人工智能课</h4>
+                    <div class="bottom_box">
+                        <span>初级</span>
+                        <p>1900人学习</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="images/4.jpg" alt="">
+                    <h4>前端小白零基础入门HTML5+CSS3</h4>
+                    <div class="bottom_box">
+                        <span>初级</span>
+                        <p>56800人学习</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="images/5.jpg" alt="">
+                    <h4>Photoshop由浅入深教程</h4>
+                    <div class="bottom_box">
+                        <span>初级</span>
+                        <p>2389人学习</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="images/6.jpg" alt="">
+                    <h4>8天零基础入门大数据</h4>
+                    <div class="bottom_box">
+                        <span>初级</span>
+                        <p>1756人学习</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="images/7.jpg" alt="">
+                    <h4>快速入门产品经理</h4>
+                    <div class="bottom_box">
+                        <span>初级</span>
+                        <p>10050人学习</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="images/8.jpg" alt="">
+                    <h4>C++| 匠心之作 从0到1入门学编程</h4>
+                    <div class="bottom_box">
+                        <span>初级</span>
+                        <p>809人学习</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="images/9.jpg" alt="">
+                    <h4>软件测试入门到精通</h4>
+                    <div class="bottom_box">
+                        <span>初级</span>
+                        <p>78924人学习</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="images/10.jpg" alt="">
+                    <h4>理论到实战结合-带你掌握AirTest自动化测试</h4>
+                    <div class="bottom_box">
+                        <span>初级</span>
+                        <p>6000人学习</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</body>
+</html>

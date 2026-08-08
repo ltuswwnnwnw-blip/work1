@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+			<meta charset="utf-8">
+			<title>CSS优先级</title>
+			<style type="text/css">
+				#content .book{font-size: 28px;}/* 权重100+10 */
+				p span{font-size: 20px;}/* 权重1+1 */
+				.book{font-size: 24px;}/* 权重10 */
+				#content span{font-size: 26px;}/* 权重100+1 */
+				
+			</style>
+		</head>
+		<body>
+			<p id="content"><span class="book">《黄帝内经》</span>奠定了人体生理、病理、诊断以及治疗的认识基础，是中国影响极大的一部医学著作，被称为医之始祖。</p>
+		</body>
+</html>

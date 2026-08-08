@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>响应式布局 —— 一个页面适配所有屏幕</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+/* ===== 第1层：全局重置 ===== */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"微软雅黑",sans-serif;line-height:1.8;color:#333;background:#f8f9fa;padding:20px;}
+.wrapper{max-width:900px;margin:0 auto;}
+h1{text-align:center;color:#2c3e50;margin-bottom:6px;}
+.subtitle{text-align:center;color:#888;margin-bottom:30px;font-size:14px;}
+h2{color:#c0392b;border-left:5px solid #c0392b;padding-left:12px;margin:35px 0 15px;font-size:22px;}
+h3{color:#e67e22;margin:22px 0 10px;font-size:18px;}
+p{margin-bottom:12px;}
+
+/* ★★★ 响应式演示卡片 ★★★ */
+/* 第2层：单个卡片的基础样式 */
+.card-grid{display:flex;flex-wrap:wrap;gap:15px;margin:20px 0;}
+/* flex-wrap: wrap —— 这是响应式的关键！一行装不下自动换行 */
+/* gap: 15px —— 间距统一管理，卡片不用设margin */
+
+.card{background:#fff;border-radius:8px;padding:20px;text-align:center;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);transition:transform 0.3s;}
+/* box-shadow: 水平偏移 垂直偏移 模糊半径 颜色 —— 卡片"浮起来"的感觉 */
+/* transition: transform 0.3s —— hover上浮的平滑过渡(第6层) */
+.card:hover{transform:translateY(-5px);}
+.card .icon{font-size:40px;margin-bottom:10px;}
+.card h4{margin-bottom:6px;color:#2c3e50;}
+.card p{font-size:13px;color:#888;}
+
+/* 第7层：媒体查询 —— 不同屏幕切不同列数 */
+/* 默认：1列（手机竖屏，<576px） */
+.card{width:100%;}
+
+/* min-width: 576px → 2列（大手机/小平板竖屏） */
+@media screen and (min-width:576px){
+    .card{width:calc((100% - 15px) / 2);}
+    /* calc解释：100%减去1个gap(15px)，除以2列 */
+}
+
+/* min-width: 768px → 3列（平板横屏） */
+@media screen and (min-width:768px){
+    .card{width:calc((100% - 30px) / 3);}
+    /* calc解释：3列之间有2个gap，共30px，减去后除以3 */
+}
+
+/* min-width: 992px → 4列（笔记本） */
+@media screen and (min-width:992px){
+    .card{width:calc((100% - 45px) / 4);}
+    /* calc解释：4列之间有3个gap，共45px */
+}
+
+/* min-width: 1200px → 5列（台式大屏） */
+@media screen and (min-width:1200px){
+    .card{width:calc((100% - 60px) / 5);}
+}
+
+/* 当前屏幕宽度指示器 */
+.screen-indicator{background:#2c3e50;color:#fff;text-align:center;padding:10px;border-radius:6px;margin-bottom:20px;font-size:14px;}
+.screen-indicator::after{content:"";}
+@media screen and (max-width:575px){.screen-indicator::after{content:" < 576px → 1列（手机竖屏）";}}
+@media screen and (min-width:576px) and (max-width:767px){.screen-indicator::after{content:" 576-767px → 2列（大手机）";}}
+@media screen and (min-width:768px) and (max-width:991px){.screen-indicator::after{content:" 768-991px → 3列（平板）";}}
+@media screen and (min-width:992px) and (max-width:1199px){.screen-indicator::after{content:" 992-1199px → 4列（笔记本）";}}
+@media screen and (min-width:1200px){.screen-indicator::after{content:" ≥ 1200px → 5列（台式大屏）";}}
+
+pre{background:#2c3e50;color:#ecf0f1;padding:15px;border-radius:6px;overflow-x:auto;font-size:13px;line-height:1.5;margin:10px 0;}
+code{background:#eee;padding:2px 6px;border-radius:3px;font-size:13px;color:#e74c3c;}
+pre code{background:none;padding:0;color:#ecf0f1;}
+
+.highlight{background:#fff3cd;border-left:4px solid #f39c12;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+.error-box{background:#fdeaea;border-left:4px solid #e74c3c;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+
+table{width:100%;border-collapse:collapse;margin:15px 0;}
+th,td{border:1px solid #ddd;padding:10px 14px;text-align:left;font-size:14px;}
+th{background:#f0f0f0;color:#555;}
+.tag{display:inline-block;padding:2px 8px;border-radius:3px;font-size:12px;font-weight:bold;color:#fff;}
+.tag-good{background:#27ae60;}
+.tag-bad{background:#e74c3c;}
+</style>
+</head>
+<body>
+<hr style="margin-top:50px;border:2px dashed #ccc;">
+<h2 style="text-align:center;color:#333;">🧪 纯净演示区（无注释，仅展示效果）</h2>
+
+<style>
+.clean-rwd-box { max-width: 700px; margin: 20px auto; background: #fff; padding: 20px; border-radius: 8px; }
+.clean-rwd-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+.clean-rwd-card { width: calc((100% - 30px) / 4); background: #3498db; color: #fff; padding: 20px; text-align: center; border-radius: 4px; }
+@media (max-width: 768px) { .clean-rwd-card { width: calc((100% - 10px) / 2); } }
+@media (max-width: 480px) { .clean-rwd-card { width: 100%; } }
+</style>
+
+<div class="clean-rwd-box">
+<h4>响应式卡片：大屏4列 → 平板2列 → 手机1列（缩小浏览器窗口看效果）</h4>
+<div class="clean-rwd-grid">
+  <div class="clean-rwd-card">卡片 1</div>
+  <div class="clean-rwd-card">卡片 2</div>
+  <div class="clean-rwd-card">卡片 3</div>
+  <div class="clean-rwd-card">卡片 4</div>
+  <div class="clean-rwd-card">卡片 5</div>
+  <div class="clean-rwd-card">卡片 6</div>
+  <div class="clean-rwd-card">卡片 7</div>
+  <div class="clean-rwd-card">卡片 8</div>
+</div>
+</div>
+
+</body>
+</html>
+
+<hr style="margin-top:50px;border:2px dashed #3498db;">
+<h2 style="text-align:center;color:#555;">📖 教学讲解区</h2>
+
+<div class="wrapper">
+
+<h1>📱 响应式布局 —— 一个页面适配所有屏幕</h1>
+<p class="subtitle">viewport + @media + calc() + flex-wrap = 响应式的四大支柱</p>
+
+<!--
+宏观理解：
+响应式布局的本质是："同一个HTML，根据屏幕宽度换不同的CSS"。
+实现方式：先用flex-wrap让元素自动换行（第3层），再用@media在不同断点改宽度（第7层）。
+
+min-width vs max-width 的选择：
+- min-width（移动优先）：默认样式给小屏，@media (min-width) 给大屏加样式
+- max-width（桌面优先）：默认样式给大屏，@media (max-width) 给小屏减样式
+推荐移动优先（min-width），因为移动端流量已经超过桌面端。
+-->
+
+<!-- 屏幕宽度指示器 -->
+<div class="screen-indicator">📐 当前屏幕宽度：</div>
+
+<!-- 响应式卡片演示 -->
+<h2>一、现场演示：缩小浏览器窗口看卡片列数变化</h2>
+<div class="card-grid">
+    <div class="card"><div class="icon">📗</div><h4>HTML基础</h4><p>网页的骨架</p></div>
+    <div class="card"><div class="icon">🎨</div><h4>CSS样式</h4><p>网页的皮肉</p></div>
+    <div class="card"><div class="icon">⚡</div><h4>JavaScript</h4><p>网页的神经</p></div>
+    <div class="card"><div class="icon">📐</div><h4>Flexbox</h4><p>现代布局引擎</p></div>
+    <div class="card"><div class="icon">📱</div><h4>响应式设计</h4><p>适配所有屏幕</p></div>
+</div>
+
+<h2>二、viewport —— 响应式的第一行代码</h2>
+
+<pre><code>&lt;!-- 放在 &lt;head&gt; 里，必须写！ --&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+&lt;!--
+    width=device-width → 页面宽度=设备屏幕宽度（375px手机就是375，不写的话手机会模拟980px）
+    initial-scale=1.0 → 初始缩放比例1:1
+    不写这行 → 手机端页面会缩小得像蚂蚁，用户要双指放大才能看
+--&gt;</code></pre>
+
+<h2>三、min-width vs max-width —— 两种响应式思路</h2>
+
+<table>
+<tr><th></th><th>min-width（移动优先）</th><th>max-width（桌面优先）</th></tr>
+<tr><td>默认样式</td><td>给手机（1列）</td><td>给大屏（多列）</td></tr>
+<tr><td>@media 后缀</td><td>大屏叠加</td><td>小屏覆盖</td></tr>
+<tr><td>代码量</td><td>少（手机样式简单）</td><td>多</td></tr>
+<tr><td>推荐</td><td><span class="tag tag-good">✅ 新项目首选</span></td><td><span class="tag tag-bad">老项目兼容</span></td></tr>
+</table>
+
+<h2>四、calc() 列宽公式 —— 核心公式</h2>
+
+<pre><code>/* 通用公式 */
+width: calc((100% - (列数-1) × gap值) / 列数)
+
+/* 实际例子（gap=15px） */
+1列: width: 100%                          不需要calc
+2列: width: calc((100% - 15px) / 2)       减1个gap
+3列: width: calc((100% - 30px) / 3)       减2个gap
+4列: width: calc((100% - 45px) / 4)       减3个gap
+5列: width: calc((100% - 60px) / 5)       减4个gap
+
+/* ★★★ calc() 运算符两边必须有空格！★★★ */
+/* ❌ */ width: calc((100%-30px)/3);   /* 无效！CSS引擎直接丢弃整行 */
+/* ✅ */ width: calc((100% - 30px) / 3);</code></pre>
+
+<div class="error-box">
+<h3>❌ 你踩过的坑：calc 空格 + flex-wrap缺失</h3>
+<p>1. calc((100%-30px)/3) → 没空格 → CSS丢弃 → 宽度回到默认 → 卡片挤在一起</p>
+<p>2. 写了@media没写flex-wrap → li还是块级元素一个占一行 → 媒体查询改width也无效</p>
+</div>
+
+<h2>五、完整的响应式卡片模板</h2>
+<pre><code>/* 第1层 */
+*{margin:0;padding:0;box-sizing:border-box;}
+
+/* 第2层 + 第3层：默认移动端样式 */
+.card-grid{display:flex;flex-wrap:wrap;gap:15px;}
+.card{width:100%;}  /* 移动端1列 */
+
+/* 第7层：按屏幕宽度递增列数 */
+@media (min-width:576px){.card{width:calc((100% - 15px) / 2);}}
+@media (min-width:768px){.card{width:calc((100% - 30px) / 3);}}
+@media (min-width:992px){.card{width:calc((100% - 45px) / 4);}}
+@media (min-width:1200px){.card{width:calc((100% - 60px) / 5);}}</code></pre>
+
+<h2>六、因果关系链</h2>
+<pre><code>没写 &lt;meta viewport&gt; → 手机模拟980px → 页面缩成蚂蚁 → 用户双指放大
+
+没写 flex-wrap → 卡片不换行 → 全挤一行溢出 → @media改width也白改
+
+calc没空格 → CSS丢弃整行 → 卡片宽度变默认 → 布局崩
+
+gap和margin同时存在 → 间距变大 → calc只减了gap没减margin → 宽度不对</code></pre>
+
+<div class="highlight">
+<p><strong>💡 响应式布局三板斧</strong>：</p>
+<p>1. <code>display: flex; flex-wrap: wrap; gap: 间距;</code>（第3层）</p>
+<p>2. <code>width: calc((100% - 缝隙总和) / 列数);</code>（第2层+第7层）</p>
+<p>3. <code>@media (min-width: 断点) { 改列数 }</code>（第7层）</p>
+</div>
+
+<p style="text-align:center;color:#888;margin-top:50px;">
+👉 下一步：<a href="浮动布局_幸福东莞.html" style="color:#c0392b;">浮动布局_幸福东莞</a>
+</p>
+
+</div>
+
+</body>
+</html>

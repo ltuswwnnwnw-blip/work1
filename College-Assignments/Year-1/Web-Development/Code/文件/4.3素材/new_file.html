@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>垂直导航条</title>
+		<style>
+			/*总体布局*/
+			nav{
+				width: 120px;
+				border: 1px solid gray;
+			}
+			
+			nav a{
+				display: block;
+				width: 90px;
+				height: 50px;
+				text-align: center;
+				margin: 0 3px;
+				line-height: 50px;
+				text-decoration: none;
+				background: url(imgs/icon1.jpg) no-repeat;
+				padding-left: 25px;
+				background-position: left;
+				color: #00ffff;
+				border-bottom: 1px dashed gray;
+			}
+			nav a#first{
+				background-image: url(imgs/icon2.jpg);
+			}
+			
+			}
+			nav a:link{/*未访问*/
+
+			}
+			nav a:visited{
+				color: blue;
+			}
+			nav a:hover,nav a#first:hover{/*鼠标悬停时*/
+				color: white;
+				text-decoration: underline;
+				background-color: greenyellow;
+				background-image: url(imgs/arrow.png);
+			}
+			h3{
+				background-color: paleturquoise;
+				color: red;
+				height: 50px;
+				line-height: 50px;
+				margin: 0;
+				text-align: center;
+			}
+			nav a:nth-child(7){
+				border-bottom: none;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<nav>
+			<h3>图书分类</h3>
+			<a href="#" id="first">特色图书</a>
+			<a href="#" id="second">教育类</a>
+			<a href="#" id="second">文艺类</a>
+			<a href="#" id="second">人文社科类</a>
+			<a href="#" id="second">生活类</a>
+			<a href="#" id="second">英文原版书</a>
+		</nav>
+	</body>
+</html>

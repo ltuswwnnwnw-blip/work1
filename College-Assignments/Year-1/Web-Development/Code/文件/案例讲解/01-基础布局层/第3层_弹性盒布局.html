@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>第3层：弹性盒布局 —— 子元素怎么排队</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"微软雅黑",sans-serif;line-height:1.8;color:#333;background:#f8f9fa;padding:20px;}
+.wrapper{max-width:900px;margin:0 auto;}
+h1{text-align:center;color:#2c3e50;margin-bottom:6px;}
+.subtitle{text-align:center;color:#888;margin-bottom:30px;font-size:14px;}
+h2{color:#3498db;border-left:5px solid #3498db;padding-left:12px;margin:35px 0 15px;font-size:22px;}
+h3{color:#2ecc71;margin:22px 0 10px;font-size:18px;}
+p{margin-bottom:12px;}
+
+.demo-section{background:#fff;border:1px solid #ddd;border-radius:8px;padding:20px;margin:20px 0;}
+.compare-row{display:flex;gap:20px;margin:15px 0;}
+.compare-col{flex:1;padding:15px;border:2px solid #ddd;border-radius:6px;}
+.compare-col.bad{border-color:#e74c3c;background:#fdeaea;}
+.compare-col.good{border-color:#27ae60;background:#eafaf1;}
+
+/* flex演示用的彩色盒子 */
+.flex-demo{border:2px dashed #3498db;padding:10px;border-radius:6px;margin:10px 0;min-height:80px;}
+.flex-demo .item{background:#3498db;color:#fff;padding:15px 20px;border-radius:4px;text-align:center;font-weight:bold;margin:3px;white-space:nowrap;}
+.flex-demo .item:nth-child(odd){background:#e74c3c;}
+
+pre{background:#2c3e50;color:#ecf0f1;padding:15px;border-radius:6px;overflow-x:auto;font-size:13px;line-height:1.5;margin:10px 0;}
+code{background:#eee;padding:2px 6px;border-radius:3px;font-size:13px;color:#e74c3c;}
+pre code{background:none;padding:0;color:#ecf0f1;}
+
+.highlight{background:#fff3cd;border-left:4px solid #f39c12;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+.error-box{background:#fdeaea;border-left:4px solid #e74c3c;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+.tag{display:inline-block;padding:2px 8px;border-radius:3px;font-size:12px;font-weight:bold;}
+.tag-bad{background:#e74c3c;color:#fff;}
+.tag-good{background:#27ae60;color:#fff;}
+
+table{width:100%;border-collapse:collapse;margin:15px 0;}
+th,td{border:1px solid #ddd;padding:10px 14px;text-align:left;font-size:14px;}
+th{background:#f0f0f0;color:#555;}
+</style>
+</head>
+<body>
+<hr style="margin-top:50px;border:2px dashed #ccc;">
+<h2 style="text-align:center;color:#333;">🧪 纯净演示区（无注释，仅展示效果）</h2>
+
+<style>
+.clean-flex-box { max-width: 700px; margin: 20px auto; background: #fff; padding: 20px; border-radius: 8px; }
+.clean-flex-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; }
+.clean-flex-item { background: #3498db; color: #fff; padding: 20px; text-align: center; border-radius: 4px; }
+.clean-flex-item.grow { flex: 1; }
+.clean-flex-item.w30 { width: calc((100% - 20px) / 3); }
+</style>
+
+<div class="clean-flex-box">
+<h4>flex + flex-wrap: wrap + gap</h4>
+<div class="clean-flex-row">
+  <div class="clean-flex-item w30">卡片 1</div>
+  <div class="clean-flex-item w30">卡片 2</div>
+  <div class="clean-flex-item w30">卡片 3</div>
+  <div class="clean-flex-item w30">卡片 4</div>
+  <div class="clean-flex-item w30">卡片 5</div>
+  <div class="clean-flex-item w30">卡片 6</div>
+</div>
+<h4>flex: 1 弹性分配</h4>
+<div style="display:flex;gap:10px;">
+  <div class="clean-flex-item grow">弹性1</div>
+  <div class="clean-flex-item grow">弹性1</div>
+  <div class="clean-flex-item" style="flex:2;">弹性2（比别人多一倍）</div>
+</div>
+</div>
+
+</body>
+</html>
+
+<hr style="margin-top:50px;border:2px dashed #3498db;">
+<h2 style="text-align:center;color:#555;">📖 教学讲解区</h2>
+
+<div class="wrapper">
+
+<h1>📐 第3层：弹性盒布局（Flexbox）</h1>
+<p class="subtitle">子元素怎么排队——display:flex、flex-wrap、gap、justify-content、align-items</p>
+
+<!--
+宏观理解：
+第3层是CSS布局的"发动机"。如果说第2层管"每个元素自己多大"，
+第3层就管"一群子元素怎么在父容器里面排列"。
+
+核心概念：flex布局的权力在父容器手里。
+父容器说"你们横着排"，子元素就横着排；
+父容器说"装不下了换行"，子元素就换行；
+父容器说"间隙统一15px"，子元素就不能自己设margin。
+
+这就是为什么 gap 和 margin 不能同时存在——gap是父容器的命令，margin是子元素自己的主张，两个一起用就是"两个领导同时下命令"。
+-->
+
+<h2>一、flex 三件套 —— 90%的布局就靠这三行</h2>
+
+<pre><code>/* ★★★ flex 布局最核心的三行代码 ★★★ */
+.container {
+    display: flex;        /* ① 开启弹性盒：把子元素变成"弹性项" */
+    flex-wrap: wrap;      /* ② 允许换行：一行装不下自动折到下一行 */
+    gap: 15px;            /* ③ 统一间距：子元素之间统一留15px */
+}
+/* 这三行配合 calc() 和 @media，构成了响应式布局的基础 */</code></pre>
+
+<div class="demo-section">
+<h4>现场演示：有 flex-wrap vs 没有 flex-wrap</h4>
+<div class="compare-row">
+<div class="compare-col bad">
+<h4>❌ 没有 flex-wrap</h4>
+<div class="flex-demo" style="display:flex;">
+    <div class="item">卡片1</div><div class="item">卡片2</div><div class="item">卡片3</div>
+    <div class="item">卡片4</div><div class="item">卡片5</div><div class="item">卡片6</div>
+</div>
+<p style="font-size:12px;color:#888;">6个卡片全部挤在一行，溢出容器→出现横向滚动条</p>
+</div>
+<div class="compare-col good">
+<h4>✅ 有 flex-wrap: wrap</h4>
+<div class="flex-demo" style="display:flex;flex-wrap:wrap;">
+    <div class="item">卡片1</div><div class="item">卡片2</div><div class="item">卡片3</div>
+    <div class="item">卡片4</div><div class="item">卡片5</div><div class="item">卡片6</div>
+</div>
+<p style="font-size:12px;color:#888;">一行装不下自动换行→真正的响应式</p>
+</div>
+</div>
+</div>
+
+<div class="error-box">
+<h3>❌ 你踩过的坑：第四层媒体查询无效，根子在第三层</h3>
+<p><strong>现象</strong>：写了 <code>@media (min-width: 768px) { li { width: calc((100%-30px)/3); } }</code>，但li还是竖着排，一个占一行。</p>
+<p><strong>根本原因</strong>：<strong>第3层没装 flex-wrap</strong>。ul没有<code>display:flex; flex-wrap:wrap</code>，li还是块级元素，不管媒体查询怎么改width，块级元素就是一个占一行。</p>
+<p><strong>因果关系链</strong>：没写flex-wrap → li保持block → width改了也没用 → 以为是第7层(@media)的问题 → 其实是第3层的问题</p>
+</div>
+
+<h2>二、flex 容器 vs flex 子元素 —— 权力在谁手里</h2>
+
+<table>
+<tr><th>属性写在哪</th><th>属性</th><th>做什么</th></tr>
+<tr><td rowspan="5"><strong>父容器</strong>（权力中心）</td>
+    <td><code>display: flex</code></td><td>开启弹性盒</td></tr>
+<tr><td><code>flex-wrap: wrap</code></td><td>允许子元素换行</td></tr>
+<tr><td><code>justify-content</code></td><td>子元素在主轴上的对齐方式</td></tr>
+<tr><td><code>align-items</code></td><td>子元素在交叉轴上的对齐方式</td></tr>
+<tr><td><code>gap</code></td><td>子元素之间的统一间距</td></tr>
+<tr><td rowspan="2"><strong>子元素</strong></td>
+    <td><code>flex: 1</code></td><td>占满剩余空间（弹性比例）</td></tr>
+<tr><td><code>width: calc()</code></td><td>固定列宽的响应式网格</td></tr>
+</table>
+
+<h2>三、justify-content —— 水平方向怎么排</h2>
+
+<div class="demo-section">
+<div class="flex-demo" style="display:flex;justify-content:flex-start;"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+<p><code>justify-content: flex-start</code>（默认）—— 从左往右排，右边有空位就空着</p>
+
+<div class="flex-demo" style="display:flex;justify-content:center;"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+<p><code>justify-content: center</code> —— 整体居中</p>
+
+<div class="flex-demo" style="display:flex;justify-content:space-between;"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+<p><code>justify-content: space-between</code> —— 两端贴边，中间平分</p>
+
+<div class="flex-demo" style="display:flex;justify-content:space-around;"><div class="item">1</div><div class="item">2</div><div class="item">3</div></div>
+<p><code>justify-content: space-around</code> —— 每个元素左右有相等的空间</p>
+</div>
+
+<div class="error-box">
+<h3>❌ 你踩过的坑：justify-content 写在非flex元素上无效</h3>
+<p><strong>旧代码</strong>：<code>h2 { text-align:center; justify-content:center; }</code></p>
+<p><strong>问题</strong>：h2 不是 flex 容器（没有<code>display:flex</code>），<code>justify-content</code>对非flex元素无效。</p>
+<p><strong>修复</strong>：先加<code>display:flex</code>，<code>justify-content</code>才生效。</p>
+<p><strong>因果关系</strong>：justify-content 是 flex 容器的属性 → 元素必须是 display:flex → 否则相当于对牛弹琴</p>
+</div>
+
+<h2>四、align-items —— 垂直方向怎么对齐</h2>
+
+<div class="demo-section">
+<div class="flex-demo" style="display:flex;align-items:flex-start;height:120px;">
+    <div class="item" style="padding:10px;">矮</div>
+    <div class="item" style="padding:40px 20px;">高</div>
+    <div class="item" style="padding:20px;">中</div>
+</div>
+<p><code>align-items: flex-start</code> —— 顶部对齐</p>
+
+<div class="flex-demo" style="display:flex;align-items:center;height:120px;">
+    <div class="item" style="padding:10px;">矮</div>
+    <div class="item" style="padding:40px 20px;">高</div>
+    <div class="item" style="padding:20px;">中</div>
+</div>
+<p><code>align-items: center</code> —— 垂直居中（最常用）</p>
+</div>
+
+<h2>五、flex: 1 —— 占满剩余空间</h2>
+
+<p><code>flex: 1</code> 是<code>flex-grow: 1</code>的简写，意思是：<strong>"父容器里剩下的空间，都给我"</strong>。</p>
+
+<div class="demo-section">
+<div class="flex-demo" style="display:flex;">
+    <div class="item" style="width:150px;">固定150px</div>
+    <div class="item" style="flex:1;">flex:1（占满剩下的）</div>
+</div>
+<p>左边固定150px，右边自动填满剩余空间→经典的"侧边栏+主内容"布局</p>
+</div>
+
+<h2>六、gap vs margin —— 最终裁决</h2>
+
+<div class="highlight">
+<p><strong>铁律</strong>：flex/grid容器的子元素间距统一用 <code>gap</code>，不要用 <code>margin</code>。</p>
+<p><strong>原因</strong>：gap 是父容器统一管理，margin 是子元素各自为政。两者同时存在等于两个领导同时下命令。</p>
+</div>
+
+<h2>七、inline-block vs flex —— 时代的对决</h2>
+
+<table>
+<tr><th></th><th>inline-block（旧时代）</th><th>flex（新时代）</th></tr>
+<tr><td>谁来控制排列</td><td>元素自己</td><td>父容器</td></tr>
+<tr><td>换行</td><td>宽度超过自动折行（不可控）</td><td>flex-wrap: wrap（精确控制）</td></tr>
+<tr><td>垂直对齐</td><td>默认基线对齐，常对不齐</td><td>align-items 一行搞定</td></tr>
+<tr><td>间距</td><td>标签间换行符产生4px空隙（难缠）</td><td>gap 精确控制</td></tr>
+<tr><td>推荐</td><td><span class="tag tag-bad">仅文字级小元素</span></td><td><span class="tag tag-good">所有布局场景</span></td></tr>
+</table>
+
+<h2>八、flex 布局完整模板</h2>
+
+<pre><code>/* ===== 第3层：flex布局标准模板 ===== */
+
+/* 卡片网格（响应式基础） */
+.card-grid {
+    display: flex;           /* 开启弹性盒 */
+    flex-wrap: wrap;         /* 允许换行 ← 这是响应式的关键 */
+    gap: 15px;               /* 统一间距 ← 子元素不要再设margin */
+}
+
+.card {
+    width: calc((100% - 30px) / 3);  /* 3列：减2个gap，除以3 */
+    /* 注意：calc 运算符两边必须有空格！ */
+}
+
+/* 侧边栏 + 主内容 */
+.page-layout {
+    display: flex;
+    gap: 20px;
+}
+.sidebar { width: 200px; }      /* 固定宽度侧边栏 */
+.main-content { flex: 1; }      /* 弹性主内容区，占满剩余 */</code></pre>
+
+<h2>九、因果关系链</h2>
+<pre><code>display: flex → 子元素可以横排 →
+flex-wrap: wrap → 一行不够自动换行 →
+gap: 15px → 子元素统一间距 →
+width: calc((100% - N*gap) / 列数) → 精确控制每列宽度 →
+@media 改列数 → 响应式完成
+
+缺了 flex-wrap → 子元素全挤一行 → @media 改width也没用 → 看起来像@media坏了
+用了gap又用margin → 间距变大 → calc算错 → 列溢出换行 → 布局崩</code></pre>
+
+<p style="text-align:center;color:#888;margin-top:50px;">
+👉 下一步：<a href="../02-定位与高级布局/第4层_定位详解.html" style="color:#3498db;">第4层_定位详解</a>
+</p>
+
+</div>
+
+</body>
+</html>

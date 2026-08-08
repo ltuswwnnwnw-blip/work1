@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>JS基础：变量与if判断 —— 分数等级判断器</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"微软雅黑",sans-serif;line-height:1.8;color:#333;background:#f8f9fa;padding:20px;}
+.wrapper{max-width:860px;margin:0 auto;}
+h1{text-align:center;color:#2c3e50;margin-bottom:6px;}
+.subtitle{text-align:center;color:#888;margin-bottom:30px;font-size:14px;}
+h2{color:#f39c12;border-left:5px solid #f39c12;padding-left:12px;margin:35px 0 15px;font-size:22px;}
+h3{color:#2ecc71;margin:22px 0 10px;font-size:18px;}
+p{margin-bottom:12px;}
+pre{background:#2c3e50;color:#ecf0f1;padding:15px;border-radius:6px;overflow-x:auto;font-size:13px;line-height:1.5;margin:10px 0;}
+code{background:#eee;padding:2px 6px;border-radius:3px;font-size:13px;color:#e74c3c;}
+pre code{background:none;padding:0;color:#ecf0f1;}
+.highlight{background:#fff3cd;border-left:4px solid #f39c12;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+.error-box{background:#fdeaea;border-left:4px solid #e74c3c;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+table{width:100%;border-collapse:collapse;margin:15px 0;}
+th,td{border:1px solid #ddd;padding:10px 14px;text-align:left;font-size:14px;}
+th{background:#f0f0f0;color:#555;}
+
+.demo-panel{background:#2c3e50;color:#ecf0f1;padding:25px;border-radius:10px;margin:20px 0;text-align:center;}
+.demo-panel button{background:#f39c12;color:#fff;border:none;padding:12px 30px;font-size:16px;border-radius:6px;cursor:pointer;margin:10px 5px;}
+.demo-panel button:hover{background:#e67e22;}
+#output{background:#1a1a2e;color:#2ecc71;padding:15px;border-radius:6px;margin-top:15px;font-family:"Consolas",monospace;font-size:15px;min-height:50px;}
+</style>
+</head>
+<body>
+<hr style="margin-top:50px;border:2px dashed #ccc;">
+<h2 style="text-align:center;color:#333;">🧪 纯净演示区（无注释，仅展示效果）</h2>
+<div style="max-width:500px;margin:20px auto;background:#2c3e50;padding:25px;border-radius:10px;text-align:center;">
+  <p style="color:#fff;margin-bottom:15px;">输入分数，程序判断等级</p>
+  <button onclick="demoScore()" style="background:#f39c12;color:#fff;border:none;padding:10px 25px;font-size:14px;border-radius:4px;cursor:pointer;">🎯 开始</button>
+  <div id="demo-score-out" style="background:#1a1a2e;color:#2ecc71;padding:12px;border-radius:6px;margin-top:12px;font-family:Consolas,monospace;min-height:30px;line-height:1.6;"></div>
+</div>
+<script>
+function demoScore() {
+  var s = Number(prompt("输入分数："));
+  var g;
+  if (s >= 90) { g = "优秀"; }
+  else if (s >= 80) { g = "良好"; }
+  else if (s >= 70) { g = "中等"; }
+  else if (s >= 60) { g = "及格"; }
+  else { g = "不及格"; }
+  document.getElementById("demo-score-out").innerHTML = s + "分 → " + g;
+}
+</script>
+
+</body>
+</html>
+<hr style="margin-top:50px;border:2px dashed #3498db;">
+<h2 style="text-align:center;color:#555;">📖 教学讲解区</h2>
+
+<div class="wrapper">
+
+<h1>⚡ JavaScript 基础：变量与if判断</h1>
+<p class="subtitle">对应课件 7.2 | 实战：分数等级判断器</p>
+
+<!--
+宏观理解：
+JavaScript 运行在浏览器里，不是命令行。
+和 Python 的关系：语法相似，但运行环境不同。
+Python: print()/input() 在终端
+JS: document.write()/prompt() 在浏览器
+
+本文件教你：
+1. var 声明变量（= Python 的 name = "张三"）
+2. prompt() 输入（= Python 的 input()）
+3. if/else if/else 判断（和 Python 一样，但用花括号代替缩进）
+4. 类型转换：prompt返回的永远是字符串，算分前必须转数字
+-->
+
+<h2>一、Python vs JavaScript 速查</h2>
+<table>
+<tr><th>概念</th><th>Python</th><th>JavaScript</th><th>区别</th></tr>
+<tr><td>变量</td><td><code>name="张三"</code></td><td><code>var name="张三";</code></td><td>JS要写var，语句末尾加分号</td></tr>
+<tr><td>输入</td><td><code>input("提示")</code></td><td><code>prompt("提示")</code></td><td>都返回字符串</td></tr>
+<tr><td>输出到屏幕</td><td><code>print(内容)</code></td><td><code>document.write(内容)</code></td><td>JS写到网页上</td></tr>
+<tr><td>字符串→数字</td><td><code>int("85")</code></td><td><code>Number("85")</code></td><td>不转会怎样？"85"+5="855"</td></tr>
+<tr><td>数字→字符串</td><td><code>str(85)</code></td><td><code>String(85)</code></td><td></td></tr>
+<tr><td>if判断</td><td><code>if a>90:</code></td><td><code>if(a>90){}</code></td><td>JS用()包条件、{}包代码块</td></tr>
+<tr><td>列表</td><td><code>students=[]</code></td><td><code>var students=[];</code></td><td>JS用var声明</td></tr>
+<tr><td>追加元素</td><td><code>.append()</code></td><td><code>.push()</code></td><td>方法名不同</td></tr>
+<tr><td>函数</td><td><code>def f():</code></td><td><code>function f(){}</code></td><td>关键字不同</td></tr>
+</table>
+
+<h2>二、三种数据类型</h2>
+<pre><code>// String 字符串 —— 用引号包起来的就是字符串
+var name = "张三";       // 双引号
+var msg = 'hello';       // 单引号也行
+// 做什么：存文字信息（姓名、地址、密码...）
+// 不能做什么：不能做数学运算！"85" + 5 = "855"（这是拼接，不是加法）
+
+// Number 数字 —— 不带引号的数字
+var score = 85;          // 可以做数学运算：85 + 5 = 90
+var pi = 3.14;           // 小数也可以
+// JavaScript只有一种数字类型，不分int/float
+
+// Boolean 布尔 —— 只有两个值
+var passed = true;       // 真
+var failed = false;      // 假
+// 用途：开关、判断条件、标记状态</code></pre>
+
+<h2>三、if 三种结构</h2>
+<pre><code>// 结构1：if —— 判断一种条件
+if (score >= 60) {
+    document.write("及格了");
+}
+// ()里的条件为true → 执行{}里的代码
+// ()里的条件为false → 跳过，什么都不做
+
+// 结构2：if...else —— 判断两种条件
+if (score >= 60) {
+    document.write("及格");
+} else {
+    document.write("不及格");
+}
+// 条件成立走if，不成立走else。二选一，不会两个都执行。
+
+// 结构3：if...else if...else —— 判断多种条件
+if (score >= 90) {
+    document.write("优秀");
+} else if (score >= 60) {
+    document.write("及格");
+} else {
+    document.write("不及格");
+}
+// 从上往下检查，第一个成立的就执行，后面的全跳过。
+// ★ 注意顺序：90必须在60前面！
+//    如果60在前，85分就先匹配">=60"→输出"及格"→跳过后面的"优秀"
+//    永远是"严格的在上，宽松的在下"</code></pre>
+
+<h2>四、实战：分数等级判断器</h2>
+<div class="demo-panel">
+    <p>点击按钮，输入名字和分数，程序判断等级</p>
+    <button onclick="startJudge()">🎯 开始</button>
+    <button onclick="document.getElementById('output').innerHTML=''">🗑️ 清空</button>
+    <div id="output"></div>
+</div>
+
+<script>
+// ★★★ 所有JS代码必须放在 <script> 标签里 ★★★
+// 不放的话浏览器会当成普通文字显示在页面上
+
+function startJudge() {
+    // function = 定义一个函数（Python的def）
+    // startJudge = 函数名（驼峰命名：每个单词首字母大写，第一个小写）
+    // () = 参数列表（这个函数不需要参数，所以空着）
+    // {} = 函数体
+
+    // --- 第1步：获取输入 ---
+    var name = prompt("请输入你的名字：");
+    // var → 声明变量（JS必须先声明再使用）
+    // prompt("提示文字") → 弹出输入框，用户输入的内容以字符串返回
+    // 如果用户点"取消"→返回null；如果直接点确定没输入→返回""
+
+    // --- 第2步：检查是否有效输入 ---
+    if (name === "" || name === null) {
+        // === → 严格相等（值和类型都相同才算相等）
+        // "" → 空字符串（用户直接点了确定）
+        // null → 空值（用户点了取消）
+        // || → 逻辑"或"：两个条件满足任意一个就执行
+        document.getElementById("output").innerHTML += "❌ 你取消了输入<br>";
+        // document.getElementById("output") → 找到id为"output"的元素
+        // .innerHTML → 获取或设置元素内部的HTML内容
+        // += → 追加（不是覆盖），每次判断结果都累加到后面
+        return;
+        // return → 结束函数（和Python一样）
+        // 不加return的话，下面的代码还会继续执行
+    }
+
+    // --- 第3步：获取分数 ---
+    var scoreStr = prompt("请输入" + name + "的分数：");
+    // "请输入" + name + "的分数：" → 字符串拼接
+    // 假如name是"张三"，弹窗显示"请输入张三的分数："
+
+    // --- 第4步：类型转换（★最容易忘的一步！）---
+    var score = Number(scoreStr);
+    // Number() → 把字符串转成数字
+    // prompt()返回的永远是字符串！就算用户输入85，拿到的是"85"不是85
+    // 如果忘了这一步："85" >= 90 → JS会把字符串和数字比较 → 结果不可预期
+    // 如果忘了这一步："85" + 5 → "855"（字符串拼接，不是数学加法！）
+
+    // --- 第5步：判断等级 ---
+    var grade;  // 先声明变量，稍后赋值
+    if (score >= 90) {           // 大于等于90
+        grade = "🏆 优秀";
+    } else if (score >= 80) {    // 80~89
+        grade = "🥇 良好";
+    } else if (score >= 70) {    // 70~79
+        grade = "🥈 中等";
+    } else if (score >= 60) {    // 60~69
+        grade = "🥉 及格";
+    } else {                      // 60以下
+        grade = "📚 不及格，继续加油！";
+    }
+
+    // --- 第6步：输出结果 ---
+    document.getElementById("output").innerHTML +=
+        "👤 " + name + " ｜ 📊 " + score + "分 ｜ " + grade + "<br>";
+}
+</script>
+
+<h2>五、逐行因果关系</h2>
+<pre><code>用户点击按钮 → onclick触发 → startJudge()执行
+  → prompt()弹出输入框 → 返回字符串"85"（不是数字85！）
+  → Number("85")转成数字85
+  → if(85>=90)→false → else if(85>=80)→true → grade="良好"
+  → document.getElementById找到output元素
+  → .innerHTML+= 把结果追加写到页面上
+  → 用户看到：张三 ｜ 85分 ｜ 良好</code></pre>
+
+<h2>六、你踩过的坑</h2>
+<div class="error-box">
+<h3>❌ prompt返回值忘了转数字</h3>
+<p><code>var score = prompt("输入分数");</code> // score是"85"（字符串）</p>
+<p><code>score + 5</code> → <strong>"855"</strong>（字符串拼接！不是90！）</p>
+<p><strong>修复</strong>：<code>var score = Number(prompt("输入分数"));</code></p>
+</div>
+
+<div class="error-box">
+<h3>❌ if条件顺序写反了</h3>
+<pre><code>if (score >= 60) { grade = "及格"; }
+else if (score >= 90) { grade = "优秀"; }  // 永远不会执行！
+// 85分已经在上面的>=60那里被捕获了，根本轮不到>=90</code></pre>
+<p><strong>修复</strong>：严格的在上，宽松的在下。90→80→70→60→不及格。</p>
+</div>
+
+<p style="text-align:center;color:#888;margin-top:50px;">
+👉 下一步：<a href="JS特效_打字机文字效果.html" style="color:#f39c12;">JS特效_打字机文字效果</a>
+</p>
+
+</div>
+
+</body>
+</html>

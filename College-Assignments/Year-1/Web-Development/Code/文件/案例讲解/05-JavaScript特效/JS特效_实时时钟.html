@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>JS特效：实时时钟</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"微软雅黑",sans-serif;line-height:1.8;color:#333;background:#f8f9fa;padding:20px;}
+.wrapper{max-width:860px;margin:0 auto;}
+h1{text-align:center;color:#2c3e50;margin-bottom:6px;}
+.subtitle{text-align:center;color:#888;margin-bottom:20px;font-size:14px;}
+h2{color:#9b59b6;border-left:5px solid #9b59b6;padding-left:12px;margin:35px 0 15px;font-size:22px;}
+h3{color:#2ecc71;margin:22px 0 10px;font-size:18px;}
+p{margin-bottom:12px;}
+pre{background:#2c3e50;color:#ecf0f1;padding:15px;border-radius:6px;overflow-x:auto;font-size:13px;line-height:1.5;margin:10px 0;}
+code{background:#eee;padding:2px 6px;border-radius:3px;font-size:13px;color:#e74c3c;}
+pre code{background:none;padding:0;color:#ecf0f1;}
+.highlight{background:#fff3cd;border-left:4px solid #f39c12;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+.error-box{background:#fdeaea;border-left:4px solid #e74c3c;padding:12px 16px;margin:15px 0;border-radius:0 6px 6px 0;}
+table{width:100%;border-collapse:collapse;margin:15px 0;}
+th,td{border:1px solid #ddd;padding:10px 14px;text-align:left;font-size:14px;}
+th{background:#f0f0f0;color:#555;}
+.demo-section{background:#fff;border-radius:8px;padding:20px;margin:20px 0;text-align:center;}
+
+/* 时钟显示 */
+#clock-display{background:#1a1a2e;color:#2ecc71;padding:25px;border-radius:10px;font-family:"Consolas",monospace;display:inline-block;margin:15px 0;}
+#clock-date{font-size:18px;color:#aaa;margin-bottom:5px;}
+#clock-time{font-size:42px;font-weight:bold;}
+#clock-week{font-size:16px;color:#f39c12;margin-top:5px;}
+</style>
+</head>
+<body>
+<hr style="margin-top:50px;border:2px dashed #ccc;">
+<h2 style="text-align:center;color:#333;">🧪 纯净演示区（无注释，仅展示效果）</h2>
+<div style="max-width:400px;margin:20px auto;background:#1a1a2e;padding:20px;border-radius:10px;text-align:center;">
+  <div id="demo-clock-d" style="font-size:16px;color:#aaa;font-family:Consolas,monospace;"></div>
+  <div id="demo-clock-t" style="font-size:36px;color:#2ecc71;font-weight:bold;font-family:Consolas,monospace;"></div>
+  <div id="demo-clock-w" style="font-size:14px;color:#f39c12;font-family:Consolas,monospace;margin-top:5px;"></div>
+</div>
+<script>
+function demoTick() {
+  var n = new Date();
+  var w = ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+  var h = n.getHours(), m = n.getMinutes(), s = n.getSeconds();
+  h = h < 10 ? "0" + h : h;
+  m = m < 10 ? "0" + m : m;
+  s = s < 10 ? "0" + s : s;
+  document.getElementById("demo-clock-d").innerHTML = n.getFullYear() + "年" + (n.getMonth()+1) + "月" + n.getDate() + "日";
+  document.getElementById("demo-clock-t").innerHTML = h + ":" + m + ":" + s;
+  document.getElementById("demo-clock-w").innerHTML = w[n.getDay()];
+  setTimeout(demoTick, 1000);
+}
+demoTick();
+</script>
+
+</body>
+</html>
+<hr style="margin-top:50px;border:2px dashed #3498db;">
+<h2 style="text-align:center;color:#555;">📖 教学讲解区</h2>
+
+<div class="wrapper">
+
+<h1>🕐 JS特效：实时时钟</h1>
+<p class="subtitle">对应课件 8.3 | 核心：new Date() + switch + setTimeout递归</p>
+
+<!--
+宏观理解：
+网页上的实时时钟 = 获取当前时间 + 格式化成好看的样子 + 每秒刷新
+
+关键：
+1. new Date() 拍一张"此刻时间"的快照
+2. getHours/getMinutes/getSeconds 从快照里提取时分秒
+3. setTimeout递归：1秒后再次调用自己 → 实现每秒刷新
+4. switch语句：把getDay()返回的0~6转成"星期日"~"星期六"
+-->
+
+<h2>一、Date对象：JS内置的日历+手表</h2>
+<pre><code>var now = new Date();  // 创建Date对象，自动保存"此刻"的日期时间
+// 注意：new Date()是拍快照，不是实时更新的
+// 1秒后再取now.getSeconds()还是创建那一刻的秒数 → 所以要每秒重新new
+
+// Date对象的方法（全部返回数字）：
+now.getFullYear();   // → 2026   年份（4位数）
+now.getMonth();      // → 6      月份（★0=1月！所以实际月份要+1）
+now.getDate();       // → 11     日期（几号）
+now.getHours();      // → 14     小时（24小时制，0~23）
+now.getMinutes();    // → 30     分钟（0~59）
+now.getSeconds();    // → 0      秒（0~59）
+now.getDay();        // → 6      星期几（★0=周日, 1=周一 ... 6=周六）</code></pre>
+
+<div class="error-box">
+<h3>⚠️ 两个大坑</h3>
+<p><strong>坑1：getMonth()从0开始</strong> → 1月返回0，12月返回11 → 永远要+1才能显示给用户</p>
+<p><strong>坑2：getDay()返回数字</strong> → 0~6，不是"星期一" → 需要switch转换成中文</p>
+</div>
+
+<h2>二、switch语句：多分支判断</h2>
+<pre><code>// switch = 一个变量等于不同值时做不同的事
+// 类比：if...else if...else的另一种写法
+
+var day = now.getDay();  // 0~6的数字
+
+switch (day) {
+    case 0: weekStr = "星期日"; break;
+    case 1: weekStr = "星期一"; break;
+    case 2: weekStr = "星期二"; break;
+    case 3: weekStr = "星期三"; break;
+    case 4: weekStr = "星期四"; break;
+    case 5: weekStr = "星期五"; break;
+    case 6: weekStr = "星期六"; break;
+    default: weekStr = "未知";    // 兜底：万一day不是0~6
+}
+// ★ 每个case后面必须有break！
+// 没有break会怎样？ → 会"穿透"继续执行下一个case
+// 例如day=0，没有break → 会一直执行到case 6 → weekStr最终="星期六"
+// 这叫switch穿透(fall-through)，基本上都是bug</code></pre>
+
+<h2>三、switch vs if 对比</h2>
+<table>
+<tr><th></th><th>switch</th><th>if...else if</th></tr>
+<tr><td>适用场景</td><td>一个变量取不同<strong>具体值</strong></td><td>多个<strong>条件组合</strong>判断</td></tr>
+<tr><td>可读性</td><td>值多时更清晰</td><td>条件复杂时更灵活</td></tr>
+<tr><td>穿透风险</td><td>忘了break会穿透</td><td>没有穿透问题</td></tr>
+<tr><td>本例中</td><td>day的值只有6种，switch更好</td><td>如果day&6且hour>12→if更合适</td></tr>
+</table>
+
+<h2>四、setTimeout递归：每秒刷新自己</h2>
+<pre><code>function showTime() {
+    var now = new Date();         // 每次调用都重新拍快照
+    // ... 获取时分秒，显示到页面上 ...
+    setTimeout(showTime, 1000);   // 1秒后再次调用自己！
+}
+// 这招叫"递归调用"——函数自己叫自己
+// 和setInterval的区别：
+//   setInterval：不管你上次执行完没有，到点就执行
+//   setTimeout递归：上次执行完后再等1秒→更稳定
+// 为什么用setTimeout而不是setInterval？
+//   如果某次执行花了0.5秒，setInterval在1秒后触发→前后两次间隔只有0.5秒
+//   setTimeout递归则一定间隔完整的1秒</code></pre>
+
+<h2>五、现场演示</h2>
+<div class="demo-section">
+    <h3>实时时钟（每秒自动更新）</h3>
+    <div id="clock-display">
+        <div id="clock-date"></div>
+        <div id="clock-time"></div>
+        <div id="clock-week"></div>
+    </div>
+</div>
+
+<script>
+// ★★★ 实时时钟完整代码 ★★★
+
+function showTime() {
+    // 1. 创建Date对象（拍快照）
+    var now = new Date();
+    // 每次调用showTime都重新new一个Date，拿到最新的时间
+
+    // 2. 获取年月日
+    var year = now.getFullYear();        // 2026
+    var month = now.getMonth() + 1;      // getMonth()返回0~11，+1变成1~12
+    var date = now.getDate();            // 几号
+
+    // 3. 获取时分秒
+    var hours = now.getHours();          // 0~23
+    var minutes = now.getMinutes();      // 0~59
+    var seconds = now.getSeconds();      // 0~59
+
+    // 4. 补零：个位数前面加"0" → "09"而不是"9"
+    // 三元运算符：条件 ? 真时的值 : 假时的值
+    hours = hours < 10 ? "0" + hours : hours;
+    // 翻译：如果hours<10，前面补"0"；否则保持原样
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    // 5. 获取星期几（switch转换）
+    var day = now.getDay();  // 0=周日, 1=周一...
+    var weekStr;
+    switch (day) {
+        case 0: weekStr = "星期日"; break;
+        case 1: weekStr = "星期一"; break;
+        case 2: weekStr = "星期二"; break;
+        case 3: weekStr = "星期三"; break;
+        case 4: weekStr = "星期四"; break;
+        case 5: weekStr = "星期五"; break;
+        case 6: weekStr = "星期六"; break;
+        default: weekStr = "";
+    }
+    // ★ 每个case后面的break不能少！不然会穿透
+
+    // 6. 显示到页面上
+    document.getElementById("clock-date").innerHTML =
+        year + "年" + month + "月" + date + "日";
+    document.getElementById("clock-time").innerHTML =
+        hours + ":" + minutes + ":" + seconds;
+    document.getElementById("clock-week").innerHTML = weekStr;
+
+    // 7. 1秒后再次调用自己（递归 → 实现每秒刷新）
+    setTimeout(showTime, 1000);
+    // 为什么不用setInterval？
+    // setTimeout递归更稳定：确保上一次完全执行完后再等1秒
+}
+
+// 页面加载时启动时钟
+window.onload = function() {
+    showTime();  // 第一次调用 → 之后每秒自己调自己 → 永远循环
+};
+</script>
+
+<h2>六、因果关系链</h2>
+<pre><code>页面加载 → onload触发 → showTime()第一次执行
+  → new Date()拍快照 → 提取年月日时分秒星期
+  → month+1（因为getMonth从0开始）→ 个位数补零
+  → switch把数字转成中文星期
+  → 显示到页面上
+  → setTimeout(showTime, 1000) → 1秒后再次调用showTime
+  → 新的new Date() → 新的秒数 → 页面更新
+  → 无限循环 ...</code></pre>
+
+<div class="error-box">
+<h3>❌ 常见错误：忘了getMonth()+1</h3>
+<p><strong>症状</strong>：7月份显示"6月"</p>
+<p><strong>原因</strong>：getMonth()返回值是0~11（0=1月），直接显示会少一个月。</p>
+</div>
+
+<div class="error-box">
+<h3>❌ 常见错误：switch忘了break</h3>
+<p><strong>症状</strong>：无论星期几都显示"星期六"</p>
+<p><strong>原因</strong>：没有break → case穿透 → 一直执行到最后一行。</p>
+</div>
+
+<p style="text-align:center;color:#888;margin-top:50px;">
+👉 下一步：<a href="JS特效_下拉导航菜单.html" style="color:#9b59b6;">JS特效_下拉导航菜单</a>
+</p>
+
+</div>
+
+</body>
+</html>
